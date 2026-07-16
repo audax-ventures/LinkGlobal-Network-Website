@@ -70,8 +70,11 @@ export default function StylizedGlobe({
   const globeRef = useRef<GlobeMethods | undefined>(undefined)
   const textureUrl = useSolidTexture('#0a1128')
 
+  console.log('[StylizedGlobe] render, width/height props:', width, height, 'textureUrl ready:', !!textureUrl)
+
   useEffect(() => {
     const globe = globeRef.current
+    console.log('[StylizedGlobe] controls effect, globeRef.current:', !!globe)
     if (!globe) return
     const controls = globe.controls() as unknown as {
       autoRotate: boolean
