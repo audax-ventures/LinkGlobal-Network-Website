@@ -8,8 +8,14 @@ interface LoadingScreenProps {
 
 type Phase = 'logo' | 'world' | 'done'
 
+function getInitialPhase(): Phase {
+  if (typeof window === 'undefined') return 'logo'
+  const debugPhase = new URLSearchParams(window.location.search).get('debugPhase')
+  return debugPhase === 'world' ? 'world' : 'logo'
+}
+
 export default function LoadingScreen({ onFinished }: LoadingScreenProps) {
-  const [phase, setPhase] = useState<Phase>('logo')
+  const [phase, setPhase] = useState<Phase>(getInitialPhase)
 
   useEffect(() => {
     if (phase === 'done') return
