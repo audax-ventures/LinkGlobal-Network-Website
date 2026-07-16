@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-navy-950 text-white font-sans antialiased;
+    overscroll-behavior-y: none;
+  }
+}
+
+@layer utilities {
+  .text-gradient-brand {
+    background: linear-gradient(90deg, #3ec6ff 0%, #8fe0ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
