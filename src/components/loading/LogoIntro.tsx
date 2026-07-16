@@ -39,15 +39,14 @@ export default function LogoIntro({ onComplete, durationSeconds = 2.6 }: LogoInt
       duration: 0.7,
       ease: 'back.out(1.6)',
     })
-    tl.to(
-      logoWrap,
-      {
-        rotateY: 360,
-        duration: durationSeconds - 0.7,
-        ease: 'power1.inOut',
-      },
-      '<',
-    )
+    // Spin + scale pulse run concurrently, starting only once the fade-in above
+    // has fully finished — otherwise they'd fight the fade-in tween for control
+    // of the same rotateY/scale properties mid-flight.
+    tl.to(logoWrap, {
+      rotateY: 360,
+      duration: durationSeconds - 0.7,
+      ease: 'power1.inOut',
+    })
     tl.to(
       logoWrap,
       {
