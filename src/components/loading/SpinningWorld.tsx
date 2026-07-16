@@ -24,7 +24,9 @@ export default function SpinningWorld({ onDismiss }: SpinningWorldProps) {
   const hintRef = useRef<HTMLDivElement>(null)
   const dismissedRef = useRef(false)
   const { width, height } = useViewportSize()
-  const globeSize = Math.min(width * 0.82, height * 0.62, 560)
+  // Floor guards against a 0x0 (invisible) canvas on the first render, before
+  // the real viewport size is known.
+  const globeSize = Math.max(Math.min(width * 0.82, height * 0.62, 560), 280)
 
   useEffect(() => {
     const wrap = containerRef.current
