@@ -1,10 +1,26 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import GlobeGL, { type GlobeMethods } from 'react-globe.gl'
 
-// Flat navy SVG texture — the globe reads as a stylized wireframe/graticule sphere
+// Flat navy texture — the globe reads as a stylized wireframe/graticule sphere
 // rather than a photographic earth, keeping it in the brand's blue/navy palette.
-const NAVY_TEXTURE =
-  "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='2' height='2'><rect width='2' height='2' fill='%230a1128'/></svg>"
+// Generated via canvas rather than a hand-built data URI so the image is always
+// a well-formed bitmap three.js's texture loader can decode.
+function useSolidTexture(color: string) {
+  const [url, setUrl] = useState<string | null>(null)
+
+  useEffect(() => {
+    const canvas = document.createElement('canvas')
+    canvas.width = 4
+    canvas.height = 4
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+    ctx.fillStyle = color
+    ctx.fillRect(0, 0, 4, 4)
+    setUrl(canvas.toDataURL('image/png'))
+  }, [color])
+
+  return url
+}
 
 export interface GlobeLabel {
   lat: number
@@ -52,6 +68,7 @@ export default function StylizedGlobe({
   className = '',
 }: StylizedGlobeProps) {
   const globeRef = useRef<GlobeMethods | undefined>(undefined)
+  const textureUrl = useSolidTexture('#0a1128')
 
   useEffect(() => {
     const globe = globeRef.current
@@ -67,7 +84,9 @@ export default function StylizedGlobe({
     controls.enabled = false
     controls.enableZoom = false
     globe.pointOfView({ lat: 15, lng: 10, altitude: 2.2 }, 0)
-  }, [autoRotateSpeed])
+  }, [autoRotateSpeed, textureUrl])
+
+  if (!textureUrl) return <div className={className} style={{ width, height }} />
 
   return (
     <div className={className} style={{ pointerEvents: 'none' }}>
@@ -76,7 +95,7 @@ export default function StylizedGlobe({
         width={width}
         height={height}
         backgroundColor="rgba(0,0,0,0)"
-        globeImageUrl={NAVY_TEXTURE}
+        globeImageUrl={textureUrl}
         showAtmosphere
         atmosphereColor="#3ec6ff"
         atmosphereAltitude={0.28}
