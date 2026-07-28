@@ -112,7 +112,7 @@ export default function StylizedGlobe({
   width,
   height,
   greetings = [],
-  autoRotateSpeed = 4,
+  autoRotateSpeed = 7,
   className = '',
 }: StylizedGlobeProps) {
   const globeRef = useRef<GlobeMethods | undefined>(undefined)
