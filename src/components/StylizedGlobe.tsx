@@ -68,18 +68,25 @@ interface StylizedGlobeProps {
 
 function greetingEl(d: object) {
   const { greeting, index } = d as CountryGreeting & { index: number }
+  // react-globe.gl positions this OUTER element itself (via its own inline
+  // transform, updated every frame to track the globe's rotation) — so the
+  // pop-in animation must live on an INNER child instead. Animating
+  // `transform` on this root node would fight the library's own positioning
+  // transform and freeze the element at whatever position that race left it.
   const el = document.createElement('div')
-  el.style.cssText = `
+  el.style.pointerEvents = 'none'
+
+  const inner = document.createElement('div')
+  inner.style.cssText = `
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2px;
-    pointer-events: none;
     opacity: 0;
     animation: lg-pop-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     animation-delay: ${0.3 + index * 0.35}s;
   `
-  el.innerHTML = `
+  inner.innerHTML = `
     <div style="
       background: rgba(10, 17, 40, 0.85);
       border: 1px solid rgba(143, 224, 255, 0.5);
@@ -97,6 +104,7 @@ function greetingEl(d: object) {
       <path d="M0 26c0-6.6 4.9-11 11-11s11 4.4 11 11" fill="#8fe0ff" fill-opacity="0.9"/>
     </svg>
   `
+  el.appendChild(inner)
   return el
 }
 
@@ -104,7 +112,7 @@ export default function StylizedGlobe({
   width,
   height,
   greetings = [],
-  autoRotateSpeed = 0.45,
+  autoRotateSpeed = 1.2,
   className = '',
 }: StylizedGlobeProps) {
   const globeRef = useRef<GlobeMethods | undefined>(undefined)
@@ -151,6 +159,7 @@ export default function StylizedGlobe({
         htmlElementsData={greetingsWithIndex}
         htmlLat={(d) => (d as CountryGreeting).lat}
         htmlLng={(d) => (d as CountryGreeting).lng}
+        htmlAltitude={0.04}
         htmlElement={greetingEl}
       />
     </div>
