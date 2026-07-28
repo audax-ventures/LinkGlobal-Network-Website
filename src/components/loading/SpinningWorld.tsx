@@ -1,20 +1,21 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
-import StylizedGlobe, { type GlobeLabel } from '../StylizedGlobe'
+import StylizedGlobe, { type CountryGreeting } from '../StylizedGlobe'
 import { useViewportSize } from '../../hooks/useViewportSize'
 
 interface SpinningWorldProps {
   onDismiss: () => void
 }
 
-const GREETINGS: GlobeLabel[] = [
-  { text: 'Hola', lat: 40, lng: -3 },
-  { text: 'Bonjour', lat: 46, lng: 2 },
-  { text: '你好', lat: 34, lng: 108 },
-  { text: 'こんにちは', lat: 36, lng: 138 },
-  { text: 'Ciao', lat: 42, lng: 12 },
-  { text: 'Hallo', lat: 51, lng: 10 },
-  { text: 'مرحبا', lat: 24, lng: 45 },
+// One major country per widely-spoken language, each greeted in its own tongue.
+const COUNTRY_GREETINGS: CountryGreeting[] = [
+  { country: 'United States', greeting: 'Hello', lat: 39, lng: -98 },
+  { country: 'France', greeting: 'Bonjour', lat: 46, lng: 2 },
+  { country: 'Spain', greeting: 'Hola', lat: 40, lng: -4 },
+  { country: 'Germany', greeting: 'Hallo', lat: 51, lng: 10 },
+  { country: 'China', greeting: '你好', lat: 35, lng: 105 },
+  { country: 'Japan', greeting: 'こんにちは', lat: 36, lng: 138 },
+  { country: 'Russia', greeting: 'Привет', lat: 61, lng: 90 },
 ]
 
 const SCROLL_THRESHOLD = 4
@@ -102,7 +103,7 @@ export default function SpinningWorld({ onDismiss }: SpinningWorldProps) {
         }}
       />
       <div className="relative flex items-center justify-center">
-        <StylizedGlobe width={globeSize} height={globeSize} labels={GREETINGS} />
+        <StylizedGlobe width={globeSize} height={globeSize} greetings={COUNTRY_GREETINGS} />
       </div>
 
       <div ref={hintRef} className="absolute bottom-12 flex flex-col items-center gap-2 text-brand-light/80">
