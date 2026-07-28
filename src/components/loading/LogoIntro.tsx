@@ -82,7 +82,7 @@ export default function LogoIntro({ onComplete, durationSeconds = 2.6 }: LogoInt
       />
       <div style={{ perspective: 900 }} className="relative">
         <div ref={logoWrapRef} style={{ transformStyle: 'preserve-3d' }} className="drop-shadow-[0_0_30px_rgba(62,198,255,0.45)]">
-          <Logo variant="reversed" className="w-56 sm:w-64 h-auto" />
+          <Logo variant="reversed" className="w-[85vw] max-w-[420px] sm:w-[32rem] sm:max-w-[560px] h-auto" />
         </div>
       </div>
     </div>
