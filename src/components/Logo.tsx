@@ -32,16 +32,16 @@ export default function Logo({ variant = 'dark', markOnly = false, className = '
           fill={bubbleFill}
         />
         <g clipPath="url(#lg-globe-clip)">
-          <circle cx="32" cy="29" r="16.5" fill="#2fb8ef" fillOpacity="0.16" />
+          {/* fully see-through — just the grid, no fill, so whatever sits behind reads through the gaps */}
           {/* meridians */}
-          <ellipse cx="32" cy="29" rx="11" ry="16.5" fill="none" stroke="#ffffff" strokeOpacity="0.8" strokeWidth="0.8" />
-          <ellipse cx="32" cy="29" rx="5.2" ry="16.5" fill="none" stroke="#ffffff" strokeOpacity="0.8" strokeWidth="0.8" />
+          <ellipse cx="32" cy="29" rx="11" ry="16.5" fill="none" stroke="#3ec6ff" strokeOpacity="0.95" strokeWidth="1" />
+          <ellipse cx="32" cy="29" rx="5.2" ry="16.5" fill="none" stroke="#3ec6ff" strokeOpacity="0.95" strokeWidth="1" />
           {/* parallels */}
-          <ellipse cx="32" cy="29" rx="16.5" ry="5.2" fill="none" stroke="#ffffff" strokeOpacity="0.9" strokeWidth="0.9" />
-          <ellipse cx="32" cy="20.5" rx="14.8" ry="4.4" fill="none" stroke="#ffffff" strokeOpacity="0.75" strokeWidth="0.8" />
-          <ellipse cx="32" cy="37.5" rx="14.8" ry="4.4" fill="none" stroke="#ffffff" strokeOpacity="0.75" strokeWidth="0.8" />
+          <ellipse cx="32" cy="29" rx="16.5" ry="5.2" fill="none" stroke="#3ec6ff" strokeOpacity="1" strokeWidth="1.1" />
+          <ellipse cx="32" cy="20.5" rx="14.8" ry="4.4" fill="none" stroke="#3ec6ff" strokeOpacity="0.9" strokeWidth="1" />
+          <ellipse cx="32" cy="37.5" rx="14.8" ry="4.4" fill="none" stroke="#3ec6ff" strokeOpacity="0.9" strokeWidth="1" />
         </g>
-        <circle cx="32" cy="29" r="16.5" fill="none" stroke="#ffffff" strokeOpacity="0.95" strokeWidth="1" />
+        <circle cx="32" cy="29" r="16.5" fill="none" stroke="#3ec6ff" strokeOpacity="1" strokeWidth="1.2" />
       </g>
       {!markOnly && (
         <g id="lg-wordmark" fontFamily="Inter, system-ui, sans-serif" fontWeight="800">

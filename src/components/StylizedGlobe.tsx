@@ -112,7 +112,7 @@ export default function StylizedGlobe({
   width,
   height,
   greetings = [],
-  autoRotateSpeed = 1.2,
+  autoRotateSpeed = 4,
   className = '',
 }: StylizedGlobeProps) {
   const globeRef = useRef<GlobeMethods | undefined>(undefined)
@@ -123,16 +123,33 @@ export default function StylizedGlobe({
     const globe = globeRef.current
     if (!globe) return
     const controls = globe.controls() as unknown as {
-      autoRotate: boolean
-      autoRotateSpeed: number
       enabled: boolean
       enableZoom: boolean
     }
-    controls.autoRotate = true
-    controls.autoRotateSpeed = autoRotateSpeed
     controls.enabled = false
     controls.enableZoom = false
-    globe.pointOfView({ lat: 15, lng: 10, altitude: 2.2 }, 0)
+
+    // Drive rotation manually (rather than OrbitControls' built-in autoRotate)
+    // so the camera's longitude — and therefore what's currently front-and-
+    // center — is always known and predictable, in degrees-per-second.
+    const startLat = 20
+    let lng = 10
+    let lastTime: number | null = null
+    let frameId: number
+
+    const rotate = (time: number) => {
+      if (lastTime !== null) {
+        const dt = (time - lastTime) / 1000
+        lng += autoRotateSpeed * dt
+        if (lng > 180) lng -= 360
+        globe.pointOfView({ lat: startLat, lng, altitude: 2.2 }, 0)
+      }
+      lastTime = time
+      frameId = requestAnimationFrame(rotate)
+    }
+    frameId = requestAnimationFrame(rotate)
+
+    return () => cancelAnimationFrame(frameId)
   }, [autoRotateSpeed, textureUrl])
 
   if (!textureUrl) return <div className={className} style={{ width, height }} />
