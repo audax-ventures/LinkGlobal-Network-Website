@@ -11,7 +11,8 @@ import {
   PricingIcon,
   ContactIcon,
 } from './NavIcons'
-import { WAVE_MASK_URL, WAVE_MASK_SIZE, MASK_Y_VISIBLE, MASK_Y_HIDDEN, PILL_HEIGHT } from './waveMask'
+
+const PILL_HEIGHT = 92
 
 const NAV_ITEMS = [
   { id: 'home', label: 'Home', Icon: HomeIcon },
@@ -61,7 +62,7 @@ function NavCircle({ label, Icon }: { label: string; Icon: typeof HomeIcon }) {
 }
 
 export default function FloatingNav() {
-  const clipRef = useRef<HTMLDivElement>(null)
+  const navRef = useRef<HTMLDivElement>(null)
   const progressRef = useRef({ value: 0 })
   const lastScrollY = useRef(0)
   const tweenRef = useRef<gsap.core.Tween | null>(null)
@@ -69,24 +70,21 @@ export default function FloatingNav() {
   useEffect(() => {
     lastScrollY.current = window.scrollY
 
-    const applyMask = () => {
-      const el = clipRef.current
+    const apply = () => {
+      const el = navRef.current
       if (!el) return
       const p = progressRef.current.value
-      const maskY = MASK_Y_VISIBLE + (MASK_Y_HIDDEN - MASK_Y_VISIBLE) * p
-      const translateY = -18 * p
-      el.style.maskPosition = `0px ${maskY}px`
-      el.style.setProperty('-webkit-mask-position', `0px ${maskY}px`)
-      el.style.transform = `translateY(${translateY}px)`
+      el.style.transform = `translateY(${-140 * p}px)`
+      el.style.opacity = `${1 - p}`
     }
 
     const animateTo = (target: number) => {
       tweenRef.current?.kill()
       tweenRef.current = gsap.to(progressRef.current, {
         value: target,
-        duration: 0.6,
+        duration: 0.5,
         ease: 'power2.inOut',
-        onUpdate: applyMask,
+        onUpdate: apply,
       })
     }
 
@@ -103,36 +101,24 @@ export default function FloatingNav() {
       lastScrollY.current = y
     }
 
-    applyMask()
+    apply()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   return (
-    <div className="fixed top-6 left-1/2 -translate-x-1/2 z-40" style={{ height: PILL_HEIGHT }}>
+    <div ref={navRef} className="fixed top-6 left-1/2 -translate-x-1/2 z-40">
       <div
-        ref={clipRef}
+        className="flex items-center gap-3 sm:gap-4 rounded-full border border-white/15 px-4 sm:px-5 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl"
         style={{
-          maskImage: WAVE_MASK_URL,
-          WebkitMaskImage: WAVE_MASK_URL,
-          maskRepeat: 'repeat-x',
-          WebkitMaskRepeat: 'repeat-x',
-          maskSize: WAVE_MASK_SIZE,
-          WebkitMaskSize: WAVE_MASK_SIZE,
+          height: PILL_HEIGHT,
+          background:
+            'linear-gradient(120deg, rgba(62,198,255,0.22), rgba(19,41,82,0.35), rgba(143,224,255,0.18))',
         }}
       >
-        <div
-          className="flex items-center gap-3 sm:gap-4 rounded-full border border-white/15 px-4 sm:px-5 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl"
-          style={{
-            height: PILL_HEIGHT,
-            background:
-              'linear-gradient(120deg, rgba(62,198,255,0.22), rgba(19,41,82,0.35), rgba(143,224,255,0.18))',
-          }}
-        >
-          {NAV_ITEMS.map((item) => (
-            <NavCircle key={item.id} label={item.label} Icon={item.Icon} />
-          ))}
-        </div>
+        {NAV_ITEMS.map((item) => (
+          <NavCircle key={item.id} label={item.label} Icon={item.Icon} />
+        ))}
       </div>
     </div>
   )

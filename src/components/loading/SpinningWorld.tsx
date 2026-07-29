@@ -104,10 +104,10 @@ export default function SpinningWorld({ onDismiss }: SpinningWorldProps) {
           <StylizedGlobe width={globeSize} height={globeSize} greetings={COUNTRY_GREETINGS} />
         </div>
 
-        <div ref={hintRef} className="absolute bottom-12 flex flex-col items-center gap-2 text-brand-light/80">
-          <span className="text-xs uppercase tracking-[0.25em] font-medium">Scroll to continue</span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <div ref={hintRef} className="absolute bottom-14 flex flex-col items-center gap-3 text-white drop-shadow-[0_0_16px_rgba(62,198,255,0.6)]">
+          <span className="text-lg sm:text-xl uppercase tracking-[0.3em] font-bold">Scroll to continue</span>
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
       </div>
