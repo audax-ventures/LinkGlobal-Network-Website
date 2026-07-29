@@ -25,24 +25,35 @@ function useSolidTexture(color: string) {
 
 const WORLD_ATLAS_URL = 'https://unpkg.com/world-atlas@2.0.2/countries-110m.json'
 
+// Module-scoped so the fetch + topojson conversion happens once for the
+// entire session, no matter how many StylizedGlobe instances mount (the
+// loading screen's globe and the Global Reach section's globe both use it).
+let countryPolygonsPromise: Promise<Feature<Geometry>[]> | null = null
+
+function fetchCountryPolygons(): Promise<Feature<Geometry>[]> {
+  if (!countryPolygonsPromise) {
+    countryPolygonsPromise = fetch(WORLD_ATLAS_URL)
+      .then((res) => res.json())
+      .then((topology: Topology) => {
+        const collection = feature(topology, topology.objects.countries as GeometryCollection)
+        return 'features' in collection ? collection.features : [collection]
+      })
+      .catch(() => {
+        // Silently fall back to no country outlines — the globe still renders fine without them.
+        return []
+      })
+  }
+  return countryPolygonsPromise
+}
+
 function useCountryPolygons() {
   const [features, setFeatures] = useState<Feature<Geometry>[]>([])
 
   useEffect(() => {
     let cancelled = false
-    fetch(WORLD_ATLAS_URL)
-      .then((res) => res.json())
-      .then((topology: Topology) => {
-        if (cancelled) return
-        const collection = feature(
-          topology,
-          topology.objects.countries as GeometryCollection,
-        )
-        setFeatures('features' in collection ? collection.features : [collection])
-      })
-      .catch(() => {
-        // Silently fall back to no country outlines — the globe still renders fine without them.
-      })
+    fetchCountryPolygons().then((f) => {
+      if (!cancelled) setFeatures(f)
+    })
     return () => {
       cancelled = true
     }

@@ -1,5 +1,6 @@
+import { Suspense } from 'react'
 import { motion } from 'framer-motion'
-import StylizedGlobe from '../StylizedGlobe'
+import LazyStylizedGlobe from '../LazyStylizedGlobe'
 import { COUNTRY_GREETINGS } from '../../data/countryGreetings'
 import { useViewportSize } from '../../hooks/useViewportSize'
 
@@ -55,7 +56,9 @@ export default function GlobalReach() {
       </div>
 
       <div className="relative z-10 mx-auto mt-12 flex justify-center">
-        <StylizedGlobe width={globeSize} height={globeSize} greetings={COUNTRY_GREETINGS} autoRotateSpeed={14} />
+        <Suspense fallback={<div style={{ width: globeSize, height: globeSize }} />}>
+          <LazyStylizedGlobe width={globeSize} height={globeSize} greetings={COUNTRY_GREETINGS} autoRotateSpeed={14} />
+        </Suspense>
       </div>
 
       <div className="relative z-10 mx-auto mt-16 grid max-w-5xl gap-5 sm:grid-cols-2">

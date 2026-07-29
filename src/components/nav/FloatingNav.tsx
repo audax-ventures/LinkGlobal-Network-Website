@@ -65,6 +65,7 @@ export default function FloatingNav() {
   const navRef = useRef<HTMLDivElement>(null)
   const progressRef = useRef({ value: 0 })
   const lastScrollY = useRef(0)
+  const currentTarget = useRef(0)
   const tweenRef = useRef<gsap.core.Tween | null>(null)
 
   useEffect(() => {
@@ -82,6 +83,12 @@ export default function FloatingNav() {
     }
 
     const animateTo = (target: number) => {
+      // Skip re-triggering entirely once we're already animating toward (or
+      // sitting at) this target — otherwise every single scroll event during
+      // a continuous scroll gesture kills and restarts the tween, which adds
+      // up fast on lower-powered devices.
+      if (currentTarget.current === target) return
+      currentTarget.current = target
       tweenRef.current?.kill()
       tweenRef.current = gsap.to(progressRef.current, {
         value: target,
@@ -112,7 +119,7 @@ export default function FloatingNav() {
   return (
     <div ref={navRef} className="fixed top-6 left-1/2 -translate-x-1/2 z-40">
       <div
-        className="flex items-center gap-3 sm:gap-4 rounded-full border border-white/15 px-4 sm:px-5 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl"
+        className="flex items-center gap-3 sm:gap-4 rounded-full border border-white/15 px-4 sm:px-5 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
         style={{
           height: PILL_HEIGHT,
           background:

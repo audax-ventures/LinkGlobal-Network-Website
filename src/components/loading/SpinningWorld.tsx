@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react'
+import { Suspense, useEffect, useRef } from 'react'
 import gsap from 'gsap'
-import StylizedGlobe from '../StylizedGlobe'
+import LazyStylizedGlobe from '../LazyStylizedGlobe'
 import { useViewportSize } from '../../hooks/useViewportSize'
 import { COUNTRY_GREETINGS } from '../../data/countryGreetings'
 
@@ -101,7 +101,9 @@ export default function SpinningWorld({ onDismiss }: SpinningWorldProps) {
           fade-in a no-op, since contents removes the element's own box). */}
       <div ref={contentRef}>
         <div className="relative flex items-center justify-center">
-          <StylizedGlobe width={globeSize} height={globeSize} greetings={COUNTRY_GREETINGS} />
+          <Suspense fallback={<div style={{ width: globeSize, height: globeSize }} />}>
+            <LazyStylizedGlobe width={globeSize} height={globeSize} greetings={COUNTRY_GREETINGS} />
+          </Suspense>
         </div>
 
         <div ref={hintRef} className="absolute bottom-14 flex flex-col items-center gap-3 text-white drop-shadow-[0_0_16px_rgba(62,198,255,0.6)]">
