@@ -74,7 +74,10 @@ export default function FloatingNav() {
       const el = navRef.current
       if (!el) return
       const p = progressRef.current.value
-      el.style.transform = `translateY(${-140 * p}px)`
+      // Must include the centering translateX(-50%) here too — setting
+      // style.transform replaces the Tailwind -translate-x-1/2 class's
+      // transform entirely rather than composing with it.
+      el.style.transform = `translateX(-50%) translateY(${-140 * p}px)`
       el.style.opacity = `${1 - p}`
     }
 
