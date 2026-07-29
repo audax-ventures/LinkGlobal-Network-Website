@@ -1,22 +1,12 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
-import StylizedGlobe, { type CountryGreeting } from '../StylizedGlobe'
+import StylizedGlobe from '../StylizedGlobe'
 import { useViewportSize } from '../../hooks/useViewportSize'
+import { COUNTRY_GREETINGS } from '../../data/countryGreetings'
 
 interface SpinningWorldProps {
   onDismiss: () => void
 }
-
-// One major country per widely-spoken language, each greeted in its own tongue.
-const COUNTRY_GREETINGS: CountryGreeting[] = [
-  { country: 'United States', greeting: 'Hello', lat: 39, lng: -98 },
-  { country: 'France', greeting: 'Bonjour', lat: 46, lng: 2 },
-  { country: 'Spain', greeting: 'Hola', lat: 40, lng: -4 },
-  { country: 'Germany', greeting: 'Hallo', lat: 51, lng: 10 },
-  { country: 'China', greeting: '你好', lat: 35, lng: 105 },
-  { country: 'Japan', greeting: 'こんにちは', lat: 36, lng: 138 },
-  { country: 'Russia', greeting: 'Привет', lat: 61, lng: 90 },
-]
 
 const SCROLL_THRESHOLD = 4
 
