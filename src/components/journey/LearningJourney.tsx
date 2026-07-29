@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { ensureGsapPlugins, gsap, ScrollTrigger } from '../../lib/gsapSetup'
+import { ensureGsapPlugins, ScrollTrigger } from '../../lib/gsapSetup'
 
 interface Milestone {
   title: string
@@ -56,7 +56,6 @@ export default function LearningJourney() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const pathRef = useRef<SVGPathElement>(null)
   const nodeRefs = useRef<(SVGCircleElement | null)[]>([])
-  const labelRefs = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
     ensureGsapPlugins()
@@ -68,10 +67,8 @@ export default function LearningJourney() {
     path.style.strokeDasharray = `${length}`
     path.style.strokeDashoffset = `${length}`
 
-    labelRefs.current.forEach((label) => {
-      if (label) gsap.set(label, { opacity: 0, y: 24 })
-    })
-
+    // Only the connecting line (and the nodes strung along it) animate with
+    // scroll — the step text is always visible, not gated behind scrolling.
     const trigger = ScrollTrigger.create({
       trigger: section,
       start: 'top top',
@@ -83,14 +80,10 @@ export default function LearningJourney() {
 
         MILESTONES.forEach((m, i) => {
           const node = nodeRefs.current[i]
-          const label = labelRefs.current[i]
           const active = progress >= m.progress - 0.02
           if (node) {
             node.style.fill = active ? '#3ec6ff' : 'rgba(143,224,255,0.15)'
             node.style.filter = active ? 'drop-shadow(0 0 8px rgba(62,198,255,0.9))' : 'none'
-          }
-          if (label) {
-            gsap.to(label, { opacity: active ? 1 : 0, y: active ? 0 : 24, duration: 0.4, overwrite: 'auto' })
           }
         })
       },
@@ -148,9 +141,6 @@ export default function LearningJourney() {
         {MILESTONES.map((m, i) => (
           <div
             key={m.title}
-            ref={(el) => {
-              labelRefs.current[i] = el
-            }}
             className={`absolute w-[46%] sm:w-[34%] px-4 ${
               m.side === 'right' ? 'left-[54%] sm:left-[58%] text-left' : 'right-[54%] sm:right-[58%] text-right'
             }`}
