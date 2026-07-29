@@ -42,11 +42,12 @@ export default function SplitSection() {
         preserveAspectRatio="none"
         aria-hidden="true"
       >
-        {/* Kept close to 54–58% (never below 54%) so it stays well clear of the
-            content grid's ~50% column boundary regardless of the curve. */}
-        <path d="M0,0 L58,0 C54,35 58,65 54,100 L0,100 Z" fill="rgba(62,198,255,0.05)" />
+        {/* Swings 48–52%, close to dead center, for a more even light/dark
+            balance — the wider column gap below keeps both sides' content
+            clear of it regardless of the curve. */}
+        <path d="M0,0 L52,0 C48,35 52,65 48,100 L0,100 Z" fill="rgba(62,198,255,0.05)" />
         <path
-          d="M58,0 C54,35 58,65 54,100"
+          d="M52,0 C48,35 52,65 48,100"
           fill="none"
           stroke="rgba(143,224,255,0.18)"
           strokeWidth="0.4"
@@ -54,13 +55,13 @@ export default function SplitSection() {
         />
       </svg>
 
-      <div className="relative z-10 mx-auto grid max-w-6xl gap-16 md:grid-cols-2 md:gap-20">
+      <div className="relative z-10 mx-auto grid max-w-6xl gap-16 md:grid-cols-2 md:gap-24">
         <motion.div
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
-          className="flex flex-col items-center text-center md:items-start md:text-left"
+          className="flex flex-col items-center text-center md:items-start md:text-left md:pr-6"
         >
           <LearnerIllustration />
           <span className="mt-8 text-xs font-semibold uppercase tracking-[0.25em] text-brand-light/60">
