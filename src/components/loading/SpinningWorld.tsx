@@ -12,6 +12,7 @@ const SCROLL_THRESHOLD = 4
 
 export default function SpinningWorld({ onDismiss }: SpinningWorldProps) {
   const containerRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
   const hintRef = useRef<HTMLDivElement>(null)
   const dismissedRef = useRef(false)
   const { width, height } = useViewportSize()
@@ -21,7 +22,11 @@ export default function SpinningWorld({ onDismiss }: SpinningWorldProps) {
 
   useEffect(() => {
     const wrap = containerRef.current
-    gsap.fromTo(wrap, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: 'power1.out' })
+    // Fade in the globe/hint content, not the container — the container's
+    // opaque background must already be fully visible the instant this
+    // mounts, or the homepage underneath flashes through during the handoff
+    // from Beat 1.
+    gsap.fromTo(contentRef.current, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: 'power1.out' })
 
     const hintTl = gsap.to(hintRef.current, {
       y: 8,
@@ -92,15 +97,19 @@ export default function SpinningWorld({ onDismiss }: SpinningWorldProps) {
             'radial-gradient(circle at 50% 50%, rgba(62,198,255,0.14), transparent 60%)',
         }}
       />
-      <div className="relative flex items-center justify-center">
-        <StylizedGlobe width={globeSize} height={globeSize} greetings={COUNTRY_GREETINGS} />
-      </div>
+      {/* Plain wrapper (not display:contents — that would make the opacity
+          fade-in a no-op, since contents removes the element's own box). */}
+      <div ref={contentRef}>
+        <div className="relative flex items-center justify-center">
+          <StylizedGlobe width={globeSize} height={globeSize} greetings={COUNTRY_GREETINGS} />
+        </div>
 
-      <div ref={hintRef} className="absolute bottom-12 flex flex-col items-center gap-2 text-brand-light/80">
-        <span className="text-xs uppercase tracking-[0.25em] font-medium">Scroll to continue</span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-          <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+        <div ref={hintRef} className="absolute bottom-12 flex flex-col items-center gap-2 text-brand-light/80">
+          <span className="text-xs uppercase tracking-[0.25em] font-medium">Scroll to continue</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
       </div>
     </div>
   )

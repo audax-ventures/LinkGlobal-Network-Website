@@ -102,8 +102,8 @@ export default function LearningJourney() {
       className="relative h-[220vh] sm:h-[260vh]"
       style={{ background: 'linear-gradient(180deg, #0e1c3d 0%, #0a1128 50%, #030407 100%)' }}
     >
-      <div className="sticky top-0 h-screen overflow-hidden flex items-center justify-center">
-        <div className="absolute left-1/2 top-8 -translate-x-1/2 text-center px-6">
+      <div className="relative h-full">
+        <div className="absolute left-1/2 top-16 -translate-x-1/2 text-center px-6">
           <span className="text-xs uppercase tracking-[0.3em] text-brand-light/60">The Journey</span>
           <h2 className="mt-2 text-2xl sm:text-3xl font-bold text-white">Your Path to Fluency</h2>
         </div>

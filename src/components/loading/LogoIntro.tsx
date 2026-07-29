@@ -22,9 +22,12 @@ export default function LogoIntro({ onComplete, durationSeconds = 2.6 }: LogoInt
 
     const tl = gsap.timeline({
       onComplete: () => {
-        gsap.to(containerRef.current, {
+        // Fade the logo itself out, NOT the container — the container's opaque
+        // background must stay fully visible right up until Beat 2 mounts, or
+        // the homepage underneath flashes through during the handoff.
+        gsap.to(logoWrap, {
           opacity: 0,
-          duration: 0.4,
+          duration: 0.3,
           ease: 'power1.inOut',
           onComplete,
         })
