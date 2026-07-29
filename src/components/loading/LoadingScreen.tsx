@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react'
-import LogoIntro from './LogoIntro'
 import SpinningWorld from './SpinningWorld'
 
 interface LoadingScreenProps {
   onFinished: () => void
 }
 
-type Phase = 'logo' | 'world' | 'done'
+type Phase = 'world' | 'done'
 
 function getInitialPhase(): Phase {
-  if (typeof window === 'undefined') return 'logo'
+  if (typeof window === 'undefined') return 'world'
   const debugPhase = new URLSearchParams(window.location.search).get('debugPhase')
-  if (debugPhase === 'world' || debugPhase === 'done') return debugPhase
-  return 'logo'
+  return debugPhase === 'done' ? 'done' : 'world'
 }
 
 export default function LoadingScreen({ onFinished }: LoadingScreenProps) {
@@ -33,10 +31,5 @@ export default function LoadingScreen({ onFinished }: LoadingScreenProps) {
 
   if (phase === 'done') return null
 
-  return (
-    <>
-      {phase === 'logo' && <LogoIntro onComplete={() => setPhase('world')} />}
-      {phase === 'world' && <SpinningWorld onDismiss={() => setPhase('done')} />}
-    </>
-  )
+  return <SpinningWorld onDismiss={() => setPhase('done')} />
 }
