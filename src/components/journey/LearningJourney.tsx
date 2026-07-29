@@ -9,41 +9,44 @@ interface Milestone {
   progress: number
 }
 
+// Spread across 0.2–0.85 rather than 0.1–0.9 — leaves clear room at the top
+// for the title block and at the bottom for breathing space, now that the
+// whole section is short enough to read as "one page."
 const MILESTONES: Milestone[] = [
   {
     title: 'Choose Your Language',
     description: 'Explore 40+ languages and pick the one that fits where you’re headed.',
     side: 'right',
-    progress: 0.1,
+    progress: 0.2,
   },
   {
     title: 'Take Our Onboarding Test',
     description: 'A quick placement assessment tailors your path from day one.',
     side: 'left',
-    progress: 0.3,
+    progress: 0.3625,
   },
   {
     title: 'Start Learning',
     description: 'Bite-sized lessons built around how busy people actually learn.',
     side: 'right',
-    progress: 0.5,
+    progress: 0.525,
   },
   {
     title: 'Connect with Real Tutors',
     description: 'Practice live with native speakers — not just an app.',
     side: 'left',
-    progress: 0.7,
+    progress: 0.6875,
   },
   {
     title: 'Expand Your Capabilities',
     description: 'Track fluency milestones and unlock new opportunities.',
     side: 'right',
-    progress: 0.9,
+    progress: 0.85,
   },
 ]
 
 // Path drawn in a 100 (wide) x 500 (tall) local coordinate space, positioned
-// via a narrow centered column so it maps roughly to the milestones' 0.1–0.9
+// via a narrow centered column so it maps roughly to the milestones' 0.2–0.85
 // progress spread. Non-uniform stretch to the actual container is a
 // deliberate, acceptable trade-off for a decorative scroll-driven line.
 const PATH_D =
@@ -99,13 +102,13 @@ export default function LearningJourney() {
   return (
     <section
       ref={sectionRef}
-      className="relative h-[220vh] sm:h-[260vh]"
+      className="relative h-[130vh] sm:h-[140vh]"
       style={{ background: 'linear-gradient(180deg, #0e1c3d 0%, #0a1128 50%, #030407 100%)' }}
     >
       <div className="relative h-full">
-        <div className="absolute left-1/2 top-16 -translate-x-1/2 text-center px-6">
+        <div className="absolute left-1/2 top-8 -translate-x-1/2 text-center px-6">
           <span className="text-xs uppercase tracking-[0.3em] text-brand-light/60">The Journey</span>
-          <h2 className="mt-2 text-2xl sm:text-3xl font-bold text-white">Your Path to Fluency</h2>
+          <h2 className="mt-1.5 text-xl sm:text-2xl font-bold text-white">Your Path to Fluency</h2>
         </div>
 
         <div className="absolute left-1/2 -translate-x-1/2 w-[140px] sm:w-[180px] h-full">
@@ -153,11 +156,11 @@ export default function LearningJourney() {
             }`}
             style={{ top: `${m.progress * 100}%`, transform: 'translateY(-50%)' }}
           >
-            <span className="mb-2 inline-block rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-light/70">
+            <span className="mb-1 inline-block rounded-full border border-white/15 bg-white/5 px-2.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.2em] text-brand-light/70">
               Step {i + 1}
             </span>
-            <h3 className="text-lg sm:text-xl font-bold text-white">{m.title}</h3>
-            <p className="mt-1.5 text-sm text-white/60">{m.description}</p>
+            <h3 className="text-sm sm:text-base font-bold text-white leading-snug">{m.title}</h3>
+            <p className="mt-1 text-xs sm:text-sm text-white/60 leading-snug">{m.description}</p>
           </div>
         ))}
       </div>
