@@ -11,7 +11,8 @@ type Phase = 'logo' | 'world' | 'done'
 function getInitialPhase(): Phase {
   if (typeof window === 'undefined') return 'logo'
   const debugPhase = new URLSearchParams(window.location.search).get('debugPhase')
-  return debugPhase === 'world' ? 'world' : 'logo'
+  if (debugPhase === 'world' || debugPhase === 'done') return debugPhase
+  return 'logo'
 }
 
 export default function LoadingScreen({ onFinished }: LoadingScreenProps) {
