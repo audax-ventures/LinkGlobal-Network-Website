@@ -2,7 +2,8 @@ import { motion } from 'framer-motion'
 import MockScreen from './MockScreen'
 
 interface ScreenConfig {
-  variant: 'dashboard' | 'lesson' | 'chat' | 'progress'
+  src: string
+  alt: string
   top: string
   left: string
   width: string
@@ -13,10 +14,50 @@ interface ScreenConfig {
 }
 
 const SCREENS: ScreenConfig[] = [
-  { variant: 'dashboard', top: '8%', left: '6%', width: '30%', rotateY: 18, rotateX: 4, translateZ: 40, z: 20 },
-  { variant: 'lesson', top: '14%', left: '58%', width: '26%', rotateY: -16, rotateX: 6, translateZ: 60, z: 30 },
-  { variant: 'chat', top: '48%', left: '10%', width: '24%', rotateY: 12, rotateX: -4, translateZ: 20, z: 10 },
-  { variant: 'progress', top: '46%', left: '62%', width: '26%', rotateY: -20, rotateX: -2, translateZ: 80, z: 40 },
+  {
+    src: '/gallery/dashboard.png',
+    alt: 'LinkGlobal Network learner dashboard',
+    top: '8%',
+    left: '6%',
+    width: '30%',
+    rotateY: 18,
+    rotateX: 4,
+    translateZ: 40,
+    z: 20,
+  },
+  {
+    src: '/gallery/onboarding.png',
+    alt: 'LinkGlobal Network onboarding flow',
+    top: '14%',
+    left: '58%',
+    width: '26%',
+    rotateY: -16,
+    rotateX: 6,
+    translateZ: 60,
+    z: 30,
+  },
+  {
+    src: '/gallery/practice-report.png',
+    alt: 'LinkGlobal Network AI practice session report',
+    top: '48%',
+    left: '10%',
+    width: '24%',
+    rotateY: 12,
+    rotateX: -4,
+    translateZ: 20,
+    z: 10,
+  },
+  {
+    src: '/gallery/session-details.png',
+    alt: 'LinkGlobal Network session management details',
+    top: '46%',
+    left: '62%',
+    width: '26%',
+    rotateY: -20,
+    rotateX: -2,
+    translateZ: 80,
+    z: 40,
+  },
 ]
 
 export default function PlatformGallery() {
@@ -64,7 +105,7 @@ export default function PlatformGallery() {
           {SCREENS.map((s, i) => (
             <motion.div
               key={i}
-              className="absolute aspect-[4/3]"
+              className="absolute aspect-[16/9]"
               style={{
                 top: s.top,
                 left: s.left,
@@ -83,7 +124,7 @@ export default function PlatformGallery() {
               }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
-              <MockScreen variant={s.variant} />
+              <MockScreen src={s.src} alt={s.alt} />
             </motion.div>
           ))}
         </div>
