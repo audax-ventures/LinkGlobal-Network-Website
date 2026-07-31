@@ -9,37 +9,41 @@ interface Milestone {
   progress: number
 }
 
-// Spread across 0.2–0.85 rather than 0.1–0.9 — leaves clear room at the top
-// for the title block and at the bottom for breathing space, now that the
-// whole section is short enough to read as "one page."
+// Spread across 0.2–0.85 — leaves clear room at the top for the title block
+// and at the bottom for breathing space.
 const MILESTONES: Milestone[] = [
   {
     title: 'Choose Your Language',
-    description: 'Explore 40+ languages and pick the one that fits where you’re headed.',
+    description:
+      'Explore 40+ languages and pick the one that fits where you’re headed — a new job, a big trip, or reconnecting with family.',
     side: 'right',
     progress: 0.2,
   },
   {
     title: 'Take Our Onboarding Test',
-    description: 'A quick placement assessment tailors your path from day one.',
+    description:
+      'A quick, guided placement assessment figures out exactly where you’re starting from, so your path is tailored from day one.',
     side: 'left',
     progress: 0.3625,
   },
   {
     title: 'Start Learning',
-    description: 'Bite-sized lessons built around how busy people actually learn.',
+    description:
+      'Bite-sized lessons built around how busy people actually learn, fitting into the pockets of time you already have.',
     side: 'right',
     progress: 0.525,
   },
   {
     title: 'Connect with Real Tutors',
-    description: 'Practice live with native speakers — not just an app.',
+    description:
+      'Practice live with native speakers who adapt to your goals and pace — not just an app quizzing you on flashcards.',
     side: 'left',
     progress: 0.6875,
   },
   {
     title: 'Expand Your Capabilities',
-    description: 'Track fluency milestones and unlock new opportunities.',
+    description:
+      'Track fluency milestones as you hit them, and unlock new opportunities at work, while traveling, or at home.',
     side: 'right',
     progress: 0.85,
   },
@@ -82,8 +86,8 @@ export default function LearningJourney() {
           const node = nodeRefs.current[i]
           const active = progress >= m.progress - 0.02
           if (node) {
-            node.style.fill = active ? '#3ec6ff' : 'rgba(143,224,255,0.15)'
-            node.style.filter = active ? 'drop-shadow(0 0 8px rgba(62,198,255,0.9))' : 'none'
+            node.style.fill = active ? '#1ba3e0' : 'rgba(19,41,82,0.15)'
+            node.style.filter = active ? 'drop-shadow(0 0 5px rgba(27,163,224,0.55))' : 'none'
           }
         })
       },
@@ -93,20 +97,16 @@ export default function LearningJourney() {
   }, [])
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative h-[130vh] sm:h-[140vh]"
-      style={{ background: 'linear-gradient(180deg, #0e1c3d 0%, #0a1128 50%, #030407 100%)' }}
-    >
+    <section ref={sectionRef} className="relative h-[150vh] sm:h-[165vh]">
       <div className="relative h-full">
-        <div className="absolute left-1/2 top-8 -translate-x-1/2 text-center px-6">
-          <span className="text-xs uppercase tracking-[0.3em] text-brand-light/60">The Journey</span>
-          <h2 className="mt-1.5 text-xl sm:text-2xl font-bold text-white">Your Path to Fluency</h2>
+        <div className="absolute left-1/2 top-10 -translate-x-1/2 text-center px-6">
+          <span className="text-xs uppercase tracking-[0.3em] text-navy-700/60">The Journey</span>
+          <h2 className="mt-1.5 text-2xl sm:text-3xl font-bold text-navy-950">Your Path to Fluency</h2>
         </div>
 
-        <div className="absolute left-1/2 -translate-x-1/2 w-[140px] sm:w-[180px] h-full">
+        <div className="absolute left-1/2 -translate-x-1/2 w-[110px] sm:w-[150px] h-full">
           <svg viewBox="0 0 100 500" preserveAspectRatio="none" className="h-full w-full">
-            <path d={PATH_D} fill="none" stroke="rgba(143,224,255,0.12)" strokeWidth={2.5} />
+            <path d={PATH_D} fill="none" stroke="rgba(19,41,82,0.14)" strokeWidth={2.5} />
             <path
               ref={pathRef}
               d={PATH_D}
@@ -118,7 +118,7 @@ export default function LearningJourney() {
             <defs>
               <linearGradient id="journey-gradient" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="#132952" />
-                <stop offset="100%" stopColor="#3ec6ff" />
+                <stop offset="100%" stopColor="#1ba3e0" />
               </linearGradient>
             </defs>
             {MILESTONES.map((m, i) => (
@@ -130,8 +130,8 @@ export default function LearningJourney() {
                 cx={m.side === 'right' ? 65 : 35}
                 cy={m.progress * 500}
                 r={5}
-                fill="rgba(143,224,255,0.15)"
-                stroke="#0a1128"
+                fill="rgba(19,41,82,0.15)"
+                stroke="#f8fbff"
                 strokeWidth={1.5}
               />
             ))}
@@ -141,16 +141,16 @@ export default function LearningJourney() {
         {MILESTONES.map((m, i) => (
           <div
             key={m.title}
-            className={`absolute w-[46%] sm:w-[34%] px-4 ${
-              m.side === 'right' ? 'left-[54%] sm:left-[58%] text-left' : 'right-[54%] sm:right-[58%] text-right'
+            className={`absolute w-[48%] sm:w-[40%] px-4 ${
+              m.side === 'right' ? 'left-[52%] sm:left-[54%] text-left' : 'right-[52%] sm:right-[54%] text-right'
             }`}
             style={{ top: `${m.progress * 100}%`, transform: 'translateY(-50%)' }}
           >
-            <span className="mb-1 inline-block rounded-full border border-white/15 bg-white/5 px-2.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.2em] text-brand-light/70">
+            <span className="mb-2 inline-block rounded-full border border-navy-900/10 bg-navy-900/[0.03] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-navy-700/70">
               Step {i + 1}
             </span>
-            <h3 className="text-sm sm:text-base font-bold text-white leading-snug">{m.title}</h3>
-            <p className="mt-1 text-xs sm:text-sm text-white/60 leading-snug">{m.description}</p>
+            <h3 className="text-xl sm:text-2xl font-bold text-navy-950 leading-snug">{m.title}</h3>
+            <p className="mt-2 text-sm sm:text-base text-navy-700/75 leading-relaxed">{m.description}</p>
           </div>
         ))}
       </div>

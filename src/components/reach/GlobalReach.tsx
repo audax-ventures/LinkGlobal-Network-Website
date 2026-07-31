@@ -8,6 +8,7 @@ interface Testimonial {
   name: string
   country: string
   quote: string
+  accent: string
 }
 
 const TESTIMONIALS: Testimonial[] = [
@@ -16,34 +17,45 @@ const TESTIMONIALS: Testimonial[] = [
     country: 'Germany',
     quote:
       'Learning with a real tutor changed everything — I finally understand how the language actually sounds in conversation, not just in a textbook.',
+    accent: '#1ba3e0',
   },
   {
     name: 'Haruto Sato',
     country: 'Japan',
     quote: 'I tried three other apps before this one. It’s the first time I’ve actually looked forward to my lessons.',
+    accent: '#3ec6ff',
   },
   {
     name: 'Amara Okafor',
     country: 'Nigeria',
     quote:
       'My tutor adjusted everything to how I learn best. Three months in, I had my first full conversation in French.',
+    accent: '#8fe0ff',
   },
   {
     name: 'Mateus Silva',
     country: 'Brazil',
     quote: 'Connecting with a native speaker every week made all the difference. It stopped feeling like homework.',
+    accent: '#5fb8e8',
   },
 ]
+
+function AvatarIllustration({ color }: { color: string }) {
+  return (
+    <svg viewBox="0 0 36 36" className="h-9 w-9">
+      <circle cx="18" cy="18" r="18" fill={color} fillOpacity="0.16" />
+      <circle cx="18" cy="14.5" r="6" fill={color} />
+      <path d="M6 30c0-7.2 5.4-12 12-12s12 4.8 12 12" fill={color} />
+    </svg>
+  )
+}
 
 export default function GlobalReach() {
   const { width } = useViewportSize()
   const globeSize = Math.max(Math.min(width * 0.55, 480), 260)
 
   return (
-    <section
-      className="relative overflow-hidden py-28 sm:py-36 px-6"
-      style={{ background: 'linear-gradient(180deg, #0e1c3d 0%, #0a1128 55%, #030407 100%)' }}
-    >
+    <section className="relative overflow-hidden py-28 sm:py-36 px-6">
       <div className="relative z-10 mx-auto max-w-3xl text-center">
         <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-light/60">
           Global Reach
@@ -73,9 +85,7 @@ export default function GlobalReach() {
           >
             <p className="text-sm sm:text-base text-white/80">&ldquo;{t.quote}&rdquo;</p>
             <div className="mt-4 flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-cyan/20 text-sm font-semibold text-brand-light">
-                {t.name.charAt(0)}
-              </div>
+              <AvatarIllustration color={t.accent} />
               <div>
                 <p className="text-sm font-semibold text-white">{t.name}</p>
                 <p className="text-xs text-white/50">{t.country}</p>

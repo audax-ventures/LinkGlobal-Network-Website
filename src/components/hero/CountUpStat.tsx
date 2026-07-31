@@ -41,11 +41,11 @@ export default function CountUpStat({ value, suffix = '', decimals = 0, label }:
 
   return (
     <div ref={wrapRef} className="flex flex-col items-center text-center opacity-0">
-      <span className="text-3xl sm:text-4xl font-extrabold text-white">
+      <span className="text-3xl sm:text-4xl font-extrabold text-navy-950">
         <span ref={numberRef}>0</span>
         {suffix}
       </span>
-      <span className="mt-1 text-xs sm:text-sm uppercase tracking-[0.2em] text-brand-light/70">{label}</span>
+      <span className="mt-1 text-xs sm:text-sm uppercase tracking-[0.2em] text-navy-700/70">{label}</span>
     </div>
   )
 }

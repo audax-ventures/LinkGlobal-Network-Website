@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import gsap from 'gsap'
+import Logo from '../Logo'
 import {
   HomeIcon,
   AboutIcon,
@@ -11,8 +12,6 @@ import {
   PricingIcon,
   ContactIcon,
 } from './NavIcons'
-
-const PILL_HEIGHT = 92
 
 const NAV_ITEMS = [
   { id: 'home', label: 'Home', Icon: HomeIcon },
@@ -25,6 +24,9 @@ const NAV_ITEMS = [
   { id: 'contact', label: 'Contact', Icon: ContactIcon },
 ] as const
 
+// Each icon is its own small floating chip with a soft shadow, rather than
+// one shared gradient pill housing all of them — a deliberately different
+// visual language from the earlier treatment.
 function NavCircle({ label, Icon }: { label: string; Icon: typeof HomeIcon }) {
   const [hovered, setHovered] = useState(false)
 
@@ -37,11 +39,11 @@ function NavCircle({ label, Icon }: { label: string; Icon: typeof HomeIcon }) {
       <AnimatePresence>
         {hovered && (
           <motion.span
-            initial={{ opacity: 0, y: 6, scale: 0.9 }}
+            initial={{ opacity: 0, y: 4, scale: 0.92 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 6, scale: 0.9 }}
-            transition={{ duration: 0.18, ease: 'easeOut' }}
-            className="absolute -top-11 whitespace-nowrap rounded-full bg-navy-950/90 px-3 py-1 text-xs font-medium tracking-wide text-white shadow-lg"
+            exit={{ opacity: 0, y: 4, scale: 0.92 }}
+            transition={{ duration: 0.16, ease: 'easeOut' }}
+            className="absolute -top-9 whitespace-nowrap rounded-full bg-navy-950 px-3 py-1 text-[11px] font-medium tracking-wide text-white shadow-md"
           >
             {label}
           </motion.span>
@@ -50,12 +52,11 @@ function NavCircle({ label, Icon }: { label: string; Icon: typeof HomeIcon }) {
       <motion.button
         type="button"
         aria-label={label}
-        whileHover={{ scale: 1.14 }}
-        transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-        className="flex h-16 w-16 items-center justify-center rounded-full border border-white/20 text-white shadow-[0_4px_16px_rgba(0,0,0,0.3)] transition-colors hover:border-white/40"
-        style={{ background: 'linear-gradient(145deg, rgba(62,198,255,0.45), rgba(19,41,82,0.55))' }}
+        whileHover={{ y: -2 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 22 }}
+        className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-navy-700 shadow-[0_2px_10px_rgba(10,17,40,0.12)] ring-1 ring-navy-900/[0.06] transition-colors hover:text-brand-blue hover:ring-brand-blue/30"
       >
-        <Icon className="h-7 w-7" />
+        <Icon className="h-[18px] w-[18px]" />
       </motion.button>
     </div>
   )
@@ -75,18 +76,11 @@ export default function FloatingNav() {
       const el = navRef.current
       if (!el) return
       const p = progressRef.current.value
-      // Must include the centering translateX(-50%) here too — setting
-      // style.transform replaces the Tailwind -translate-x-1/2 class's
-      // transform entirely rather than composing with it.
-      el.style.transform = `translateX(-50%) translateY(${-140 * p}px)`
+      el.style.transform = `translateY(${-90 * p}px)`
       el.style.opacity = `${1 - p}`
     }
 
     const animateTo = (target: number) => {
-      // Skip re-triggering entirely once we're already animating toward (or
-      // sitting at) this target — otherwise every single scroll event during
-      // a continuous scroll gesture kills and restarts the tween, which adds
-      // up fast on lower-powered devices.
       if (currentTarget.current === target) return
       currentTarget.current = target
       tweenRef.current?.kill()
@@ -117,15 +111,9 @@ export default function FloatingNav() {
   }, [])
 
   return (
-    <div ref={navRef} className="fixed top-6 left-1/2 -translate-x-1/2 z-40">
-      <div
-        className="flex items-center gap-3 sm:gap-4 rounded-full border border-white/15 px-4 sm:px-5 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
-        style={{
-          height: PILL_HEIGHT,
-          background:
-            'linear-gradient(120deg, rgba(62,198,255,0.22), rgba(19,41,82,0.35), rgba(143,224,255,0.18))',
-        }}
-      >
+    <div ref={navRef} className="fixed top-0 inset-x-0 z-40 flex items-center justify-between px-5 sm:px-8 py-4">
+      <Logo variant="dark" markOnly className="h-9 w-9" />
+      <div className="flex items-center gap-2 sm:gap-2.5">
         {NAV_ITEMS.map((item) => (
           <NavCircle key={item.id} label={item.label} Icon={item.Icon} />
         ))}

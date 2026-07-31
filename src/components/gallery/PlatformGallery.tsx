@@ -62,10 +62,7 @@ const SCREENS: ScreenConfig[] = [
 
 export default function PlatformGallery() {
   return (
-    <section
-      className="relative overflow-hidden py-28 sm:py-36"
-      style={{ background: 'linear-gradient(180deg, #030407 0%, #0a1128 60%, #0e1c3d 100%)' }}
-    >
+    <section className="relative overflow-hidden py-28 sm:py-36">
       <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
         <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-light/60">
           Inside the Platform

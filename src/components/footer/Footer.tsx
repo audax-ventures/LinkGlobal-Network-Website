@@ -32,10 +32,7 @@ function SocialIcon({ path }: { path: string }) {
 
 export default function Footer() {
   return (
-    <footer
-      className="relative px-6 pt-24 pb-10"
-      style={{ background: 'linear-gradient(180deg, #132952 0%, #030407 65%, #000000 100%)' }}
-    >
+    <footer className="relative px-6 pt-24 pb-10">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-12 md:grid-cols-[1.2fr_1fr_1fr]">
           <div>

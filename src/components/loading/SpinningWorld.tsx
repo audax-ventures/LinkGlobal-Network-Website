@@ -89,20 +89,13 @@ export default function SpinningWorld({ onDismiss }: SpinningWorldProps) {
       ref={containerRef}
       className="fixed inset-0 z-[60] flex flex-col items-center justify-center overflow-hidden"
       style={{
-        background: 'linear-gradient(160deg, #030407 0%, #0a1128 55%, #132952 100%)',
+        background: 'radial-gradient(circle at 50% 40%, #ffffff 0%, #eaf5ff 55%, #d6ecff 100%)',
       }}
     >
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(circle at 50% 50%, rgba(62,198,255,0.14), transparent 60%)',
-        }}
-      />
       {/* Plain wrapper (not display:contents — that would make the opacity
           fade-in a no-op, since contents removes the element's own box). */}
       <div ref={contentRef} className="flex flex-col items-center gap-6 sm:gap-10">
-        <Logo variant="reversed" className="w-40 sm:w-52 h-auto drop-shadow-[0_0_24px_rgba(62,198,255,0.4)]" />
+        <Logo variant="dark" className="w-40 sm:w-52 h-auto" />
 
         <div className="relative flex items-center justify-center">
           <Suspense fallback={<div style={{ width: globeSize, height: globeSize }} />}>
@@ -112,7 +105,7 @@ export default function SpinningWorld({ onDismiss }: SpinningWorldProps) {
 
         <div
           ref={hintRef}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-white drop-shadow-[0_0_16px_rgba(62,198,255,0.6)]"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-navy-700"
         >
           <span className="text-lg sm:text-xl uppercase tracking-[0.3em] font-bold">Scroll to continue</span>
           <svg width="30" height="30" viewBox="0 0 24 24" fill="none">

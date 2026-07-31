@@ -1,60 +1,56 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { ensureGsapPlugins, gsap, ScrollTrigger } from '../../lib/gsapSetup'
 
 /**
- * Lightweight, performant hero backdrop — animated gradient orbs and a slowly
- * drifting grid, no WebGL. Keeps the "tech-forward, in motion" feel without a
- * second globe scene stacked right after the loading sequence's.
- *
- * The loops only run while this is actually on screen — otherwise they'd
- * keep animating (and costing CPU/GPU) for the entire rest of the session
- * once the user has scrolled past the hero.
+ * Soft, restrained decorative accents only — no opaque background layer here.
+ * The actual page background is one continuous gradient set on <main> in
+ * App.tsx, so every section (including this one) only ever adds translucent
+ * accents on top of it, never covers it.
  */
 export default function HeroBackground() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const parallaxRef = useRef<HTMLDivElement>(null)
   const inView = useInView(containerRef, { margin: '200px 0px 200px 0px' })
+
+  useEffect(() => {
+    ensureGsapPlugins()
+    const el = parallaxRef.current
+    const section = containerRef.current?.closest('section')
+    if (!el || !section) return
+
+    // The background accents lag behind the page's own scroll — a small
+    // parallax touch so leaving the hero reads as depth pulling through
+    // into the next section, rather than a hard cut.
+    const trigger = ScrollTrigger.create({
+      trigger: section,
+      start: 'top top',
+      end: 'bottom top',
+      scrub: 0.6,
+      onUpdate: (self) => {
+        gsap.set(el, { y: self.progress * 120 })
+      },
+    })
+
+    return () => trigger.kill()
+  }, [])
 
   return (
     <div ref={containerRef} className="absolute inset-0 overflow-hidden" aria-hidden="true">
-      <div
-        className="absolute inset-0"
-        style={{ background: 'linear-gradient(160deg, #030407 0%, #0a1128 45%, #132952 100%)' }}
-      />
-
-      <motion.div
-        className="absolute -left-32 top-10 h-[420px] w-[420px] rounded-full blur-3xl"
-        style={{ background: 'radial-gradient(circle, rgba(62,198,255,0.35), transparent 70%)' }}
-        animate={inView ? { x: [0, 40, 0], y: [0, 30, 0] } : { x: 0, y: 0 }}
-        transition={{ duration: 18, repeat: inView ? Infinity : 0, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="absolute right-[-160px] top-1/3 h-[520px] w-[520px] rounded-full blur-3xl"
-        style={{ background: 'radial-gradient(circle, rgba(143,224,255,0.25), transparent 70%)' }}
-        animate={inView ? { x: [0, -50, 0], y: [0, -40, 0] } : { x: 0, y: 0 }}
-        transition={{ duration: 22, repeat: inView ? Infinity : 0, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="absolute bottom-[-120px] left-1/3 h-[380px] w-[380px] rounded-full blur-3xl"
-        style={{ background: 'radial-gradient(circle, rgba(27,163,224,0.3), transparent 70%)' }}
-        animate={inView ? { x: [0, 30, 0], y: [0, -25, 0] } : { x: 0, y: 0 }}
-        transition={{ duration: 16, repeat: inView ? Infinity : 0, ease: 'easeInOut' }}
-      />
-
-      <motion.div
-        className="absolute inset-0 opacity-[0.12]"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(143,224,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(143,224,255,0.6) 1px, transparent 1px)',
-          backgroundSize: '48px 48px',
-        }}
-        animate={inView ? { backgroundPosition: ['0px 0px', '48px 48px'] } : { backgroundPosition: '0px 0px' }}
-        transition={{ duration: 12, repeat: inView ? Infinity : 0, ease: 'linear' }}
-      />
-
-      <div
-        className="absolute inset-0"
-        style={{ background: 'radial-gradient(circle at 50% 30%, transparent 30%, #030407 100%)' }}
-      />
+      <div ref={parallaxRef}>
+        <motion.div
+          className="absolute -left-40 top-0 h-[420px] w-[420px] rounded-full blur-3xl"
+          style={{ background: 'radial-gradient(circle, rgba(62,198,255,0.18), transparent 70%)' }}
+          animate={inView ? { x: [0, 30, 0], y: [0, 20, 0] } : { x: 0, y: 0 }}
+          transition={{ duration: 20, repeat: inView ? Infinity : 0, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute right-[-160px] top-1/4 h-[480px] w-[480px] rounded-full blur-3xl"
+          style={{ background: 'radial-gradient(circle, rgba(143,224,255,0.16), transparent 70%)' }}
+          animate={inView ? { x: [0, -30, 0], y: [0, -20, 0] } : { x: 0, y: 0 }}
+          transition={{ duration: 24, repeat: inView ? Infinity : 0, ease: 'easeInOut' }}
+        />
+      </div>
     </div>
   )
 }

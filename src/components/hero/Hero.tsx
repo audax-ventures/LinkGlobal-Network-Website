@@ -14,7 +14,10 @@ const item = {
 
 export default function Hero() {
   return (
-    <section id="home" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6">
+    <section
+      id="home"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 pt-20"
+    >
       <HeroBackground />
 
       <motion.div
@@ -25,21 +28,21 @@ export default function Hero() {
       >
         <motion.span
           variants={item}
-          className="mb-5 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-brand-light/80 backdrop-blur"
+          className="mb-5 rounded-full border border-navy-900/10 bg-navy-900/[0.03] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-navy-700"
         >
           Language Learning, Without Borders
         </motion.span>
 
         <motion.h1
           variants={item}
-          className="text-4xl sm:text-6xl md:text-7xl font-extrabold leading-[1.05] tracking-tight text-white"
+          className="text-4xl sm:text-6xl md:text-7xl font-extrabold leading-[1.05] tracking-tight text-navy-950"
         >
           Learn Any Language.
           <br />
           <span className="text-gradient-brand">Meet the Whole World.</span>
         </motion.h1>
 
-        <motion.p variants={item} className="mt-6 max-w-2xl text-base sm:text-lg text-white/70">
+        <motion.p variants={item} className="mt-6 max-w-2xl text-base sm:text-lg text-navy-700/80">
           LinkGlobal Network connects you with real, native-speaking tutors in over 120
           countries — so you don&rsquo;t just learn a language, you live it.
         </motion.p>
@@ -47,14 +50,14 @@ export default function Hero() {
         <motion.div variants={item} className="mt-10 flex flex-col sm:flex-row items-center gap-4">
           <button
             type="button"
-            className="rounded-full px-8 py-3.5 text-sm font-semibold text-navy-950 shadow-[0_8px_30px_rgba(62,198,255,0.35)] transition-transform hover:scale-105"
-            style={{ background: 'linear-gradient(90deg, #3ec6ff, #8fe0ff)' }}
+            className="rounded-full px-8 py-3.5 text-sm font-semibold text-white shadow-[0_8px_30px_rgba(30,120,190,0.3)] transition-transform hover:scale-105"
+            style={{ background: 'linear-gradient(90deg, #1ba3e0, #3ec6ff)' }}
           >
             Get Started
           </button>
           <button
             type="button"
-            className="rounded-full border border-white/20 px-8 py-3.5 text-sm font-semibold text-white/90 transition-colors hover:bg-white/10"
+            className="rounded-full border border-navy-900/15 px-8 py-3.5 text-sm font-semibold text-navy-800 transition-colors hover:bg-navy-900/[0.04]"
           >
             See How It Works
           </button>
@@ -77,7 +80,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 0.8 }}
-        className="absolute bottom-8 flex flex-col items-center gap-2 text-white/40"
+        className="absolute bottom-8 flex flex-col items-center gap-2 text-navy-900/35"
       >
         <span className="text-[10px] uppercase tracking-[0.25em]">Scroll</span>
         <motion.svg
