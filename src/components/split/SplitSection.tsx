@@ -5,37 +5,9 @@ const fadeUp = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
 }
 
-function LearnerIllustration() {
-  return (
-    <svg viewBox="0 0 200 160" className="w-full max-w-xs mx-auto">
-      <rect x="30" y="90" width="140" height="8" rx="4" fill="#cfe6f7" />
-      <rect x="50" y="50" width="100" height="60" rx="8" fill="#eef7ff" stroke="#1ba3e0" strokeOpacity="0.35" />
-      <rect x="58" y="58" width="84" height="44" rx="4" fill="#dcefff" />
-      <path d="M74 78h52M74 88h36" stroke="#1ba3e0" strokeOpacity="0.55" strokeWidth="2" strokeLinecap="round" />
-      <circle cx="100" cy="34" r="16" fill="#1ba3e0" fillOpacity="0.9" />
-      <path d="M86 46c0-8 6-14 14-14s14 6 14 14" fill="#1ba3e0" fillOpacity="0.9" />
-      <rect x="20" y="112" width="36" height="26" rx="3" fill="#eef7ff" stroke="#1ba3e0" strokeOpacity="0.3" />
-      <path d="M20 118h36M20 124h28" stroke="#1ba3e0" strokeOpacity="0.45" strokeWidth="1.5" />
-    </svg>
-  )
-}
-
-function EducatorIllustration() {
-  return (
-    <svg viewBox="0 0 200 160" className="w-full max-w-xs mx-auto">
-      <rect x="30" y="30" width="120" height="80" rx="6" fill="#eef7ff" stroke="#1ba3e0" strokeOpacity="0.35" />
-      <path d="M46 50h60M46 64h88M46 78h70" stroke="#1ba3e0" strokeOpacity="0.55" strokeWidth="2" strokeLinecap="round" />
-      <circle cx="100" cy="132" r="18" fill="#3ec6ff" fillOpacity="0.9" />
-      <path d="M84 146c0-9 7-16 16-16s16 7 16 16" fill="#3ec6ff" fillOpacity="0.9" />
-      <path d="M60 116l40-14 40 14-40 14z" fill="#1ba3e0" fillOpacity="0.4" />
-      <rect x="96" y="130" width="8" height="18" fill="#1ba3e0" fillOpacity="0.4" />
-    </svg>
-  )
-}
-
 export default function SplitSection() {
   return (
-    <section className="relative overflow-hidden py-28 sm:py-36 px-6">
+    <section className="relative overflow-hidden py-20 sm:py-28 px-6">
       <svg
         className="absolute inset-0 h-full w-full"
         viewBox="0 0 100 100"
@@ -54,29 +26,54 @@ export default function SplitSection() {
         />
       </svg>
 
-      <div className="relative z-10 mx-auto grid max-w-6xl gap-16 md:grid-cols-2 md:gap-24">
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.4 }}
+        className="relative z-10 mx-auto max-w-2xl text-center"
+      >
+        <span className="text-xs font-semibold uppercase tracking-[0.25em] text-navy-700/60">
+          Two Sides, One Platform
+        </span>
+        <h2 className="mt-3 text-3xl sm:text-5xl font-extrabold tracking-tight text-navy-950">
+          Whichever side you&rsquo;re on, we&rsquo;ve built for you.
+        </h2>
+        <p className="mt-4 text-navy-700/75">
+          Learning a language and teaching one are very different journeys — LinkGlobal Network is
+          designed around both.
+        </p>
+      </motion.div>
+
+      <div className="relative z-10 mx-auto mt-16 grid max-w-6xl gap-16 md:grid-cols-2 md:gap-12">
         <motion.div
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
-          className="flex flex-col items-center text-center md:items-start md:text-left md:pr-6"
+          className="flex flex-col items-center text-center md:items-start md:text-left"
         >
-          <LearnerIllustration />
-          <span className="mt-8 text-xs font-semibold uppercase tracking-[0.25em] text-navy-700/60">
-            For Learners
-          </span>
-          <h3 className="mt-3 text-3xl sm:text-4xl font-bold text-navy-950">Learn at the speed of real life.</h3>
-          <p className="mt-4 max-w-md text-navy-700/75">
-            Personalized lessons, flexible scheduling, and real conversations with native
-            speakers — so progress fits around your life, not the other way around.
-          </p>
-          <button
-            type="button"
-            className="mt-8 rounded-full border border-navy-900/15 px-7 py-3 text-sm font-semibold text-navy-800 transition-colors hover:bg-navy-900/[0.04]"
-          >
-            Explore for Learners
-          </button>
+          <img
+            src="/photos/learners.jpg"
+            alt="A learner studying a new language on a laptop"
+            className="aspect-[4/3] w-full rounded-2xl object-cover shadow-[0_12px_32px_rgba(19,41,82,0.1)]"
+          />
+          <div className="mt-8 w-full rounded-2xl border border-navy-900/10 bg-white/70 backdrop-blur-sm px-6 py-6 sm:px-7 sm:py-7 shadow-[0_8px_28px_rgba(19,41,82,0.08)]">
+            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-navy-700/60">
+              For Learners
+            </span>
+            <h3 className="mt-3 text-3xl sm:text-4xl font-bold text-navy-950">Learn at the speed of real life.</h3>
+            <p className="mt-4 text-navy-700/75">
+              Personalized lessons, flexible scheduling, and real conversations with native
+              speakers — so progress fits around your life, not the other way around.
+            </p>
+            <button
+              type="button"
+              className="mt-8 rounded-full border border-navy-900/15 px-7 py-3 text-sm font-semibold text-navy-800 transition-colors hover:bg-navy-900/[0.04]"
+            >
+              Explore for Learners
+            </button>
+          </div>
         </motion.div>
 
         <motion.div
@@ -84,23 +81,29 @@ export default function SplitSection() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
-          className="flex flex-col items-center text-center md:items-start md:text-left md:pl-6"
+          className="flex flex-col items-center text-center md:items-start md:text-left"
         >
-          <EducatorIllustration />
-          <span className="mt-8 text-xs font-semibold uppercase tracking-[0.25em] text-navy-700/60">
-            For Educators
-          </span>
-          <h3 className="mt-3 text-3xl sm:text-4xl font-bold text-navy-950">Teach the world, on your terms.</h3>
-          <p className="mt-4 max-w-md text-navy-700/75">
-            Set your own hours, connect with motivated learners globally, and get paid
-            reliably for doing what you already love.
-          </p>
-          <button
-            type="button"
-            className="mt-8 rounded-full border border-navy-900/15 px-7 py-3 text-sm font-semibold text-navy-800 transition-colors hover:bg-navy-900/[0.04]"
-          >
-            Become a Tutor
-          </button>
+          <img
+            src="/photos/educators.jpg"
+            alt="A teacher preparing an online tutoring session on a laptop"
+            className="aspect-[4/3] w-full rounded-2xl object-cover shadow-[0_12px_32px_rgba(19,41,82,0.1)]"
+          />
+          <div className="mt-8 w-full rounded-2xl border border-navy-900/10 bg-white/70 backdrop-blur-sm px-6 py-6 sm:px-7 sm:py-7 shadow-[0_8px_28px_rgba(19,41,82,0.08)]">
+            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-navy-700/60">
+              For Educators
+            </span>
+            <h3 className="mt-3 text-3xl sm:text-4xl font-bold text-navy-950">Teach the world, on your terms.</h3>
+            <p className="mt-4 text-navy-700/75">
+              Set your own hours, connect with motivated learners globally, and get paid
+              reliably for doing what you already love.
+            </p>
+            <button
+              type="button"
+              className="mt-8 rounded-full border border-navy-900/15 px-7 py-3 text-sm font-semibold text-navy-800 transition-colors hover:bg-navy-900/[0.04]"
+            >
+              Become a Tutor
+            </button>
+          </div>
         </motion.div>
       </div>
     </section>

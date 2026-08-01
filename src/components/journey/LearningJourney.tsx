@@ -7,6 +7,8 @@ interface Milestone {
   side: 'left' | 'right'
   /** Position along the path, 0–1 */
   progress: number
+  /** Only steps 1–4 get a filler photo opposite their text card. */
+  photo?: { src: string; alt: string }
 }
 
 // Spread across 0.2–0.85 — leaves clear room at the top for the title block
@@ -18,6 +20,7 @@ const MILESTONES: Milestone[] = [
       'Explore 40+ languages and pick the one that fits where you’re headed — a new job, a big trip, or reconnecting with family.',
     side: 'right',
     progress: 0.2,
+    photo: { src: '/photos/journey-1.jpg', alt: 'Learner studying with headphones at home' },
   },
   {
     title: 'Take Our Onboarding Test',
@@ -25,6 +28,7 @@ const MILESTONES: Milestone[] = [
       'A quick, guided placement assessment figures out exactly where you’re starting from, so your path is tailored from day one.',
     side: 'left',
     progress: 0.3625,
+    photo: { src: '/photos/journey-2.jpg', alt: 'Group of learners studying together around a laptop' },
   },
   {
     title: 'Start Learning',
@@ -32,6 +36,7 @@ const MILESTONES: Milestone[] = [
       'Bite-sized lessons built around how busy people actually learn, fitting into the pockets of time you already have.',
     side: 'right',
     progress: 0.525,
+    photo: { src: '/photos/journey-3.jpg', alt: 'Learner relaxing at home while studying on a laptop' },
   },
   {
     title: 'Connect with Real Tutors',
@@ -39,6 +44,7 @@ const MILESTONES: Milestone[] = [
       'Practice live with native speakers who adapt to your goals and pace — not just an app quizzing you on flashcards.',
     side: 'left',
     progress: 0.6875,
+    photo: { src: '/photos/journey-4.jpg', alt: 'Learner waving during a video call with a tutor' },
   },
   {
     title: 'Expand Your Capabilities',
@@ -71,6 +77,17 @@ export default function LearningJourney() {
     path.style.strokeDasharray = `${length}`
     path.style.strokeDashoffset = `${length}`
 
+    // Read each node's position directly off the path geometry so the dots
+    // always sit centered on the line, regardless of exactly how it curves —
+    // fixed left/right cx values drifted off the curve at in-between points.
+    MILESTONES.forEach((m, i) => {
+      const node = nodeRefs.current[i]
+      if (!node) return
+      const pt = path.getPointAtLength(m.progress * length)
+      node.setAttribute('cx', `${pt.x}`)
+      node.setAttribute('cy', `${pt.y}`)
+    })
+
     // Only the connecting line (and the nodes strung along it) animate with
     // scroll — the step text is always visible, not gated behind scrolling.
     const trigger = ScrollTrigger.create({
@@ -97,62 +114,95 @@ export default function LearningJourney() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative h-[150vh] sm:h-[165vh]">
+    <section ref={sectionRef} className="relative h-[165vh] sm:h-[180vh]">
       <div className="relative h-full">
-        <div className="absolute left-1/2 top-10 -translate-x-1/2 text-center px-6">
+        <div className="pt-16 sm:pt-24 text-center px-6">
           <span className="text-xs uppercase tracking-[0.3em] text-navy-700/60">The Journey</span>
-          <h2 className="mt-1.5 text-2xl sm:text-3xl font-bold text-navy-950">Your Path to Fluency</h2>
+          <h2 className="mt-2 text-4xl sm:text-6xl font-extrabold tracking-tight text-brand-blue">
+            Your Path to Fluency
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-base sm:text-lg text-navy-700/80">
+            Five steps from your first lesson to real conversations with native speakers — here&rsquo;s
+            exactly how it works.
+          </p>
         </div>
 
-        <div className="absolute left-1/2 -translate-x-1/2 w-[110px] sm:w-[150px] h-full">
-          <svg viewBox="0 0 100 500" preserveAspectRatio="none" className="h-full w-full">
-            <path d={PATH_D} fill="none" stroke="rgba(19,41,82,0.14)" strokeWidth={2.5} />
-            <path
-              ref={pathRef}
-              d={PATH_D}
-              fill="none"
-              stroke="url(#journey-gradient)"
-              strokeWidth={2.5}
-              strokeLinecap="round"
-            />
-            <defs>
-              <linearGradient id="journey-gradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#132952" />
-                <stop offset="100%" stopColor="#1ba3e0" />
-              </linearGradient>
-            </defs>
-            {MILESTONES.map((m, i) => (
-              <circle
-                key={m.title}
-                ref={(el) => {
-                  nodeRefs.current[i] = el
-                }}
-                cx={m.side === 'right' ? 65 : 35}
-                cy={m.progress * 500}
-                r={5}
-                fill="rgba(19,41,82,0.15)"
-                stroke="#f8fbff"
-                strokeWidth={1.5}
+        {/* Offset below the header so the animated line starts underneath the
+            title block instead of running behind it. */}
+        <div className="absolute inset-x-0 top-[270px] sm:top-[340px] bottom-0">
+          <div className="absolute left-1/2 -translate-x-1/2 w-[110px] sm:w-[150px] h-full">
+            <svg viewBox="0 0 100 500" preserveAspectRatio="none" className="h-full w-full">
+              <path d={PATH_D} fill="none" stroke="rgba(19,41,82,0.14)" strokeWidth={2.5} />
+              <path
+                ref={pathRef}
+                d={PATH_D}
+                fill="none"
+                stroke="url(#journey-gradient)"
+                strokeWidth={2.5}
+                strokeLinecap="round"
               />
-            ))}
-          </svg>
-        </div>
-
-        {MILESTONES.map((m, i) => (
-          <div
-            key={m.title}
-            className={`absolute w-[48%] sm:w-[40%] px-4 ${
-              m.side === 'right' ? 'left-[52%] sm:left-[54%] text-left' : 'right-[52%] sm:right-[54%] text-right'
-            }`}
-            style={{ top: `${m.progress * 100}%`, transform: 'translateY(-50%)' }}
-          >
-            <span className="mb-2 inline-block rounded-full border border-navy-900/10 bg-navy-900/[0.03] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-navy-700/70">
-              Step {i + 1}
-            </span>
-            <h3 className="text-xl sm:text-2xl font-bold text-navy-950 leading-snug">{m.title}</h3>
-            <p className="mt-2 text-sm sm:text-base text-navy-700/75 leading-relaxed">{m.description}</p>
+              <defs>
+                <linearGradient id="journey-gradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#132952" />
+                  <stop offset="100%" stopColor="#1ba3e0" />
+                </linearGradient>
+              </defs>
+              {MILESTONES.map((m, i) => (
+                <circle
+                  key={m.title}
+                  ref={(el) => {
+                    nodeRefs.current[i] = el
+                  }}
+                  cx={m.side === 'right' ? 65 : 35}
+                  cy={m.progress * 500}
+                  r={5}
+                  fill="rgba(19,41,82,0.15)"
+                  stroke="#f8fbff"
+                  strokeWidth={1.5}
+                />
+              ))}
+            </svg>
           </div>
-        ))}
+
+          {MILESTONES.map((m, i) => (
+            <div
+              key={m.title}
+              className={`absolute w-[48%] sm:w-[38%] px-4 ${
+                m.side === 'right' ? 'left-[52%] sm:left-[56%] text-left' : 'right-[52%] sm:right-[56%] text-right'
+              }`}
+              style={{ top: `${m.progress * 100}%`, transform: 'translateY(-50%)' }}
+            >
+              <div className="rounded-2xl border border-navy-900/10 bg-white/70 backdrop-blur-sm px-5 py-5 sm:px-6 sm:py-6 shadow-[0_8px_28px_rgba(19,41,82,0.08)]">
+                <span className="mb-2 inline-block rounded-full border border-navy-900/10 bg-navy-900/[0.03] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-navy-700/70">
+                  Step {i + 1}
+                </span>
+                <h3 className="text-xl sm:text-2xl font-bold text-navy-950 leading-snug">{m.title}</h3>
+                <p className="mt-2 text-sm sm:text-base text-navy-700/75 leading-relaxed">{m.description}</p>
+              </div>
+            </div>
+          ))}
+
+          {/* Steps 1–4 get a stock photo filling the empty space on the
+              opposite side of the line from their text card. */}
+          {MILESTONES.slice(0, 4).map((m) => {
+            if (!m.photo) return null
+            return (
+              <div
+                key={`photo-${m.title}`}
+                className={`hidden md:block absolute w-[26%] ${
+                  m.side === 'right' ? 'right-[58%]' : 'left-[58%]'
+                }`}
+                style={{ top: `${m.progress * 100}%`, transform: 'translateY(-50%)' }}
+              >
+                <img
+                  src={m.photo.src}
+                  alt={m.photo.alt}
+                  className="aspect-[4/3] w-full rounded-2xl object-cover shadow-[0_12px_32px_rgba(19,41,82,0.12)]"
+                />
+              </div>
+            )
+          })}
+        </div>
       </div>
     </section>
   )

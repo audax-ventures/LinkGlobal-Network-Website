@@ -2,6 +2,7 @@ import { Suspense, useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import LazyStylizedGlobe from '../LazyStylizedGlobe'
 import Logo from '../Logo'
+import LaptopMockup from './LaptopMockup'
 import { useViewportSize } from '../../hooks/useViewportSize'
 import { COUNTRY_GREETINGS } from '../../data/countryGreetings'
 
@@ -94,13 +95,35 @@ export default function SpinningWorld({ onDismiss }: SpinningWorldProps) {
     >
       {/* Plain wrapper (not display:contents — that would make the opacity
           fade-in a no-op, since contents removes the element's own box). */}
-      <div ref={contentRef} className="flex flex-col items-center gap-6 sm:gap-10">
-        <Logo variant="dark" className="w-40 sm:w-52 h-auto" />
+      <div ref={contentRef} className="flex flex-col items-center gap-5 sm:gap-8 px-6">
+        <Logo variant="dark" className="w-36 sm:w-44 h-auto" />
 
-        <div className="relative flex items-center justify-center">
+        <div className="text-center max-w-xl">
+          <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-navy-950">
+            Welcome to LinkGlobal Network
+          </h1>
+          <p className="mt-2 text-sm sm:text-base text-navy-700/80">
+            The platform that connects learners with real, native-speaking tutors — in over
+            120 countries.
+          </p>
+        </div>
+
+        <div className="relative flex items-center justify-center gap-6 lg:gap-10">
+          <LaptopMockup
+            src="/gallery/dashboard.png"
+            alt="LinkGlobal Network learner dashboard"
+            className="hidden lg:block w-[220px] xl:w-[260px] -rotate-2"
+          />
+
           <Suspense fallback={<div style={{ width: globeSize, height: globeSize }} />}>
             <LazyStylizedGlobe width={globeSize} height={globeSize} greetings={COUNTRY_GREETINGS} />
           </Suspense>
+
+          <LaptopMockup
+            src="/gallery/practice-report.png"
+            alt="LinkGlobal Network AI practice session report"
+            className="hidden lg:block w-[220px] xl:w-[260px] rotate-2"
+          />
         </div>
 
         <div

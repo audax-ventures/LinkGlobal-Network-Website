@@ -62,7 +62,7 @@ const SCREENS: ScreenConfig[] = [
 
 export default function PlatformGallery() {
   return (
-    <section className="relative overflow-hidden py-28 sm:py-36">
+    <section className="relative overflow-hidden py-16 sm:py-24">
       <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
         <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-light/60">
           Inside the Platform
@@ -77,7 +77,7 @@ export default function PlatformGallery() {
       </div>
 
       <div
-        className="relative mx-auto mt-20 h-[480px] sm:h-[560px] w-full max-w-5xl px-6"
+        className="relative mx-auto mt-14 h-[480px] sm:h-[560px] w-full max-w-5xl px-6"
         style={{ perspective: '1600px' }}
       >
         {/* grid floor */}

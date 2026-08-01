@@ -39,11 +39,11 @@ function NavCircle({ label, Icon }: { label: string; Icon: typeof HomeIcon }) {
       <AnimatePresence>
         {hovered && (
           <motion.span
-            initial={{ opacity: 0, y: 4, scale: 0.92 }}
+            initial={{ opacity: 0, y: -4, scale: 0.92 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 4, scale: 0.92 }}
+            exit={{ opacity: 0, y: -4, scale: 0.92 }}
             transition={{ duration: 0.16, ease: 'easeOut' }}
-            className="absolute -top-9 whitespace-nowrap rounded-full bg-navy-950 px-3 py-1 text-[11px] font-medium tracking-wide text-white shadow-md"
+            className="absolute -bottom-9 whitespace-nowrap rounded-full bg-navy-950 px-3 py-1 text-[11px] font-medium tracking-wide text-white shadow-md"
           >
             {label}
           </motion.span>
@@ -112,7 +112,7 @@ export default function FloatingNav() {
 
   return (
     <div ref={navRef} className="fixed top-0 inset-x-0 z-40 flex items-center justify-between px-5 sm:px-8 py-4">
-      <Logo variant="dark" markOnly className="h-9 w-9" />
+      <Logo variant="dark" className="h-8 w-auto sm:h-9" />
       <div className="flex items-center gap-2 sm:gap-2.5">
         {NAV_ITEMS.map((item) => (
           <NavCircle key={item.id} label={item.label} Icon={item.Icon} />

@@ -20,49 +20,64 @@ export default function Hero() {
     >
       <HeroBackground />
 
-      <motion.div
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className="relative z-10 flex max-w-4xl flex-col items-center text-center"
-      >
-        <motion.span
-          variants={item}
-          className="mb-5 rounded-full border border-navy-900/10 bg-navy-900/[0.03] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-navy-700"
+      <div className="relative z-10 grid w-full max-w-6xl items-center gap-12 md:grid-cols-2 md:gap-10">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="flex flex-col items-center text-center md:items-start md:text-left"
         >
-          Language Learning, Without Borders
-        </motion.span>
-
-        <motion.h1
-          variants={item}
-          className="text-4xl sm:text-6xl md:text-7xl font-extrabold leading-[1.05] tracking-tight text-navy-950"
-        >
-          Learn Any Language.
-          <br />
-          <span className="text-gradient-brand">Meet the Whole World.</span>
-        </motion.h1>
-
-        <motion.p variants={item} className="mt-6 max-w-2xl text-base sm:text-lg text-navy-700/80">
-          LinkGlobal Network connects you with real, native-speaking tutors in over 120
-          countries — so you don&rsquo;t just learn a language, you live it.
-        </motion.p>
-
-        <motion.div variants={item} className="mt-10 flex flex-col sm:flex-row items-center gap-4">
-          <button
-            type="button"
-            className="rounded-full px-8 py-3.5 text-sm font-semibold text-white shadow-[0_8px_30px_rgba(30,120,190,0.3)] transition-transform hover:scale-105"
-            style={{ background: 'linear-gradient(90deg, #1ba3e0, #3ec6ff)' }}
+          <motion.span
+            variants={item}
+            className="mb-5 rounded-full border border-navy-900/10 bg-navy-900/[0.03] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-navy-700"
           >
-            Get Started
-          </button>
-          <button
-            type="button"
-            className="rounded-full border border-navy-900/15 px-8 py-3.5 text-sm font-semibold text-navy-800 transition-colors hover:bg-navy-900/[0.04]"
+            Language Learning, Without Borders
+          </motion.span>
+
+          <motion.h1
+            variants={item}
+            className="text-4xl sm:text-6xl md:text-6xl font-extrabold leading-[1.05] tracking-tight text-navy-950"
           >
-            See How It Works
-          </button>
+            Learn Any Language.
+            <br />
+            <span className="text-gradient-brand">Meet the Whole World.</span>
+          </motion.h1>
+
+          <motion.p variants={item} className="mt-6 max-w-lg text-base sm:text-lg text-navy-700/80">
+            LinkGlobal Network connects you with real, native-speaking tutors in over 120
+            countries — so you don&rsquo;t just learn a language, you live it.
+          </motion.p>
+
+          <motion.div variants={item} className="mt-10 flex flex-col sm:flex-row items-center gap-4">
+            <button
+              type="button"
+              className="rounded-full px-8 py-3.5 text-sm font-semibold text-white shadow-[0_8px_30px_rgba(30,120,190,0.3)] transition-transform hover:scale-105"
+              style={{ background: 'linear-gradient(90deg, #1ba3e0, #3ec6ff)' }}
+            >
+              Get Started
+            </button>
+            <button
+              type="button"
+              className="rounded-full border border-navy-900/15 px-8 py-3.5 text-sm font-semibold text-navy-800 transition-colors hover:bg-navy-900/[0.04]"
+            >
+              See How It Works
+            </button>
+          </motion.div>
         </motion.div>
-      </motion.div>
+
+        <motion.div
+          variants={item}
+          initial="hidden"
+          animate="show"
+          className="flex justify-center md:justify-end"
+        >
+          <img
+            src="/photos/hero-learner.jpg"
+            alt="A learner using the LinkGlobal Network platform on their laptop at home"
+            className="aspect-[4/5] w-full max-w-sm rounded-3xl object-cover shadow-[0_25px_60px_rgba(19,41,82,0.18)] sm:max-w-md"
+          />
+        </motion.div>
+      </div>
 
       <motion.div
         variants={item}
