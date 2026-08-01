@@ -21,7 +21,7 @@ export default function SpinningWorld({ onDismiss }: SpinningWorldProps) {
   // the real viewport size is known. Sized a bit smaller than before (and
   // against height*0.5 rather than 0.62) to leave room for the static logo
   // stacked above it.
-  const globeSize = Math.max(Math.min(width * 0.75, height * 0.5, 480), 240)
+  const globeSize = Math.max(Math.min(width * 0.75, height * 0.5, 440), 240)
 
   useEffect(() => {
     const wrap = containerRef.current
@@ -105,11 +105,11 @@ export default function SpinningWorld({ onDismiss }: SpinningWorldProps) {
           </p>
         </div>
 
-        <div className="relative flex items-center justify-center gap-10">
+        <div className="relative flex items-center justify-center gap-8">
           <LaptopMockup
             src="/gallery/dashboard.png"
             alt="LinkGlobal Network learner dashboard"
-            className="hidden xl:block w-[320px] -rotate-2"
+            className="hidden xl:block w-[350px] -rotate-2 2xl:w-[420px]"
           />
 
           <Suspense fallback={<div style={{ width: globeSize, height: globeSize }} />}>
@@ -119,7 +119,7 @@ export default function SpinningWorld({ onDismiss }: SpinningWorldProps) {
           <LaptopMockup
             src="/gallery/practice-report.png"
             alt="LinkGlobal Network AI practice session report"
-            className="hidden xl:block w-[320px] rotate-2"
+            className="hidden xl:block w-[350px] rotate-2 2xl:w-[420px]"
           />
         </div>
 

@@ -46,13 +46,13 @@ export default function PlatformGallery() {
         </div>
       </div>
 
-      <div className="relative mx-auto mt-14 w-full max-w-5xl px-6" style={{ perspective: '1600px' }}>
+      <div className="relative mx-auto mt-14 w-full max-w-7xl px-6" style={{ perspective: '1600px' }}>
         <div
           className="absolute inset-0"
           style={{ background: 'radial-gradient(circle at 50% 40%, rgba(62,198,255,0.18), transparent 60%)' }}
         />
 
-        <div className="relative grid grid-cols-2 gap-6 sm:gap-10">
+        <div className="relative grid grid-cols-2 gap-8 sm:gap-12">
           {SCREENS.map((s, i) => (
             <motion.div
               key={i}

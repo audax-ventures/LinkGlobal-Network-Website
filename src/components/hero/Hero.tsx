@@ -74,7 +74,7 @@ export default function Hero() {
           <img
             src="/photos/hero-learner.jpg"
             alt="A learner using the LinkGlobal Network platform on their laptop at home"
-            className="aspect-[4/5] w-full max-w-sm rounded-3xl object-cover shadow-[0_25px_60px_rgba(19,41,82,0.18)] sm:max-w-md"
+            className="aspect-[4/5] w-full max-w-md rounded-3xl object-cover shadow-[0_25px_60px_rgba(19,41,82,0.18)] sm:max-w-xl"
           />
         </motion.div>
       </div>
