@@ -25,7 +25,7 @@ export default function PageHeader({ eyebrow, title, description }: PageHeaderPr
       animate="show"
       className="relative px-6 pt-36 pb-16 sm:pt-44 sm:pb-20 text-center"
     >
-      <div className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-3xl rounded-3xl border border-navy-900/10 bg-white/70 px-6 py-10 sm:px-12 sm:py-14 backdrop-blur-sm shadow-[0_20px_60px_rgba(19,41,82,0.08)]">
         <motion.span
           variants={item}
           className="mb-5 inline-block rounded-full border border-navy-900/10 bg-navy-900/[0.03] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-navy-700"

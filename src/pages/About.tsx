@@ -53,6 +53,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="rounded-3xl border border-navy-900/10 bg-white/70 px-6 py-8 sm:px-9 sm:py-9 backdrop-blur-sm shadow-[0_8px_28px_rgba(19,41,82,0.08)]"
           >
             <span className="text-xs font-semibold uppercase tracking-[0.25em] text-navy-700/60">
               Why We Started
@@ -94,7 +95,7 @@ export default function About() {
       </section>
 
       <section className="relative px-6 pb-24 sm:pb-32">
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-2xl rounded-3xl border border-navy-900/10 bg-navy-900/[0.03] px-6 py-8 sm:px-10 sm:py-10 text-center">
           <span className="text-xs font-semibold uppercase tracking-[0.25em] text-navy-700/60">
             What We Believe
           </span>

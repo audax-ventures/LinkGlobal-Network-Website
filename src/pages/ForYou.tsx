@@ -79,7 +79,7 @@ export default function ForYou() {
                 <img src={a.image} alt={a.title} className="aspect-[4/3] w-full object-cover" />
               </div>
 
-              <div>
+              <div className="rounded-3xl border border-navy-900/10 bg-white/70 px-6 py-8 sm:px-9 sm:py-9 backdrop-blur-sm shadow-[0_8px_28px_rgba(19,41,82,0.08)]">
                 <span className="text-xs font-semibold uppercase tracking-[0.25em] text-navy-700/60">
                   {a.eyebrow}
                 </span>

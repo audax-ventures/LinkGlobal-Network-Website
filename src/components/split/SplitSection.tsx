@@ -31,7 +31,7 @@ export default function SplitSection() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.4 }}
-        className="relative z-10 mx-auto max-w-2xl text-center"
+        className="relative z-10 mx-auto max-w-2xl rounded-3xl border border-navy-900/10 bg-white/70 px-6 py-10 sm:px-12 sm:py-12 text-center backdrop-blur-sm shadow-[0_20px_60px_rgba(19,41,82,0.08)]"
       >
         <span className="text-xs font-semibold uppercase tracking-[0.25em] text-navy-700/60">
           Two Sides, One Platform

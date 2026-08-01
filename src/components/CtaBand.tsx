@@ -16,7 +16,7 @@ export default function CtaBand({ title, description, primary, secondary }: CtaB
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.4 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 mx-auto max-w-2xl text-center"
+        className="relative z-10 mx-auto max-w-2xl rounded-3xl border border-white/10 bg-white/5 px-6 py-12 sm:px-14 sm:py-16 text-center backdrop-blur"
       >
         <h2 className="text-3xl sm:text-4xl font-bold text-white">{title}</h2>
         <p className="mt-4 text-white/65">{description}</p>

@@ -56,15 +56,17 @@ export default function GlobalReach() {
 
   return (
     <section className="relative overflow-hidden py-28 sm:py-36 px-6">
-      <div className="relative z-10 mx-auto max-w-3xl text-center">
-        <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-light/60">
-          Global Reach
-        </span>
-        <h2 className="mt-3 text-3xl sm:text-5xl font-bold text-white">Learners in 120+ countries.</h2>
-        <p className="mt-4 text-white/65">
-          Wherever you are, there’s a tutor and a community waiting on the other side of
-          the conversation.
-        </p>
+      <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
+        <div className="rounded-3xl border border-white/10 bg-white/5 px-6 py-10 sm:px-12 sm:py-12 backdrop-blur">
+          <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-light/60">
+            Global Reach
+          </span>
+          <h2 className="mt-3 text-3xl sm:text-5xl font-bold text-white">Learners in 120+ countries.</h2>
+          <p className="mt-4 text-white/65">
+            Wherever you are, there’s a tutor and a community waiting on the other side of
+            the conversation.
+          </p>
+        </div>
       </div>
 
       <div className="relative z-10 mx-auto mt-12 flex justify-center">

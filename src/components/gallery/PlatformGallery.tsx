@@ -64,16 +64,18 @@ export default function PlatformGallery() {
   return (
     <section className="relative overflow-hidden py-16 sm:py-24">
       <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
-        <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-light/60">
-          Inside the Platform
-        </span>
-        <h2 className="mt-3 text-3xl sm:text-5xl font-bold text-white">
-          Built for how you actually learn.
-        </h2>
-        <p className="mt-4 text-white/65">
-          A preview of the LinkGlobal Network experience — lessons, live sessions, and
-          progress tracking, all in one place.
-        </p>
+        <div className="rounded-3xl border border-white/10 bg-white/5 px-6 py-10 sm:px-12 sm:py-12 backdrop-blur">
+          <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-light/60">
+            Inside the Platform
+          </span>
+          <h2 className="mt-3 text-3xl sm:text-5xl font-bold text-white">
+            Built for how you actually learn.
+          </h2>
+          <p className="mt-4 text-white/65">
+            A preview of the LinkGlobal Network experience — lessons, live sessions, and
+            progress tracking, all in one place.
+          </p>
+        </div>
       </div>
 
       <div

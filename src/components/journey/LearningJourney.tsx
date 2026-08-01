@@ -117,19 +117,22 @@ export default function LearningJourney() {
     <section ref={sectionRef} className="relative h-[165vh] sm:h-[180vh]">
       <div className="relative h-full">
         <div className="pt-16 sm:pt-24 text-center px-6">
-          <span className="text-xs uppercase tracking-[0.3em] text-navy-700/60">The Journey</span>
-          <h2 className="mt-2 text-4xl sm:text-6xl font-extrabold tracking-tight text-brand-blue">
-            Your Path to Fluency
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-base sm:text-lg text-navy-700/80">
-            Five steps from your first lesson to real conversations with native speakers — here&rsquo;s
-            exactly how it works.
-          </p>
+          <div className="mx-auto max-w-2xl rounded-3xl border border-navy-900/10 bg-white/70 px-6 py-8 sm:px-10 sm:py-10 backdrop-blur-sm shadow-[0_20px_60px_rgba(19,41,82,0.08)]">
+            <span className="text-xs uppercase tracking-[0.3em] text-navy-700/60">The Journey</span>
+            <h2 className="mt-2 text-4xl sm:text-6xl font-extrabold tracking-tight text-brand-blue">
+              Your Path to Fluency
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-base sm:text-lg text-navy-700/80">
+              Five steps from your first lesson to real conversations with native speakers — here&rsquo;s
+              exactly how it works.
+            </p>
+          </div>
         </div>
 
         {/* Offset below the header so the animated line starts underneath the
-            title block instead of running behind it. */}
-        <div className="absolute inset-x-0 top-[270px] sm:top-[340px] bottom-0">
+            title block instead of running behind it. Boxing the header added
+            extra height, so this is pushed down from the previous 270/340. */}
+        <div className="absolute inset-x-0 top-[360px] sm:top-[440px] bottom-0">
           <div className="absolute left-1/2 -translate-x-1/2 w-[110px] sm:w-[150px] h-full">
             <svg viewBox="0 0 100 500" preserveAspectRatio="none" className="h-full w-full">
               <path d={PATH_D} fill="none" stroke="rgba(19,41,82,0.14)" strokeWidth={2.5} />
