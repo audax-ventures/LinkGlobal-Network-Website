@@ -105,11 +105,11 @@ export default function SpinningWorld({ onDismiss }: SpinningWorldProps) {
           </p>
         </div>
 
-        <div className="relative flex items-center justify-center gap-6 lg:gap-10">
+        <div className="relative flex items-center justify-center gap-10">
           <LaptopMockup
             src="/gallery/dashboard.png"
             alt="LinkGlobal Network learner dashboard"
-            className="hidden lg:block w-[220px] xl:w-[260px] -rotate-2"
+            className="hidden xl:block w-[320px] -rotate-2"
           />
 
           <Suspense fallback={<div style={{ width: globeSize, height: globeSize }} />}>
@@ -119,7 +119,7 @@ export default function SpinningWorld({ onDismiss }: SpinningWorldProps) {
           <LaptopMockup
             src="/gallery/practice-report.png"
             alt="LinkGlobal Network AI practice session report"
-            className="hidden lg:block w-[220px] xl:w-[260px] rotate-2"
+            className="hidden xl:block w-[320px] rotate-2"
           />
         </div>
 

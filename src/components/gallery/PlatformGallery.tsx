@@ -4,65 +4,33 @@ import MockScreen from './MockScreen'
 interface ScreenConfig {
   src: string
   alt: string
-  top: string
-  left: string
-  width: string
   rotateY: number
   rotateX: number
-  translateZ: number
-  z: number
 }
 
+// A real 2x2 grid — every cell is identically sized, so alignment is exact
+// by construction rather than tuned per-screen percentages. The alternating
+// tilt direction per cell keeps some of the original 3D-room character.
 const SCREENS: ScreenConfig[] = [
-  {
-    src: '/gallery/dashboard.png',
-    alt: 'LinkGlobal Network learner dashboard',
-    top: '8%',
-    left: '4%',
-    width: '35%',
-    rotateY: 18,
-    rotateX: 4,
-    translateZ: 40,
-    z: 20,
-  },
-  {
-    src: '/gallery/onboarding.png',
-    alt: 'LinkGlobal Network onboarding flow',
-    top: '14%',
-    left: '56%',
-    width: '30%',
-    rotateY: -16,
-    rotateX: 6,
-    translateZ: 60,
-    z: 30,
-  },
+  { src: '/gallery/dashboard.png', alt: 'LinkGlobal Network learner dashboard', rotateY: 8, rotateX: 3 },
+  { src: '/gallery/onboarding.png', alt: 'LinkGlobal Network onboarding flow', rotateY: -8, rotateX: 3 },
   {
     src: '/gallery/practice-report.png',
     alt: 'LinkGlobal Network AI practice session report',
-    top: '48%',
-    left: '8%',
-    width: '28%',
-    rotateY: 12,
-    rotateX: -4,
-    translateZ: 20,
-    z: 10,
+    rotateY: 8,
+    rotateX: -3,
   },
   {
     src: '/gallery/session-details.png',
     alt: 'LinkGlobal Network session management details',
-    top: '46%',
-    left: '60%',
-    width: '30%',
-    rotateY: -20,
-    rotateX: -2,
-    translateZ: 80,
-    z: 40,
+    rotateY: -8,
+    rotateX: -3,
   },
 ]
 
 export default function PlatformGallery() {
   return (
-    <section className="relative overflow-hidden py-16 sm:py-24">
+    <section className="relative overflow-hidden pb-16 sm:pb-24">
       <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
         <div className="rounded-3xl border border-white/10 bg-white/5 px-6 py-10 sm:px-12 sm:py-12 backdrop-blur">
           <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-light/60">
@@ -78,50 +46,23 @@ export default function PlatformGallery() {
         </div>
       </div>
 
-      <div
-        className="relative mx-auto mt-14 h-[520px] sm:h-[600px] w-full max-w-5xl px-6"
-        style={{ perspective: '1600px' }}
-      >
-        {/* grid floor */}
-        <div
-          className="absolute inset-x-0 bottom-0 h-1/2"
-          style={{
-            transform: 'rotateX(75deg)',
-            transformOrigin: 'bottom',
-            backgroundImage:
-              'linear-gradient(rgba(62,198,255,0.25) 1px, transparent 1px), linear-gradient(90deg, rgba(62,198,255,0.25) 1px, transparent 1px)',
-            backgroundSize: '48px 48px',
-            maskImage: 'linear-gradient(to top, black, transparent)',
-            WebkitMaskImage: 'linear-gradient(to top, black, transparent)',
-          }}
-        />
+      <div className="relative mx-auto mt-14 w-full max-w-5xl px-6" style={{ perspective: '1600px' }}>
         <div
           className="absolute inset-0"
           style={{ background: 'radial-gradient(circle at 50% 40%, rgba(62,198,255,0.18), transparent 60%)' }}
         />
 
-        <div className="relative h-full w-full" style={{ transformStyle: 'preserve-3d' }}>
+        <div className="relative grid grid-cols-2 gap-6 sm:gap-10">
           {SCREENS.map((s, i) => (
             <motion.div
               key={i}
-              className="absolute aspect-[16/9]"
-              style={{
-                top: s.top,
-                left: s.left,
-                width: s.width,
-                zIndex: s.z,
-                transformStyle: 'preserve-3d',
-              }}
-              initial={{ opacity: 0, y: 40, rotateY: s.rotateY, rotateX: s.rotateX, translateZ: s.translateZ }}
-              whileInView={{ opacity: 1, y: 0, rotateY: s.rotateY, rotateX: s.rotateX, translateZ: s.translateZ }}
+              className="aspect-[16/9]"
+              style={{ transformStyle: 'preserve-3d' }}
+              initial={{ opacity: 0, y: 40, rotateY: s.rotateY, rotateX: s.rotateX }}
+              whileInView={{ opacity: 1, y: 0, rotateY: s.rotateY, rotateX: s.rotateX }}
               viewport={{ once: true, amount: 0.3 }}
-              whileHover={{
-                rotateY: s.rotateY * 0.3,
-                rotateX: s.rotateX * 0.3,
-                translateZ: s.translateZ + 40,
-                scale: 1.04,
-              }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ rotateY: s.rotateY * 0.3, rotateX: s.rotateX * 0.3, scale: 1.04 }}
+              transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
             >
               <MockScreen src={s.src} alt={s.alt} />
             </motion.div>

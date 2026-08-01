@@ -43,6 +43,7 @@ const MILESTONES: Milestone[] = [
     description:
       'Track fluency milestones as you hit them, and unlock new opportunities at work, while traveling, or at home.',
     side: 'right',
+    photo: { src: '/photos/hero-learner.jpg', alt: 'Learner confidently using the LinkGlobal Network platform' },
   },
 ]
 
@@ -236,8 +237,8 @@ export default function LearningJourney() {
             </div>
           ))}
 
-          {/* Steps 1–4 get a stock photo filling the empty space on the
-              opposite side of the line from their text card. */}
+          {/* Each step with a photo gets it filling the empty space on the
+              opposite side of the line from its text card. */}
           {MILESTONES.map((m, i) => {
             if (!m.photo) return null
             return (
