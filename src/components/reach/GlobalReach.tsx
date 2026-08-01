@@ -1,8 +1,4 @@
-import { Suspense } from 'react'
 import { motion } from 'framer-motion'
-import LazyStylizedGlobe from '../LazyStylizedGlobe'
-import { COUNTRY_GREETINGS } from '../../data/countryGreetings'
-import { useViewportSize } from '../../hooks/useViewportSize'
 
 interface Testimonial {
   name: string
@@ -51,9 +47,6 @@ function AvatarIllustration({ color }: { color: string }) {
 }
 
 export default function GlobalReach() {
-  const { width } = useViewportSize()
-  const globeSize = Math.max(Math.min(width * 0.55, 480), 260)
-
   return (
     <section className="relative overflow-hidden py-28 sm:py-36 px-6">
       <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
@@ -67,12 +60,6 @@ export default function GlobalReach() {
             the conversation.
           </p>
         </div>
-      </div>
-
-      <div className="relative z-10 mx-auto mt-12 flex justify-center">
-        <Suspense fallback={<div style={{ width: globeSize, height: globeSize }} />}>
-          <LazyStylizedGlobe width={globeSize} height={globeSize} greetings={COUNTRY_GREETINGS} autoRotateSpeed={14} />
-        </Suspense>
       </div>
 
       <div className="relative z-10 mx-auto mt-16 grid max-w-5xl gap-5 sm:grid-cols-2">

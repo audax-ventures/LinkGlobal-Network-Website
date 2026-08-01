@@ -25,7 +25,7 @@ export default function Hero() {
           variants={container}
           initial="hidden"
           animate="show"
-          className="flex flex-col items-center rounded-3xl border border-navy-900/10 bg-white/70 px-6 py-8 text-center backdrop-blur-sm shadow-[0_20px_60px_rgba(19,41,82,0.08)] sm:px-10 sm:py-10 md:items-start md:text-left"
+          className="flex flex-col items-center text-center md:items-start md:text-left"
         >
           <motion.span
             variants={item}

@@ -18,8 +18,8 @@ const SCREENS: ScreenConfig[] = [
     src: '/gallery/dashboard.png',
     alt: 'LinkGlobal Network learner dashboard',
     top: '8%',
-    left: '6%',
-    width: '30%',
+    left: '4%',
+    width: '35%',
     rotateY: 18,
     rotateX: 4,
     translateZ: 40,
@@ -29,8 +29,8 @@ const SCREENS: ScreenConfig[] = [
     src: '/gallery/onboarding.png',
     alt: 'LinkGlobal Network onboarding flow',
     top: '14%',
-    left: '58%',
-    width: '26%',
+    left: '56%',
+    width: '30%',
     rotateY: -16,
     rotateX: 6,
     translateZ: 60,
@@ -40,8 +40,8 @@ const SCREENS: ScreenConfig[] = [
     src: '/gallery/practice-report.png',
     alt: 'LinkGlobal Network AI practice session report',
     top: '48%',
-    left: '10%',
-    width: '24%',
+    left: '8%',
+    width: '28%',
     rotateY: 12,
     rotateX: -4,
     translateZ: 20,
@@ -51,8 +51,8 @@ const SCREENS: ScreenConfig[] = [
     src: '/gallery/session-details.png',
     alt: 'LinkGlobal Network session management details',
     top: '46%',
-    left: '62%',
-    width: '26%',
+    left: '60%',
+    width: '30%',
     rotateY: -20,
     rotateX: -2,
     translateZ: 80,
@@ -79,7 +79,7 @@ export default function PlatformGallery() {
       </div>
 
       <div
-        className="relative mx-auto mt-14 h-[480px] sm:h-[560px] w-full max-w-5xl px-6"
+        className="relative mx-auto mt-14 h-[520px] sm:h-[600px] w-full max-w-5xl px-6"
         style={{ perspective: '1600px' }}
       >
         {/* grid floor */}

@@ -139,7 +139,11 @@ export default function LearningJourney() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative h-[165vh] sm:h-[180vh]">
+    // Total height is the measured header footprint plus a flat amount of
+    // scroll room for the milestones — keeping the two independent means
+    // boxing (or any future change to) the header can never compress the
+    // milestone spacing enough to make cards/photos overlap again.
+    <section ref={sectionRef} className="relative" style={{ height: `calc(${lineTop}px + 160vh)` }}>
       <div className="relative h-full">
         <div className="pt-16 sm:pt-24 text-center px-6">
           <div

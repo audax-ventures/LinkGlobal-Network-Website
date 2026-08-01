@@ -58,7 +58,7 @@ export default function SplitSection() {
             alt="A learner studying a new language on a laptop"
             className="aspect-[4/3] w-full rounded-2xl object-cover shadow-[0_12px_32px_rgba(19,41,82,0.1)]"
           />
-          <div className="mt-8 w-full rounded-2xl border border-navy-900/10 bg-white/70 backdrop-blur-sm px-6 py-6 sm:px-7 sm:py-7 shadow-[0_8px_28px_rgba(19,41,82,0.08)]">
+          <div className="mt-8 flex w-full flex-1 flex-col rounded-2xl border border-navy-900/10 bg-white/70 backdrop-blur-sm px-6 py-6 sm:px-7 sm:py-7 shadow-[0_8px_28px_rgba(19,41,82,0.08)]">
             <span className="text-xs font-semibold uppercase tracking-[0.25em] text-navy-700/60">
               For Learners
             </span>
@@ -67,9 +67,10 @@ export default function SplitSection() {
               Personalized lessons, flexible scheduling, and real conversations with native
               speakers — so progress fits around your life, not the other way around.
             </p>
+            <div className="flex-1" />
             <button
               type="button"
-              className="mt-8 rounded-full border border-navy-900/15 px-7 py-3 text-sm font-semibold text-navy-800 transition-colors hover:bg-navy-900/[0.04]"
+              className="mt-8 self-center rounded-full border border-navy-900/15 px-7 py-3 text-sm font-semibold text-navy-800 transition-colors hover:bg-navy-900/[0.04] md:self-start"
             >
               Explore for Learners
             </button>
@@ -88,7 +89,7 @@ export default function SplitSection() {
             alt="A teacher preparing an online tutoring session on a laptop"
             className="aspect-[4/3] w-full rounded-2xl object-cover shadow-[0_12px_32px_rgba(19,41,82,0.1)]"
           />
-          <div className="mt-8 w-full rounded-2xl border border-navy-900/10 bg-white/70 backdrop-blur-sm px-6 py-6 sm:px-7 sm:py-7 shadow-[0_8px_28px_rgba(19,41,82,0.08)]">
+          <div className="mt-8 flex w-full flex-1 flex-col rounded-2xl border border-navy-900/10 bg-white/70 backdrop-blur-sm px-6 py-6 sm:px-7 sm:py-7 shadow-[0_8px_28px_rgba(19,41,82,0.08)]">
             <span className="text-xs font-semibold uppercase tracking-[0.25em] text-navy-700/60">
               For Educators
             </span>
@@ -97,9 +98,10 @@ export default function SplitSection() {
               Set your own hours, connect with motivated learners globally, and get paid
               reliably for doing what you already love.
             </p>
+            <div className="flex-1" />
             <button
               type="button"
-              className="mt-8 rounded-full border border-navy-900/15 px-7 py-3 text-sm font-semibold text-navy-800 transition-colors hover:bg-navy-900/[0.04]"
+              className="mt-8 self-center rounded-full border border-navy-900/15 px-7 py-3 text-sm font-semibold text-navy-800 transition-colors hover:bg-navy-900/[0.04] md:self-start"
             >
               Become a Tutor
             </button>

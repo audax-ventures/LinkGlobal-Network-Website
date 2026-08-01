@@ -1,7 +1,6 @@
 import { Suspense, useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import LazyStylizedGlobe from '../LazyStylizedGlobe'
-import Logo from '../Logo'
 import LaptopMockup from './LaptopMockup'
 import { useViewportSize } from '../../hooks/useViewportSize'
 import { COUNTRY_GREETINGS } from '../../data/countryGreetings'
@@ -96,8 +95,6 @@ export default function SpinningWorld({ onDismiss }: SpinningWorldProps) {
       {/* Plain wrapper (not display:contents — that would make the opacity
           fade-in a no-op, since contents removes the element's own box). */}
       <div ref={contentRef} className="flex flex-col items-center gap-5 sm:gap-8 px-6">
-        <Logo variant="dark" className="w-36 sm:w-44 h-auto" />
-
         <div className="text-center max-w-xl">
           <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-navy-950">
             Welcome to LinkGlobal Network
