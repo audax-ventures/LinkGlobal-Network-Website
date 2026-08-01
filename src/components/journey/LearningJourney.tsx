@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { ensureGsapPlugins, ScrollTrigger } from '../../lib/gsapSetup'
 
 interface Milestone {
@@ -62,10 +62,35 @@ const MILESTONES: Milestone[] = [
 const PATH_D =
   'M50,0 C50,25 65,25 65,50 C65,100 35,100 35,150 C35,200 65,200 65,250 C65,300 35,300 35,350 C35,400 65,400 65,450 C65,475 50,475 50,500'
 
+// Fallback used only until the header box's real height is measured (and as
+// the floor for the gap below it) — actual value is computed from the DOM
+// so the line never starts above wrapped/boxed header text at any width.
+const FALLBACK_LINE_TOP = 360
+const GAP_BELOW_HEADER = 32
+
 export default function LearningJourney() {
   const sectionRef = useRef<HTMLDivElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
   const pathRef = useRef<SVGPathElement>(null)
   const nodeRefs = useRef<(SVGCircleElement | null)[]>([])
+  const [lineTop, setLineTop] = useState(FALLBACK_LINE_TOP)
+
+  useLayoutEffect(() => {
+    const section = sectionRef.current
+    const header = headerRef.current
+    if (!section || !header) return
+
+    const measure = () => {
+      const sectionTop = section.getBoundingClientRect().top
+      const headerBottom = header.getBoundingClientRect().bottom
+      setLineTop(Math.round(headerBottom - sectionTop + GAP_BELOW_HEADER))
+    }
+
+    measure()
+    const observer = new ResizeObserver(measure)
+    observer.observe(header)
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     ensureGsapPlugins()
@@ -117,7 +142,10 @@ export default function LearningJourney() {
     <section ref={sectionRef} className="relative h-[165vh] sm:h-[180vh]">
       <div className="relative h-full">
         <div className="pt-16 sm:pt-24 text-center px-6">
-          <div className="mx-auto max-w-2xl rounded-3xl border border-navy-900/10 bg-white/70 px-6 py-8 sm:px-10 sm:py-10 backdrop-blur-sm shadow-[0_20px_60px_rgba(19,41,82,0.08)]">
+          <div
+            ref={headerRef}
+            className="mx-auto max-w-2xl rounded-3xl border border-navy-900/10 bg-white/70 px-6 py-8 sm:px-10 sm:py-10 backdrop-blur-sm shadow-[0_20px_60px_rgba(19,41,82,0.08)]"
+          >
             <span className="text-xs uppercase tracking-[0.3em] text-navy-700/60">The Journey</span>
             <h2 className="mt-2 text-4xl sm:text-6xl font-extrabold tracking-tight text-brand-blue">
               Your Path to Fluency
@@ -130,9 +158,10 @@ export default function LearningJourney() {
         </div>
 
         {/* Offset below the header so the animated line starts underneath the
-            title block instead of running behind it. Boxing the header added
-            extra height, so this is pushed down from the previous 270/340. */}
-        <div className="absolute inset-x-0 top-[360px] sm:top-[440px] bottom-0">
+            title block instead of running behind it — measured from the
+            header box's real rendered height, not a guessed pixel value, so
+            it stays correct regardless of how the boxed text wraps. */}
+        <div className="absolute inset-x-0 bottom-0" style={{ top: `${lineTop}px` }}>
           <div className="absolute left-1/2 -translate-x-1/2 w-[110px] sm:w-[150px] h-full">
             <svg viewBox="0 0 100 500" preserveAspectRatio="none" className="h-full w-full">
               <path d={PATH_D} fill="none" stroke="rgba(19,41,82,0.14)" strokeWidth={2.5} />
