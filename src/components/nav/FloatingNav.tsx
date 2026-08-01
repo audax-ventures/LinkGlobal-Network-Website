@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import Logo from '../Logo'
+import { NAV_ROUTES } from '../../routes'
 import {
   HomeIcon,
   AboutIcon,
@@ -13,21 +15,23 @@ import {
   ContactIcon,
 } from './NavIcons'
 
-const NAV_ITEMS = [
-  { id: 'home', label: 'Home', Icon: HomeIcon },
-  { id: 'about', label: 'About', Icon: AboutIcon },
-  { id: 'for-you', label: 'For You', Icon: ForYouIcon },
-  { id: 'learners', label: 'For Learners', Icon: LearnersIcon },
-  { id: 'educators', label: 'For Educators', Icon: EducatorsIcon },
-  { id: 'try-now', label: 'Try Now', Icon: TryNowIcon },
-  { id: 'pricing', label: 'Pricing', Icon: PricingIcon },
-  { id: 'contact', label: 'Contact', Icon: ContactIcon },
-] as const
+const ICONS: Record<string, typeof HomeIcon> = {
+  home: HomeIcon,
+  about: AboutIcon,
+  'for-you': ForYouIcon,
+  learners: LearnersIcon,
+  educators: EducatorsIcon,
+  'try-now': TryNowIcon,
+  pricing: PricingIcon,
+  contact: ContactIcon,
+}
+
+const MotionLink = motion(Link)
 
 // Each icon is its own small floating chip with a soft shadow, rather than
 // one shared gradient pill housing all of them — a deliberately different
 // visual language from the earlier treatment.
-function NavCircle({ label, Icon }: { label: string; Icon: typeof HomeIcon }) {
+function NavCircle({ label, path, Icon }: { label: string; path: string; Icon: typeof HomeIcon }) {
   const [hovered, setHovered] = useState(false)
 
   return (
@@ -49,15 +53,15 @@ function NavCircle({ label, Icon }: { label: string; Icon: typeof HomeIcon }) {
           </motion.span>
         )}
       </AnimatePresence>
-      <motion.button
-        type="button"
+      <MotionLink
+        to={path}
         aria-label={label}
         whileHover={{ y: -2 }}
         transition={{ type: 'spring', stiffness: 400, damping: 22 }}
         className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-navy-700 shadow-[0_2px_10px_rgba(10,17,40,0.12)] ring-1 ring-navy-900/[0.06] transition-colors hover:text-brand-blue hover:ring-brand-blue/30"
       >
         <Icon className="h-[18px] w-[18px]" />
-      </motion.button>
+      </MotionLink>
     </div>
   )
 }
@@ -114,8 +118,8 @@ export default function FloatingNav() {
     <div ref={navRef} className="fixed top-0 inset-x-0 z-40 flex items-center justify-between px-5 sm:px-8 py-4">
       <Logo variant="dark" className="h-8 w-auto sm:h-9" />
       <div className="flex items-center gap-2 sm:gap-2.5">
-        {NAV_ITEMS.map((item) => (
-          <NavCircle key={item.id} label={item.label} Icon={item.Icon} />
+        {NAV_ROUTES.map((route) => (
+          <NavCircle key={route.id} label={route.label} path={route.path} Icon={ICONS[route.id]} />
         ))}
       </div>
     </div>

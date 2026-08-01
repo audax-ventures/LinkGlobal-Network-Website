@@ -1,6 +1,6 @@
+import { Link } from 'react-router-dom'
 import Logo from '../Logo'
-
-const NAV_LINKS = ['Home', 'About', 'For You', 'For Learners', 'For Educators', 'Try Now', 'Pricing', 'Contact']
+import { NAV_ROUTES } from '../../routes'
 
 const PARTNERS = [
   'Nordic Language Institute',
@@ -51,15 +51,11 @@ export default function Footer() {
           <div>
             <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40">Explore</span>
             <ul className="mt-4 space-y-2.5">
-              {NAV_LINKS.map((link) => (
-                <li key={link}>
-                  <a
-                    href="#"
-                    onClick={(e) => e.preventDefault()}
-                    className="text-sm text-white/60 transition-colors hover:text-white"
-                  >
-                    {link}
-                  </a>
+              {NAV_ROUTES.map((route) => (
+                <li key={route.id}>
+                  <Link to={route.path} className="text-sm text-white/60 transition-colors hover:text-white">
+                    {route.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -73,9 +69,6 @@ export default function Footer() {
               <a href="mailto:info@linkglobalnetwork.ca" className="text-brand-light hover:underline">
                 info@linkglobalnetwork.ca
               </a>
-            </p>
-            <p className="mt-4 text-xs text-white/35">
-              A full Contact page is on the way — this is a placeholder for now.
             </p>
           </div>
         </div>
