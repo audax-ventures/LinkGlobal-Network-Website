@@ -43,7 +43,7 @@ const MILESTONES: Milestone[] = [
     description:
       'Track fluency milestones as you hit them, and unlock new opportunities at work, while traveling, or at home.',
     side: 'right',
-    photo: { src: '/photos/hero-learner.jpg', alt: 'Learner confidently using the LinkGlobal Network platform' },
+    photo: { src: '/photos/journey-5.jpg', alt: 'Two friends chatting confidently while traveling' },
   },
 ]
 
