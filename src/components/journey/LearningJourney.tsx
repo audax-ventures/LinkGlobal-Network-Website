@@ -56,7 +56,7 @@ const PATH_D =
 const FALLBACK_LINE_TOP = 360
 const GAP_BELOW_HEADER = 32
 const GAP_BETWEEN_STEPS = 56
-const BOTTOM_PADDING = 100
+const BOTTOM_PADDING = 48
 const MIN_ROW_HEIGHT = 200
 const FALLBACK_ROW_HEIGHT = 280
 
@@ -73,6 +73,7 @@ export default function LearningJourney() {
     MILESTONES.map((_, i) => FALLBACK_ROW_HEIGHT * (i + 0.5)),
   )
   const [containerHeight, setContainerHeight] = useState(FALLBACK_ROW_HEIGHT * MILESTONES.length)
+  const [lineHeight, setLineHeight] = useState(FALLBACK_ROW_HEIGHT * MILESTONES.length)
 
   // Measures the header's real height (so the line starts below it) and each
   // step card/photo's real height (so rows are spaced by actual content, not
@@ -97,6 +98,11 @@ export default function LearningJourney() {
         cumulativeTop += rowHeight + GAP_BETWEEN_STEPS
       })
       setCenters(nextCenters)
+      // The line itself should stop exactly at the last step's row (card or
+      // photo, whichever is taller) — BOTTOM_PADDING is scroll/layout
+      // breathing room after that, not something the drawn line should
+      // visually run through.
+      setLineHeight(Math.round(cumulativeTop - GAP_BETWEEN_STEPS))
       setContainerHeight(Math.round(cumulativeTop - GAP_BETWEEN_STEPS + BOTTOM_PADDING))
     }
 
@@ -118,13 +124,16 @@ export default function LearningJourney() {
     path.style.strokeDasharray = `${length}`
     path.style.strokeDashoffset = `${length}`
 
+    // Two different fractions, deliberately: the path is only drawn to
+    // lineHeight tall (stops at step 5), so a dot's position along it is a
+    // fraction of *that*. But "has the user scrolled this far" compares
+    // against self.progress, which spans the whole section (header +
+    // BOTTOM_PADDING included) — a fraction of containerHeight instead.
+    const pathFractions = centers.map((c) => (lineHeight > 0 ? c / lineHeight : 0))
     const totalHeight = lineTop + containerHeight
-    // Each milestone's fraction of the *whole* section (header included),
-    // matching what ScrollTrigger's own progress (start 'top top' / end
-    // 'bottom bottom' of the full section) means at that scroll position.
-    const fractions = centers.map((c) => (totalHeight > 0 ? (lineTop + c) / totalHeight : 0))
+    const scrollFractions = centers.map((c) => (totalHeight > 0 ? (lineTop + c) / totalHeight : 0))
 
-    fractions.forEach((f, i) => {
+    pathFractions.forEach((f, i) => {
       const node = nodeRefs.current[i]
       if (!node) return
       const pt = path.getPointAtLength(f * length)
@@ -143,7 +152,7 @@ export default function LearningJourney() {
         const progress = self.progress
         path.style.strokeDashoffset = `${length * (1 - progress)}`
 
-        fractions.forEach((f, i) => {
+        scrollFractions.forEach((f, i) => {
           const node = nodeRefs.current[i]
           const active = progress >= f - 0.02
           if (node) {
@@ -155,7 +164,7 @@ export default function LearningJourney() {
     })
 
     return () => trigger.kill()
-  }, [centers, containerHeight, lineTop])
+  }, [centers, containerHeight, lineHeight, lineTop])
 
   return (
     <section ref={sectionRef} className="relative" style={{ height: `${lineTop + containerHeight}px` }}>
@@ -180,7 +189,10 @@ export default function LearningJourney() {
             title block instead of running behind it — measured from the
             header box's real rendered height, not a guessed pixel value. */}
         <div className="absolute inset-x-0 bottom-0" style={{ top: `${lineTop}px` }}>
-          <div className="absolute left-1/2 -translate-x-1/2 w-[110px] sm:w-[150px] h-full">
+          <div
+            className="absolute left-1/2 -translate-x-1/2 w-[110px] sm:w-[150px]"
+            style={{ height: `${lineHeight}px` }}
+          >
             <svg viewBox="0 0 100 500" preserveAspectRatio="none" className="h-full w-full">
               <path d={PATH_D} fill="none" stroke="rgba(19,41,82,0.14)" strokeWidth={2.5} />
               <path

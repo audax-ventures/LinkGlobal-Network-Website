@@ -48,7 +48,7 @@ function AvatarIllustration({ color }: { color: string }) {
 
 export default function GlobalReach() {
   return (
-    <section className="relative overflow-hidden py-28 sm:py-36 px-6">
+    <section className="relative overflow-hidden pt-10 sm:pt-14 pb-14 sm:pb-20 px-6">
       <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
         <div className="rounded-3xl border border-white/10 bg-white/5 px-6 py-10 sm:px-12 sm:py-12 backdrop-blur">
           <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-light/60">

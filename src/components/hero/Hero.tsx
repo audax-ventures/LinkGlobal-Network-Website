@@ -73,7 +73,7 @@ export default function Hero() {
         >
           <img
             src="/photos/hero-learner.jpg"
-            alt="A learner using the LinkGlobal Network platform on their laptop at home"
+            alt="A learner on a live video session with a LinkGlobal Network tutor"
             className="aspect-[4/5] w-full max-w-md rounded-3xl object-cover shadow-[0_25px_60px_rgba(19,41,82,0.18)] sm:max-w-xl"
           />
         </motion.div>
@@ -89,25 +89,6 @@ export default function Hero() {
         <CountUpStat value={120} suffix="+" label="Countries" />
         <CountUpStat value={4.9} decimals={1} suffix="/5" label="Average Rating" />
         <CountUpStat value={10000} suffix="+" label="Tutoring Sessions" />
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
-        className="absolute bottom-8 flex flex-col items-center gap-2 text-navy-900/35"
-      >
-        <span className="text-[10px] uppercase tracking-[0.25em]">Scroll</span>
-        <motion.svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </motion.svg>
       </motion.div>
     </section>
   )

@@ -7,7 +7,7 @@ const fadeUp = {
 
 export default function SplitSection() {
   return (
-    <section className="relative overflow-hidden py-20 sm:py-28 px-6">
+    <section className="relative overflow-hidden pt-8 sm:pt-12 pb-20 sm:pb-28 px-6">
       <svg
         className="absolute inset-0 h-full w-full"
         viewBox="0 0 100 100"

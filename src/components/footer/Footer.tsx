@@ -32,7 +32,7 @@ function SocialIcon({ path }: { path: string }) {
 
 export default function Footer() {
   return (
-    <footer className="relative px-6 pt-24 pb-10">
+    <footer className="relative px-6 pt-12 pb-10">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-12 md:grid-cols-[1.2fr_1fr_1fr]">
           <div>
