@@ -14,6 +14,7 @@ interface Tier {
   description: string
   features: string[]
   cta: { label: string; to: string }
+  color: string
   highlighted?: boolean
 }
 
@@ -30,6 +31,7 @@ const TIERS: Tier[] = [
       'Basic progress tracking',
     ],
     cta: { label: 'Start Learning', to: '/try-now' },
+    color: '#2dd4bf',
   },
   {
     name: 'Premium',
@@ -44,6 +46,7 @@ const TIERS: Tier[] = [
       'Progress milestones & goals',
     ],
     cta: { label: 'Start Learning', to: '/try-now' },
+    color: '#1ba3e0',
     highlighted: true,
   },
   {
@@ -57,6 +60,7 @@ const TIERS: Tier[] = [
       'Custom billing arrangements',
     ],
     cta: { label: 'Contact Sales', to: '/contact' },
+    color: '#a78bfa',
   },
 ]
 
@@ -71,9 +75,10 @@ export default function Pricing() {
           </>
         }
         description="Straightforward pricing, no surprise fees. Switch or cancel anytime."
+        image={{ src: '/gallery/dashboard.png', alt: 'LinkGlobal Network learner dashboard' }}
       />
 
-      <section className="relative px-6 pb-24 sm:pb-32">
+      <section className="relative px-6 pb-16 sm:pb-20">
         <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-3">
           {TIERS.map((tier, i) => (
             <motion.div
@@ -82,14 +87,18 @@ export default function Pricing() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className={`relative flex flex-col rounded-3xl p-8 ${
+              className={`relative flex flex-col rounded-3xl bg-white p-8 ${
                 tier.highlighted
-                  ? 'border-2 border-brand-blue bg-white shadow-[0_30px_80px_rgba(19,41,82,0.18)] lg:-translate-y-3'
-                  : 'border border-navy-900/10 bg-navy-900/[0.03]'
+                  ? 'shadow-[0_30px_80px_rgba(19,41,82,0.25)] lg:-translate-y-3'
+                  : 'shadow-[0_15px_40px_rgba(19,41,82,0.1)]'
               }`}
+              style={tier.highlighted ? { border: `2px solid ${tier.color}` } : undefined}
             >
               {tier.highlighted && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-blue px-4 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-white">
+                <span
+                  className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-white"
+                  style={{ background: tier.color }}
+                >
                   Most Popular
                 </span>
               )}
@@ -104,7 +113,10 @@ export default function Pricing() {
               <ul className="mt-6 flex-1 space-y-3">
                 {tier.features.map((f) => (
                   <li key={f} className="flex items-start gap-3 text-sm text-navy-700/80">
-                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue">
+                    <span
+                      className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-white"
+                      style={{ background: tier.color }}
+                    >
                       <CheckIcon className="h-3 w-3" />
                     </span>
                     <span>{f}</span>
@@ -114,12 +126,8 @@ export default function Pricing() {
 
               <Link
                 to={tier.cta.to}
-                className={`mt-8 rounded-full px-6 py-3 text-center text-sm font-semibold transition-transform hover:scale-105 ${
-                  tier.highlighted
-                    ? 'text-white shadow-[0_8px_30px_rgba(30,120,190,0.3)]'
-                    : 'border border-navy-900/15 text-navy-800 hover:bg-navy-900/[0.04]'
-                }`}
-                style={tier.highlighted ? { background: 'linear-gradient(90deg, #1ba3e0, #3ec6ff)' } : undefined}
+                className="mt-8 rounded-full px-6 py-3 text-center text-sm font-semibold text-white shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition-transform hover:scale-105"
+                style={{ background: tier.color }}
               >
                 {tier.cta.label}
               </Link>
@@ -134,6 +142,29 @@ export default function Pricing() {
           </a>{' '}
           and we'll help you find the right fit.
         </p>
+      </section>
+
+      <section className="relative px-6 pb-16 sm:pb-20">
+        <div className="mx-auto max-w-4xl grid gap-6 sm:grid-cols-2">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden rounded-3xl shadow-[0_20px_50px_rgba(19,41,82,0.15)]"
+          >
+            <img src="/gallery/practice-report.png" alt="LinkGlobal Network AI practice session report" className="w-full object-cover" />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden rounded-3xl shadow-[0_20px_50px_rgba(19,41,82,0.15)]"
+          >
+            <img src="/gallery/session-details.png" alt="LinkGlobal Network session management details" className="w-full object-cover" />
+          </motion.div>
+        </div>
       </section>
 
       <CtaBand

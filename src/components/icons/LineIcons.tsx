@@ -108,6 +108,15 @@ export function TargetIcon({ className }: IconProps) {
   )
 }
 
+export function MailIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...shared}>
+      <rect x="3.5" y="5.5" width="17" height="13" rx="1.5" />
+      <path d="M4 7l8 6 8-6" />
+    </svg>
+  )
+}
+
 export function RocketIcon({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" className={className} {...shared}>

@@ -5,11 +5,13 @@ interface PageHeaderProps {
   eyebrow: string
   title: ReactNode
   description?: string
+  image: { src: string; alt: string }
+  imagePosition?: 'left' | 'right'
 }
 
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+  show: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
 }
 
 const item = {
@@ -17,35 +19,52 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const } },
 }
 
-export default function PageHeader({ eyebrow, title, description }: PageHeaderProps) {
+export default function PageHeader({ eyebrow, title, description, image, imagePosition = 'right' }: PageHeaderProps) {
+  const imageOnLeft = imagePosition === 'left'
+
   return (
-    <motion.div
-      variants={container}
-      initial="hidden"
-      animate="show"
-      className="relative px-6 pt-36 pb-16 sm:pt-44 sm:pb-20 text-center"
-    >
-      <div className="mx-auto max-w-3xl rounded-3xl border border-navy-900/10 bg-white/70 px-6 py-10 sm:px-12 sm:py-14 backdrop-blur-sm shadow-[0_20px_60px_rgba(19,41,82,0.08)]">
-        <motion.span
-          variants={item}
-          className="mb-5 inline-block rounded-full border border-navy-900/10 bg-navy-900/[0.03] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-navy-700"
+    <div className="relative px-6 pt-32 pb-16 sm:pt-40 sm:pb-20">
+      <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2 md:gap-16">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className={`flex flex-col items-center text-center md:items-start md:text-left ${imageOnLeft ? 'md:order-2' : ''}`}
         >
-          {eyebrow}
-        </motion.span>
+          <motion.span
+            variants={item}
+            className="mb-5 inline-block rounded-full bg-brand-blue/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-brand-blue"
+          >
+            {eyebrow}
+          </motion.span>
 
-        <motion.h1
-          variants={item}
-          className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.05] tracking-tight text-navy-950"
+          <motion.h1
+            variants={item}
+            className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.05] tracking-tight text-navy-950"
+          >
+            {title}
+          </motion.h1>
+
+          {description && (
+            <motion.p variants={item} className="mt-6 max-w-lg text-base sm:text-lg text-navy-700/80">
+              {description}
+            </motion.p>
+          )}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.94 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          className={imageOnLeft ? 'md:order-1' : ''}
         >
-          {title}
-        </motion.h1>
-
-        {description && (
-          <motion.p variants={item} className="mt-6 max-w-2xl mx-auto text-base sm:text-lg text-navy-700/80">
-            {description}
-          </motion.p>
-        )}
+          <img
+            src={image.src}
+            alt={image.alt}
+            className="aspect-[4/3] w-full rounded-3xl object-cover shadow-[0_25px_60px_rgba(19,41,82,0.2)]"
+          />
+        </motion.div>
       </div>
-    </motion.div>
+    </div>
   )
 }

@@ -3,6 +3,7 @@ import type { FormEvent } from 'react'
 import { motion } from 'framer-motion'
 import PageShell from '../components/PageShell'
 import PageHeader from '../components/PageHeader'
+import { MailIcon } from '../components/icons/LineIcons'
 
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
@@ -61,15 +62,16 @@ export default function Contact() {
           </>
         }
         description="Questions about learning, teaching, or bringing LinkGlobal Network to your organization — send us a message and we'll get back to you."
+        image={{ src: '/photos/journey-5.jpg', alt: 'Two people connecting in conversation' }}
       />
 
-      <section className="relative px-6 pb-24 sm:pb-32">
-        <div className="mx-auto max-w-xl">
+      <section className="relative px-6 pb-16 sm:pb-20">
+        <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-[1.3fr_1fr]">
           {status === 'success' ? (
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              className="rounded-3xl border border-navy-900/10 bg-navy-900/[0.03] p-8 text-center"
+              className="rounded-3xl bg-white p-8 text-center shadow-[0_15px_40px_rgba(19,41,82,0.1)]"
             >
               <h2 className="text-2xl font-bold text-navy-950">Message sent.</h2>
               <p className="mt-3 text-navy-700/80">
@@ -83,7 +85,7 @@ export default function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="rounded-3xl border border-navy-900/10 bg-navy-900/[0.03] p-8"
+              className="rounded-3xl bg-white p-8 shadow-[0_15px_40px_rgba(19,41,82,0.1)]"
             >
               {/* Honeypot field — hidden from real users via CSS, visible to bots. */}
               <input
@@ -156,12 +158,40 @@ export default function Contact() {
             </motion.form>
           )}
 
-          <p className="mt-8 text-center text-sm text-navy-700/60">
-            Prefer email?{' '}
-            <a href="mailto:info@linkglobalnetwork.ca" className="font-semibold text-brand-blue hover:underline">
-              info@linkglobalnetwork.ca
-            </a>
-          </p>
+          <div className="flex flex-col gap-6">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="overflow-hidden rounded-3xl shadow-[0_20px_50px_rgba(19,41,82,0.15)]"
+            >
+              <img
+                src="/photos/educators.jpg"
+                alt="A LinkGlobal Network tutor ready to connect"
+                className="aspect-[4/3] w-full object-cover"
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="rounded-3xl bg-white p-6 shadow-[0_15px_40px_rgba(19,41,82,0.1)]"
+            >
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue shadow-[0_6px_16px_rgba(0,0,0,0.18)]">
+                <MailIcon className="h-5 w-5 text-white" />
+              </div>
+              <p className="mt-4 text-sm text-navy-700/70">Prefer email?</p>
+              <a
+                href="mailto:info@linkglobalnetwork.ca"
+                className="mt-1 block font-semibold text-brand-blue hover:underline"
+              >
+                info@linkglobalnetwork.ca
+              </a>
+            </motion.div>
+          </div>
         </div>
       </section>
     </PageShell>

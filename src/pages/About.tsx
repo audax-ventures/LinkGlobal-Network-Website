@@ -55,18 +55,19 @@ export default function About() {
           </>
         }
         description="LinkGlobal Network exists because language apps got really good at vocabulary drills and never got good at conversation — so we built the thing that was missing: real tutors, real people, real practice."
+        image={{ src: '/photos/about-founders.jpg', alt: 'The LinkGlobal Network founders reviewing an early version of the platform' }}
       />
 
-      <section className="relative px-6 pb-24 sm:pb-32">
+      <section className="relative px-6 pb-16 sm:pb-20">
         <div className="mx-auto grid max-w-6xl gap-16 md:grid-cols-2 md:items-center">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="rounded-3xl border border-navy-900/10 bg-white/70 px-6 py-8 sm:px-9 sm:py-9 backdrop-blur-sm shadow-[0_8px_28px_rgba(19,41,82,0.08)]"
+            className="rounded-3xl bg-white px-6 py-8 sm:px-9 sm:py-9 shadow-[0_15px_40px_rgba(19,41,82,0.1)]"
           >
-            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-navy-700/60">
+            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-blue">
               Why We Started
             </span>
             <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-navy-950">
@@ -89,15 +90,15 @@ export default function About() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="relative mx-auto max-w-sm overflow-hidden rounded-3xl border border-navy-900/10 shadow-[0_30px_80px_rgba(19,41,82,0.15)]"
+            className="relative mx-auto max-w-sm overflow-hidden rounded-3xl shadow-[0_30px_80px_rgba(19,41,82,0.18)]"
           >
             <img src="/photos/hero-learner.jpg" alt="A learner in a live session on LinkGlobal Network" className="h-full w-full object-cover" />
           </motion.div>
         </div>
       </section>
 
-      <section className="relative px-6 pb-24 sm:pb-32">
-        <div className="mx-auto grid max-w-4xl grid-cols-2 gap-8 sm:grid-cols-4 sm:gap-14">
+      <section className="relative px-6 pb-16 sm:pb-20">
+        <div className="mx-auto max-w-4xl grid grid-cols-2 gap-8 sm:grid-cols-4 sm:gap-14 rounded-3xl bg-white px-6 py-10 sm:px-10 shadow-[0_15px_40px_rgba(19,41,82,0.1)]">
           <CountUpStat value={50000} suffix="+" label="Learners" />
           <CountUpStat value={120} suffix="+" label="Countries" />
           <CountUpStat value={4.9} decimals={1} suffix="/5" label="Average Rating" />
@@ -105,8 +106,39 @@ export default function About() {
         </div>
       </section>
 
-      <section className="relative px-6 pb-24 sm:pb-32">
-        <div className="mx-auto max-w-2xl rounded-3xl bg-white/95 px-6 py-8 sm:px-10 sm:py-10 text-center shadow-[0_20px_60px_rgba(5,15,35,0.3)]">
+      <section className="relative px-6 pb-16 sm:pb-20">
+        <div className="mx-auto max-w-5xl">
+          <div className="text-center">
+            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-blue">
+              See It In Action
+            </span>
+            <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-navy-950">The platform behind the mission.</h2>
+          </div>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="overflow-hidden rounded-3xl shadow-[0_20px_50px_rgba(19,41,82,0.15)]"
+            >
+              <img src="/gallery/dashboard.png" alt="LinkGlobal Network learner dashboard" className="w-full object-cover" />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="overflow-hidden rounded-3xl shadow-[0_20px_50px_rgba(19,41,82,0.15)]"
+            >
+              <img src="/gallery/practice-report.png" alt="LinkGlobal Network AI practice session report" className="w-full object-cover" />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative px-6 pb-16 sm:pb-20">
+        <div className="mx-auto max-w-2xl rounded-3xl bg-white px-6 py-8 sm:px-10 sm:py-10 text-center shadow-[0_20px_60px_rgba(5,15,35,0.3)]">
           <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-blue">
             What We Believe
           </span>
