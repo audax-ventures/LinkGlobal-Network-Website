@@ -7,6 +7,9 @@ interface PageHeaderProps {
   description?: string
   image: { src: string; alt: string }
   imagePosition?: 'left' | 'right'
+  /** Tailwind aspect-ratio arbitrary value, e.g. "4/3" or "1000/540" — pass the
+   * real dimensions for screenshots so object-cover doesn't crop UI content. */
+  imageAspect?: string
 }
 
 const container = {
@@ -19,7 +22,14 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const } },
 }
 
-export default function PageHeader({ eyebrow, title, description, image, imagePosition = 'right' }: PageHeaderProps) {
+export default function PageHeader({
+  eyebrow,
+  title,
+  description,
+  image,
+  imagePosition = 'right',
+  imageAspect = '4/3',
+}: PageHeaderProps) {
   const imageOnLeft = imagePosition === 'left'
 
   return (
@@ -61,7 +71,8 @@ export default function PageHeader({ eyebrow, title, description, image, imagePo
           <img
             src={image.src}
             alt={image.alt}
-            className="aspect-[4/3] w-full rounded-3xl object-cover shadow-[0_25px_60px_rgba(19,41,82,0.2)]"
+            style={{ aspectRatio: imageAspect }}
+            className="w-full rounded-3xl object-cover shadow-[0_25px_60px_rgba(19,41,82,0.2)]"
           />
         </motion.div>
       </div>

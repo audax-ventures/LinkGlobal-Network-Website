@@ -76,6 +76,7 @@ export default function Pricing() {
         }
         description="Straightforward pricing, no surprise fees. Switch or cancel anytime."
         image={{ src: '/gallery/dashboard.png', alt: 'LinkGlobal Network learner dashboard' }}
+        imageAspect="1000/540"
       />
 
       <section className="relative px-6 pb-16 sm:pb-20">

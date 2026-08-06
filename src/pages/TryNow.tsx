@@ -53,6 +53,7 @@ export default function TryNow() {
         }
         description="Whether you're here to learn or here to teach, getting started takes just a few minutes."
         image={{ src: '/gallery/onboarding.png', alt: 'LinkGlobal Network onboarding flow' }}
+        imageAspect="1000/540"
       />
 
       <section className="relative px-6 pb-16 sm:pb-20">
