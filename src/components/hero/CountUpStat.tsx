@@ -42,7 +42,7 @@ export default function CountUpStat({ value, suffix = '', decimals = 0, label }:
   return (
     <div
       ref={wrapRef}
-      className="flex flex-col items-center rounded-2xl border border-navy-900/10 bg-white/70 px-4 py-5 text-center opacity-0 backdrop-blur-sm shadow-[0_8px_28px_rgba(19,41,82,0.06)]"
+      className="flex flex-col items-center rounded-2xl bg-white px-4 py-5 text-center opacity-0 shadow-[0_15px_35px_rgba(19,41,82,0.1)]"
     >
       <span className="text-3xl sm:text-4xl font-extrabold text-navy-950">
         <span ref={numberRef}>0</span>
