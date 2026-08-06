@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 export default function AboutIntro() {
   return (
-    <section className="relative px-6 py-16 sm:py-24">
+    <section className="relative px-6 pt-16 pb-6 sm:pt-24 sm:pb-8">
       <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2 md:gap-16">
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}

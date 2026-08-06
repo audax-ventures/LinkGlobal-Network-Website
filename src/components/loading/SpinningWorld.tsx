@@ -23,6 +23,19 @@ export default function SpinningWorld({ onDismiss }: SpinningWorldProps) {
   // stacked above it.
   const globeSize = Math.max(Math.min(width * 0.75, height * 0.5, 480), 240)
 
+  // Laptop width is derived from real remaining space (viewport minus the
+  // container's own padding, the flex gaps, and the globe) rather than a
+  // guessed breakpoint value — that guessing repeatedly either overflowed or
+  // left the laptops smaller than they could be. This always fills exactly
+  // the space that's actually left, up to a sensible ceiling.
+  const HORIZONTAL_PADDING = 48 // px-6 on each side of the content wrapper
+  const FLEX_GAPS = 64 // gap-8 between the 3 flex children (2 gaps)
+  const MIN_LAPTOP_WIDTH = 260
+  const MAX_LAPTOP_WIDTH = 560
+  const availableForLaptops = (width - HORIZONTAL_PADDING - FLEX_GAPS - globeSize) / 2
+  const showLaptops = availableForLaptops >= MIN_LAPTOP_WIDTH
+  const laptopWidth = Math.min(Math.max(availableForLaptops, MIN_LAPTOP_WIDTH), MAX_LAPTOP_WIDTH)
+
   useEffect(() => {
     const wrap = containerRef.current
     // Fade in the logo/globe/hint content, not the container — the
@@ -106,21 +119,27 @@ export default function SpinningWorld({ onDismiss }: SpinningWorldProps) {
         </div>
 
         <div className="relative flex items-center justify-center gap-8">
-          <LaptopMockup
-            src="/gallery/dashboard.png"
-            alt="LinkGlobal Network learner dashboard"
-            className="hidden xl:block w-[380px] -rotate-2 2xl:w-[460px]"
-          />
+          {showLaptops && (
+            <LaptopMockup
+              src="/gallery/dashboard.png"
+              alt="LinkGlobal Network learner dashboard"
+              className="-rotate-2"
+              style={{ width: laptopWidth }}
+            />
+          )}
 
           <Suspense fallback={<div style={{ width: globeSize, height: globeSize }} />}>
             <LazyStylizedGlobe width={globeSize} height={globeSize} greetings={COUNTRY_GREETINGS} />
           </Suspense>
 
-          <LaptopMockup
-            src="/gallery/practice-report.png"
-            alt="LinkGlobal Network AI practice session report"
-            className="hidden xl:block w-[380px] rotate-2 2xl:w-[460px]"
-          />
+          {showLaptops && (
+            <LaptopMockup
+              src="/gallery/practice-report.png"
+              alt="LinkGlobal Network AI practice session report"
+              className="rotate-2"
+              style={{ width: laptopWidth }}
+            />
+          )}
         </div>
 
         <div

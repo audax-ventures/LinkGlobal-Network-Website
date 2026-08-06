@@ -169,7 +169,7 @@ export default function LearningJourney() {
   return (
     <section ref={sectionRef} className="relative" style={{ height: `${lineTop + containerHeight}px` }}>
       <div className="relative h-full">
-        <div className="pt-16 sm:pt-24 text-center px-6">
+        <div className="pt-10 sm:pt-14 text-center px-6">
           <div
             ref={headerRef}
             className="mx-auto max-w-2xl rounded-3xl border border-navy-900/10 bg-white/70 px-6 py-8 sm:px-10 sm:py-10 backdrop-blur-sm shadow-[0_20px_60px_rgba(19,41,82,0.08)]"
