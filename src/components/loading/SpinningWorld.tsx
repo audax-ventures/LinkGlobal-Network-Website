@@ -109,8 +109,17 @@ export default function SpinningWorld({ onDismiss }: SpinningWorldProps) {
           fade-in a no-op, since contents removes the element's own box). */}
       <div ref={contentRef} className="flex flex-col items-center gap-5 sm:gap-8 px-6">
         <div className="text-center max-w-xl">
+          <span className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-brand-blue/10 px-4 py-1.5 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-brand-blue">
+            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor">
+              <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" />
+            </svg>
+            #1 Platform for Real Conversations
+          </span>
           <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-navy-950">
-            Welcome to LinkGlobal Network
+            Welcome to{' '}
+            <span style={{ background: 'linear-gradient(90deg, #1ba3e0, #a78bfa)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
+              LinkGlobal Network
+            </span>
           </h1>
           <p className="mt-2 text-sm sm:text-base text-navy-700/80">
             The platform that connects learners with real, native-speaking tutors — in over

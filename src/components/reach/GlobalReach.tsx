@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import AvatarIllustration from '../AvatarIllustration'
 
 interface Testimonial {
   name: string
@@ -35,16 +36,6 @@ const TESTIMONIALS: Testimonial[] = [
     accent: '#5fb8e8',
   },
 ]
-
-function AvatarIllustration({ color }: { color: string }) {
-  return (
-    <svg viewBox="0 0 36 36" className="h-9 w-9">
-      <circle cx="18" cy="18" r="18" fill={color} fillOpacity="0.16" />
-      <circle cx="18" cy="14.5" r="6" fill={color} />
-      <path d="M6 30c0-7.2 5.4-12 12-12s12 4.8 12 12" fill={color} />
-    </svg>
-  )
-}
 
 export default function GlobalReach() {
   return (

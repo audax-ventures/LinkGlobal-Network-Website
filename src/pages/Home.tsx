@@ -1,6 +1,6 @@
 import PageShell from '../components/PageShell'
 import Hero from '../components/hero/Hero'
-import AboutIntro from '../components/about/AboutIntro'
+import GlobalCommunity from '../components/community/GlobalCommunity'
 import LearningJourney from '../components/journey/LearningJourney'
 import SplitSection from '../components/split/SplitSection'
 import PlatformGallery from '../components/gallery/PlatformGallery'
@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <PageShell>
       <Hero />
-      <AboutIntro />
+      <GlobalCommunity />
       <LearningJourney />
       <SplitSection />
       <PlatformGallery />
