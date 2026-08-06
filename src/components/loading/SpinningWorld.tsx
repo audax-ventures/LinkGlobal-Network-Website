@@ -137,9 +137,21 @@ export default function SpinningWorld({ onDismiss }: SpinningWorldProps) {
             />
           )}
 
-          <Suspense fallback={<div style={{ width: globeSize, height: globeSize }} />}>
-            <LazyStylizedGlobe width={globeSize} height={globeSize} greetings={COUNTRY_GREETINGS} />
-          </Suspense>
+          <div className="relative flex items-center justify-center" style={{ width: globeSize, height: globeSize }}>
+            {/* Decorative orbital ring — purely cosmetic, sits behind the globe. */}
+            <div
+              className="pointer-events-none absolute rounded-full"
+              style={{
+                width: globeSize * 1.14,
+                height: globeSize * 1.14,
+                border: '1px solid rgba(62,198,255,0.35)',
+                transform: 'rotate(-8deg)',
+              }}
+            />
+            <Suspense fallback={<div style={{ width: globeSize, height: globeSize }} />}>
+              <LazyStylizedGlobe width={globeSize} height={globeSize} greetings={COUNTRY_GREETINGS} />
+            </Suspense>
+          </div>
 
           {showLaptops && (
             <LaptopMockup
