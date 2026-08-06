@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import PageShell from '../components/PageShell'
 import PageHeader from '../components/PageHeader'
-import FeatureCard from '../components/FeatureCard'
 import CtaBand from '../components/CtaBand'
 import CountUpStat from '../components/hero/CountUpStat'
 import { ChatIcon, GlobeIcon, HeartIcon, ClockIcon } from '../components/icons/LineIcons'
@@ -12,24 +11,36 @@ const VALUES = [
     title: 'Real conversations, not drills',
     description:
       'Fluency comes from talking to people, not tapping through flashcards. Every lesson is built around live, human conversation.',
+    image: '/photos/journey-4.jpg',
+    imageAlt: 'A learner waving during a live video call with a tutor',
+    color: '#1ba3e0',
   },
   {
     icon: <HeartIcon className="h-full w-full" />,
     title: 'Tutors, not algorithms',
     description:
       'A language is a living thing. Our tutors adapt to how you actually learn — something no app has managed to fake yet.',
+    image: '/photos/educators.jpg',
+    imageAlt: 'A tutor preparing an online session on LinkGlobal Network',
+    color: '#f5a623',
   },
   {
     icon: <GlobeIcon className="h-full w-full" />,
     title: 'A genuinely global community',
     description:
       'Learners and tutors in over 120 countries, meeting across time zones and cultures — the whole point of learning a language in the first place.',
+    image: '/photos/journey-2.jpg',
+    imageAlt: 'A group of learners studying together around a laptop',
+    color: '#2dd4bf',
   },
   {
     icon: <ClockIcon className="h-full w-full" />,
     title: 'Learning that fits your life',
     description:
       'No rigid class times, no wasted modules. Sessions and pacing built around the time you actually have.',
+    image: '/photos/journey-3.jpg',
+    imageAlt: 'A learner relaxing at home while studying on a laptop',
+    color: '#a78bfa',
   },
 ]
 
@@ -95,15 +106,41 @@ export default function About() {
       </section>
 
       <section className="relative px-6 pb-24 sm:pb-32">
-        <div className="mx-auto max-w-2xl rounded-3xl border border-navy-900/10 bg-navy-900/[0.03] px-6 py-8 sm:px-10 sm:py-10 text-center">
-          <span className="text-xs font-semibold uppercase tracking-[0.25em] text-navy-700/60">
+        <div className="mx-auto max-w-2xl rounded-3xl bg-white/95 px-6 py-8 sm:px-10 sm:py-10 text-center shadow-[0_20px_60px_rgba(5,15,35,0.3)]">
+          <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-blue">
             What We Believe
           </span>
           <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-navy-950">The principles behind the platform.</h2>
         </div>
-        <div className="mx-auto mt-12 grid max-w-5xl gap-5 sm:grid-cols-2">
+
+        <div className="mx-auto mt-12 grid max-w-5xl gap-6 sm:grid-cols-2">
           {VALUES.map((v, i) => (
-            <FeatureCard key={v.title} icon={v.icon} title={v.title} description={v.description} delay={i * 0.1} />
+            <motion.div
+              key={v.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="group overflow-hidden rounded-3xl bg-white shadow-[0_20px_50px_rgba(5,15,35,0.3)]"
+            >
+              <div className="relative aspect-[3/2] overflow-hidden">
+                <img
+                  src={v.image}
+                  alt={v.imageAlt}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div
+                  className="absolute -bottom-6 left-6 flex h-14 w-14 items-center justify-center rounded-2xl shadow-lg"
+                  style={{ background: v.color }}
+                >
+                  <span className="h-6 w-6 text-white">{v.icon}</span>
+                </div>
+              </div>
+              <div className="px-6 pb-7 pt-10">
+                <h3 className="text-xl font-bold text-navy-950">{v.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-navy-700/75">{v.description}</p>
+              </div>
+            </motion.div>
           ))}
         </div>
       </section>
