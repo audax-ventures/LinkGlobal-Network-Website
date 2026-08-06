@@ -73,7 +73,7 @@ export default function Hero() {
         >
           <img
             src="/photos/hero-learner.jpg"
-            alt="A learner on a live video session with a LinkGlobal Network tutor"
+            alt="A student learning with LinkGlobal Network, laptop and notebook in hand"
             className="aspect-[4/5] w-full max-w-md rounded-3xl object-cover shadow-[0_25px_60px_rgba(19,41,82,0.18)] sm:max-w-xl"
           />
         </motion.div>
