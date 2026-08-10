@@ -1,12 +1,15 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import type { ReactNode } from 'react'
 import { ensureGsapPlugins, ScrollTrigger } from '../../lib/gsapSetup'
+import { CheckIcon, GlobeIcon, ClipboardIcon, GraduationCapIcon, UsersIcon, RocketIcon } from '../icons/LineIcons'
 
 interface Milestone {
   title: string
   description: string
   side: 'left' | 'right'
-  /** Only steps 1–4 get a filler photo opposite their text card. */
-  photo?: { src: string; alt: string }
+  icon: ReactNode
+  photo: { src: string; alt: string; rotate: string }
+  overlay: ReactNode
 }
 
 const MILESTONES: Milestone[] = [
@@ -15,35 +18,96 @@ const MILESTONES: Milestone[] = [
     description:
       'Explore 40+ languages and pick the one that fits where you’re headed — a new job, a big trip, or reconnecting with family.',
     side: 'right',
-    photo: { src: '/photos/journey-1.jpg', alt: 'Learner studying with headphones at home' },
+    icon: <GlobeIcon className="h-full w-full" />,
+    photo: { src: '/photos/journey-1.jpg', alt: 'Learner studying with headphones at home', rotate: '-rotate-2' },
+    overlay: (
+      <div className="flex flex-col gap-1.5 text-xs">
+        <div className="flex items-center gap-1.5">
+          <span>🇪🇸</span>
+          <span className="font-semibold text-navy-950">Spanish</span>
+          <CheckIcon className="ml-auto h-3 w-3 text-emerald-500" />
+        </div>
+        <div className="flex items-center gap-1.5 text-navy-700/50">
+          <span>🇫🇷</span>
+          <span>French</span>
+        </div>
+        <div className="flex items-center gap-1.5 text-navy-700/50">
+          <span>🇯🇵</span>
+          <span>Japanese</span>
+        </div>
+      </div>
+    ),
   },
   {
     title: 'Take Our Onboarding Test',
     description:
       'A quick, guided placement assessment figures out exactly where you’re starting from, so your path is tailored from day one.',
     side: 'left',
-    photo: { src: '/photos/journey-2.jpg', alt: 'Group of learners studying together around a laptop' },
+    icon: <ClipboardIcon className="h-full w-full" />,
+    photo: { src: '/photos/journey-2.jpg', alt: 'Group of learners studying together around a laptop', rotate: 'rotate-2' },
+    overlay: (
+      <div className="text-xs">
+        <p className="text-navy-700/50">Your Level</p>
+        <p className="font-bold text-navy-950">Intermediate</p>
+        <div className="mt-1.5 h-1.5 w-28 rounded-full bg-navy-900/10">
+          <div className="h-full w-[72%] rounded-full bg-brand-blue" />
+        </div>
+      </div>
+    ),
   },
   {
     title: 'Start Learning',
     description:
       'Bite-sized lessons built around how busy people actually learn, fitting into the pockets of time you already have.',
     side: 'right',
-    photo: { src: '/photos/journey-3.jpg', alt: 'Learner relaxing at home while studying on a laptop' },
+    icon: <GraduationCapIcon className="h-full w-full" />,
+    photo: { src: '/photos/journey-3.jpg', alt: 'Learner relaxing at home while studying on a laptop', rotate: '-rotate-2' },
+    overlay: (
+      <div className="text-xs">
+        <div className="flex items-center justify-between gap-3">
+          <p className="text-navy-700/50">Today&rsquo;s Lesson</p>
+          <span className="flex h-3.5 w-3.5 items-center justify-center rounded-full bg-brand-blue text-white">
+            <CheckIcon className="h-2 w-2" />
+          </span>
+        </div>
+        <p className="font-bold text-navy-950">Daily Conversations</p>
+        <div className="mt-1 flex items-center justify-between text-[10px] text-navy-700/50">
+          <span>Lesson 8</span>
+          <span>85%</span>
+        </div>
+      </div>
+    ),
   },
   {
     title: 'Connect with Real Tutors',
     description:
       'Practice live with native speakers who adapt to your goals and pace — not just an app quizzing you on flashcards.',
     side: 'left',
-    photo: { src: '/photos/journey-4.jpg', alt: 'Learner waving during a video call with a tutor' },
+    icon: <UsersIcon className="h-full w-full" />,
+    photo: { src: '/photos/journey-4.jpg', alt: 'Learner waving during a video call with a tutor', rotate: 'rotate-2' },
+    overlay: (
+      <div className="flex items-center gap-1 text-xs font-bold text-navy-950">
+        <span>5.0</span>
+        <span className="text-amber-400">★★★★★</span>
+      </div>
+    ),
   },
   {
     title: 'Expand Your Capabilities',
     description:
       'Track fluency milestones as you hit them, and unlock new opportunities at work, while traveling, or at home.',
     side: 'right',
-    photo: { src: '/photos/journey-5.jpg', alt: 'Two friends chatting confidently while traveling' },
+    icon: <RocketIcon className="h-full w-full" />,
+    photo: { src: '/photos/journey-5.jpg', alt: 'Two friends chatting confidently while traveling', rotate: '-rotate-2' },
+    overlay: (
+      <div className="flex items-center gap-2 text-xs">
+        <span className="text-lg">🏅</span>
+        <div>
+          <p className="text-navy-700/50">New Achievement</p>
+          <p className="font-bold text-navy-950">Fluent Speaker</p>
+        </div>
+      </div>
+    ),
   },
 ]
 
@@ -64,7 +128,8 @@ export default function LearningJourney() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
   const pathRef = useRef<SVGPathElement>(null)
-  const nodeRefs = useRef<(SVGCircleElement | null)[]>([])
+  const glowPathRef = useRef<SVGPathElement>(null)
+  const nodeGroupRefs = useRef<(SVGGElement | null)[]>([])
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
   const photoRefs = useRef<(HTMLImageElement | null)[]>([])
 
@@ -118,11 +183,16 @@ export default function LearningJourney() {
     ensureGsapPlugins()
     const section = sectionRef.current
     const path = pathRef.current
+    const glowPath = glowPathRef.current
     if (!section || !path) return
 
     const length = path.getTotalLength()
     path.style.strokeDasharray = `${length}`
     path.style.strokeDashoffset = `${length}`
+    if (glowPath) {
+      glowPath.style.strokeDasharray = `${length}`
+      glowPath.style.strokeDashoffset = `${length}`
+    }
 
     // Two different fractions, deliberately: the path is only drawn to
     // lineHeight tall (stops at step 5), so a dot's position along it is a
@@ -134,11 +204,10 @@ export default function LearningJourney() {
     const scrollFractions = centers.map((c) => (totalHeight > 0 ? (lineTop + c) / totalHeight : 0))
 
     pathFractions.forEach((f, i) => {
-      const node = nodeRefs.current[i]
-      if (!node) return
+      const group = nodeGroupRefs.current[i]
+      if (!group) return
       const pt = path.getPointAtLength(f * length)
-      node.setAttribute('cx', `${pt.x}`)
-      node.setAttribute('cy', `${pt.y}`)
+      group.setAttribute('transform', `translate(${pt.x}, ${pt.y})`)
     })
 
     // Only the connecting line (and the nodes strung along it) animate with
@@ -151,13 +220,20 @@ export default function LearningJourney() {
       onUpdate: (self) => {
         const progress = self.progress
         path.style.strokeDashoffset = `${length * (1 - progress)}`
+        if (glowPath) glowPath.style.strokeDashoffset = `${length * (1 - progress)}`
 
         scrollFractions.forEach((f, i) => {
-          const node = nodeRefs.current[i]
+          const group = nodeGroupRefs.current[i]
+          if (!group) return
           const active = progress >= f - 0.02
-          if (node) {
-            node.style.fill = active ? '#1ba3e0' : 'rgba(19,41,82,0.15)'
-            node.style.filter = active ? 'drop-shadow(0 0 5px rgba(27,163,224,0.55))' : 'none'
+          const circle = group.querySelector('circle')
+          const text = group.querySelector('text')
+          if (circle) {
+            circle.setAttribute('stroke', active ? '#1ba3e0' : 'rgba(19,41,82,0.2)')
+            circle.style.filter = active ? 'drop-shadow(0 0 6px rgba(27,163,224,0.65))' : 'none'
+          }
+          if (text) {
+            text.setAttribute('fill', active ? '#1ba3e0' : 'rgba(19,41,82,0.35)')
           }
         })
       },
@@ -167,20 +243,36 @@ export default function LearningJourney() {
   }, [centers, containerHeight, lineHeight, lineTop])
 
   return (
-    <section ref={sectionRef} className="relative" style={{ height: `${lineTop + containerHeight}px` }}>
+    <section ref={sectionRef} className="relative overflow-hidden" style={{ height: `${lineTop + containerHeight}px` }}>
+      {/* Faint decorative dots, matching the reference's ambient scatter. */}
+      <div className="pointer-events-none absolute left-[8%] top-[6%] h-2 w-2 rounded-full bg-brand-blue/30" aria-hidden="true" />
+      <div className="pointer-events-none absolute left-[14%] top-[10%] h-1.5 w-1.5 rounded-full bg-brand-blue/20" aria-hidden="true" />
+      <svg
+        className="pointer-events-none absolute right-[10%] top-[4%] h-10 w-10 text-brand-blue/50"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M21 3 3 10.5l7 2.5 2.5 7L21 3Z" />
+        <path d="M12.5 13 21 3" />
+      </svg>
+
       <div className="relative h-full">
         <div className="pt-10 sm:pt-14 text-center px-6">
-          <div
-            ref={headerRef}
-            className="mx-auto max-w-2xl rounded-3xl border border-navy-900/10 bg-white/70 px-6 py-8 sm:px-10 sm:py-10 backdrop-blur-sm shadow-[0_20px_60px_rgba(19,41,82,0.08)]"
-          >
-            <span className="text-xs uppercase tracking-[0.3em] text-navy-700/60">The Journey</span>
-            <h2 className="mt-2 text-4xl sm:text-6xl font-extrabold tracking-tight text-brand-blue">
-              Your Path to Fluency
+          <div ref={headerRef} className="mx-auto max-w-2xl rounded-3xl bg-white px-6 py-8 sm:px-10 sm:py-10 shadow-[0_20px_60px_rgba(19,41,82,0.1)]">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-blue/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-brand-blue">
+              Our Journey
+            </span>
+            <h2 className="mt-3 text-4xl sm:text-6xl font-extrabold tracking-tight text-navy-950">
+              Your Path to <span className="text-brand-blue">Fluency</span>
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-base sm:text-lg text-navy-700/80">
-              Five steps from your first lesson to real conversations with native speakers — here&rsquo;s
-              exactly how it works.
+              From first lesson to real conversations with native speakers, we guide your journey
+              every step of the way.
             </p>
           </div>
         </div>
@@ -193,35 +285,51 @@ export default function LearningJourney() {
             className="absolute left-1/2 -translate-x-1/2 w-[110px] sm:w-[150px]"
             style={{ height: `${lineHeight}px` }}
           >
-            <svg viewBox="0 0 100 500" preserveAspectRatio="none" className="h-full w-full">
-              <path d={PATH_D} fill="none" stroke="rgba(19,41,82,0.14)" strokeWidth={2.5} />
+            <svg viewBox="0 0 100 500" preserveAspectRatio="none" className="h-full w-full overflow-visible">
+              <path d={PATH_D} fill="none" stroke="rgba(19,41,82,0.12)" strokeWidth={3} />
+              <path
+                ref={glowPathRef}
+                d={PATH_D}
+                fill="none"
+                stroke="#3ec6ff"
+                strokeWidth={7}
+                strokeLinecap="round"
+                opacity={0.35}
+                style={{ filter: 'blur(3px)' }}
+              />
               <path
                 ref={pathRef}
                 d={PATH_D}
                 fill="none"
                 stroke="url(#journey-gradient)"
-                strokeWidth={2.5}
+                strokeWidth={3}
                 strokeLinecap="round"
               />
               <defs>
                 <linearGradient id="journey-gradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#132952" />
+                  <stop offset="0%" stopColor="#8fe0ff" />
                   <stop offset="100%" stopColor="#1ba3e0" />
                 </linearGradient>
               </defs>
               {MILESTONES.map((m, i) => (
-                <circle
+                <g
                   key={m.title}
                   ref={(el) => {
-                    nodeRefs.current[i] = el
+                    nodeGroupRefs.current[i] = el
                   }}
-                  cx={m.side === 'right' ? 65 : 35}
-                  cy={0}
-                  r={5}
-                  fill="rgba(19,41,82,0.15)"
-                  stroke="#f8fbff"
-                  strokeWidth={1.5}
-                />
+                >
+                  <circle r={9} fill="#ffffff" stroke="rgba(19,41,82,0.2)" strokeWidth={2} />
+                  <text
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    fontSize="9"
+                    fontWeight="800"
+                    fontFamily="Inter, system-ui, sans-serif"
+                    fill="rgba(19,41,82,0.35)"
+                  >
+                    {i + 1}
+                  </text>
+                </g>
               ))}
             </svg>
           </div>
@@ -238,40 +346,50 @@ export default function LearningJourney() {
                 ref={(el) => {
                   cardRefs.current[i] = el
                 }}
-                className="rounded-2xl border border-navy-900/10 bg-white/70 backdrop-blur-sm px-5 py-5 sm:px-6 sm:py-6 shadow-[0_8px_28px_rgba(19,41,82,0.08)]"
+                className="relative rounded-2xl bg-white px-5 py-5 sm:px-6 sm:py-6 shadow-[0_15px_40px_rgba(19,41,82,0.1)]"
               >
-                <span className="mb-2 inline-block rounded-full border border-navy-900/10 bg-navy-900/[0.03] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-navy-700/70">
+                <span className="inline-block rounded-full bg-brand-blue/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-brand-blue">
                   Step {i + 1}
                 </span>
-                <h3 className="text-xl sm:text-2xl font-bold text-navy-950 leading-snug">{m.title}</h3>
+                <div className="absolute right-5 top-5 flex h-11 w-11 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue sm:right-6 sm:top-6">
+                  <span className="h-5 w-5">{m.icon}</span>
+                </div>
+                <h3 className="mt-3 max-w-[calc(100%-56px)] text-xl sm:text-2xl font-bold text-navy-950 leading-snug">
+                  {m.title}
+                </h3>
                 <p className="mt-2 text-sm sm:text-base text-navy-700/75 leading-relaxed">{m.description}</p>
               </div>
             </div>
           ))}
 
-          {/* Each step with a photo gets it filling the empty space on the
-              opposite side of the line from its text card. */}
-          {MILESTONES.map((m, i) => {
-            if (!m.photo) return null
-            return (
-              <div
-                key={`photo-${m.title}`}
-                className={`hidden md:block absolute w-[26%] ${
-                  m.side === 'right' ? 'right-[58%]' : 'left-[58%]'
-                }`}
-                style={{ top: `${centers[i]}px`, transform: 'translateY(-50%)' }}
-              >
+          {/* Each step's photo fills the empty space on the opposite side of
+              the line from its text card, framed like a floating print with
+              a small contextual UI chip overlapping its bottom edge. */}
+          {MILESTONES.map((m, i) => (
+            <div
+              key={`photo-${m.title}`}
+              className={`hidden md:block absolute w-[26%] ${m.side === 'right' ? 'right-[58%]' : 'left-[58%]'}`}
+              style={{ top: `${centers[i]}px`, transform: 'translateY(-50%)' }}
+            >
+              <div className={`rounded-2xl bg-white p-2 shadow-[0_20px_50px_rgba(19,41,82,0.15)] ${m.photo.rotate}`}>
                 <img
                   ref={(el) => {
                     photoRefs.current[i] = el
                   }}
                   src={m.photo.src}
                   alt={m.photo.alt}
-                  className="aspect-[4/3] w-full rounded-2xl object-cover shadow-[0_12px_32px_rgba(19,41,82,0.12)]"
+                  className="aspect-[4/3] w-full rounded-xl object-cover"
                 />
               </div>
-            )
-          })}
+              <div
+                className={`absolute -bottom-4 rounded-xl bg-white px-3 py-2.5 shadow-[0_10px_25px_rgba(19,41,82,0.18)] ${
+                  m.side === 'right' ? 'left-3' : 'right-3'
+                }`}
+              >
+                {m.overlay}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

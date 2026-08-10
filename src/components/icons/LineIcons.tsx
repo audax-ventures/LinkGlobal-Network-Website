@@ -117,6 +117,26 @@ export function MailIcon({ className }: IconProps) {
   )
 }
 
+export function ClipboardIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...shared}>
+      <rect x="5" y="4.5" width="14" height="17" rx="1.5" />
+      <path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1" />
+      <path d="M8.5 11.5l2 2 4-4.5M8.5 16.5h7" />
+    </svg>
+  )
+}
+
+export function GraduationCapIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...shared}>
+      <path d="M2.5 9.5 12 5l9.5 4.5-9.5 4.5-9.5-4.5Z" />
+      <path d="M6.5 11.7v4.3c0 1.4 2.5 2.5 5.5 2.5s5.5-1.1 5.5-2.5v-4.3" />
+      <path d="M21.5 9.5v6" />
+    </svg>
+  )
+}
+
 export function RocketIcon({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" className={className} {...shared}>
