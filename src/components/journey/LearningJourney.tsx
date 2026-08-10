@@ -337,8 +337,8 @@ export default function LearningJourney() {
           {MILESTONES.map((m, i) => (
             <div
               key={m.title}
-              className={`absolute w-[48%] sm:w-[38%] px-4 ${
-                m.side === 'right' ? 'left-[52%] sm:left-[56%] text-left' : 'right-[52%] sm:right-[56%] text-right'
+              className={`absolute w-[48%] sm:w-[38%] px-4 text-left ${
+                m.side === 'right' ? 'left-[52%] sm:left-[56%]' : 'right-[52%] sm:right-[56%]'
               }`}
               style={{ top: `${centers[i]}px`, transform: 'translateY(-50%)' }}
             >
