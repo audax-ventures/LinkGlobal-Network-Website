@@ -137,6 +137,24 @@ export function GraduationCapIcon({ className }: IconProps) {
   )
 }
 
+export function SparkleIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor">
+      <path d="M12 2.5c.5 3.6 1.9 5 5.5 5.5-3.6.5-5 1.9-5.5 5.5-.5-3.6-1.9-5-5.5-5.5 3.6-.5 5-1.9 5.5-5.5Z" />
+      <path d="M19 14c.3 1.9 1 2.7 3 3-2 .3-2.7 1-3 3-.3-1.9-1-2.7-3-3 2-.3 2.7-1 3-3Z" />
+    </svg>
+  )
+}
+
+export function UserIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...shared}>
+      <circle cx="12" cy="8" r="3.8" />
+      <path d="M4.5 20c0-4.1 3.4-7.5 7.5-7.5s7.5 3.4 7.5 7.5" />
+    </svg>
+  )
+}
+
 export function RocketIcon({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" className={className} {...shared}>
