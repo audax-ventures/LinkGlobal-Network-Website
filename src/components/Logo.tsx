@@ -5,8 +5,10 @@ interface LogoProps {
 }
 
 /**
- * Vector recreation of the LinkGlobal Network mark: a speech-bubble containing
- * a blue-and-white globe, paired with the "Link"/"Global" wordmark.
+ * Matches the mark used in the real product (visible in the platform
+ * screenshots): a solid black chat-bubble circle with a small tail,
+ * a thin light ring, and a blue globe with white continent silhouettes —
+ * paired with the "Link"/"Global" wordmark.
  * `variant="reversed"` swaps the bubble + "Global" text to white for dark backgrounds.
  */
 export default function Logo({ variant = 'dark', markOnly = false, className = '' }: LogoProps) {
@@ -23,32 +25,19 @@ export default function Logo({ variant = 'dark', markOnly = false, className = '
     >
       <defs>
         <clipPath id="lg-globe-clip">
-          <circle cx="32" cy="29" r="16.5" />
+          <circle cx="32" cy="27" r="13.5" />
         </clipPath>
-        <linearGradient id="lg-globe-gradient" x1="16" y1="12.5" x2="48" y2="45.5" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#3ec6ff" />
-          <stop offset="100%" stopColor="#1373b3" />
-        </linearGradient>
       </defs>
       <g id="lg-mark">
-        <path
-          d="M32 4C17.6 4 6 15.2 6 29c0 7 3 13.4 7.9 18l-2.6 11.4a2 2 0 0 0 2.8 2.3l12.6-6.1c1.7.3 3.5.4 5.3.4 14.4 0 26-11.2 26-25S46.4 4 32 4Z"
-          fill={bubbleFill}
-        />
-        <circle cx="32" cy="29" r="16.5" fill="url(#lg-globe-gradient)" />
-        <g clipPath="url(#lg-globe-clip)" opacity="0.5">
-          <ellipse cx="32" cy="29" rx="8.4" ry="16.5" fill="none" stroke="#ffffff" strokeWidth="1" />
-          <ellipse cx="32" cy="29" rx="16.5" ry="6" fill="none" stroke="#ffffff" strokeWidth="1" />
-          <path
-            d="M20 18c3 4 3.5 8-1 11-3.4 2.3-2 6.6 2 6.2 5-.5 6 3.7 10 4.6"
-            fill="none"
-            stroke="#ffffff"
-            strokeWidth="1.1"
-            strokeLinecap="round"
-          />
+        <path d="M11,36 L15,43 L3,54 Z" fill={bubbleFill} />
+        <circle cx="32" cy="27" r="23" fill={bubbleFill} />
+        <circle cx="32" cy="27" r="15.5" fill={bubbleFill} />
+        <circle cx="32" cy="27" r="13.5" fill="#1ba3e0" />
+        <g clipPath="url(#lg-globe-clip)" fill="#ffffff">
+          <path d="M27,14.5c2.3.2 3.6 2 3 4.3-.5 1.8.4 3 2 4.3 2.3 1.9 2 4.7-.4 6-1.7.9-2.1 2.6-1.4 4.6.9 2.6-.2 5.3-2.6 5.9-1.6.4-2.6 1.6-2.9 3.4-.6-.1-1.2-.3-1.7-.6-2-1.2-2.4-3.7-3.4-5.7-1-2.1.2-3.9 1.7-5.2 1.7-1.5 1.5-3.4-.2-4.6-2.2-1.6-2.6-3.8-1.5-6.1 1-2.1 3-2.9 5-3.1.6-.1 1.3-.1 1.9-1.2Z" />
+          <path d="M40,17.5c1.9-.3 3.6.6 3.9 2.4.3 1.6-.6 2.8-2.1 3.3-1.7.6-1.9 2-1.2 3.4.8 1.7-.1 3.1-1.9 3.2-1.5.1-2.4-.8-2.6-2.2-.2-1.5.6-2.6 1.9-3.2 1.4-.7 1.5-1.7.3-2.7-1.2-1-1.3-2.3-.4-3.4.6-.7 1.4-.9 2.1-.8Z" />
         </g>
-        <circle cx="24.5" cy="22.5" r="2.1" fill="#ffffff" fillOpacity="0.85" />
-        <circle cx="32" cy="29" r="16.5" fill="none" stroke={variant === 'reversed' ? '#ffffff' : '#0b0d12'} strokeOpacity="0.12" strokeWidth="1" />
+        <circle cx="32" cy="27" r="15.5" fill="none" stroke={variant === 'reversed' ? '#0b0d12' : '#ffffff'} strokeOpacity="0.15" strokeWidth="0.75" />
       </g>
       {!markOnly && (
         <g id="lg-wordmark" fontFamily="Inter, system-ui, sans-serif" fontWeight="800">
