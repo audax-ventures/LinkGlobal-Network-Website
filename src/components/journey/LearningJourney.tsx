@@ -118,18 +118,18 @@ const PATH_D =
   'M50,0 C50,25 65,25 65,50 C65,100 35,100 35,150 C35,200 65,200 65,250 C65,300 35,300 35,350 C35,400 65,400 65,450 C65,475 50,475 50,500'
 
 const FALLBACK_LINE_TOP = 360
-const GAP_BELOW_HEADER = 32
-const GAP_BETWEEN_STEPS = 56
-const BOTTOM_PADDING = 48
-const MIN_ROW_HEIGHT = 200
-const FALLBACK_ROW_HEIGHT = 280
+const GAP_BELOW_HEADER = 24
+const GAP_BETWEEN_STEPS = 36
+const BOTTOM_PADDING = 32
+const MIN_ROW_HEIGHT = 170
+const FALLBACK_ROW_HEIGHT = 240
 
 export default function LearningJourney() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
   const pathRef = useRef<SVGPathElement>(null)
   const glowPathRef = useRef<SVGPathElement>(null)
-  const nodeGroupRefs = useRef<(SVGGElement | null)[]>([])
+  const nodeRefs = useRef<(HTMLDivElement | null)[]>([])
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
   const photoRefs = useRef<(HTMLImageElement | null)[]>([])
 
@@ -203,11 +203,19 @@ export default function LearningJourney() {
     const totalHeight = lineTop + containerHeight
     const scrollFractions = centers.map((c) => (totalHeight > 0 ? (lineTop + c) / totalHeight : 0))
 
+    // Nodes are plain HTML circles positioned by percentage (left/top),
+    // deliberately NOT drawn inside the SVG — that viewBox is stretched
+    // non-uniformly to fit its container (fine for the decorative line
+    // itself, which is meant to look like a loose squiggle either way,
+    // but a <circle> living in that same distorted space renders as an
+    // ellipse, not a circle). Percentage positioning on an HTML element
+    // resolves against the container's real, undistorted box.
     pathFractions.forEach((f, i) => {
-      const group = nodeGroupRefs.current[i]
-      if (!group) return
+      const node = nodeRefs.current[i]
+      if (!node) return
       const pt = path.getPointAtLength(f * length)
-      group.setAttribute('transform', `translate(${pt.x}, ${pt.y})`)
+      node.style.left = `${pt.x}%`
+      node.style.top = `${(pt.y / 500) * 100}%`
     })
 
     // Only the connecting line (and the nodes strung along it) animate with
@@ -223,18 +231,12 @@ export default function LearningJourney() {
         if (glowPath) glowPath.style.strokeDashoffset = `${length * (1 - progress)}`
 
         scrollFractions.forEach((f, i) => {
-          const group = nodeGroupRefs.current[i]
-          if (!group) return
+          const node = nodeRefs.current[i]
+          if (!node) return
           const active = progress >= f - 0.02
-          const circle = group.querySelector('circle')
-          const text = group.querySelector('text')
-          if (circle) {
-            circle.setAttribute('stroke', active ? '#1ba3e0' : 'rgba(19,41,82,0.2)')
-            circle.style.filter = active ? 'drop-shadow(0 0 6px rgba(27,163,224,0.65))' : 'none'
-          }
-          if (text) {
-            text.setAttribute('fill', active ? '#1ba3e0' : 'rgba(19,41,82,0.35)')
-          }
+          node.style.borderColor = active ? '#1ba3e0' : 'rgba(19,41,82,0.2)'
+          node.style.color = active ? '#1ba3e0' : 'rgba(19,41,82,0.35)'
+          node.style.boxShadow = active ? '0 0 0 4px rgba(27,163,224,0.18), 0 2px 8px rgba(19,41,82,0.15)' : '0 2px 8px rgba(19,41,82,0.15)'
         })
       },
     })
@@ -311,27 +313,21 @@ export default function LearningJourney() {
                   <stop offset="100%" stopColor="#1ba3e0" />
                 </linearGradient>
               </defs>
-              {MILESTONES.map((m, i) => (
-                <g
-                  key={m.title}
-                  ref={(el) => {
-                    nodeGroupRefs.current[i] = el
-                  }}
-                >
-                  <circle r={9} fill="#ffffff" stroke="rgba(19,41,82,0.2)" strokeWidth={2} />
-                  <text
-                    textAnchor="middle"
-                    dominantBaseline="central"
-                    fontSize="9"
-                    fontWeight="800"
-                    fontFamily="Inter, system-ui, sans-serif"
-                    fill="rgba(19,41,82,0.35)"
-                  >
-                    {i + 1}
-                  </text>
-                </g>
-              ))}
             </svg>
+
+            {/* Plain HTML circles, not SVG — see the effect above for why. */}
+            {MILESTONES.map((m, i) => (
+              <div
+                key={m.title}
+                ref={(el) => {
+                  nodeRefs.current[i] = el
+                }}
+                className="absolute z-10 flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-xs font-extrabold"
+                style={{ border: '2px solid rgba(19,41,82,0.2)', color: 'rgba(19,41,82,0.35)', boxShadow: '0 2px 8px rgba(19,41,82,0.15)' }}
+              >
+                {i + 1}
+              </div>
+            ))}
           </div>
 
           {MILESTONES.map((m, i) => (
