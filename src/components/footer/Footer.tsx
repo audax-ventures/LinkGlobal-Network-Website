@@ -104,7 +104,7 @@ export default function Footer() {
           <p className="text-xs text-white/35">
             Built by{' '}
             <a
-              href="https://audaxventures.ca"
+              href="https://www.audaxventures.ca"
               target="_blank"
               rel="noreferrer"
               className="text-white/60 hover:text-white"
