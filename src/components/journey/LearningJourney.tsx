@@ -19,7 +19,7 @@ const MILESTONES: Milestone[] = [
       'Explore 40+ languages and pick the one that fits where you’re headed — a new job, a big trip, or reconnecting with family.',
     side: 'right',
     icon: <GlobeIcon className="h-full w-full" />,
-    photo: { src: '/photos/journey-1.jpg', alt: 'Learner studying with headphones at home', rotate: '-rotate-2' },
+    photo: { src: '/photos/journey-app-1.png', alt: 'LinkGlobal Network onboarding screen for choosing a native language', rotate: '-rotate-2' },
     overlay: (
       <div className="flex flex-col gap-1.5 text-xs">
         <div className="flex items-center gap-1.5">
@@ -44,7 +44,7 @@ const MILESTONES: Milestone[] = [
       'A quick, guided placement assessment figures out exactly where you’re starting from, so your path is tailored from day one.',
     side: 'left',
     icon: <ClipboardIcon className="h-full w-full" />,
-    photo: { src: '/photos/journey-2.jpg', alt: 'Group of learners studying together around a laptop', rotate: 'rotate-2' },
+    photo: { src: '/photos/journey-app-2.png', alt: 'LinkGlobal Network real-time voice assessment interaction', rotate: 'rotate-2' },
     overlay: (
       <div className="text-xs">
         <p className="text-navy-700/50">Your Level</p>
@@ -61,7 +61,7 @@ const MILESTONES: Milestone[] = [
       'Bite-sized lessons built around how busy people actually learn, fitting into the pockets of time you already have.',
     side: 'right',
     icon: <GraduationCapIcon className="h-full w-full" />,
-    photo: { src: '/photos/journey-3.jpg', alt: 'Learner relaxing at home while studying on a laptop', rotate: '-rotate-2' },
+    photo: { src: '/photos/journey-app-3.png', alt: 'LinkGlobal Network learner dashboard with strengths and areas for improvement', rotate: '-rotate-2' },
     overlay: (
       <div className="text-xs">
         <div className="flex items-center justify-between gap-3">
@@ -84,7 +84,7 @@ const MILESTONES: Milestone[] = [
       'Practice live with native speakers who adapt to your goals and pace — not just an app quizzing you on flashcards.',
     side: 'left',
     icon: <UsersIcon className="h-full w-full" />,
-    photo: { src: '/photos/journey-4.jpg', alt: 'Learner waving during a video call with a tutor', rotate: 'rotate-2' },
+    photo: { src: '/photos/journey-app-4.png', alt: 'LinkGlobal Network live session booking flow with a tutor', rotate: 'rotate-2' },
     overlay: (
       <div className="flex items-center gap-1 text-xs font-bold text-navy-950">
         <span>5.0</span>
@@ -98,7 +98,7 @@ const MILESTONES: Milestone[] = [
       'Track fluency milestones as you hit them, and unlock new opportunities at work, while traveling, or at home.',
     side: 'right',
     icon: <RocketIcon className="h-full w-full" />,
-    photo: { src: '/photos/journey-5.jpg', alt: 'Two friends chatting confidently while traveling', rotate: '-rotate-2' },
+    photo: { src: '/photos/journey-app-5.png', alt: 'LinkGlobal Network AI practice session report with scores and transcript', rotate: '-rotate-2' },
     overlay: (
       <div className="flex items-center gap-2 text-xs">
         <span className="text-lg">🏅</span>
