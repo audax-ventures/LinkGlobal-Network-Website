@@ -116,7 +116,9 @@ export default function FloatingNav() {
 
   return (
     <div ref={navRef} className="fixed top-0 inset-x-0 z-40 flex items-center justify-between px-5 sm:px-8 py-4">
-      <Logo variant="dark" className="h-8 w-auto sm:h-9" />
+      <Link to="/" aria-label="LinkGlobal Network home">
+        <Logo variant="dark" className="h-8 w-auto sm:h-9" />
+      </Link>
       <div className="flex items-center gap-2 sm:gap-2.5">
         {NAV_ROUTES.map((route) => (
           <NavCircle key={route.id} label={route.label} path={route.path} Icon={ICONS[route.id]} />

@@ -36,7 +36,9 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-12 md:grid-cols-[1.2fr_1fr_1fr]">
           <div>
-            <Logo variant="reversed" className="h-8 w-auto" />
+            <Link to="/" aria-label="LinkGlobal Network home">
+              <Logo variant="reversed" className="h-8 w-auto" />
+            </Link>
             <p className="mt-4 max-w-xs text-sm text-white/55">
               Connecting learners with real tutors, in real conversations, all around the
               world.
