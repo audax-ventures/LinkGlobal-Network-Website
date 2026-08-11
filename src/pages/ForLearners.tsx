@@ -55,7 +55,7 @@ export default function ForLearners() {
           </>
         }
         description="Personalized lessons, flexible scheduling, and real conversations with native speakers — so progress fits around your life, not the other way around."
-        image={{ src: '/photos/learners.jpg', alt: 'A learner studying a new language on a laptop' }}
+        image={{ src: '/photos/learners-hero.jpg', alt: 'A learner reviewing her LinkGlobal Network dashboard in a modern office' }}
       />
 
       <section className="relative px-6 pb-16 sm:pb-20">

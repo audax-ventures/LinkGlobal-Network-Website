@@ -116,7 +116,7 @@ const SIDES: Side[] = [
     description:
       'Personalized lessons, flexible scheduling, and real conversations with native speakers — so progress fits around your life, not the other way around.',
     image: '/photos/learners.jpg',
-    imageAlt: 'A learner studying a new language on a laptop',
+    imageAlt: 'A learner reviewing his LinkGlobal Network dashboard on a laptop at home',
     color: '#1ba3e0',
     gradient: 'linear-gradient(90deg, #1ba3e0, #3ec6ff)',
     badgeIcon: <BookIcon className="h-full w-full" />,
@@ -138,7 +138,7 @@ const SIDES: Side[] = [
     description:
       'Set your own hours, connect with motivated learners globally, and get paid reliably for doing what you already love.',
     image: '/photos/educators.jpg',
-    imageAlt: 'A teacher preparing an online tutoring session on a laptop',
+    imageAlt: 'A tutor planning today’s lesson focus on a whiteboard before an online session',
     color: '#7c3aed',
     gradient: 'linear-gradient(90deg, #7c3aed, #a78bfa)',
     badgeIcon: <GraduationCapIcon className="h-full w-full" />,

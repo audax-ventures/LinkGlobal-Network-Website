@@ -62,7 +62,7 @@ export default function ForEducators() {
           </>
         }
         description="Set your own hours, connect with motivated learners globally, and get paid reliably for doing what you already love."
-        image={{ src: '/photos/educators.jpg', alt: 'A tutor preparing an online tutoring session on a laptop' }}
+        image={{ src: '/photos/educators-hero.jpg', alt: 'A tutor reviewing his lesson plan before an online session' }}
       />
 
       <section className="relative px-6 pb-16 sm:pb-20">

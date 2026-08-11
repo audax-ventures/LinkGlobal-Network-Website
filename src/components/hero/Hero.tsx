@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import HeroBackground from './HeroBackground'
 import LaptopMockup from '../loading/LaptopMockup'
-import PhoneMockup from './PhoneMockup'
 import AvatarIllustration from '../AvatarIllustration'
 
 const container = {
@@ -117,10 +116,10 @@ export default function Hero() {
             alt="LinkGlobal Network learner dashboard"
             className="relative z-10 w-full max-w-md"
           />
-          <PhoneMockup
-            src="/gallery/practice-report.png"
-            alt="LinkGlobal Network learning progress on mobile"
-            className="absolute -bottom-6 -left-2 z-20 w-24 -rotate-6 sm:-left-8 sm:w-32"
+          <img
+            src="/gallery/mobile-dashboard-mockup.png"
+            alt="LinkGlobal Network dashboard on mobile"
+            className="absolute -bottom-6 -left-2 z-20 w-24 drop-shadow-[0_20px_45px_rgba(10,20,45,0.32)] -rotate-6 sm:-left-8 sm:w-32"
           />
         </motion.div>
       </div>
