@@ -5,25 +5,26 @@ interface LogoProps {
 }
 
 /**
- * Solid black chat-bubble circle with a curled tail, a crisp white gap ring,
- * and a blue globe with a latitude/longitude grid plus an angular continent
- * silhouette, paired with the "Link"/"Global" wordmark. `variant="reversed"`
- * swaps the bubble to white and the gap ring to dark for use on dark
- * backgrounds.
+ * Solid black chat-bubble circle with a curled tail and a blue globe, paired
+ * with the "Link"/"Global" wordmark. `variant="reversed"` swaps the bubble
+ * to white for use on dark backgrounds.
  *
- * The mark renders at only ~32px total (h-8/h-9 in the nav), so both the
- * grid strokes and the continent shape are deliberately bold (2.2 stroke
- * width, 95% opacity) and straight-edged rather than fine or wavy — thin/
- * low-opacity strokes and smooth curved continent paths were tried in
- * earlier passes and either vanished or blurred into a muddy blob at real
- * size, even though they looked fine scaled up for review. This design was
- * chosen by rasterizing several candidates to a canvas at the true ~32px
- * size and comparing, not by eyeballing a zoomed-up copy.
+ * The continent path is traced pixel-for-pixel from the client's actual
+ * reference asset (not hand-drawn/eyeballed): flood-filled the globe disk,
+ * classified white vs. blue pixels by color distance, ran Moore-neighbor
+ * boundary tracing on the resulting mask, then simplified with Douglas-
+ * Peucker (~1700 points down to 42). That tracing process also showed there
+ * is no white gap ring between the black bubble and the globe in the real
+ * asset — earlier versions had invented one.
+ *
+ * The mark renders at only ~32px total (h-8/h-9 in the nav) — confirmed via
+ * a true-size raster (not a scaled-up copy, which looks fine regardless of
+ * whether the real small size does) that this traced shape stays legible at
+ * that size despite its detail, unlike earlier hand-drawn attempts.
  */
 export default function Logo({ variant = 'dark', markOnly = false, className = '' }: LogoProps) {
   const isReversed = variant === 'reversed'
   const bubbleFill = isReversed ? '#ffffff' : '#0b0d12'
-  const gapFill = isReversed ? '#0b0d12' : '#ffffff'
   const globalTextFill = isReversed ? '#ffffff' : '#0b0d12'
   const linkTextFill = '#1ba3e0'
   const globeFill = '#1ba3e0'
@@ -41,13 +42,10 @@ export default function Logo({ variant = 'dark', markOnly = false, className = '
           fill={bubbleFill}
         />
         <circle cx="32" cy="29" r="22" fill={bubbleFill} />
-        <circle cx="32" cy="29" r="18.5" fill={gapFill} />
         <circle cx="32" cy="29" r="16.5" fill={globeFill} />
-        <ellipse cx="32" cy="29" rx="16.5" ry="6.5" fill="none" stroke="#ffffff" strokeOpacity="0.95" strokeWidth="2.2" />
-        <ellipse cx="32" cy="29" rx="6.5" ry="16.5" fill="none" stroke="#ffffff" strokeOpacity="0.95" strokeWidth="2.2" />
         <path
           fill="#ffffff"
-          d="M23,20 L29,17 L34,20 L33,24 L37,26 L36,32 L31,36 L26,35 L22,31 L23,26 Z"
+          d="M33.3,14.87 L36.35,15.71 L35.9,17.08 L37.88,20.37 L37.19,21.82 L37.81,22.89 L37.35,24.42 L38.34,25.94 L39.64,27.4 L42.85,27.93 L42.92,33.43 L41.85,36.64 L43.08,37.94 L38.65,41.83 L35.51,43.06 L29.1,43.28 L25.35,41.83 L20.01,36.94 L17.56,30.83 L17.49,27.4 L18.86,22.66 L20.62,22.89 L21.23,24.88 L24.67,27.85 L24.13,30.6 L27.11,35.03 L27.26,38.4 L28.49,41.53 L29.33,41.68 L30.55,39.92 L31.08,37.63 L34.22,33.89 L34.52,30.38 L31.16,28.47 L29.02,26.17 L24.13,25.87 L22.53,22.81 L24.06,21.74 L25.35,22.05 L26.12,20.37 L30.01,17.39 L29.78,15.33 Z"
         />
       </g>
       {!markOnly && (
