@@ -42,7 +42,7 @@ const AUDIENCES: Audience[] = [
   {
     eyebrow: 'For Institutions',
     title: 'Bring real conversation practice to your classroom or team.',
-    image: '/gallery/dashboard.png',
+    image: '/photos/institutions.jpg',
     color: '#2dd4bf',
     points: [
       'Bulk seats for schools, companies, and language programs',
