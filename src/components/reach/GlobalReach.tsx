@@ -41,12 +41,17 @@ export default function GlobalReach() {
   return (
     <section className="relative overflow-hidden pt-10 sm:pt-14 pb-14 sm:pb-20 px-6">
       <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
-        <div className="rounded-3xl border border-white/10 bg-white/5 px-6 py-10 sm:px-12 sm:py-12 backdrop-blur">
-          <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-light/60">
+        {/* Solid white card + dark navy text, same fix as Platform Gallery's
+            intro card — this section sits partway through Home's
+            light-to-dark fade wrapper (see Home.tsx), so translucent
+            white-on-white text sized for a solid dark navy backdrop had
+            poor contrast against the lighter/mid-tone part of that fade. */}
+        <div className="rounded-3xl bg-white px-6 py-10 sm:px-12 sm:py-12 shadow-[0_20px_60px_rgba(19,41,82,0.12)]">
+          <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-blue">
             Global Reach
           </span>
-          <h2 className="mt-3 text-3xl sm:text-5xl font-bold text-white">Learners in 120+ countries.</h2>
-          <p className="mt-4 text-white/65">
+          <h2 className="mt-3 text-3xl sm:text-5xl font-bold text-navy-950">Learners in 120+ countries.</h2>
+          <p className="mt-4 text-navy-700/80">
             Wherever you are, there’s a tutor and a community waiting on the other side of
             the conversation.
           </p>
@@ -61,14 +66,14 @@ export default function GlobalReach() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur"
+            className="rounded-2xl bg-white p-6 shadow-[0_15px_40px_rgba(19,41,82,0.12)]"
           >
-            <p className="text-sm sm:text-base text-white/80">&ldquo;{t.quote}&rdquo;</p>
+            <p className="text-sm sm:text-base text-navy-700/85">&ldquo;{t.quote}&rdquo;</p>
             <div className="mt-4 flex items-center gap-3">
               <AvatarIllustration color={t.accent} />
               <div>
-                <p className="text-sm font-semibold text-white">{t.name}</p>
-                <p className="text-xs text-white/50">{t.country}</p>
+                <p className="text-sm font-semibold text-navy-950">{t.name}</p>
+                <p className="text-xs text-navy-700/60">{t.country}</p>
               </div>
             </div>
           </motion.div>
