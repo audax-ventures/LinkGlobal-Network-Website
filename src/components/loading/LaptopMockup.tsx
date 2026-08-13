@@ -18,12 +18,14 @@ export default function LaptopMockup({ src, alt, className = '', style }: Laptop
       {/* A real MacBook screen is ~16:10 — the screenshots themselves export
           at 1000x540 (~1.85:1), noticeably wider/shallower than that, which
           previously made the whole mockup read as a too-wide, squashed
-          laptop. object-contain (not object-cover) on a navy-900 bg keeps
-          the full screenshot uncropped — no left/right content loss like the
-          old 16:10 attempt had — with the small resulting top/bottom gap
-          just reading as screen bezel inset rather than a rendering bug. */}
+          laptop. object-contain was tried to avoid cropping, but since it's
+          anchored object-top, the entire ~1.85:1-vs-1.6:1 gap piles up as one
+          solid black bar at the bottom instead of being split away — reads
+          as a broken/cut-off screenshot, not an inset. object-cover crops a
+          modest, evenly-split ~7% off each side instead — no visible dead
+          space, and the crop is small enough that it doesn't cut real UI. */}
       <div className="overflow-hidden rounded-[10px] border-[6px] border-navy-900 bg-navy-900 shadow-[0_20px_45px_rgba(10,20,45,0.28)] aspect-[16/10]">
-        <img src={src} alt={alt} className="h-full w-full object-contain object-top" />
+        <img src={src} alt={alt} className="h-full w-full object-cover" />
       </div>
       <div className="mx-auto h-[7px] w-[112%] rounded-b-md bg-navy-800" />
     </div>
