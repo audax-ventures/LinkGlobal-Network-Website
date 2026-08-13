@@ -2,7 +2,6 @@ import { Suspense, useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import LazyStylizedGlobe from '../LazyStylizedGlobe'
 import MonitorMockup from './MonitorMockup'
-import TabletMockup from './TabletMockup'
 import { useViewportSize } from '../../hooks/useViewportSize'
 import { COUNTRY_GREETINGS } from '../../data/countryGreetings'
 
@@ -158,7 +157,14 @@ export default function SpinningWorld({ onDismiss }: SpinningWorldProps) {
 
           {showSideDevices && (
             <div className="relative" style={{ width: deviceWidth }}>
-              <TabletMockup src="/gallery/practice-report.png" alt="LinkGlobal Network AI practice session report" />
+              {/* This mockup has its own device bezel baked into the image
+                  (like the phone below), so it renders as a plain <img> —
+                  not wrapped in TabletMockup's CSS-built frame. */}
+              <img
+                src="/gallery/tablet-dashboard-mockup.png"
+                alt="LinkGlobal Network learner dashboard on tablet"
+                className="w-full drop-shadow-[0_20px_45px_rgba(10,20,45,0.28)]"
+              />
               <img
                 src="/gallery/mobile-dashboard-mockup.png"
                 alt="LinkGlobal Network dashboard on mobile"
