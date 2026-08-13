@@ -37,20 +37,27 @@ export default function PlatformGallery() {
   return (
     <section className="relative overflow-hidden pb-6 sm:pb-8">
       <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
-        <div className="rounded-3xl border border-white/10 bg-white/5 px-6 py-10 sm:px-12 sm:py-12 backdrop-blur">
-          <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-light/60">
+        {/* This section sits early in Home's light-to-dark fade wrapper (see
+            Home.tsx), so it reads closer to light than dark — the previous
+            white-on-translucent-dark styling (sized for a solid dark navy
+            backdrop) went nearly invisible here. Solid white card + dark
+            navy text matches the rest of the site's light-background
+            sections instead of guessing at contrast against a backdrop that
+            varies by scroll position. */}
+        <div className="rounded-3xl bg-white px-6 py-10 sm:px-12 sm:py-12 shadow-[0_20px_60px_rgba(19,41,82,0.12)]">
+          <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-blue">
             Inside the Platform
           </span>
-          <h2 className="mt-3 text-3xl sm:text-5xl font-bold text-white">
+          <h2 className="mt-3 text-3xl sm:text-5xl font-bold text-navy-950">
             Built for how you actually learn.
           </h2>
-          <p className="mt-4 text-white/65">
+          <p className="mt-4 text-navy-700/80">
             A preview of the LinkGlobal Network experience — lessons, live sessions, and
             progress tracking, all in one place.
           </p>
           <Link
             to="/about"
-            className="mt-6 inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-white/10 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/20"
+            className="mt-6 inline-flex items-center gap-1.5 rounded-full border border-navy-900/15 px-6 py-2.5 text-sm font-semibold text-navy-800 transition-colors hover:bg-navy-900/[0.03]"
           >
             Learn More
             <span aria-hidden="true">→</span>
