@@ -487,7 +487,7 @@ export default function About() {
       <CtaBand
         title="Ready to see it for yourself?"
         description="Start learning with a real tutor today, or explore how LinkGlobal Network fits into your classroom or organization."
-        primary={{ label: 'Try It Now', to: '/try-now' }}
+        primary={{ label: 'Start Your Journey', to: '/try-now' }}
         secondary={{ label: 'Explore Pricing', to: '/pricing' }}
       />
     </PageShell>

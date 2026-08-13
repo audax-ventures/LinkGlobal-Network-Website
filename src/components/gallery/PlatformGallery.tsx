@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import MockScreen from './MockScreen'
 import Lightbox from './Lightbox'
 
@@ -47,6 +48,13 @@ export default function PlatformGallery() {
             A preview of the LinkGlobal Network experience — lessons, live sessions, and
             progress tracking, all in one place.
           </p>
+          <Link
+            to="/about"
+            className="mt-6 inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-white/10 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/20"
+          >
+            Learn More
+            <span aria-hidden="true">→</span>
+          </Link>
         </div>
       </div>
 

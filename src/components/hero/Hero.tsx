@@ -60,7 +60,7 @@ export default function Hero() {
           >
             Real People.
             <br />
-            Real Conversations.
+            <span className="whitespace-nowrap">Real Conversations.</span>
             <br />
             <span style={{ background: 'linear-gradient(90deg, #1ba3e0, #a78bfa)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
               Real Progress.

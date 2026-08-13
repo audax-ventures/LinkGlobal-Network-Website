@@ -171,7 +171,7 @@ export default function Pricing() {
       <CtaBand
         title="Still deciding?"
         description="Try a session first — there's no better way to know if it's the right fit."
-        primary={{ label: 'Try It Now', to: '/try-now' }}
+        primary={{ label: 'Start Your Journey', to: '/try-now' }}
         secondary={{ label: 'Contact Us', to: '/contact' }}
       />
     </PageShell>

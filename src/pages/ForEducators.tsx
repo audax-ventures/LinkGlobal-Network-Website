@@ -128,7 +128,7 @@ export default function ForEducators() {
       <CtaBand
         title="Ready to start teaching?"
         description="Join tutors in over 120 countries already teaching on LinkGlobal Network."
-        primary={{ label: 'Become a Tutor', to: '/try-now' }}
+        primary={{ label: 'Start Your Journey', to: '/try-now' }}
         secondary={{ label: 'Contact Us', to: '/contact' }}
       />
     </PageShell>

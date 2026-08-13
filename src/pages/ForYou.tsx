@@ -123,7 +123,7 @@ export default function ForYou() {
       <CtaBand
         title="Not sure where to start?"
         description="Jump straight in and try a session, or talk to us about what would work best for you."
-        primary={{ label: 'Try It Now', to: '/try-now' }}
+        primary={{ label: 'Start Your Journey', to: '/try-now' }}
         secondary={{ label: 'Contact Us', to: '/contact' }}
       />
     </PageShell>

@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
+import { motion } from 'framer-motion'
 import { ensureGsapPlugins, ScrollTrigger } from '../../lib/gsapSetup'
 import { CheckIcon, GlobeIcon, ClipboardIcon, GraduationCapIcon, UsersIcon, RocketIcon } from '../icons/LineIcons'
 
@@ -338,10 +339,19 @@ export default function LearningJourney() {
               }`}
               style={{ top: `${centers[i]}px`, transform: 'translateY(-50%)' }}
             >
-              <div
+              {/* Slide-in direction matches the step's side — a right-side
+                  card enters from further right, a left-side card from
+                  further left. This wrapper only carries the animation; the
+                  outer div above owns the static top/vertical-centering
+                  transform so the two don't fight over `transform`. */}
+              <motion.div
                 ref={(el) => {
                   cardRefs.current[i] = el
                 }}
+                initial={{ opacity: 0, x: m.side === 'right' ? 48 : -48 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="relative rounded-2xl bg-white px-5 py-5 sm:px-6 sm:py-6 shadow-[0_15px_40px_rgba(19,41,82,0.1)]"
               >
                 <span className="inline-block rounded-full bg-brand-blue/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-brand-blue">
@@ -354,7 +364,7 @@ export default function LearningJourney() {
                   {m.title}
                 </h3>
                 <p className="mt-2 text-sm sm:text-base text-navy-700/75 leading-relaxed">{m.description}</p>
-              </div>
+              </motion.div>
             </div>
           ))}
 
@@ -367,23 +377,32 @@ export default function LearningJourney() {
               className={`hidden md:block absolute w-[26%] ${m.side === 'right' ? 'right-[58%]' : 'left-[58%]'}`}
               style={{ top: `${centers[i]}px`, transform: 'translateY(-50%)' }}
             >
-              <div className={`rounded-2xl bg-white p-2 shadow-[0_20px_50px_rgba(19,41,82,0.15)] ${m.photo.rotate}`}>
-                <img
-                  ref={(el) => {
-                    photoRefs.current[i] = el
-                  }}
-                  src={m.photo.src}
-                  alt={m.photo.alt}
-                  className="aspect-[3/2] w-full rounded-xl object-cover"
-                />
-              </div>
-              <div
-                className={`absolute -bottom-4 rounded-xl bg-white px-3 py-2.5 shadow-[0_10px_25px_rgba(19,41,82,0.18)] ${
-                  m.side === 'right' ? 'left-3' : 'right-3'
-                }`}
+              {/* Photo sits on the opposite side from its card, so it slides
+                  in from the opposite direction too. */}
+              <motion.div
+                initial={{ opacity: 0, x: m.side === 'right' ? -48 : 48 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               >
-                {m.overlay}
-              </div>
+                <div className={`rounded-2xl bg-white p-2 shadow-[0_20px_50px_rgba(19,41,82,0.15)] ${m.photo.rotate}`}>
+                  <img
+                    ref={(el) => {
+                      photoRefs.current[i] = el
+                    }}
+                    src={m.photo.src}
+                    alt={m.photo.alt}
+                    className="aspect-[3/2] w-full rounded-xl object-cover"
+                  />
+                </div>
+                <div
+                  className={`absolute -bottom-4 rounded-xl bg-white px-3 py-2.5 shadow-[0_10px_25px_rgba(19,41,82,0.18)] ${
+                    m.side === 'right' ? 'left-3' : 'right-3'
+                  }`}
+                >
+                  {m.overlay}
+                </div>
+              </motion.div>
             </div>
           ))}
         </div>

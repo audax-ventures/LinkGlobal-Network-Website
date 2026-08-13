@@ -15,11 +15,15 @@ interface LaptopMockupProps {
 export default function LaptopMockup({ src, alt, className = '', style }: LaptopMockupProps) {
   return (
     <div className={className} style={style}>
-      {/* Matches the real screenshots' actual 1000x540 export dimensions —
-          the previous 16:10 box didn't match, so object-cover was cropping
-          content off the left/right edges of every screen. */}
-      <div className="overflow-hidden rounded-[10px] border-[6px] border-navy-900 bg-navy-900 shadow-[0_20px_45px_rgba(10,20,45,0.28)] aspect-[1000/540]">
-        <img src={src} alt={alt} className="h-full w-full object-cover object-top" />
+      {/* A real MacBook screen is ~16:10 — the screenshots themselves export
+          at 1000x540 (~1.85:1), noticeably wider/shallower than that, which
+          previously made the whole mockup read as a too-wide, squashed
+          laptop. object-contain (not object-cover) on a navy-900 bg keeps
+          the full screenshot uncropped — no left/right content loss like the
+          old 16:10 attempt had — with the small resulting top/bottom gap
+          just reading as screen bezel inset rather than a rendering bug. */}
+      <div className="overflow-hidden rounded-[10px] border-[6px] border-navy-900 bg-navy-900 shadow-[0_20px_45px_rgba(10,20,45,0.28)] aspect-[16/10]">
+        <img src={src} alt={alt} className="h-full w-full object-contain object-top" />
       </div>
       <div className="mx-auto h-[7px] w-[112%] rounded-b-md bg-navy-800" />
     </div>

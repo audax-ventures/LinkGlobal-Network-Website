@@ -132,7 +132,7 @@ export default function ForLearners() {
       <CtaBand
         title="Ready to start learning?"
         description="Get matched with a tutor and have your first real conversation this week."
-        primary={{ label: 'Try It Now', to: '/try-now' }}
+        primary={{ label: 'Start Your Journey', to: '/try-now' }}
         secondary={{ label: 'View Pricing', to: '/pricing' }}
       />
     </PageShell>
