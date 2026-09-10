@@ -26,13 +26,27 @@ const ICONS: Record<string, typeof HomeIcon> = {
   contact: ContactIcon,
 }
 
+// Each route gets its own accent (rotating the site's established palette)
+// and a preview image — reusing the exact photo/screenshot that page's own
+// hero already shows, rather than a separately-generated screenshot. That
+// keeps every preview automatically accurate (no asset pipeline to keep in
+// sync) and reuses images already shipped in the bundle.
+const ROUTE_META: Record<string, { color: string; image: string; blurb: string }> = {
+  home: { color: '#1ba3e0', image: '/gallery/dashboard.png', blurb: 'Real people. Real conversations.' },
+  about: { color: '#f5a623', image: '/photos/about-founders.jpg', blurb: 'Why we built LinkGlobal Network.' },
+  'for-you': { color: '#2dd4bf', image: '/photos/hero-learner.jpg', blurb: 'Made for learners, tutors & institutions.' },
+  learners: { color: '#a78bfa', image: '/photos/learners-hero.jpg', blurb: 'Learn at the speed of real life.' },
+  educators: { color: '#f472b6', image: '/photos/educators-hero.jpg', blurb: 'Teach the world, on your terms.' },
+  'try-now': { color: '#4ade80', image: '/gallery/onboarding.png', blurb: 'Your first real conversation starts here.' },
+  pricing: { color: '#1ba3e0', image: '/gallery/dashboard.png', blurb: 'Plans built around how you learn.' },
+  contact: { color: '#f5a623', image: '/photos/journey-5.jpg', blurb: "Have a question? We're here." },
+}
+
 const MotionLink = motion(Link)
 
-// Each icon is its own small floating chip with a soft shadow, rather than
-// one shared gradient pill housing all of them — a deliberately different
-// visual language from the earlier treatment.
-function NavCircle({ label, path, Icon }: { label: string; path: string; Icon: typeof HomeIcon }) {
+function NavCircle({ label, path, Icon, id }: { label: string; path: string; Icon: typeof HomeIcon; id: string }) {
   const [hovered, setHovered] = useState(false)
+  const meta = ROUTE_META[id]
 
   return (
     <div
@@ -42,23 +56,35 @@ function NavCircle({ label, path, Icon }: { label: string; path: string; Icon: t
     >
       <AnimatePresence>
         {hovered && (
-          <motion.span
-            initial={{ opacity: 0, y: -4, scale: 0.92 }}
+          <motion.div
+            initial={{ opacity: 0, y: -6, scale: 0.94 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -4, scale: 0.92 }}
-            transition={{ duration: 0.16, ease: 'easeOut' }}
-            className="absolute -bottom-9 whitespace-nowrap rounded-full bg-navy-950 px-3 py-1 text-[11px] font-medium tracking-wide text-white shadow-md"
+            exit={{ opacity: 0, y: -6, scale: 0.94 }}
+            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute -bottom-3 left-1/2 w-[176px] -translate-x-1/2 translate-y-full overflow-hidden rounded-2xl bg-white shadow-[0_20px_45px_rgba(10,17,40,0.22)] ring-1 ring-navy-900/[0.06]"
           >
-            {label}
-          </motion.span>
+            <div className="relative aspect-[16/10] w-full overflow-hidden">
+              <img src={meta.image} alt="" className="h-full w-full object-cover" />
+              <div
+                className="absolute inset-0"
+                style={{ background: `linear-gradient(180deg, transparent 40%, ${meta.color}cc 100%)` }}
+              />
+              <span className="absolute bottom-2 left-2.5 text-xs font-bold text-white drop-shadow">{label}</span>
+            </div>
+            <p className="px-2.5 py-2 text-[11px] leading-snug text-navy-700/75">{meta.blurb}</p>
+          </motion.div>
         )}
       </AnimatePresence>
       <MotionLink
         to={path}
         aria-label={label}
-        whileHover={{ y: -2 }}
+        whileHover={{ y: -2, scale: 1.06 }}
         transition={{ type: 'spring', stiffness: 400, damping: 22 }}
-        className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-navy-700 shadow-[0_2px_10px_rgba(10,17,40,0.12)] ring-1 ring-navy-900/[0.06] transition-colors hover:text-brand-blue hover:ring-brand-blue/30"
+        className="flex h-11 w-11 items-center justify-center rounded-full shadow-[0_2px_10px_rgba(10,17,40,0.12)] ring-1 ring-navy-900/[0.06] transition-colors"
+        style={{
+          background: hovered ? meta.color : `${meta.color}1a`,
+          color: hovered ? '#ffffff' : meta.color,
+        }}
       >
         <Icon className="h-[18px] w-[18px]" />
       </MotionLink>
@@ -121,7 +147,7 @@ export default function FloatingNav() {
       </Link>
       <div className="flex items-center gap-2 sm:gap-2.5">
         {NAV_ROUTES.map((route) => (
-          <NavCircle key={route.id} label={route.label} path={route.path} Icon={ICONS[route.id]} />
+          <NavCircle key={route.id} id={route.id} label={route.label} path={route.path} Icon={ICONS[route.id]} />
         ))}
       </div>
     </div>
