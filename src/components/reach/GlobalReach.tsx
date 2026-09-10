@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import AvatarIllustration from '../AvatarIllustration'
 
 interface Testimonial {
@@ -58,26 +57,34 @@ export default function GlobalReach() {
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto mt-16 grid max-w-5xl gap-5 sm:grid-cols-2">
-        {TESTIMONIALS.map((t, i) => (
-          <motion.div
-            key={t.name}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="rounded-2xl bg-white p-6 shadow-[0_15px_40px_rgba(19,41,82,0.12)]"
-          >
-            <p className="text-sm sm:text-base text-navy-700/85">&ldquo;{t.quote}&rdquo;</p>
-            <div className="mt-4 flex items-center gap-3">
-              <AvatarIllustration color={t.accent} />
-              <div>
-                <p className="text-sm font-semibold text-navy-950">{t.name}</p>
-                <p className="text-xs text-navy-700/60">{t.country}</p>
+      {/* A continuously-scrolling marquee instead of a static grid — the
+          track holds two back-to-back copies of the testimonials and
+          animates exactly -50% (one full copy's width), so the loop point
+          is seamless: as the first copy scrolls fully offscreen, the second
+          identical copy is already in the exact position to continue. Pure
+          CSS animation (not GSAP/JS) so it can't be affected by the same
+          scroll-triggered-animation timing issues as whileInView elements. */}
+      <div
+        className="relative z-10 mt-16 overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]"
+        aria-hidden="false"
+      >
+        <div className="flex w-max gap-5 lg-marquee-track hover:[animation-play-state:paused]">
+          {[...TESTIMONIALS, ...TESTIMONIALS].map((t, i) => (
+            <div
+              key={`${t.name}-${i}`}
+              className="w-[320px] sm:w-[380px] shrink-0 rounded-2xl bg-white p-6 shadow-[0_15px_40px_rgba(19,41,82,0.12)]"
+            >
+              <p className="text-sm sm:text-base text-navy-700/85">&ldquo;{t.quote}&rdquo;</p>
+              <div className="mt-4 flex items-center gap-3">
+                <AvatarIllustration color={t.accent} />
+                <div>
+                  <p className="text-sm font-semibold text-navy-950">{t.name}</p>
+                  <p className="text-xs text-navy-700/60">{t.country}</p>
+                </div>
               </div>
             </div>
-          </motion.div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   )

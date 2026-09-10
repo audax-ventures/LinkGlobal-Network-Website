@@ -55,18 +55,42 @@ export default function SpinningWorld({ onDismiss }: SpinningWorldProps) {
       ease: 'sine.inOut',
     })
 
+    const removeListeners = () => {
+      window.removeEventListener('wheel', onWheel)
+      window.removeEventListener('touchstart', onTouchStart)
+      window.removeEventListener('touchmove', onTouchMove)
+    }
+
+    // Previously these listeners stayed attached — still calling
+    // preventDefault() on every wheel tick — until the 0.7s fade-out's GSAP
+    // onComplete fired and unmounted this component. If the tab lost focus
+    // right as the fade started, browsers throttle requestAnimationFrame for
+    // background tabs, which could stall onComplete indefinitely: the user's
+    // scroll stayed swallowed with no way out short of a refresh. Removing
+    // the listeners the instant dismiss triggers (not waiting on the
+    // animation) means scroll can never stay blocked past a single gesture,
+    // and the timeout below guarantees the transition still completes even
+    // if the tween itself never fires onComplete.
     const dismiss = () => {
       if (dismissedRef.current) return
       dismissedRef.current = true
+      removeListeners()
       hintTl.kill()
+      let fired = false
+      const finish = () => {
+        if (fired) return
+        fired = true
+        onDismiss()
+      }
       gsap.to(wrap, {
         opacity: 0,
         scale: 1.05,
         filter: 'blur(6px)',
         duration: 0.7,
         ease: 'power2.inOut',
-        onComplete: onDismiss,
+        onComplete: finish,
       })
+      window.setTimeout(finish, 1500)
     }
 
     const onWheel = (e: WheelEvent) => {
@@ -93,9 +117,7 @@ export default function SpinningWorld({ onDismiss }: SpinningWorldProps) {
     window.addEventListener('touchmove', onTouchMove, { passive: false })
 
     return () => {
-      window.removeEventListener('wheel', onWheel)
-      window.removeEventListener('touchstart', onTouchStart)
-      window.removeEventListener('touchmove', onTouchMove)
+      removeListeners()
       hintTl.kill()
     }
   }, [onDismiss])

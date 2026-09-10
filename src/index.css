@@ -34,3 +34,29 @@
     transform: scale(1) translateY(0);
   }
 }
+
+/* Continuous rotation for the nav/footer logo's globe (Logo.tsx) — inline
+   React styles can't declare @keyframes, so this lives globally. */
+@keyframes lg-globe-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Testimonial marquee (GlobalReach.tsx) — the track holds two back-to-back
+   copies of the same content, so animating exactly -50% loops seamlessly. */
+@keyframes lg-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.lg-marquee-track {
+  animation: lg-marquee 32s linear infinite;
+}

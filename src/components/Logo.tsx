@@ -42,11 +42,17 @@ export default function Logo({ variant = 'dark', markOnly = false, className = '
           fill={bubbleFill}
         />
         <circle cx="32" cy="29" r="22" fill={bubbleFill} />
-        <circle cx="32" cy="29" r="16.5" fill={globeFill} />
-        <path
-          fill="#ffffff"
-          d="M33.3,14.87 L36.35,15.71 L35.9,17.08 L37.88,20.37 L37.19,21.82 L37.81,22.89 L37.35,24.42 L38.34,25.94 L39.64,27.4 L42.85,27.93 L42.92,33.43 L41.85,36.64 L43.08,37.94 L38.65,41.83 L35.51,43.06 L29.1,43.28 L25.35,41.83 L20.01,36.94 L17.56,30.83 L17.49,27.4 L18.86,22.66 L20.62,22.89 L21.23,24.88 L24.67,27.85 L24.13,30.6 L27.11,35.03 L27.26,38.4 L28.49,41.53 L29.33,41.68 L30.55,39.92 L31.08,37.63 L34.22,33.89 L34.52,30.38 L31.16,28.47 L29.02,26.17 L24.13,25.87 L22.53,22.81 L24.06,21.74 L25.35,22.05 L26.12,20.37 L30.01,17.39 L29.78,15.33 Z"
-        />
+        {/* Only the globe (circle + continent) spins — the outer bubble and
+            tail stay fixed, since the tail has a fixed direction and
+            spinning the whole mark would look broken. transformOrigin is
+            set to the globe's own center so it rotates in place. */}
+        <g style={{ animation: 'lg-globe-spin 12s linear infinite', transformOrigin: '32px 29px' }}>
+          <circle cx="32" cy="29" r="16.5" fill={globeFill} />
+          <path
+            fill="#ffffff"
+            d="M33.3,14.87 L36.35,15.71 L35.9,17.08 L37.88,20.37 L37.19,21.82 L37.81,22.89 L37.35,24.42 L38.34,25.94 L39.64,27.4 L42.85,27.93 L42.92,33.43 L41.85,36.64 L43.08,37.94 L38.65,41.83 L35.51,43.06 L29.1,43.28 L25.35,41.83 L20.01,36.94 L17.56,30.83 L17.49,27.4 L18.86,22.66 L20.62,22.89 L21.23,24.88 L24.67,27.85 L24.13,30.6 L27.11,35.03 L27.26,38.4 L28.49,41.53 L29.33,41.68 L30.55,39.92 L31.08,37.63 L34.22,33.89 L34.52,30.38 L31.16,28.47 L29.02,26.17 L24.13,25.87 L22.53,22.81 L24.06,21.74 L25.35,22.05 L26.12,20.37 L30.01,17.39 L29.78,15.33 Z"
+          />
+        </g>
       </g>
       {!markOnly && (
         <g id="lg-wordmark" fontFamily="Inter, system-ui, sans-serif" fontWeight="800">

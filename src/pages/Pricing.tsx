@@ -1,16 +1,16 @@
+import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageShell from '../components/PageShell'
 import PageHeader from '../components/PageHeader'
 import CtaBand from '../components/CtaBand'
-import { CheckIcon } from '../components/icons/LineIcons'
+import { ensureGsapPlugins, gsap, ScrollTrigger } from '../lib/gsapSetup'
+import { CheckIcon, CalendarIcon, MailIcon } from '../components/icons/LineIcons'
 
-// Placeholder tiers/prices — swap in real numbers when ready. Structure
-// (3 tiers, feature lists, "most popular" middle tier) is the real design.
 interface Tier {
   name: string
-  price: string
-  period?: string
+  price: number
+  period: string
   description: string
   features: string[]
   cta: { label: string; to: string }
@@ -18,51 +18,81 @@ interface Tier {
   highlighted?: boolean
 }
 
+// Final approved pricing — not a placeholder.
 const TIERS: Tier[] = [
   {
     name: 'Starter',
-    price: '$19',
+    price: 39,
     period: '/month',
-    description: 'For learners just getting started with regular practice.',
-    features: [
-      '2 live tutor sessions / month',
-      'Guided placement assessment',
-      'Community practice access',
-      'Basic progress tracking',
-    ],
-    cta: { label: 'Start Learning', to: '/try-now' },
+    description: 'For your first real conversations.',
+    features: ['Full AI roadmap', '2 live native-speaker sessions / month', 'Progress tracked after every conversation'],
+    cta: { label: 'Start Your Journey', to: '/try-now' },
     color: '#2dd4bf',
   },
   {
-    name: 'Premium',
-    price: '$49',
+    name: 'Growth',
+    price: 89,
     period: '/month',
-    description: 'For learners serious about getting fluent, fast.',
+    description: 'For steady, visible momentum.',
     features: [
-      '6 live tutor sessions / month',
-      'Priority tutor matching',
-      'AI-supported practice reports',
-      'Flexible rescheduling',
-      'Progress milestones & goals',
+      'Everything in Starter',
+      '4 live native-speaker sessions / month',
+      'Business or exam-prep track (IELTS & TOEFL preparation)',
     ],
-    cta: { label: 'Start Learning', to: '/try-now' },
+    cta: { label: 'Start Your Journey', to: '/try-now' },
     color: '#1ba3e0',
     highlighted: true,
   },
   {
-    name: 'Institutions',
-    price: 'Custom',
-    description: 'For schools, companies, and language programs.',
-    features: [
-      'Bulk seats for teams or classrooms',
-      'Admin dashboard & cohort reporting',
-      'Dedicated onboarding & support',
-      'Custom billing arrangements',
-    ],
-    cta: { label: 'Contact Sales', to: '/contact' },
+    name: 'Intensive',
+    price: 159,
+    period: '/month',
+    description: 'For a deadline you intend to hit.',
+    features: ['Everything in Growth', '8 live sessions / month + priority scheduling', 'Weekly roadmap check-ins'],
+    cta: { label: 'Start Your Journey', to: '/try-now' },
     color: '#a78bfa',
   },
 ]
+
+// Local count-up variant (not the shared CountUpStat, which has no $ prefix
+// support and is used elsewhere with its own centered-card layout) — counts
+// from 0 to the tier price once it scrolls into view.
+function PriceCountUp({ value }: { value: number }) {
+  const ref = useRef<HTMLSpanElement>(null)
+  const wrapRef = useRef<HTMLSpanElement>(null)
+
+  useEffect(() => {
+    ensureGsapPlugins()
+    const el = ref.current
+    const wrap = wrapRef.current
+    if (!el || !wrap) return
+
+    const counter = { val: 0 }
+    const trigger = ScrollTrigger.create({
+      trigger: wrap,
+      start: 'top 90%',
+      once: true,
+      onEnter: () => {
+        gsap.to(counter, {
+          val: value,
+          duration: 1.2,
+          ease: 'power2.out',
+          onUpdate: () => {
+            el.textContent = Math.round(counter.val).toString()
+          },
+        })
+      },
+    })
+
+    return () => trigger.kill()
+  }, [value])
+
+  return (
+    <span ref={wrapRef}>
+      $<span ref={ref}>0</span>
+    </span>
+  )
+}
 
 export default function Pricing() {
   return (
@@ -106,8 +136,10 @@ export default function Pricing() {
 
               <h3 className="text-lg font-bold text-navy-950">{tier.name}</h3>
               <div className="mt-4 flex items-baseline gap-1">
-                <span className="text-4xl font-extrabold text-navy-950">{tier.price}</span>
-                {tier.period && <span className="text-sm text-navy-700/60">{tier.period}</span>}
+                <span className="text-4xl font-extrabold text-navy-950">
+                  <PriceCountUp value={tier.price} />
+                </span>
+                <span className="text-sm text-navy-700/60">{tier.period}</span>
               </div>
               <p className="mt-3 text-sm text-navy-700/75">{tier.description}</p>
 
@@ -136,13 +168,50 @@ export default function Pricing() {
           ))}
         </div>
 
-        <p className="mx-auto mt-10 max-w-lg text-center text-sm text-navy-700/60">
-          Prefer to pay per session instead of a monthly plan?{' '}
-          <a href="mailto:info@linkglobalnetwork.ca" className="font-semibold text-brand-blue hover:underline">
-            Get in touch
-          </a>{' '}
-          and we'll help you find the right fit.
-        </p>
+        {/* Previously a single buried sentence below the tiers — now its own
+            clearly-showcased option, distinct from (not folded into) the
+            monthly plans above, matching the client's ask to give it real
+            visual weight rather than a footnote. Institutions gets the same
+            treatment alongside it, since ForYou.tsx already covers that
+            audience in depth and doesn't need a full duplicate pricing card
+            here. */}
+        <div className="mx-auto mt-10 grid max-w-4xl gap-6 sm:grid-cols-2">
+          <div className="flex items-start gap-4 rounded-2xl border border-navy-900/10 bg-white p-6 shadow-[0_10px_30px_rgba(19,41,82,0.08)]">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue">
+              <CalendarIcon className="h-5 w-5" />
+            </span>
+            <div>
+              <h3 className="font-bold text-navy-950">Prefer to pay per session?</h3>
+              <p className="mt-1 text-sm text-navy-700/70">
+                No monthly commitment — book and pay one session at a time. We'll help you find the right fit.
+              </p>
+              <a
+                href="mailto:info@linkglobalnetwork.ca"
+                className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue hover:gap-2.5 transition-all"
+              >
+                Get in touch <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-4 rounded-2xl border border-navy-900/10 bg-white p-6 shadow-[0_10px_30px_rgba(19,41,82,0.08)]">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue">
+              <MailIcon className="h-5 w-5" />
+            </span>
+            <div>
+              <h3 className="font-bold text-navy-950">Schools, companies, or teams?</h3>
+              <p className="mt-1 text-sm text-navy-700/70">
+                Bulk seats, admin dashboards, and custom billing for institutions and organizations.
+              </p>
+              <Link
+                to="/contact"
+                className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue hover:gap-2.5 transition-all"
+              >
+                Contact sales <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section className="relative px-6 pb-16 sm:pb-20">
