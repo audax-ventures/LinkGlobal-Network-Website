@@ -54,25 +54,33 @@ function NavCircle({ label, path, Icon, id }: { label: string; path: string; Ico
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
+      {/* Static positioning (centering + the below-the-icon offset) lives on
+          this plain wrapper, not the motion.div inside it — Framer Motion
+          writes its own `transform` for the entrance animation (y/scale),
+          which fully overwrites any Tailwind transform classes placed on
+          the same element rather than combining with them. Same fix as the
+          Learning Journey step cards hit earlier in this project. */}
       <AnimatePresence>
         {hovered && (
-          <motion.div
-            initial={{ opacity: 0, y: -6, scale: 0.94 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -6, scale: 0.94 }}
-            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute -bottom-3 left-1/2 w-[176px] -translate-x-1/2 translate-y-full overflow-hidden rounded-2xl bg-white shadow-[0_20px_45px_rgba(10,17,40,0.22)] ring-1 ring-navy-900/[0.06]"
-          >
-            <div className="relative aspect-[16/10] w-full overflow-hidden">
-              <img src={meta.image} alt="" className="h-full w-full object-cover" />
-              <div
-                className="absolute inset-0"
-                style={{ background: `linear-gradient(180deg, transparent 40%, ${meta.color}cc 100%)` }}
-              />
-              <span className="absolute bottom-2 left-2.5 text-xs font-bold text-white drop-shadow">{label}</span>
-            </div>
-            <p className="px-2.5 py-2 text-[11px] leading-snug text-navy-700/75">{meta.blurb}</p>
-          </motion.div>
+          <div className="absolute -bottom-3 left-1/2 w-[176px] -translate-x-1/2 translate-y-full">
+            <motion.div
+              initial={{ opacity: 0, y: -6, scale: 0.94 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -6, scale: 0.94 }}
+              transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+              className="overflow-hidden rounded-2xl bg-white shadow-[0_20px_45px_rgba(10,17,40,0.22)] ring-1 ring-navy-900/[0.06]"
+            >
+              <div className="relative aspect-[16/10] w-full overflow-hidden">
+                <img src={meta.image} alt="" className="h-full w-full object-cover" />
+                <div
+                  className="absolute inset-0"
+                  style={{ background: `linear-gradient(180deg, transparent 40%, ${meta.color}cc 100%)` }}
+                />
+                <span className="absolute bottom-2 left-2.5 text-xs font-bold text-white drop-shadow">{label}</span>
+              </div>
+              <p className="px-2.5 py-2 text-[11px] leading-snug text-navy-700/75">{meta.blurb}</p>
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
       <MotionLink
