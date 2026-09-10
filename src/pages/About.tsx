@@ -364,76 +364,37 @@ export default function About() {
         </div>
       </section>
 
+      {/* Previously duplicated the same dashboard/session screenshots the
+          homepage's Platform Gallery already showcases in full — dropped
+          per the client's note that visuals shouldn't repeat across the
+          site with no new context. Keeps the section's real job (driving to
+          /for-you) without the redundant images. */}
       <section className="relative px-6 pb-16 sm:pb-20">
-        <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-2 md:items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="text-center md:text-left"
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="mx-auto max-w-2xl text-center"
+        >
+          <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-blue">
+            See It In Action
+          </span>
+          <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-navy-950">
+            The platform behind the mission.
+          </h2>
+          <p className="mt-4 text-navy-700/80 leading-relaxed">
+            Powerful tools for learners and tutors to connect, grow, and succeed — together.
+          </p>
+          <Link
+            to="/for-you"
+            className="mt-7 inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold text-white shadow-[0_8px_30px_rgba(30,120,190,0.3)] transition-transform hover:scale-105"
+            style={{ background: 'linear-gradient(90deg, #1ba3e0, #3ec6ff)' }}
           >
-            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-blue">
-              See It In Action
-            </span>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-navy-950">
-              The platform behind the mission.
-            </h2>
-            <p className="mt-4 max-w-md text-navy-700/80 leading-relaxed mx-auto md:mx-0">
-              Powerful tools for learners and tutors to connect, grow, and succeed — together.
-            </p>
-            <Link
-              to="/for-you"
-              className="mt-7 inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold text-white shadow-[0_8px_30px_rgba(30,120,190,0.3)] transition-transform hover:scale-105"
-              style={{ background: 'linear-gradient(90deg, #1ba3e0, #3ec6ff)' }}
-            >
-              Explore the platform
-              <span aria-hidden="true">→</span>
-            </Link>
-          </motion.div>
-
-          <div className="grid grid-cols-2 gap-4 sm:gap-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col gap-3"
-            >
-              <div className="overflow-hidden rounded-2xl shadow-[0_20px_50px_rgba(19,41,82,0.15)]">
-                <img
-                  src="/gallery/dashboard.png"
-                  alt="LinkGlobal Network learner dashboard"
-                  style={{ aspectRatio: '1000/540' }}
-                  className="w-full object-cover"
-                />
-              </div>
-              <p className="text-center text-xs font-semibold uppercase tracking-wide text-navy-700/50">
-                Learner Dashboard
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col gap-3 sm:mt-10"
-            >
-              <div className="overflow-hidden rounded-2xl shadow-[0_20px_50px_rgba(19,41,82,0.15)]">
-                <img
-                  src="/gallery/session-details.png"
-                  alt="LinkGlobal Network tutor session workspace"
-                  style={{ aspectRatio: '1000/540' }}
-                  className="w-full object-cover"
-                />
-              </div>
-              <p className="text-center text-xs font-semibold uppercase tracking-wide text-navy-700/50">
-                Tutor Workspace
-              </p>
-            </motion.div>
-          </div>
-        </div>
+            Explore the platform
+            <span aria-hidden="true">→</span>
+          </Link>
+        </motion.div>
       </section>
 
       <section className="relative px-6 pb-16 sm:pb-20">
