@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import LoadingScreen from './components/loading/LoadingScreen'
 import FloatingNav from './components/nav/FloatingNav'
+import ChatWidget from './components/chat/ChatWidget'
 import ScrollToTop from './components/ScrollToTop'
 import Home from './pages/Home'
 import About from './pages/About'
@@ -20,6 +21,7 @@ function App() {
       {!loadingDone && <LoadingScreen onFinished={() => setLoadingDone(true)} />}
 
       {loadingDone && <FloatingNav />}
+      {loadingDone && <ChatWidget />}
       <ScrollToTop />
 
       <Routes>
