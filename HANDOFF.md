@@ -125,7 +125,8 @@ saturation increases with scroll; pay-per-session stays contact-based but
 prominent.
 
 ### DONE Sept 23 2026 (commits c6e3319, 14e274f) — verified live, desktop + 375px
-Home order is now: Hero, GlobalCommunity, **LinkGlobalLoop**, then on
+Home order is now: Hero, **LinkGlobalLoop** (GlobalCommunity was removed at
+Riley's request Sept 23; the Loop has fades in from the hero and out to the light sections), then on
 RESET_LIGHT: **LearningJourney**, **JourneyDashboard**, **SeeWhereItHappens**,
 SplitSection; then the FADE_TO_DARK group as before.
 - `journey/LearningJourney.tsx` fully rewritten: straight line, plain grid
