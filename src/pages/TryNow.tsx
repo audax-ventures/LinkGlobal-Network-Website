@@ -148,9 +148,9 @@ export default function TryNow() {
           ))}
         </div>
 
-        <p className="mx-auto mt-10 max-w-md text-center text-sm text-navy-700/60">
+        <p className="mx-auto mt-10 max-w-md text-center text-sm text-navy-950/80">
           Have questions before you start?{' '}
-          <a href="mailto:info@linkglobalnetwork.ca" className="font-semibold text-brand-blue hover:underline">
+          <a href="mailto:info@linkglobalnetwork.ca" className="font-bold text-navy-950 underline underline-offset-2 hover:text-white">
             Reach out
           </a>{' '}
           — we're happy to help you figure out the right fit.

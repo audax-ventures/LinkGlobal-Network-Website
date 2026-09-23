@@ -19,7 +19,7 @@ export default function CtaBand({ title, description, primary, secondary }: CtaB
         className="relative z-10 mx-auto max-w-3xl overflow-hidden rounded-3xl px-6 py-12 sm:px-16 sm:py-16 text-center shadow-[0_30px_80px_rgba(5,15,35,0.4)]"
         style={{ background: 'linear-gradient(135deg, #0e2a4d, #1ba3e0)' }}
       >
-        <h2 className="text-3xl sm:text-4xl font-bold text-white">{title}</h2>
+        <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-5xl">{title}</h2>
         <p className="mt-4 text-white/85">{description}</p>
         <div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link

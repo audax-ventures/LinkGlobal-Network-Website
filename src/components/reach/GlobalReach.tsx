@@ -39,22 +39,15 @@ const TESTIMONIALS: Testimonial[] = [
 export default function GlobalReach() {
   return (
     <section className="relative overflow-hidden pt-10 sm:pt-14 pb-14 sm:pb-20 px-6">
-      <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
-        {/* Solid white card + dark navy text, same fix as Platform Gallery's
-            intro card — this section sits partway through Home's
-            light-to-dark fade wrapper (see Home.tsx), so translucent
-            white-on-white text sized for a solid dark navy backdrop had
-            poor contrast against the lighter/mid-tone part of that fade. */}
-        <div className="rounded-3xl bg-white px-6 py-10 sm:px-12 sm:py-12 shadow-[0_20px_60px_rgba(19,41,82,0.12)]">
-          <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-blue">
-            Global Reach
-          </span>
-          <h2 className="mt-3 text-3xl sm:text-5xl font-bold text-navy-950">Learners in 120+ countries.</h2>
-          <p className="mt-4 text-navy-700/80">
-            Wherever you are, there’s a tutor and a community waiting on the other side of
-            the conversation.
-          </p>
-        </div>
+      {/* Open heading like every other homepage section (no boxed card) —
+          with the screenshot gallery gone, this now sits at the light top of
+          Home's fade-to-dark wrapper, so dark text reads fine. */}
+      <div className="relative z-10 mx-auto max-w-3xl text-center">
+        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-blue">Global Reach</p>
+        <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-navy-950 sm:text-6xl">Learners in 120+ countries.</h2>
+        <p className="mx-auto mt-4 max-w-xl text-base text-navy-700/80 sm:text-lg">
+          Wherever you are, there’s a tutor and a community waiting on the other side of the conversation.
+        </p>
       </div>
 
       {/* A continuously-scrolling marquee instead of a static grid — the
@@ -65,7 +58,7 @@ export default function GlobalReach() {
           CSS animation (not GSAP/JS) so it can't be affected by the same
           scroll-triggered-animation timing issues as whileInView elements. */}
       <div
-        className="relative z-10 mt-16 overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]"
+        className="relative z-10 mt-12 overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]"
         aria-hidden="false"
       >
         <div className="flex w-max gap-5 lg-marquee-track hover:[animation-play-state:paused]">
