@@ -163,7 +163,7 @@ export default function IntroSplash({ onDismiss }: IntroSplashProps) {
 
         {/* Greeting run → tagline. Fixed height so nothing shifts. */}
         <div className="relative mt-8 h-8 w-full sm:h-9" aria-live="polite">
-          <AnimatePresence mode="wait">
+          <AnimatePresence initial={false}>
             {greeting !== null && (
               <motion.p
                 key={greeting}
