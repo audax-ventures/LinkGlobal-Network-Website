@@ -105,7 +105,7 @@ export default function Pricing() {
           </>
         }
         description="Straightforward pricing, no surprise fees. Switch or cancel anytime."
-        image={{ src: '/photos/journey-app-4.png', alt: 'Booking a live session with a tutor on LinkGlobal Network' }}
+        image={{ src: '/photos/journey-app-2.png', alt: 'The placement conversation that shapes your LinkGlobal Network plan' }}
         imageAspect="3/2"
       />
 
