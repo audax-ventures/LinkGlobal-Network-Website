@@ -264,7 +264,7 @@ export default function SplitSection() {
           ))}
         </div>
         <p className="text-sm text-navy-700/70">
-          Trusted by <span className="font-bold text-navy-950">100,000+</span> learners and tutors
+          Trusted by <span className="font-bold text-navy-950">tens of thousands</span> of learners and tutors
           worldwide
         </p>
       </motion.div>
