@@ -1,7 +1,10 @@
 import PageShell from '../components/PageShell'
 import Hero from '../components/hero/Hero'
 import GlobalCommunity from '../components/community/GlobalCommunity'
+import LinkGlobalLoop from '../components/loop/LinkGlobalLoop'
 import LearningJourney from '../components/journey/LearningJourney'
+import JourneyDashboard from '../components/dashboard/JourneyDashboard'
+import SeeWhereItHappens from '../components/dashboard/SeeWhereItHappens'
 import SplitSection from '../components/split/SplitSection'
 import PlatformGallery from '../components/gallery/PlatformGallery'
 import GlobalReach from '../components/reach/GlobalReach'
@@ -26,8 +29,11 @@ export default function Home() {
     <PageShell>
       <Hero />
       <GlobalCommunity />
-      <LearningJourney />
+      <LinkGlobalLoop />
       <div style={{ background: RESET_LIGHT }}>
+        <LearningJourney />
+        <JourneyDashboard />
+        <SeeWhereItHappens />
         <SplitSection />
       </div>
       <div style={{ background: FADE_TO_DARK }}>
