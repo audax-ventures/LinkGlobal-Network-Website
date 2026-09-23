@@ -164,18 +164,18 @@ export default function SplitSection() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.4 }}
-        className="relative z-10 mx-auto max-w-2xl text-center"
+        className="relative z-10 mx-auto max-w-4xl text-center"
       >
         <span className="inline-flex items-center gap-1.5 rounded-full border border-navy-900/10 bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-blue shadow-[0_4px_16px_rgba(19,41,82,0.06)]">
           <SparkleIcon className="h-3.5 w-3.5" />
           Two Sides, One Platform
         </span>
-        <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-navy-950 sm:text-6xl">
-          Whichever side you&rsquo;re on,
-          <br />
+        <h2 className="mt-4 text-balance text-4xl font-extrabold tracking-tight text-navy-950 sm:text-6xl">
+          Whichever side you&rsquo;re on,{' '}
+          <br className="hidden sm:block" />
           we&rsquo;ve built for you.
         </h2>
-        <p className="mt-4 text-navy-700/75">
+        <p className="mx-auto mt-4 max-w-2xl text-navy-700/75">
           Learning a language and teaching one are very different journeys — LinkGlobal Network is
           designed around both.
         </p>
