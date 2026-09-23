@@ -13,7 +13,11 @@ conflict (the older text is from Aug 2026). Last commit at time of writing:
 - Never run anything locally (no dev server/build/npm install). Commit + push
   straight to `main`; Vercel auto-deploys; verify on the live site in the
   Browser pane. Wait ~90-120s after a push (ScheduleWakeup works well).
-- Commit messages must end with `Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>`.
+- Commit messages end with a `Co-Authored-By: Claude <model> <noreply@anthropic.com>` line naming the model actually in use.
+- Deploy status without hammering the site: poll GitHub's public commit
+  status API (`api.github.com/repos/audax-ventures/LinkGlobal-Network-Website/commits/<sha>/status`)
+  until `success`, then check the live site in the Browser pane. The Vercel
+  MCP connector can't see this project (lists no teams/projects).
 - Riley (the user) types briefly and expects execution; ask only real
   decision-blocking questions (AskUserQuestion).
 - Task-tracking tools (TaskCreate etc.) may be unavailable; just work.
@@ -120,7 +124,31 @@ the line as you scroll; journey style = Lingoda's straight line whose color
 saturation increases with scroll; pay-per-session stays contact-based but
 prominent.
 
+### DONE Sept 23 2026 (commits c6e3319, 14e274f) — verified live, desktop + 375px
+Home order is now: Hero, GlobalCommunity, **LinkGlobalLoop**, then on
+RESET_LIGHT: **LearningJourney**, **JourneyDashboard**, **SeeWhereItHappens**,
+SplitSection; then the FADE_TO_DARK group as before.
+- `journey/LearningJourney.tsx` fully rewritten: straight line, plain grid
+  rows (no absolute positioning / SVG stretching anymore, so the old
+  measurement notes below are obsolete), fill height = scroll head at 55%
+  of viewport, gradient sized to full line so saturation deepens as it
+  travels; steps before the head are colored, later ones `saturate-0`.
+  Steps: Discover / Understand / Plan / Converse / Grow. Character slot =
+  `characterRef` div riding the head; currently the assistant mascot SVG —
+  swap only the `<img>` when Riley's character design arrives.
+- `loop/LinkGlobalLoop.tsx`: 260vh section with sticky panel; arc + orbit
+  dot driven by scroll; nodes light when reached; Before/During/After copy
+  (client's exact wording). Followed by a 160px navy->#f8fbff fade div.
+- `dashboard/JourneyDashboard.tsx`: tabs auto-advance every 6s while in
+  view (timer bar), stop once clicked; dark product card per tab.
+- `dashboard/SeeWhereItHappens.tsx`: Leyla roadmap / teacher briefing /
+  B1->C1 chart (draws on view), all SAMPLE-tagged. Dashboard visuals were
+  kept deliberately different from these cards (client: no repeated blocks).
+- Open question for Riley: PlatformGallery ("Inside the Platform") now
+  partly overlaps the new Dashboard section in purpose; consider trimming.
+
 ### STILL TO DO — can start now (no assets needed), suggested order
+(Items 1-4 below are DONE — see above.)
 1. **Learning Journey rebuild** (item 6): straight vertical line, saturation
    increasing as you scroll (Lingoda "Your learning journey starts here"),
    minimal steps like the reference "Your path, step by step" (Discover /
