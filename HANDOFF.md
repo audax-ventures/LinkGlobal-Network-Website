@@ -176,8 +176,6 @@ polling, not opacity. Item 7 below (intro length) is superseded.
   learners.jpg/educators.jpg from the Home split; hero-learner.jpg is on
   both For You (header) and About. Nav hover previews reuse page heroes on
   purpose.
-- Copy inconsistency to raise with Riley: Home split says "Trusted by
-  100,000+ learners and tutors", About says "tens of thousands".
 
 ### STILL TO DO — can start now (no assets needed), suggested order
 (Items 1-4 below are DONE — see above.)
