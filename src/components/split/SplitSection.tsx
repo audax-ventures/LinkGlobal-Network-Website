@@ -170,7 +170,7 @@ export default function SplitSection() {
           <SparkleIcon className="h-3.5 w-3.5" />
           Two Sides, One Platform
         </span>
-        <h2 className="mt-4 font-display text-3xl sm:text-5xl font-bold tracking-tight text-navy-950">
+        <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-navy-950 sm:text-6xl">
           Whichever side you&rsquo;re on,
           <br />
           we&rsquo;ve built for you.
