@@ -4,21 +4,20 @@ import Logo from '../Logo'
 
 // Brand intro (modelled on the Avid Golf splash the client liked): navy
 // screen, spinning logo mark, letter-by-letter wordmark, then a run of
-// greetings that settles on the tagline while a thin progress bar fills.
+// greetings while a thin progress bar fills.
 // Ends on its own, or immediately on Skip / click / key / scroll.
 
 interface IntroSplashProps {
   onDismiss: () => void
 }
 
-const GREETINGS = ['Hello', 'Hola', 'Bonjour', 'こんにちは', 'مرحبا']
-const TAGLINE = 'Learn from anywhere. Connect everywhere.'
+const GREETINGS = ['Hello', 'Hola', 'Bonjour', 'こんにちは', 'Olá', 'مرحبا', 'Namaste']
 const WORD = 'LinkGlobal'
 
 // Whole intro is ~2s: auto-exit starts at 1.6s, then a 0.4s fade.
+// The last greeting stays up until the exit.
 const GREETINGS_START_MS = 350
-const GREETING_MS = 130
-const TAGLINE_AT_MS = GREETINGS_START_MS + GREETINGS.length * GREETING_MS
+const GREETING_MS = 180
 const TOTAL_MS = 1600
 const REDUCED_TOTAL_MS = 1200
 const EXIT_S = 0.4
@@ -26,8 +25,7 @@ const EXIT_S = 0.4
 export default function IntroSplash({ onDismiss }: IntroSplashProps) {
   const reduced = useReducedMotion()
   const total = reduced ? REDUCED_TOTAL_MS : TOTAL_MS
-  const [greeting, setGreeting] = useState<number | null>(null)
-  const [showTagline, setShowTagline] = useState(!!reduced)
+  const [greeting, setGreeting] = useState<number | null>(reduced ? 0 : null)
   const [exiting, setExiting] = useState(false)
   const finishedRef = useRef(false)
 
@@ -39,7 +37,7 @@ export default function IntroSplash({ onDismiss }: IntroSplashProps) {
 
   const exit = () => setExiting(true)
 
-  // Timeline: greetings → tagline → auto-exit.
+  // Timeline: greetings → auto-exit.
   useEffect(() => {
     if (reduced) {
       const t = window.setTimeout(exit, total)
@@ -49,12 +47,6 @@ export default function IntroSplash({ onDismiss }: IntroSplashProps) {
     GREETINGS.forEach((_, i) => {
       timers.push(window.setTimeout(() => setGreeting(i), GREETINGS_START_MS + i * GREETING_MS))
     })
-    timers.push(
-      window.setTimeout(() => {
-        setGreeting(null)
-        setShowTagline(true)
-      }, TAGLINE_AT_MS),
-    )
     timers.push(window.setTimeout(exit, total))
     return () => timers.forEach((t) => window.clearTimeout(t))
   }, [reduced, total])
@@ -162,7 +154,7 @@ export default function IntroSplash({ onDismiss }: IntroSplashProps) {
           Network
         </motion.p>
 
-        {/* Greeting run → tagline. Fixed height so nothing shifts. */}
+        {/* Greeting run. Fixed height so nothing shifts. */}
         <div className="relative mt-8 h-8 w-full sm:h-9" aria-live="polite">
           <AnimatePresence initial={false}>
             {greeting !== null && (
@@ -175,17 +167,6 @@ export default function IntroSplash({ onDismiss }: IntroSplashProps) {
                 transition={{ duration: 0.1 }}
               >
                 {GREETINGS[greeting]}
-              </motion.p>
-            )}
-            {showTagline && (
-              <motion.p
-                key="tagline"
-                className="absolute inset-x-0 text-base text-white/80 sm:text-xl"
-                initial={reduced ? false : { opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              >
-                {TAGLINE}
               </motion.p>
             )}
           </AnimatePresence>
