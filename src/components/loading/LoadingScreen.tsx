@@ -1,16 +1,27 @@
 import { useEffect, useState } from 'react'
-import SpinningWorld from './SpinningWorld'
+import IntroSplash from './IntroSplash'
 
 interface LoadingScreenProps {
   onFinished: () => void
 }
 
-type Phase = 'world' | 'done'
+type Phase = 'intro' | 'done'
+
+// The intro plays once per browser session. `?intro=1` forces a replay (handy
+// for checking it on the live site); `?debugPhase=done` skips it.
+const SEEN_KEY = 'lg-intro-seen'
 
 function getInitialPhase(): Phase {
-  if (typeof window === 'undefined') return 'world'
-  const debugPhase = new URLSearchParams(window.location.search).get('debugPhase')
-  return debugPhase === 'done' ? 'done' : 'world'
+  if (typeof window === 'undefined') return 'intro'
+  const params = new URLSearchParams(window.location.search)
+  if (params.get('debugPhase') === 'done') return 'done'
+  if (params.get('intro') === '1') return 'intro'
+  try {
+    if (window.sessionStorage.getItem(SEEN_KEY)) return 'done'
+  } catch {
+    // Storage blocked (private mode etc.) — just play the intro.
+  }
+  return 'intro'
 }
 
 export default function LoadingScreen({ onFinished }: LoadingScreenProps) {
@@ -26,10 +37,16 @@ export default function LoadingScreen({ onFinished }: LoadingScreenProps) {
   }, [phase])
 
   useEffect(() => {
-    if (phase === 'done') onFinished()
+    if (phase !== 'done') return
+    try {
+      window.sessionStorage.setItem(SEEN_KEY, '1')
+    } catch {
+      // Non-essential.
+    }
+    onFinished()
   }, [phase, onFinished])
 
   if (phase === 'done') return null
 
-  return <SpinningWorld onDismiss={() => setPhase('done')} />
+  return <IntroSplash onDismiss={() => setPhase('done')} />
 }
