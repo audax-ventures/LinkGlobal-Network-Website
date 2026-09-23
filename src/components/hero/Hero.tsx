@@ -56,7 +56,12 @@ export default function Hero() {
 
           <motion.h1
             variants={item}
-            className="text-4xl sm:text-6xl md:text-6xl font-extrabold leading-[1.05] tracking-tight text-navy-950"
+            // "Real Conversations." is forced onto one line (whitespace-nowrap
+            // below), and at 60px it's ~569px wide — wider than the half-width
+            // column between ~768-1360px (overlapping the laptop) and wider than
+            // a <390px phone screen (clipping). Fluid sizes keep it on one line
+            // without colliding at any width; 60px is the cap on wide screens.
+            className="text-[length:clamp(1.75rem,8.5vw,2.25rem)] sm:text-6xl md:text-[length:clamp(2rem,4.4vw,3.75rem)] font-extrabold leading-[1.05] tracking-tight text-navy-950"
           >
             Real People.
             <br />
