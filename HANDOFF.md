@@ -3,6 +3,175 @@
 Written to let a fresh chat pick up this project without re-deriving context.
 Read this file first, then the codebase, before making changes.
 
+# >>> LATEST UPDATE (Sept 2026) — READ THIS BLOCK FIRST <<<
+
+Everything in this block supersedes the older sections below wherever they
+conflict (the older text is from Aug 2026). Last commit at time of writing:
+`6c3aec4`.
+
+## Workflow (unchanged, plus one addition)
+- Never run anything locally (no dev server/build/npm install). Commit + push
+  straight to `main`; Vercel auto-deploys; verify on the live site in the
+  Browser pane. Wait ~90-120s after a push (ScheduleWakeup works well).
+- Commit messages must end with `Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>`.
+- Riley (the user) types briefly and expects execution; ask only real
+  decision-blocking questions (AskUserQuestion).
+- Task-tracking tools (TaskCreate etc.) may be unavailable; just work.
+
+## Environment gotchas learned (save yourself the time)
+- **Pasted chat images are NOT on disk.** Ask Riley to save them to
+  ~/Downloads (they arrive as "ChatGPT Image <date>.png"). macOS
+  screenshot filenames contain U+202F (narrow no-break space) before AM/PM —
+  match with Python `glob`, never a literal space.
+- Image tooling: Python 3.9 + PIL only (no numpy/opencv/brew/potrace). For
+  screenshots/mockups: crop, resize (LANCZOS), palette-quantize to 256 colors
+  (128 caused visible gradient banding), keep alpha separate. Flood-fill from
+  the borders to cut flat backgrounds without punching holes in white UI.
+  I wrote a pure-PIL Moore-neighbor contour tracer to trace the logo globe.
+- PDFs: `pip3 install --user pypdf pymupdf` is done; render pages with
+  `fitz` to PNGs in the scratchpad and Read them. (Read's built-in PDF paging
+  needs poppler, which isn't installed. A "383 pages" estimate was wrong —
+  the revision PDF is 13 pages.)
+- **Browser pane quirks:** frequently stuck/blank screenshots after scroll or
+  DOM changes (retry, fresh tab, or use DOM checks); `zoom` region-crop is
+  unsupported; framer-motion/GSAP animations tick very slowly or stay at
+  their initial `opacity:0` (force with a getComputedStyle loop setting
+  opacity 1 / transform none for verification only); the first screenshot
+  after load sometimes misses lazily painted images — re-screenshot. On the
+  loading screen, `window.innerWidth` may read 0, which makes
+  `useViewportSize` hide the side devices in the DOM even though the real
+  paint is fine — trust screenshots there.
+- **True-size legibility:** small SVG/logo work must be judged by
+  rasterizing the SVG to a canvas at its real rendered size, then magnifying
+  that raster (nearest-neighbor) — scaling the vector up hides problems.
+- **Framer Motion clobbers Tailwind transform classes** on the same element
+  (`-translate-x-1/2`, `translate-y-full` etc. are overwritten). Put static
+  positioning/centering on a plain wrapper div and animate an inner
+  `motion.div`. (Bit us in LearningJourney cards and the nav preview.)
+- `object-contain` on a mismatched aspect dumps the whole gap as one black
+  bar (looked broken); `object-cover` with a small even side crop is better.
+
+## What was built/changed since the Aug handoff (all live on main)
+- **Logo** (`src/components/Logo.tsx`): globe continent path is *traced from
+  the client's real asset* (no white gap ring exists in the real logo). The
+  globe group spins continuously via `@keyframes lg-globe-spin` in
+  `src/index.css` (bubble + tail stay fixed). Logo links home in nav + footer.
+- **Nav** (`FloatingNav.tsx`): colored per-route icon chips; hover shows a
+  preview panel (that page's own hero image + one-line blurb via
+  `ROUTE_META`). Client chose "static thumbnail" over live iframe; we reuse
+  each page's existing hero image since screenshots can't be saved to disk here.
+- **Loading screen** (`SpinningWorld.tsx`): monitor (`MonitorMockup`, 16:10,
+  object-cover) + globe + tablet (client image
+  `public/gallery/tablet-dashboard-mockup.png`, 1200px) with phone
+  (`mobile-dashboard-mockup.png`, 500px) overlapping. Dismiss bug fixed:
+  wheel/touch listeners are removed the instant dismiss triggers and a 1.5s
+  safety timeout guarantees completion (backgrounded-tab rAF throttling could
+  strand scroll-blocking). `LaptopMockup` is 16:10 object-cover (Hero).
+- **Home order** (`pages/Home.tsx`): Hero, GlobalCommunity, LearningJourney,
+  SplitSection on `#f8fbff` (RESET_LIGHT), then a FADE_TO_DARK gradient
+  wrapper around PlatformGallery + GlobalReach + CtaBand (needed because the
+  shared PageShell gradient was too dark by that point). Anything inside that
+  wrapper must be solid-white-card + dark-text (translucent white text was
+  unreadable) — PlatformGallery intro and GlobalReach are already fixed.
+- **Hero**: "Real Conversations." forced on one line; headline uses fluid
+  `text-[length:clamp(...)]` sizes so it doesn't overlap the laptop (1024px)
+  or clip on phones. Pushed but NOT yet verified at 375/768/1024/1440 widths
+  (resize_window tool can set them; measure span right edge vs laptop left).
+- **Learning Journey**: step cards/photos slide in from their side on scroll
+  (wrapper-div pattern). Photos are real product screenshots
+  `public/photos/journey-app-1..5.png` (left-aligned 3:2 crops).
+- **Pricing** (`pages/Pricing.tsx`): real approved pricing, NOT placeholder:
+  Starter $39, Growth $89 (Most Popular), Intensive $159 per month, features
+  per the client PDF; prices count up on scroll (local `PriceCountUp`,
+  GSAP ScrollTrigger); pay-per-session and Institutions are separate showcased
+  cards (contact-based, no price). Currency is unknown — never state one.
+- **Global Reach** testimonials: continuous CSS marquee (`.lg-marquee-track`,
+  two copies, -50% loop, pause on hover, edge-fade mask).
+- **Removed** duplicate product-screenshot galleries from About and Pricing.
+  About's "See It In Action" is now text + CTA only.
+- **CTAs**: every CtaBand primary label is "Start Your Journey" -> /try-now;
+  Home has a closing CtaBand. Platform Gallery has a "Learn More" -> /about.
+- **Photos**: `learners.jpg`, `educators.jpg` (Home split), `learners-hero.jpg`,
+  `educators-hero.jpg`, `institutions.jpg` (For You) are AI-generated
+  (ChatGPT) — the client wants them replaced with real photography later.
+- **AI chatbot "Intuitina"** (`src/components/chat/ChatWidget.tsx`,
+  `api/chat.ts`, `public/mascot/assistant-mascot.svg`): fixed bottom-right
+  spinning-mascot launcher (mascot SVG has a prefers-reduced-motion rule),
+  chat panel with suggestion chips/typing dots/graceful errors, mounted in
+  `App.tsx` after the loading screen. Backend calls the Anthropic Messages API
+  (`claude-haiku-4-5-20251001`) via fetch, system prompt limited to confirmed
+  facts (keep in sync with Pricing.tsx), input caps, 400 max tokens, best-effort
+  in-memory rate limit (20 per 10 min per IP). Without `ANTHROPIC_API_KEY`
+  in Vercel it returns 503 `not_configured` and the widget shows a friendly
+  "contact the team" message — verified end to end. **Riley must add the key
+  in Vercel and redeploy**; I must never handle the key. "Intuitina" is
+  assumed to be the assistant's name (constant `ASSISTANT_NAME` in
+  ChatWidget.tsx + persona line in api/chat.ts) — unconfirmed with Riley.
+  The real LLM path and 400-validation path are untested until the key exists.
+
+## The client revision document (13 pages)
+`~/Downloads/LinkGlobal Network Revision Document Updated 2.0-2.pdf`
+(sections 1-10). Riley's decisions: chatbot key later; will supply corrected
+Dilip screenshots, HD screenshots, cinematic globe hero image/video, real
+photos, and the journey character design later; claims in the doc are
+accurate (build the visuals, keep "SAMPLE" labels on illustrative cards);
+pricing is real; nav preview = static (done); journey character should walk
+the line as you scroll; journey style = Lingoda's straight line whose color
+saturation increases with scroll; pay-per-session stays contact-based but
+prominent.
+
+### STILL TO DO — can start now (no assets needed), suggested order
+1. **Learning Journey rebuild** (item 6): straight vertical line, saturation
+   increasing as you scroll (Lingoda "Your learning journey starts here"),
+   minimal steps like the reference "Your path, step by step" (Discover /
+   Understand ... short titles, one-line copy, no scattered shapes/paragraphs,
+   pictures only if they add value), numbered nodes; build a character slot
+   that will track scroll position along the line (placeholder until
+   Riley's design arrives). Keep the measured-layout approach — do NOT guess
+   heights (see older LearningJourney notes below; SVG viewBox stretching
+   rules still apply).
+2. **"The LinkGlobal Loop" section** (item 5): circular diagram (AI analyzes
+   -> Teacher briefed -> You converse) with scroll-synced Before/During/After
+   your session copy: Before: "The AI briefs your teacher on what you've
+   mastered and what you're still avoiding." During: "No diagnosis, no
+   level-guessing. The conversation starts where you need it." After:
+   "Everything that happened feeds back into your roadmap, which adjusts
+   before your next lesson."
+3. **"Your journey has a dashboard"** (item 8): tabbed/scroll-synced 01 Your
+   Roadmap / 02 Live Sessions / 03 Your Progress with a matching visual.
+4. **"See where it happens" / progress graph** (item 8): sample learner
+   ("Leyla") roadmap, teacher briefing, progress line (e.g. B1 -> C1 in ~2-3
+   months), labeled SAMPLE, animated.
+5. **Try Now card polish** (item 9, PDF p.11-12): the icon badges are cropped
+   at the photo's bottom edge and the copy below is flat/unengaging.
+6. **Section flow** (item 5): sections currently read like slides; make them
+   flow (continuous backgrounds, overlapping transitions, scroll cues).
+7. **Intro length** (item 4): the opening globe screen should run longer
+   before handing off (currently dismisses on the first scroll tick).
+8. **Repeated visuals** (item 9): the same four screenshots appear on the
+   loading screen, Hero, Platform Gallery and nav previews — cut/vary.
+9. Verify the Hero headline fix at several widths; re-check scroll-back bug
+   in a real browser with Riley (couldn't reproduce here; fix is defensive).
+
+### BLOCKED on Riley
+Corrected "Dilip" screenshots (session-details.png literally shows "Hi, Riley
+Peterson" in its pixels; site source has no "Riley"), HD screenshots, cinematic
+globe hero asset (reference: dark night-earth with glowing connection lines,
+text sequence "Every opportunity begins with a conversation." -> "Right now,
+millions of people are finding their voice." -> "Today, let's find yours."
++ Begin CTA), real photos, journey character, ANTHROPIC_API_KEY, confirm
+"Intuitina" name. **Unanswered question to Riley:** which elements are "the
+two small info blocks in the platform preview section" (item 2, PDF p.1) —
+I couldn't identify them; don't guess, ask again.
+
+### Design rules reminder
+Solid white cards (no translucent/backdrop-blur except modal overlays), dark
+navy text on light backgrounds, illustrated avatars, Playfair only on the
+Split headline, screenshots at 1000/540, "Start Your Journey" as the one CTA
+label, no invented claims (only facts confirmed by Riley/the PDF).
+
+# >>> END LATEST UPDATE — older Aug 2026 notes follow <<<
+
 ## What this is
 
 Marketing site for LinkGlobal Network (language-learning platform connecting
