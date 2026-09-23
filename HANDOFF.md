@@ -147,6 +147,20 @@ SplitSection; then the FADE_TO_DARK group as before.
 - Open question for Riley: PlatformGallery ("Inside the Platform") now
   partly overlaps the new Dashboard section in purpose; consider trimming.
 
+### Loading screen REPLACED (Sept 23 2026, cbc01cf + 0ef9f8f) — Riley's call
+The globe + monitor/tablet/phone intro (SpinningWorld, MonitorMockup) is
+gone. `loading/IntroSplash.tsx` is an Avid-Golf-style brand splash (Riley's
+reference: avid-golf-homepage.riley847668.chatgpt.site): navy, spinning
+logo mark, letter-by-letter LINKGLOBAL / NETWORK, greetings run (Hello ->
+Namaste) settling on "Learn from anywhere. Connect everywhere.", Skip intro,
+bottom progress bar, ~4.8s. Ends early on click/key/wheel/touch. Plays once
+per session (`sessionStorage` key `lg-intro-seen`); `?intro=1` forces a
+replay for testing, `?debugPhase=done` skips. StylizedGlobe/LazyStylizedGlobe
+and data/countryGreetings are now unused (kept in case the cinematic globe
+hero comes back). Verification tip: when the Browser pane is hidden,
+rAF doesn't run, so framer animations freeze — check timing via DOM text
+polling, not opacity. Item 7 below (intro length) is superseded.
+
 ### STILL TO DO — can start now (no assets needed), suggested order
 (Items 1-4 below are DONE — see above.)
 1. **Learning Journey rebuild** (item 6): straight vertical line, saturation
