@@ -5,7 +5,6 @@ import LearningJourney from '../components/journey/LearningJourney'
 import JourneyDashboard from '../components/dashboard/JourneyDashboard'
 import SeeWhereItHappens from '../components/dashboard/SeeWhereItHappens'
 import SplitSection from '../components/split/SplitSection'
-import PlatformGallery from '../components/gallery/PlatformGallery'
 import GlobalReach from '../components/reach/GlobalReach'
 import CtaBand from '../components/CtaBand'
 
@@ -16,7 +15,7 @@ import CtaBand from '../components/CtaBand'
 // showing the same continuous gradient underneath. Split Section gets an
 // explicit reset back to the gradient's lightest tone, and the fade to dark
 // (needed for the light-on-dark Footer) is deferred to its own gradient
-// scoped to just Platform Gallery + Global Reach's combined height, instead
+// scoped to just the closing Global Reach + CTA stretch, instead
 // of inheriting wherever the page-length-relative shared gradient happens to
 // be by that point.
 const RESET_LIGHT = '#f8fbff'
@@ -35,7 +34,6 @@ export default function Home() {
         <SplitSection />
       </div>
       <div style={{ background: FADE_TO_DARK }}>
-        <PlatformGallery />
         <GlobalReach />
         <CtaBand
           title="Ready to start your journey?"

@@ -72,8 +72,8 @@ const VALUES = [
     title: 'Tutors, not algorithms',
     description:
       'A language is a living thing. Our tutors adapt to how you actually learn — something no app has managed to fake yet.',
-    image: '/photos/educators.jpg',
-    imageAlt: 'A tutor preparing an online session on LinkGlobal Network',
+    image: '/photos/journey-1.jpg',
+    imageAlt: 'A learner in a live session with a tutor on her laptop',
     color: '#f5a623',
   },
   {

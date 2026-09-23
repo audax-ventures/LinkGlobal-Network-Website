@@ -106,29 +106,6 @@ export default function ForLearners() {
         </div>
       </section>
 
-      <section className="relative px-6 pb-16 sm:pb-20">
-        <div className="mx-auto max-w-6xl grid gap-6 sm:grid-cols-2">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden rounded-3xl shadow-[0_20px_50px_rgba(19,41,82,0.15)]"
-          >
-            <img src="/gallery/onboarding.png" alt="LinkGlobal Network onboarding flow" className="w-full object-cover" />
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden rounded-3xl shadow-[0_20px_50px_rgba(19,41,82,0.15)]"
-          >
-            <img src="/gallery/dashboard.png" alt="LinkGlobal Network learner dashboard" className="w-full object-cover" />
-          </motion.div>
-        </div>
-      </section>
-
       <CtaBand
         title="Ready to start learning?"
         description="Get matched with a tutor and have your first real conversation this week."

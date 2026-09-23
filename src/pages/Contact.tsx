@@ -163,20 +163,6 @@ export default function Contact() {
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="overflow-hidden rounded-3xl shadow-[0_20px_50px_rgba(19,41,82,0.15)]"
-            >
-              <img
-                src="/photos/educators.jpg"
-                alt="A LinkGlobal Network tutor ready to connect"
-                className="aspect-[4/3] w-full object-cover"
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="rounded-3xl bg-white p-6 shadow-[0_15px_40px_rgba(19,41,82,0.1)]"
             >
