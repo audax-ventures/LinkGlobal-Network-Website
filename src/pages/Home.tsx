@@ -1,6 +1,5 @@
 import PageShell from '../components/PageShell'
 import Hero from '../components/hero/Hero'
-import GlobalCommunity from '../components/community/GlobalCommunity'
 import LinkGlobalLoop from '../components/loop/LinkGlobalLoop'
 import LearningJourney from '../components/journey/LearningJourney'
 import JourneyDashboard from '../components/dashboard/JourneyDashboard'
@@ -28,7 +27,6 @@ export default function Home() {
   return (
     <PageShell>
       <Hero />
-      <GlobalCommunity />
       <LinkGlobalLoop />
       <div style={{ background: RESET_LIGHT }}>
         <LearningJourney />
