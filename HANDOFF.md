@@ -162,6 +162,23 @@ hero comes back). Verification tip: when the Browser pane is hidden,
 rAF doesn't run, so framer animations freeze — check timing via DOM text
 polling, not opacity. Item 7 below (intro length) is superseded.
 
+### Revision-doc cleanup (Sept 23 2026)
+- Try Now cards rebuilt: no photos, icon badge inside a tinted header,
+  numbered 3-step path + one perk. Buttons still inert (no signup backend).
+- PlatformGallery (+ MockScreen, Lightbox) deleted; client called it filler.
+- For Learners: removed the caption-less onboarding+dashboard screenshot
+  pair. Pricing header = journey-app-2.png (placement conversation) — do
+  NOT use journey-app-4.png there, it shows $30/$40 session prices.
+  About "Tutors, not algorithms" = journey-1.jpg; Contact photo removed.
+- Global Reach heading un-boxed to match other sections; CtaBand heading
+  now font-extrabold sm:text-5xl site-wide.
+- Still repeated (needs Riley's real photos): For You cards reuse
+  learners.jpg/educators.jpg from the Home split; hero-learner.jpg is on
+  both For You (header) and About. Nav hover previews reuse page heroes on
+  purpose.
+- Copy inconsistency to raise with Riley: Home split says "Trusted by
+  100,000+ learners and tutors", About says "tens of thousands".
+
 ### STILL TO DO — can start now (no assets needed), suggested order
 (Items 1-4 below are DONE — see above.)
 1. **Learning Journey rebuild** (item 6): straight vertical line, saturation
