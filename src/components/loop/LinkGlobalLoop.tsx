@@ -76,7 +76,11 @@ export default function LinkGlobalLoop() {
   return (
     <>
     {/* Soft hand-in from the light hero above. */}
-    <div className="pointer-events-none h-40" style={{ background: 'linear-gradient(180deg, rgba(8,27,51,0) 0%, #081b33 100%)' }} aria-hidden="true" />
+    <div
+      className="pointer-events-none relative -mt-16 h-56"
+      style={{ background: 'linear-gradient(180deg, rgba(8,27,51,0) 0%, rgba(27,99,170,0.22) 45%, rgba(8,27,51,0.85) 80%, #081b33 100%)' }}
+      aria-hidden="true"
+    />
     <section ref={sectionRef} className="relative h-[260vh]" style={{ background: '#081b33' }}>
       <div className="sticky top-0 flex min-h-screen items-center overflow-hidden px-6 py-8 md:py-16">
         <div className="mx-auto grid w-full max-w-6xl items-center gap-10 md:grid-cols-2 md:gap-16">
