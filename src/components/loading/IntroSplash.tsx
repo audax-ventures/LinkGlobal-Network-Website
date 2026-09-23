@@ -11,16 +11,17 @@ interface IntroSplashProps {
   onDismiss: () => void
 }
 
-const GREETINGS = ['Hello', 'Hola', 'Bonjour', 'こんにちは', 'Olá', 'مرحبا', 'Namaste']
+const GREETINGS = ['Hello', 'Hola', 'Bonjour', 'こんにちは', 'مرحبا']
 const TAGLINE = 'Learn from anywhere. Connect everywhere.'
 const WORD = 'LinkGlobal'
 
-const GREETINGS_START_MS = 1100
-const GREETING_MS = 330
+// Whole intro is ~2s: auto-exit starts at 1.6s, then a 0.4s fade.
+const GREETINGS_START_MS = 350
+const GREETING_MS = 130
 const TAGLINE_AT_MS = GREETINGS_START_MS + GREETINGS.length * GREETING_MS
-const TOTAL_MS = TAGLINE_AT_MS + 1300
-const REDUCED_TOTAL_MS = 1600
-const EXIT_S = 0.6
+const TOTAL_MS = 1600
+const REDUCED_TOTAL_MS = 1200
+const EXIT_S = 0.4
 
 export default function IntroSplash({ onDismiss }: IntroSplashProps) {
   const reduced = useReducedMotion()
@@ -131,7 +132,7 @@ export default function IntroSplash({ onDismiss }: IntroSplashProps) {
         <motion.div
           initial={reduced ? false : { opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
           <Logo variant="reversed" markOnly className="h-24 w-24 sm:h-32 sm:w-32" />
         </motion.div>
@@ -144,7 +145,7 @@ export default function IntroSplash({ onDismiss }: IntroSplashProps) {
               style={{ display: 'inline-block' }}
               initial={reduced ? false : { opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.35 + i * 0.05, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.4, delay: 0.1 + i * 0.03, ease: [0.16, 1, 0.3, 1] }}
               aria-hidden="true"
             >
               {ch}
@@ -155,7 +156,7 @@ export default function IntroSplash({ onDismiss }: IntroSplashProps) {
           className="mt-2 text-sm font-semibold uppercase tracking-[0.6em] text-white/60 sm:text-base"
           initial={reduced ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.9 }}
+          transition={{ duration: 0.4, delay: 0.35 }}
           aria-hidden="true"
         >
           Network
@@ -171,7 +172,7 @@ export default function IntroSplash({ onDismiss }: IntroSplashProps) {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.14 }}
+                transition={{ duration: 0.1 }}
               >
                 {GREETINGS[greeting]}
               </motion.p>
@@ -182,7 +183,7 @@ export default function IntroSplash({ onDismiss }: IntroSplashProps) {
                 className="absolute inset-x-0 text-base text-white/80 sm:text-xl"
                 initial={reduced ? false : { opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               >
                 {TAGLINE}
               </motion.p>
