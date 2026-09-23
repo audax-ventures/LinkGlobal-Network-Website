@@ -152,8 +152,8 @@ The globe + monitor/tablet/phone intro (SpinningWorld, MonitorMockup) is
 gone. `loading/IntroSplash.tsx` is an Avid-Golf-style brand splash (Riley's
 reference: avid-golf-homepage.riley847668.chatgpt.site): navy, spinning
 logo mark, letter-by-letter LINKGLOBAL / NETWORK, greetings run (Hello ->
-Namaste) settling on "Learn from anywhere. Connect everywhere.", Skip intro,
-bottom progress bar, ~4.8s. Ends early on click/key/wheel/touch. Plays once
+Namaste, 180ms each, no tagline — Riley removed it), Skip intro, bottom
+progress bar, ~2s total (Riley asked for 2s). Ends early on click/key/wheel/touch. Plays once
 per session (`sessionStorage` key `lg-intro-seen`); `?intro=1` forces a
 replay for testing, `?debugPhase=done` skips. StylizedGlobe/LazyStylizedGlobe
 and data/countryGreetings are now unused (kept in case the cinematic globe
