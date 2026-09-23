@@ -108,16 +108,17 @@ function ProgressView() {
             <div className="relative mt-1.5 h-2 overflow-hidden rounded-full bg-white/10">
               <div className="absolute inset-y-0 left-0 rounded-full bg-white/25" style={{ width: `${s.from}%` }} />
               <motion.div
-                className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-brand-blue to-brand-cyan"
-                initial={{ width: `${s.from}%` }}
-                animate={{ width: `${s.to}%` }}
+                className="absolute inset-y-0 rounded-r-full bg-gradient-to-r from-brand-blue to-brand-cyan"
+                style={{ left: `${s.from}%` }}
+                initial={{ width: '0%' }}
+                animate={{ width: `${s.to - s.from}%` }}
                 transition={{ duration: 1.2, delay: 0.2 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
               />
             </div>
           </div>
         ))}
       </div>
-      <p className="mt-5 text-xs text-white/50">Grey: where you started. Blue: where you are now.</p>
+      <p className="mt-5 text-xs text-white/50">Grey: where you started. Blue: what 12 sessions added.</p>
     </div>
   )
 }

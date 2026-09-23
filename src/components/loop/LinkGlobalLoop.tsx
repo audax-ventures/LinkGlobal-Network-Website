@@ -15,17 +15,14 @@ const PHASES = [
   {
     kicker: 'Before your session',
     copy: 'The AI briefs your teacher on what you’ve mastered and what you’re still avoiding.',
-    node: 1,
   },
   {
     kicker: 'During your session',
     copy: 'No diagnosis, no level-guessing. The conversation starts where you need it.',
-    node: 2,
   },
   {
     kicker: 'After your session',
     copy: 'Everything that happened feeds back into your roadmap, which adjusts before your next lesson.',
-    node: 0,
   },
 ]
 
@@ -41,6 +38,7 @@ export default function LinkGlobalLoop() {
   const arcRef = useRef<SVGCircleElement>(null)
   const dotRef = useRef<SVGGElement>(null)
   const [phase, setPhase] = useState(0)
+  const [reached, setReached] = useState(1)
 
   useEffect(() => {
     const section = sectionRef.current
@@ -58,6 +56,9 @@ export default function LinkGlobalLoop() {
       }
       const next = Math.min(Math.floor(p * 3), 2)
       setPhase((prev) => (prev === next ? prev : next))
+      // Nodes light up once the orbiting dot has actually reached them.
+      const hit = p >= 0.999 ? 3 : 1 + Math.floor(p * 3 + 0.02)
+      setReached((prev) => (prev === hit ? prev : hit))
     }
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(update)
@@ -72,8 +73,6 @@ export default function LinkGlobalLoop() {
     }
   }, [])
 
-  const activeNode = PHASES[phase].node
-
   return (
     <>
     <section ref={sectionRef} className="relative h-[260vh]" style={{ background: '#081b33' }}>
@@ -86,7 +85,7 @@ export default function LinkGlobalLoop() {
             </h2>
           </div>
 
-          <div className="mx-auto w-full max-w-[220px] sm:max-w-[380px]">
+          <div className="mx-auto w-full max-w-[250px] sm:max-w-[380px]">
             <svg viewBox="0 0 320 320" className="h-auto w-full overflow-visible" role="img" aria-label="The LinkGlobal Loop: AI analyzes, teacher briefed, you converse">
               <circle cx="160" cy="160" r={R} fill="none" stroke="rgba(62,198,255,0.18)" strokeWidth="2" />
               <circle
@@ -112,16 +111,19 @@ export default function LinkGlobalLoop() {
 
               {NODES.map((n, i) => {
                 const { x, y } = point(n.angle)
-                const on = i === activeNode
-                const labelY = n.angle === -90 ? y - 20 : y + 30
+                const on = i < reached
+                const top = n.angle === -90
+                // Side labels sit below and outward so they never cross the ring.
+                const labelX = top ? x : x + (x > 160 ? 22 : -22)
+                const labelY = top ? y - 20 : y + 40
                 return (
                   <g key={n.label}>
                     <circle cx={x} cy={y} r={on ? 11 : 8} fill={on ? '#3ec6ff' : '#0e2a4d'} stroke="#3ec6ff" strokeWidth="2" style={{ transition: 'r 0.4s, fill 0.4s' }} />
                     <text
-                      x={x}
+                      x={labelX}
                       y={labelY}
                       textAnchor="middle"
-                      className={`text-[13px] font-semibold ${on ? 'fill-white' : 'fill-white/50'}`}
+                      className={`text-[15px] font-semibold ${on ? 'fill-white' : 'fill-white/50'}`}
                       style={{ transition: 'fill 0.4s' }}
                     >
                       {n.label}

@@ -53,7 +53,7 @@ function ProgressChart() {
       {LEVELS.map((l) => (
         <g key={l.label}>
           <line x1="34" x2={W - 8} y1={l.y} y2={l.y} stroke="rgba(19,41,82,0.08)" strokeDasharray="3 4" />
-          <text x="0" y={l.y + 4} className="fill-navy-700/50 text-[11px] font-semibold">
+          <text x="0" y={l.y + 5} className="fill-navy-700/60 text-[14px] font-bold">
             {l.label}
           </text>
         </g>
@@ -88,13 +88,13 @@ function ProgressChart() {
         <circle cx="286" cy="24" r="9" fill="#1ba3e0" opacity="0.2" />
         <circle cx="286" cy="24" r="5" fill="#fff" stroke="#1ba3e0" strokeWidth="3" />
       </motion.g>
-      <text x="34" y={H - 2} className="fill-navy-700/50 text-[10px]">
+      <text x="34" y={H - 2} className="fill-navy-700/60 text-[13px]">
         Today
       </text>
-      <text x="160" y={H - 2} textAnchor="middle" className="fill-navy-700/50 text-[10px]">
+      <text x="160" y={H - 2} textAnchor="middle" className="fill-navy-700/60 text-[13px]">
         Month 1
       </text>
-      <text x={W - 8} y={H - 2} textAnchor="end" className="fill-navy-700/50 text-[10px]">
+      <text x={W - 8} y={H - 2} textAnchor="end" className="fill-navy-700/60 text-[13px]">
         Month 2
       </text>
     </svg>
@@ -135,7 +135,7 @@ export default function SeeWhereItHappens() {
             </ul>
           </Card>
 
-          <Card title="Teacher Briefing · Leyla" caption="The briefing" sub="Her tutor walks in already knowing where to push." delay={0.12}>
+          <Card title="Teacher Briefing" caption="The briefing" sub="Her tutor walks in already knowing where to push." delay={0.12}>
             <dl className="space-y-4 text-sm">
               {[
                 { k: 'Mastered', v: 'Introductions, describing experience', c: 'text-emerald-600' },
@@ -150,9 +150,10 @@ export default function SeeWhereItHappens() {
             </dl>
           </Card>
 
-          <Card title="Leyla’s Progress · 12 sessions" caption="The result" sub="Specific, visible, and moving." delay={0.24}>
+          <Card title="Leyla’s Progress" caption="The result" sub="Specific, visible, and moving." delay={0.24}>
             <ProgressChart />
             <p className="mt-4 text-sm text-navy-700/80">
+              <span className="font-semibold text-navy-950">12 sessions.</span>{' '}
               <span className="font-semibold text-navy-950">Hesitation:</span> shrinking.{' '}
               <span className="font-semibold text-navy-950">Self-corrections:</span> rising.
             </p>
