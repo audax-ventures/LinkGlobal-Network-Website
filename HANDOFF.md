@@ -177,6 +177,19 @@ polling, not opacity. Item 7 below (intro length) is superseded.
   both For You (header) and About. Nav hover previews reuse page heroes on
   purpose.
 
+### Site-wide look = homepage look (Sept 24 2026) — supersedes older "Design system" notes
+- PageShell is now a flat light base (#f8fbff) + soft fade into a dark
+  footer (#050f1f); the old page-length white->sky-blue gradient is gone.
+  Home and Try Now pass `footerFade={false}` (they end dark themselves).
+- `components/NavyBand.tsx`: full-width #081b33 section with solid-blue
+  fade ramps in/out (translucent midpoints looked grey — don't go back).
+  Inside: white headings (font-extrabold), brand-cyan eyebrows, dark cards
+  as `bg-white/5 ring-1 ring-white/10`, or white cards for contrast.
+- Where it's used: About (stats + What We Believe), For You (Educators
+  row), For Learners (See Your Progress), For Educators (four steps),
+  Pricing (pay-per-session + institutions), Try Now (path cards).
+  Contact's email card is a solid navy card.
+
 ### STILL TO DO — can start now (no assets needed), suggested order
 (Items 1-4 below are DONE — see above.)
 1. **Learning Journey rebuild** (item 6): straight vertical line, saturation
