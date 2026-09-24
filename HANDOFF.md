@@ -134,6 +134,8 @@ SplitSection; then the FADE_TO_DARK group as before.
   measurement notes below are obsolete), fill height = scroll head at 55%
   of viewport, gradient sized to full line so saturation deepens as it
   travels; steps before the head are colored, later ones `saturate-0`.
+  The journey marker uses `public/mascot/assistant-mascot-static.svg` (no
+  spin, per Riley); only the chat launcher uses the spinning original.
   Steps: Discover / Understand / Plan / Converse / Grow. Character slot =
   `characterRef` div riding the head; currently the assistant mascot SVG —
   swap only the `<img>` when Riley's character design arrives.
