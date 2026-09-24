@@ -78,7 +78,7 @@ export default function LinkGlobalLoop() {
     {/* Soft hand-in from the light hero above. */}
     <div
       className="pointer-events-none relative -mt-16 h-56"
-      style={{ background: 'linear-gradient(180deg, rgba(8,27,51,0) 0%, rgba(27,99,170,0.22) 45%, rgba(8,27,51,0.85) 80%, #081b33 100%)' }}
+      style={{ background: 'linear-gradient(180deg, rgba(248,251,255,0) 0%, #d6e8f8 22%, #8fb6dc 45%, #3a6698 68%, #14325a 86%, #081b33 100%)' }}
       aria-hidden="true"
     />
     <section ref={sectionRef} className="relative h-[260vh]" style={{ background: '#081b33' }}>
@@ -164,7 +164,7 @@ export default function LinkGlobalLoop() {
       </div>
     </section>
     {/* Soft hand-off into the light journey section below, instead of a hard slide-like edge. */}
-    <div className="pointer-events-none h-40" style={{ background: 'linear-gradient(180deg, #081b33 0%, #f8fbff 100%)' }} aria-hidden="true" />
+    <div className="pointer-events-none h-40" style={{ background: 'linear-gradient(180deg, #081b33 0%, #14325a 14%, #3a6698 32%, #8fb6dc 55%, #d6e8f8 78%, #f8fbff 100%)' }} aria-hidden="true" />
     </>
   )
 }

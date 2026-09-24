@@ -7,6 +7,9 @@ import type { ReactNode } from 'react'
 
 export const NAVY = '#081b33'
 const LIGHT = '#f8fbff'
+// Solid blue stops (not a translucent midpoint, which read as grey banding).
+const RAMP = '#f8fbff 0%, #d6e8f8 22%, #8fb6dc 45%, #3a6698 68%, #14325a 86%, #081b33 100%'
+const RAMP_UP = '#081b33 0%, #14325a 14%, #3a6698 32%, #8fb6dc 55%, #d6e8f8 78%, #f8fbff 100%'
 
 interface NavyBandProps {
   children: ReactNode
@@ -21,7 +24,7 @@ export default function NavyBand({ children, className = '', fadeIn = true, fade
       {fadeIn && (
         <div
           className="pointer-events-none h-28 sm:h-36"
-          style={{ background: `linear-gradient(180deg, ${LIGHT} 0%, rgba(27,99,170,0.22) 50%, ${NAVY} 100%)` }}
+          style={{ background: `linear-gradient(180deg, ${RAMP})` }}
           aria-hidden="true"
         />
       )}
@@ -31,7 +34,7 @@ export default function NavyBand({ children, className = '', fadeIn = true, fade
       {fadeOut && (
         <div
           className="pointer-events-none h-28 sm:h-36"
-          style={{ background: `linear-gradient(180deg, ${NAVY} 0%, rgba(27,99,170,0.22) 50%, ${LIGHT} 100%)` }}
+          style={{ background: `linear-gradient(180deg, ${RAMP_UP})` }}
           aria-hidden="true"
         />
       )}

@@ -148,7 +148,7 @@ function StatRow({
           duration: 1.6,
           ease: 'power2.out',
           onUpdate: () => {
-            el.textContent = counter.val.toFixed(decimals)
+            el.textContent = decimals ? counter.val.toFixed(decimals) : Math.round(counter.val).toLocaleString('en-US')
           },
         })
         gsap.fromTo(wrap, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' })
