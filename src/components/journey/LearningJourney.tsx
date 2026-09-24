@@ -187,7 +187,7 @@ export default function LearningJourney() {
         <div className="pointer-events-none absolute left-5 top-0 z-20 md:left-1/2" aria-hidden="true">
           <div ref={characterRef} style={{ transform: 'translate(-50%, 0) translateY(-50%)' }}>
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-[0_8px_24px_rgba(19,41,82,0.25)] ring-4 ring-brand-blue/20 sm:h-14 sm:w-14">
-              <img src="/mascot/assistant-mascot.svg" alt="" className="h-9 w-9 sm:h-11 sm:w-11" />
+              <img src="/mascot/assistant-mascot-static.svg" alt="" className="h-9 w-9 sm:h-11 sm:w-11" />
             </div>
           </div>
         </div>
