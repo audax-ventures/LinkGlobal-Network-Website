@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import PageShell from '../components/PageShell'
+import NavyBand from '../components/NavyBand'
 import PageHeader from '../components/PageHeader'
 import { CheckIcon, TargetIcon, ChatIcon } from '../components/icons/LineIcons'
 
@@ -59,7 +60,7 @@ const PATHS: Path[] = [
 
 export default function TryNow() {
   return (
-    <PageShell>
+    <PageShell footerFade={false}>
       <PageHeader
         eyebrow="Try Now"
         title={
@@ -72,7 +73,7 @@ export default function TryNow() {
         imageAspect="1000/540"
       />
 
-      <section className="relative px-6 pb-16 sm:pb-20">
+      <NavyBand className="pb-24 pt-8 sm:pt-12" fadeOut={false}>
         <div className="mx-auto grid max-w-4xl gap-8 md:grid-cols-2">
           {PATHS.map((p, i) => (
             <motion.div
@@ -81,7 +82,7 @@ export default function TryNow() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col overflow-hidden rounded-3xl bg-white shadow-[0_20px_50px_rgba(19,41,82,0.15)]"
+              className="flex flex-col overflow-hidden rounded-3xl bg-white shadow-[0_30px_80px_rgba(0,0,0,0.4)]"
             >
               <div className="flex items-center gap-4 px-6 py-6 sm:px-8" style={{ background: p.tint }}>
                 <div
@@ -148,14 +149,14 @@ export default function TryNow() {
           ))}
         </div>
 
-        <p className="mx-auto mt-10 max-w-md text-center text-sm text-navy-950/80">
+        <p className="mx-auto mt-10 max-w-md text-center text-sm text-white/70">
           Have questions before you start?{' '}
-          <a href="mailto:info@linkglobalnetwork.ca" className="font-bold text-navy-950 underline underline-offset-2 hover:text-white">
+          <a href="mailto:info@linkglobalnetwork.ca" className="font-bold text-brand-cyan underline underline-offset-2 hover:text-white">
             Reach out
           </a>{' '}
           — we're happy to help you figure out the right fit.
         </p>
-      </section>
+      </NavyBand>
     </PageShell>
   )
 }

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import PageShell from '../components/PageShell'
+import NavyBand from '../components/NavyBand'
 import PageHeader from '../components/PageHeader'
 import FeatureCard from '../components/FeatureCard'
 import CtaBand from '../components/CtaBand'
@@ -73,14 +74,14 @@ export default function ForLearners() {
         </div>
       </section>
 
-      <section className="relative px-6 pb-16 sm:pb-20">
+      <NavyBand className="py-8 sm:py-12">
         <div className="mx-auto grid max-w-6xl items-center gap-16 md:grid-cols-2">
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden rounded-3xl shadow-[0_30px_80px_rgba(19,41,82,0.15)] md:order-2"
+            className="overflow-hidden rounded-3xl shadow-[0_30px_80px_rgba(0,0,0,0.4)] ring-1 ring-white/10 md:order-2"
           >
             <img src="/gallery/practice-report.png" alt="LinkGlobal Network AI practice session report" className="w-full object-cover" />
           </motion.div>
@@ -90,21 +91,21 @@ export default function ForLearners() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="rounded-3xl bg-white px-6 py-8 sm:px-9 sm:py-9 shadow-[0_15px_40px_rgba(19,41,82,0.1)]"
+            className="px-1 sm:px-2"
           >
-            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-blue">
+            <span className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-cyan">
               See Your Progress
             </span>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-navy-950">
+            <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
               Know exactly what to work on next.
             </h2>
-            <p className="mt-5 text-navy-700/80 leading-relaxed">
+            <p className="mt-5 text-lg leading-relaxed text-white/75">
               Every session ends with a clear, AI-supported report — what you handled well, what tripped
               you up, and what to focus on in your next lesson. No guessing, no vague progress bars.
             </p>
           </motion.div>
         </div>
-      </section>
+      </NavyBand>
 
       <CtaBand
         title="Ready to start learning?"

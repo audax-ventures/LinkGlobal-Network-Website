@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import PageShell from '../components/PageShell'
+import NavyBand from '../components/NavyBand'
 import PageHeader from '../components/PageHeader'
 import FeatureCard from '../components/FeatureCard'
 import CtaBand from '../components/CtaBand'
@@ -80,12 +81,12 @@ export default function ForEducators() {
         </div>
       </section>
 
-      <section className="relative px-6 pb-16 sm:pb-20">
-        <div className="mx-auto max-w-2xl rounded-3xl bg-white px-6 py-8 sm:px-10 sm:py-10 text-center shadow-[0_15px_40px_rgba(19,41,82,0.1)]">
-          <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-blue">
+      <NavyBand className="py-8 sm:py-12">
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-cyan">
             Getting Started
           </span>
-          <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-navy-950">Become a tutor in four steps.</h2>
+          <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">Become a tutor in four steps.</h2>
         </div>
 
         <div className="mx-auto mt-10 grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -96,7 +97,7 @@ export default function ForEducators() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="rounded-2xl bg-white p-6 shadow-[0_15px_40px_rgba(19,41,82,0.1)]"
+              className="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10"
             >
               <span
                 className="flex h-10 w-10 items-center justify-center rounded-xl text-sm font-bold text-white shadow-[0_6px_16px_rgba(0,0,0,0.18)]"
@@ -104,12 +105,12 @@ export default function ForEducators() {
               >
                 {i + 1}
               </span>
-              <h3 className="mt-4 text-lg font-bold text-navy-950">{s.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-navy-700/75">{s.description}</p>
+              <h3 className="mt-4 text-lg font-bold text-white">{s.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-white/65">{s.description}</p>
             </motion.div>
           ))}
         </div>
-      </section>
+      </NavyBand>
 
       <section className="relative px-6 pb-16 sm:pb-20">
         <div className="mx-auto max-w-4xl">

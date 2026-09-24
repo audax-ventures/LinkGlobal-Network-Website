@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageShell from '../components/PageShell'
+import NavyBand from '../components/NavyBand'
 import PageHeader from '../components/PageHeader'
 import CtaBand from '../components/CtaBand'
 import { ensureGsapPlugins, gsap, ScrollTrigger } from '../lib/gsapSetup'
@@ -175,44 +176,51 @@ export default function Pricing() {
             treatment alongside it, since ForYou.tsx already covers that
             audience in depth and doesn't need a full duplicate pricing card
             here. */}
+      </section>
+
+      <NavyBand className="py-8 sm:py-12">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-cyan">Other ways to learn</p>
+          <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">Not ready for a monthly plan?</h2>
+        </div>
         <div className="mx-auto mt-10 grid max-w-4xl gap-6 sm:grid-cols-2">
-          <div className="flex items-start gap-4 rounded-2xl border border-navy-900/10 bg-white p-6 shadow-[0_10px_30px_rgba(19,41,82,0.08)]">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue">
+          <div className="flex items-start gap-4 rounded-2xl bg-white/5 p-6 ring-1 ring-white/10">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-cyan/15 text-brand-cyan">
               <CalendarIcon className="h-5 w-5" />
             </span>
             <div>
-              <h3 className="font-bold text-navy-950">Prefer to pay per session?</h3>
-              <p className="mt-1 text-sm text-navy-700/70">
+              <h3 className="text-lg font-bold text-white">Prefer to pay per session?</h3>
+              <p className="mt-1 text-sm text-white/65">
                 No monthly commitment — book and pay one session at a time. We'll help you find the right fit.
               </p>
               <a
                 href="mailto:info@linkglobalnetwork.ca"
-                className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue hover:gap-2.5 transition-all"
+                className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-cyan hover:gap-2.5 transition-all"
               >
                 Get in touch <span aria-hidden="true">→</span>
               </a>
             </div>
           </div>
 
-          <div className="flex items-start gap-4 rounded-2xl border border-navy-900/10 bg-white p-6 shadow-[0_10px_30px_rgba(19,41,82,0.08)]">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue">
+          <div className="flex items-start gap-4 rounded-2xl bg-white/5 p-6 ring-1 ring-white/10">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-cyan/15 text-brand-cyan">
               <MailIcon className="h-5 w-5" />
             </span>
             <div>
-              <h3 className="font-bold text-navy-950">Schools, companies, or teams?</h3>
-              <p className="mt-1 text-sm text-navy-700/70">
+              <h3 className="text-lg font-bold text-white">Schools, companies, or teams?</h3>
+              <p className="mt-1 text-sm text-white/65">
                 Bulk seats, admin dashboards, and custom billing for institutions and organizations.
               </p>
               <Link
                 to="/contact"
-                className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue hover:gap-2.5 transition-all"
+                className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-cyan hover:gap-2.5 transition-all"
               >
                 Contact sales <span aria-hidden="true">→</span>
               </Link>
             </div>
           </div>
         </div>
-      </section>
+      </NavyBand>
 
       <CtaBand
         title="Still deciding?"

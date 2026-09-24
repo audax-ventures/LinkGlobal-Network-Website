@@ -8,23 +8,16 @@ import SplitSection from '../components/split/SplitSection'
 import GlobalReach from '../components/reach/GlobalReach'
 import CtaBand from '../components/CtaBand'
 
-// PageShell's shared gradient paces itself against the WHOLE page's height,
-// so on a page as long as Home it had already darkened well past "light" by
-// the time Split Section arrived, right after Learning Journey — the two
-// sections sit on visibly different background tones despite both just
-// showing the same continuous gradient underneath. Split Section gets an
-// explicit reset back to the gradient's lightest tone, and the fade to dark
-// (needed for the light-on-dark Footer) is deferred to its own gradient
-// scoped to just the closing Global Reach + CTA stretch, instead
-// of inheriting wherever the page-length-relative shared gradient happens to
-// be by that point.
+// Home manages its own backgrounds: light sections on RESET_LIGHT, the navy
+// Loop, then FADE_TO_DARK over the closing Global Reach + CTA stretch so it
+// lands on the footer's dark tone. Hence PageShell footerFade={false}.
 const RESET_LIGHT = '#f8fbff'
 const FADE_TO_DARK =
   'linear-gradient(180deg, #f8fbff 0%, #eaf5ff 10%, #c3e6ff 30%, #7fcdf0 50%, #2f8fd4 68%, #123a66 84%, #081b33 96%, #050f1f 100%)'
 
 export default function Home() {
   return (
-    <PageShell>
+    <PageShell footerFade={false}>
       <Hero />
       <LinkGlobalLoop />
       <div style={{ background: RESET_LIGHT }}>

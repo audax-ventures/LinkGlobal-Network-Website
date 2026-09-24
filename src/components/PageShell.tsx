@@ -1,18 +1,32 @@
 import type { ReactNode } from 'react'
 import Footer from './footer/Footer'
 
-// The same continuous white-to-deep-blue gradient used on the homepage,
-// reapplied per-page so every route reads as part of one site rather than
-// homepage-only styling. Percentages are relative to each page's own
-// height, so a short page still runs light-at-top to dark-at-footer.
-const GRADIENT =
-  'linear-gradient(180deg, #f8fbff 0%, #eaf5ff 15%, #c3e6ff 30%, #7fcdf0 45%, #2f8fd4 60%, #123a66 75%, #081b33 90%, #050f1f 100%)'
+// Every page uses the homepage's palette: a clean light base (#f8fbff) with
+// full-width navy sections (NavyBand) and dark cards for contrast, then a
+// soft fade into the dark footer. This replaced an older page-length
+// white-to-sky-blue gradient that made inner pages drift into mid-blue
+// midway down, unlike the homepage.
+//
+// Home builds its own fade to dark before the footer, so it passes
+// footerFade={false}.
 
-export default function PageShell({ children }: { children: ReactNode }) {
+const LIGHT = '#f8fbff'
+const FOOTER_BG = '#050f1f'
+
+export default function PageShell({ children, footerFade = true }: { children: ReactNode; footerFade?: boolean }) {
   return (
-    <main style={{ background: GRADIENT }}>
+    <main style={{ background: LIGHT }}>
       {children}
-      <Footer />
+      {footerFade && (
+        <div
+          className="pointer-events-none h-40 sm:h-56"
+          style={{ background: `linear-gradient(180deg, ${LIGHT} 0%, #c3e6ff 30%, #2f8fd4 60%, #123a66 80%, ${FOOTER_BG} 100%)` }}
+          aria-hidden="true"
+        />
+      )}
+      <div style={{ background: FOOTER_BG }}>
+        <Footer />
+      </div>
     </main>
   )
 }

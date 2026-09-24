@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import PageShell from '../components/PageShell'
+import NavyBand from '../components/NavyBand'
 import CtaBand from '../components/CtaBand'
 import AvatarIllustration from '../components/AvatarIllustration'
 import { ensureGsapPlugins, gsap, ScrollTrigger } from '../lib/gsapSetup'
@@ -161,16 +162,16 @@ function StatRow({
     <div ref={wrapRef} className="flex items-center gap-3 opacity-0">
       <span
         className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full"
-        style={{ background: `${color}1a`, color }}
+        style={{ background: `${color}26`, color }}
       >
         <Icon className="h-5 w-5" />
       </span>
       <div>
-        <p className="text-xl sm:text-2xl font-extrabold leading-none text-navy-950">
+        <p className="text-2xl sm:text-3xl font-extrabold leading-none text-white">
           <span ref={numberRef}>0</span>
           {suffix}
         </p>
-        <p className="mt-1 text-xs text-navy-700/60">{label}</p>
+        <p className="mt-1 text-xs uppercase tracking-[0.15em] text-white/55">{label}</p>
       </div>
     </div>
   )
@@ -348,8 +349,8 @@ export default function About() {
         </div>
       </section>
 
-      <section className="relative px-6 pb-16 sm:pb-20">
-        <div className="mx-auto max-w-4xl grid grid-cols-2 gap-y-8 gap-x-6 sm:grid-cols-4 sm:gap-8 rounded-3xl bg-white px-6 py-8 sm:px-10 shadow-[0_15px_40px_rgba(19,41,82,0.1)]">
+      <NavyBand className="py-4 sm:py-8">
+        <div className="mx-auto grid max-w-5xl grid-cols-2 gap-x-6 gap-y-10 border-b border-white/10 pb-14 sm:grid-cols-4 sm:gap-8">
           {STATS.map((s) => (
             <StatRow
               key={s.label}
@@ -362,7 +363,56 @@ export default function About() {
             />
           ))}
         </div>
-      </section>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="mx-auto mt-16 max-w-2xl text-center"
+        >
+          <span className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-cyan">
+            What We Believe
+          </span>
+          <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+            The principles behind the platform.
+          </h2>
+        </motion.div>
+
+        <div className="mx-auto mt-12 grid max-w-6xl gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {VALUES.map((v, i) => (
+            <motion.div
+              key={v.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="group rounded-3xl bg-white shadow-[0_20px_50px_rgba(0,0,0,0.35)]"
+            >
+              {/* Photo clips itself; the icon badge sits outside that clip so
+                  it's never cut off at the photo's edge. */}
+              <div className="relative">
+                <div className="aspect-[3/2] overflow-hidden rounded-t-3xl">
+                  <img
+                    src={v.image}
+                    alt={v.imageAlt}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div
+                  className="absolute -bottom-5 left-5 flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-[0_8px_20px_rgba(19,41,82,0.2)]"
+                  style={{ color: v.color }}
+                >
+                  <span className="h-5 w-5">{v.icon}</span>
+                </div>
+              </div>
+              <div className="px-5 pb-6 pt-9">
+                <h3 className="text-base font-bold text-navy-950">{v.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-navy-700/75">{v.description}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </NavyBand>
 
       {/* Previously duplicated the same dashboard/session screenshots the
           homepage's Platform Gallery already showcases in full — dropped
@@ -397,53 +447,6 @@ export default function About() {
         </motion.div>
       </section>
 
-      <section className="relative px-6 pb-16 sm:pb-20">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="mx-auto max-w-2xl text-center"
-        >
-          <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-blue">
-            What We Believe
-          </span>
-          <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-navy-950">
-            The principles behind the platform.
-          </h2>
-        </motion.div>
-
-        <div className="mx-auto mt-12 grid max-w-6xl gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {VALUES.map((v, i) => (
-            <motion.div
-              key={v.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="group overflow-hidden rounded-3xl bg-white shadow-[0_20px_50px_rgba(5,15,35,0.3)]"
-            >
-              <div className="relative aspect-[3/2] overflow-hidden">
-                <img
-                  src={v.image}
-                  alt={v.imageAlt}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div
-                  className="absolute -bottom-5 left-5 flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-[0_8px_20px_rgba(19,41,82,0.2)]"
-                  style={{ color: v.color }}
-                >
-                  <span className="h-5 w-5">{v.icon}</span>
-                </div>
-              </div>
-              <div className="px-5 pb-6 pt-9">
-                <h3 className="text-base font-bold text-navy-950">{v.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-navy-700/75">{v.description}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
 
       <CtaBand
         title="Ready to see it for yourself?"

@@ -164,15 +164,16 @@ export default function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="rounded-3xl bg-white p-6 shadow-[0_15px_40px_rgba(19,41,82,0.1)]"
+              className="rounded-3xl p-6 shadow-[0_20px_50px_rgba(8,27,51,0.3)]"
+              style={{ background: '#081b33' }}
             >
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue shadow-[0_6px_16px_rgba(0,0,0,0.18)]">
                 <MailIcon className="h-5 w-5 text-white" />
               </div>
-              <p className="mt-4 text-sm text-navy-700/70">Prefer email?</p>
+              <p className="mt-4 text-sm text-white/60">Prefer email?</p>
               <a
                 href="mailto:info@linkglobalnetwork.ca"
-                className="mt-1 block font-semibold text-brand-blue hover:underline"
+                className="mt-1 block font-semibold text-brand-cyan hover:underline"
               >
                 info@linkglobalnetwork.ca
               </a>
