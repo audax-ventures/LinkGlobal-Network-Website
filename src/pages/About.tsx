@@ -284,71 +284,6 @@ export default function About() {
         </div>
       </section>
 
-      <section className="relative px-6 pb-16 sm:pb-20">
-        <div className="mx-auto grid max-w-6xl gap-16 md:grid-cols-2 md:items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="rounded-3xl bg-white px-6 py-8 sm:px-9 sm:py-9 shadow-[0_15px_40px_rgba(19,41,82,0.1)]"
-          >
-            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-blue">
-              Why We Started
-            </span>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-navy-950">
-              Every learner deserves a tutor, not just an app.
-            </h2>
-            <p className="mt-5 text-navy-700/80 leading-relaxed">
-              We started LinkGlobal Network because too many people gave up on language learning after
-              months of streaks and gamified lessons that never turned into a real conversation.
-            </p>
-            <p className="mt-4 text-navy-700/80 leading-relaxed">
-              So we built a platform around the one thing that actually works: pairing learners with
-              real, native-speaking tutors, wherever in the world they happen to be.
-            </p>
-            <p className="mt-4 text-navy-700/80 leading-relaxed">
-              Today that means tens of thousands of learners and tutors meeting across more than 120
-              countries — not to complete a level, but to actually talk to each other.
-            </p>
-            <Link
-              to="/for-you"
-              className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue transition-all hover:gap-2.5"
-            >
-              Learn more about us <span aria-hidden="true">→</span>
-            </Link>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="relative mx-auto max-w-sm"
-          >
-            <Squiggle className="absolute -top-8 -right-6 -z-10 text-brand-blue" />
-
-            <div className="relative overflow-hidden rounded-3xl shadow-[0_30px_80px_rgba(19,41,82,0.18)]">
-              <img
-                src="/photos/hero-learner.jpg"
-                alt="A learner in a live session on LinkGlobal Network"
-                className="h-full w-full object-cover"
-              />
-            </div>
-
-            <div className="absolute -bottom-6 -right-4 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-[0_10px_25px_rgba(19,41,82,0.22)] sm:-right-6">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue">
-                <GlobeIcon className="h-5 w-5" />
-              </span>
-              <div>
-                <p className="text-lg font-extrabold leading-none text-navy-950">120+</p>
-                <p className="mt-1 text-[11px] text-navy-700/60">Countries represented</p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       <NavyBand className="py-4 sm:py-8">
         <div className="mx-auto grid max-w-5xl grid-cols-2 gap-x-6 gap-y-10 border-b border-white/10 pb-14 sm:grid-cols-4 sm:gap-8">
           {STATS.map((s) => (
@@ -413,6 +348,71 @@ export default function About() {
           ))}
         </div>
       </NavyBand>
+
+      <section className="relative px-6 pb-16 sm:pb-20">
+        <div className="mx-auto grid max-w-6xl gap-16 md:grid-cols-2 md:items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="rounded-3xl bg-white px-6 py-8 sm:px-9 sm:py-9 shadow-[0_15px_40px_rgba(19,41,82,0.1)]"
+          >
+            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-blue">
+              Why We Started
+            </span>
+            <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-navy-950">
+              Every learner deserves a tutor, not just an app.
+            </h2>
+            <p className="mt-5 text-navy-700/80 leading-relaxed">
+              We started LinkGlobal Network because too many people gave up on language learning after
+              months of streaks and gamified lessons that never turned into a real conversation.
+            </p>
+            <p className="mt-4 text-navy-700/80 leading-relaxed">
+              So we built a platform around the one thing that actually works: pairing learners with
+              real, native-speaking tutors, wherever in the world they happen to be.
+            </p>
+            <p className="mt-4 text-navy-700/80 leading-relaxed">
+              Today that means tens of thousands of learners and tutors meeting across more than 120
+              countries — not to complete a level, but to actually talk to each other.
+            </p>
+            <Link
+              to="/for-you"
+              className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue transition-all hover:gap-2.5"
+            >
+              Learn more about us <span aria-hidden="true">→</span>
+            </Link>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="relative mx-auto max-w-sm"
+          >
+            <Squiggle className="absolute -top-8 -right-6 -z-10 text-brand-blue" />
+
+            <div className="relative overflow-hidden rounded-3xl shadow-[0_30px_80px_rgba(19,41,82,0.18)]">
+              <img
+                src="/photos/hero-learner.jpg"
+                alt="A learner in a live session on LinkGlobal Network"
+                className="h-full w-full object-cover"
+              />
+            </div>
+
+            <div className="absolute -bottom-6 -right-4 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-[0_10px_25px_rgba(19,41,82,0.22)] sm:-right-6">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue">
+                <GlobeIcon className="h-5 w-5" />
+              </span>
+              <div>
+                <p className="text-lg font-extrabold leading-none text-navy-950">120+</p>
+                <p className="mt-1 text-[11px] text-navy-700/60">Countries represented</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
       {/* Previously duplicated the same dashboard/session screenshots the
           homepage's Platform Gallery already showcases in full — dropped
