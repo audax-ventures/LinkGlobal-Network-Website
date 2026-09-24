@@ -157,6 +157,7 @@ export default function TryNow() {
           — we're happy to help you figure out the right fit.
         </p>
       </NavyBand>
+      <div className="pointer-events-none h-16" style={{ background: 'linear-gradient(180deg, #081b33, #050f1f)' }} aria-hidden="true" />
     </PageShell>
   )
 }
