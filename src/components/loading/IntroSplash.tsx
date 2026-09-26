@@ -15,13 +15,14 @@ interface IntroSplashProps {
 const GREETINGS = ['Hello', 'Hola', 'Bonjour', 'こんにちは', 'Olá', 'مرحبا', 'Namaste']
 const WORD = 'LinkGlobal'
 
-// Whole intro is ~4s: auto-exit starts at 3.4s, then a 0.6s fade.
+// Whole intro is ~4s: auto-exit starts at 3.2s, then a 0.8s slide up that
+// reveals the homepage underneath, like scrolling down into the site.
 // The last greeting stays up until the exit.
 const GREETINGS_START_MS = 600
 const GREETING_MS = 380
-const TOTAL_MS = 3400
+const TOTAL_MS = 3200
 const REDUCED_TOTAL_MS = 1200
-const EXIT_S = 0.6
+const EXIT_S = 0.8
 
 export default function IntroSplash({ onDismiss }: IntroSplashProps) {
   const reduced = useReducedMotion()
@@ -96,9 +97,10 @@ export default function IntroSplash({ onDismiss }: IntroSplashProps) {
   return (
     <motion.div
       className="fixed inset-0 z-[100] flex cursor-pointer select-none flex-col items-center justify-center overflow-hidden px-6 text-center"
-      style={{ background: '#02070f' }}
-      animate={exiting ? { opacity: 0 } : { opacity: 1 }}
-      transition={{ duration: EXIT_S, ease: [0.65, 0, 0.35, 1] }}
+      style={{ background: '#02070f', boxShadow: '0 40px 90px rgba(0,0,0,0.45)' }}
+      // Exit slides the whole screen up and away (reduced motion: plain fade).
+      animate={exiting ? (reduced ? { opacity: 0 } : { y: '-100%' }) : { y: 0, opacity: 1 }}
+      transition={{ duration: EXIT_S, ease: [0.76, 0, 0.24, 1] }}
       onAnimationComplete={() => {
         if (exiting) finish()
       }}
@@ -137,7 +139,7 @@ export default function IntroSplash({ onDismiss }: IntroSplashProps) {
 
       <motion.div
         className="relative flex flex-col items-center"
-        animate={exiting ? { y: -24, scale: 0.97 } : { y: 0, scale: 1 }}
+        animate={exiting ? { y: -60, opacity: 0.6 } : { y: 0, opacity: 1 }}
         transition={{ duration: EXIT_S, ease: [0.65, 0, 0.35, 1] }}
       >
         <motion.div
