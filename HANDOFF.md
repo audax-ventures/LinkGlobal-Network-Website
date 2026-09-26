@@ -158,7 +158,14 @@ logo mark, letter-by-letter LINKGLOBAL / NETWORK, greetings run (Hello ->
 Namaste, 180ms each, no tagline — Riley removed it), Skip intro, bottom
 progress bar, ~2s total (Riley asked for 2s). Ends early on click/key/wheel/touch. Plays once
 per session (`sessionStorage` key `lg-intro-seen`); `?intro=1` forces a
-replay for testing, `?debugPhase=done` skips. StylizedGlobe/LazyStylizedGlobe
+replay for testing, `?debugPhase=done` skips.
+Sept 26: the splash now plays over Riley's supplied animated globe
+(`src/lib/globeBackground.js` + `.d.ts`; original lived in
+~/Documents/Codex/2026-09-26/can/outputs). Converted from a window global
+to an ES export (verified it runs under module strict mode). Options in
+IntroSplash: brightness .85, speed 1.4, scale .95, longitude -40.
+Don't put a scale transform on its container — the script sizes the
+canvas from getBoundingClientRect and would draw off-centre. StylizedGlobe/LazyStylizedGlobe
 and data/countryGreetings are now unused (kept in case the cinematic globe
 hero comes back). Verification tip: when the Browser pane is hidden,
 rAF doesn't run, so framer animations freeze — check timing via DOM text
