@@ -15,13 +15,13 @@ interface IntroSplashProps {
 const GREETINGS = ['Hello', 'Hola', 'Bonjour', 'こんにちは', 'Olá', 'مرحبا', 'Namaste']
 const WORD = 'LinkGlobal'
 
-// Whole intro is ~2s: auto-exit starts at 1.6s, then a 0.4s fade.
+// Whole intro is ~4s: auto-exit starts at 3.4s, then a 0.6s fade.
 // The last greeting stays up until the exit.
-const GREETINGS_START_MS = 350
-const GREETING_MS = 180
-const TOTAL_MS = 1600
+const GREETINGS_START_MS = 600
+const GREETING_MS = 380
+const TOTAL_MS = 3400
 const REDUCED_TOTAL_MS = 1200
-const EXIT_S = 0.4
+const EXIT_S = 0.6
 
 export default function IntroSplash({ onDismiss }: IntroSplashProps) {
   const reduced = useReducedMotion()
@@ -156,7 +156,7 @@ export default function IntroSplash({ onDismiss }: IntroSplashProps) {
               style={{ display: 'inline-block' }}
               initial={reduced ? false : { opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.1 + i * 0.03, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, delay: 0.2 + i * 0.05, ease: [0.16, 1, 0.3, 1] }}
               aria-hidden="true"
             >
               {ch}
@@ -167,7 +167,7 @@ export default function IntroSplash({ onDismiss }: IntroSplashProps) {
           className="mt-2 text-sm font-semibold uppercase tracking-[0.6em] text-white/60 sm:text-base"
           initial={reduced ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.35 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
           aria-hidden="true"
         >
           Network
@@ -183,7 +183,7 @@ export default function IntroSplash({ onDismiss }: IntroSplashProps) {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.1 }}
+                transition={{ duration: 0.15 }}
               >
                 {GREETINGS[greeting]}
               </motion.p>
