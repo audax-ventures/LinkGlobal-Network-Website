@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import Logo from '../Logo'
+import { createGlobeBackground } from '../../lib/globeBackground'
 
 // Brand intro (modelled on the Avid Golf splash the client liked): navy
 // screen, spinning logo mark, letter-by-letter wordmark, then a run of
@@ -28,6 +29,13 @@ export default function IntroSplash({ onDismiss }: IntroSplashProps) {
   const [greeting, setGreeting] = useState<number | null>(reduced ? 0 : null)
   const [exiting, setExiting] = useState(false)
   const finishedRef = useRef(false)
+  const globeRef = useRef<HTMLDivElement>(null)
+
+  // Animated globe behind the brand mark (Riley's supplied animation).
+  useEffect(() => {
+    if (!globeRef.current) return
+    return createGlobeBackground(globeRef.current, { brightness: 0.85, speed: 1.4, scale: 0.95, longitude: -40 })
+  }, [])
 
   const finish = () => {
     if (finishedRef.current) return
@@ -88,7 +96,7 @@ export default function IntroSplash({ onDismiss }: IntroSplashProps) {
   return (
     <motion.div
       className="fixed inset-0 z-[100] flex cursor-pointer select-none flex-col items-center justify-center overflow-hidden px-6 text-center"
-      style={{ background: '#081b33' }}
+      style={{ background: '#02070f' }}
       animate={exiting ? { opacity: 0 } : { opacity: 1 }}
       transition={{ duration: EXIT_S, ease: [0.65, 0, 0.35, 1] }}
       onAnimationComplete={() => {
@@ -98,10 +106,21 @@ export default function IntroSplash({ onDismiss }: IntroSplashProps) {
       role="dialog"
       aria-label="LinkGlobal Network intro"
     >
-      {/* Soft glow behind the mark. */}
+      {/* Globe fills the screen; a soft dark vignette in the centre keeps the
+          wordmark and greetings readable over the coastlines. */}
+      <motion.div
+        ref={globeRef}
+        className="pointer-events-none absolute inset-0"
+        // Opacity only: the globe script sizes itself from getBoundingClientRect,
+        // so a scale transform here would bake an off-centre globe into the canvas.
+        initial={reduced ? false : { opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        aria-hidden="true"
+      />
       <div
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40 blur-3xl"
-        style={{ background: 'radial-gradient(circle, rgba(27,163,224,0.45) 0%, rgba(27,163,224,0) 70%)' }}
+        className="pointer-events-none absolute inset-0"
+        style={{ background: 'radial-gradient(ellipse 55% 45% at 50% 50%, rgba(2,7,15,0.72) 0%, rgba(2,7,15,0.35) 60%, rgba(2,7,15,0) 100%)' }}
         aria-hidden="true"
       />
 
