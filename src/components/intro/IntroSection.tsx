@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-motion'
 import Logo from '../Logo'
 import { createGlobeBackground } from '../../lib/globeBackground'
@@ -122,14 +122,19 @@ export default function IntroSection() {
     return createGlobeBackground(globeRef.current, { brightness: 0.85, speed: 1.4, scale: 0.95, longitude: -40 })
   }, [])
 
-  // Entry: auto-play from the top, or land on the hero.
+  // Entry position, before first paint (so returning visitors never see a
+  // flash of the intro). ScrollToTop's layout effect has already run by now.
+  useLayoutEffect(() => {
+    // The browser's own reload scroll-restoration would fight this.
+    if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual'
+    if (autoplay) jumpTo(0)
+    else if (window.scrollY < heroTop() - 2) jumpTo(heroTop())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // Auto-play: glide to the hero after the brand has played.
   useEffect(() => {
-    // Wait a frame so the route-change scroll reset (ScrollToTop) runs first.
-    const raf = requestAnimationFrame(() => {
-      if (autoplay) jumpTo(0)
-      else if (window.scrollY < heroTop() - 2) jumpTo(heroTop())
-    })
-    if (!autoplay) return () => cancelAnimationFrame(raf)
+    if (!autoplay) return
 
     // If the visitor scrolls on their own during the intro, respect that:
     // cancel the auto-glide and let them move freely.
@@ -144,7 +149,6 @@ export default function IntroSection() {
       if (!userMoved && window.scrollY < 10) glideToHero()
     }, reduced ? 1600 : AUTOPLAY_MS)
     return () => {
-      cancelAnimationFrame(raf)
       window.clearTimeout(t)
       window.removeEventListener('wheel', onUserInput)
       window.removeEventListener('touchmove', onUserInput)
