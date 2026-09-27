@@ -202,6 +202,26 @@ overlays are deleted; App no longer gates nav/chat on a loading state).
   Pricing (pay-per-session + institutions), Try Now (path cards).
   Contact's email card is a solid navy card.
 
+### Launch basics (Sept 27 2026)
+- 404: `pages/NotFound.tsx` on `path="*"`; PageMeta adds noindex.
+- `components/PageMeta.tsx`: per-route title/description/canonical/og text
+  (client-side; scrapers see index.html defaults).
+- index.html: OG/Twitter tags with `%SITE_URL%` (replaced by the
+  `lg-seo-files` plugin in vite.config.ts, order 'pre' — must run before
+  Vite resolves og:image as an asset or the build fails). Site URL =
+  SITE_URL env || VERCEL_PROJECT_PRODUCTION_URL || vercel.app fallback, so
+  it follows a custom domain automatically. The plugin also emits
+  sitemap.xml (paths hardcoded — keep in sync with src/routes.ts) and
+  robots.txt (Disallow all on preview deployments).
+- Icons in public/: favicon.svg (real traced mark, dark-mode aware),
+  favicon.ico, favicon-32.png, apple-touch-icon.png, icon-192/512.png,
+  site.webmanifest; og-image.jpg (1200x630). Generated with PIL
+  (scratchpad make_assets.py drew the mark from Logo.tsx geometry).
+- Vercel Web Analytics via plain script tag in index.html (no npm dep).
+- Vercel MCP connector has NO access to team audax-ventures-inc; read
+  build status via GitHub's commit status API. Build logs need Riley or
+  `npx vercel inspect <dpl> --logs` (don't run locally without asking).
+
 ### STILL TO DO — can start now (no assets needed), suggested order
 (Items 1-4 below are DONE — see above.)
 1. **Learning Journey rebuild** (item 6): straight vertical line, saturation
