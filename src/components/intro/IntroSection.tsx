@@ -42,6 +42,11 @@ function markSeen() {
   }
 }
 
+// The site sets `scroll-behavior: smooth` on <html>, which would turn every
+// per-frame scrollTo below into a new browser smooth-scroll (stutter). The
+// glide does its own easing, so always scroll instantly here.
+const jumpTo = (top: number) => window.scrollTo({ top, behavior: 'instant' as ScrollBehavior })
+
 const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
 
 export default function IntroSection() {
@@ -76,7 +81,7 @@ export default function IntroSection() {
     const from = window.scrollY
     const to = heroTop()
     if (reduced || Math.abs(to - from) < 2) {
-      window.scrollTo(0, to)
+      jumpTo(to)
       return
     }
     let raf = 0
@@ -94,13 +99,13 @@ export default function IntroSection() {
     const step = (now: number) => {
       if (done) return
       const t = Math.min((now - start) / GLIDE_MS, 1)
-      window.scrollTo(0, from + (to - from) * easeInOutCubic(t))
+      jumpTo(from + (to - from) * easeInOutCubic(t))
       if (t < 1) raf = requestAnimationFrame(step)
       else stop()
     }
     const fallback = window.setTimeout(() => {
       if (!done) {
-        window.scrollTo(0, to)
+        jumpTo(to)
         stop()
       }
     }, GLIDE_MS + 600)
@@ -121,8 +126,8 @@ export default function IntroSection() {
   useEffect(() => {
     // Wait a frame so the route-change scroll reset (ScrollToTop) runs first.
     const raf = requestAnimationFrame(() => {
-      if (autoplay) window.scrollTo(0, 0)
-      else if (window.scrollY < heroTop() - 2) window.scrollTo(0, heroTop())
+      if (autoplay) jumpTo(0)
+      else if (window.scrollY < heroTop() - 2) jumpTo(heroTop())
     })
     if (!autoplay) return () => cancelAnimationFrame(raf)
 
