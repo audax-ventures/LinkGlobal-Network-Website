@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import FloatingNav from './components/nav/FloatingNav'
 import ChatWidget from './components/chat/ChatWidget'
 import ScrollToTop from './components/ScrollToTop'
+import PageMeta from './components/PageMeta'
 import Home from './pages/Home'
 import About from './pages/About'
 import ForYou from './pages/ForYou'
@@ -10,6 +11,7 @@ import ForEducators from './pages/ForEducators'
 import TryNow from './pages/TryNow'
 import Pricing from './pages/Pricing'
 import Contact from './pages/Contact'
+import NotFound from './pages/NotFound'
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
       <FloatingNav />
       <ChatWidget />
       <ScrollToTop />
+      <PageMeta />
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -27,6 +30,7 @@ function App() {
         <Route path="/try-now" element={<TryNow />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   )

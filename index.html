@@ -2,19 +2,57 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LinkGlobal Network — Learn a Language, Meet the World</title>
     <meta
       name="description"
       content="LinkGlobal Network connects learners with real, native-speaking tutors in 120+ countries. Personalized language learning, built for how the world actually talks."
     />
+    <meta name="theme-color" content="#081b33" />
+    <!-- %SITE_URL% is replaced at build time (see vite.config.ts). The
+         per-page title/description/canonical are updated in the browser by
+         src/components/PageMeta.tsx; link-preview scrapers read these
+         site-wide defaults. -->
+    <link rel="canonical" href="%SITE_URL%/" />
+
+    <!-- Link previews (LinkedIn, Facebook, WhatsApp, iMessage, Slack...) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="LinkGlobal Network" />
+    <meta property="og:title" content="LinkGlobal Network — Learn a Language, Meet the World" />
+    <meta
+      property="og:description"
+      content="Real people. Real conversations. Real progress. Live 1-on-1 language learning with native-speaking tutors in 120+ countries."
+    />
+    <meta property="og:url" content="%SITE_URL%/" />
+    <meta property="og:image" content="%SITE_URL%/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="LinkGlobal Network logo beside a glowing globe connecting cities" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="LinkGlobal Network — Learn a Language, Meet the World" />
+    <meta
+      name="twitter:description"
+      content="Real people. Real conversations. Real progress. Live 1-on-1 language learning with native-speaking tutors in 120+ countries."
+    />
+    <meta name="twitter:image" content="%SITE_URL%/og-image.jpg" />
+
+    <!-- Icons -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Vercel Web Analytics (cookie-free). Needs Analytics enabled for the
+         project in the Vercel dashboard; tracks client-side route changes. -->
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments) }
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
   </head>
   <body>
     <div id="root"></div>
