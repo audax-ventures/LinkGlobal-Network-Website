@@ -20,8 +20,12 @@ function resolveSiteUrl(env: Record<string, string>) {
 function seoFiles(siteUrl: string, isProduction: boolean): Plugin {
   return {
     name: 'lg-seo-files',
-    // index.html uses %SITE_URL% placeholders.
-    transformIndexHtml: (html) => html.replace(/%SITE_URL%/g, siteUrl),
+    // index.html uses %SITE_URL% placeholders. order 'pre' so they're
+    // absolute URLs before Vite tries to resolve og:image etc. as assets.
+    transformIndexHtml: {
+      order: 'pre',
+      handler: (html) => html.replace(/%SITE_URL%/g, siteUrl),
+    },
     generateBundle() {
       const today = new Date().toISOString().slice(0, 10)
       const urls = SITEMAP_PATHS.map(
