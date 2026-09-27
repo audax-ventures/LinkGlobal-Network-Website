@@ -1,4 +1,4 @@
-/* Animated globe background for the intro splash (IntroSplash.tsx).
+/* Animated globe background for the homepage intro (intro/IntroSection.tsx).
  * Supplied by Riley (Sept 2026) as a standalone script; converted from a
  * window global to an ES module export so Vite bundles it. Canvas-only, no
  * network requests. Pauses off-screen / in hidden tabs; reduced-motion users

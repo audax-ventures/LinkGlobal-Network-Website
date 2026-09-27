@@ -1,4 +1,5 @@
 import PageShell from '../components/PageShell'
+import IntroSection from '../components/intro/IntroSection'
 import Hero from '../components/hero/Hero'
 import LinkGlobalLoop from '../components/loop/LinkGlobalLoop'
 import LearningJourney from '../components/journey/LearningJourney'
@@ -18,6 +19,7 @@ const FADE_TO_DARK =
 export default function Home() {
   return (
     <PageShell footerFade={false}>
+      <IntroSection />
       <Hero />
       <LinkGlobalLoop />
       <div style={{ background: RESET_LIGHT }}>

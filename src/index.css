@@ -60,3 +60,14 @@
 .lg-marquee-track {
   animation: lg-marquee 32s linear infinite;
 }
+
+/* Homepage intro (IntroSection.tsx) sets <html data-intro="on"> while it
+   fills the screen; the nav and chat launcher step aside until the hero. */
+.lg-hide-on-intro {
+  transition: opacity 0.4s ease, transform 0.2s ease;
+}
+html[data-intro='on'] .lg-hide-on-intro {
+  /* !important: FloatingNav writes its own inline opacity on scroll. */
+  opacity: 0 !important;
+  pointer-events: none;
+}

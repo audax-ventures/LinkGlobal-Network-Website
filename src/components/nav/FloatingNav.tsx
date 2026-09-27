@@ -133,7 +133,10 @@ export default function FloatingNav() {
     const onScroll = () => {
       const y = window.scrollY
       const goingDown = y > lastScrollY.current
-      if (y < 60) {
+      // On Home the hero sits below the intro section, which publishes the
+      // hero's offset — treat that as the page "top" so the nav shows there.
+      const top = Number(document.documentElement.dataset.heroTop || 0)
+      if (y < top + 60) {
         animateTo(0)
       } else if (goingDown) {
         animateTo(1)
@@ -149,7 +152,7 @@ export default function FloatingNav() {
   }, [])
 
   return (
-    <div ref={navRef} className="fixed top-0 inset-x-0 z-40 flex items-center justify-between px-5 sm:px-8 py-4">
+    <div ref={navRef} className="lg-hide-on-intro fixed top-0 inset-x-0 z-40 flex items-center justify-between px-5 sm:px-8 py-4">
       <Link to="/" aria-label="LinkGlobal Network home">
         <Logo variant="dark" className="h-8 w-auto sm:h-9" />
       </Link>

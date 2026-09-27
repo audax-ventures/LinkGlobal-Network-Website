@@ -1,6 +1,4 @@
-import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import LoadingScreen from './components/loading/LoadingScreen'
 import FloatingNav from './components/nav/FloatingNav'
 import ChatWidget from './components/chat/ChatWidget'
 import ScrollToTop from './components/ScrollToTop'
@@ -14,14 +12,10 @@ import Pricing from './pages/Pricing'
 import Contact from './pages/Contact'
 
 function App() {
-  const [loadingDone, setLoadingDone] = useState(false)
-
   return (
     <BrowserRouter>
-      {!loadingDone && <LoadingScreen onFinished={() => setLoadingDone(true)} />}
-
-      {loadingDone && <FloatingNav />}
-      {loadingDone && <ChatWidget />}
+      <FloatingNav />
+      <ChatWidget />
       <ScrollToTop />
 
       <Routes>
