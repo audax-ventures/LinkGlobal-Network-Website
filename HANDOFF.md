@@ -150,28 +150,29 @@ SplitSection; then the FADE_TO_DARK group as before.
 - Open question for Riley: PlatformGallery ("Inside the Platform") now
   partly overlaps the new Dashboard section in purpose; consider trimming.
 
-### Loading screen REPLACED (Sept 23 2026, cbc01cf + 0ef9f8f) — Riley's call
-The globe + monitor/tablet/phone intro (SpinningWorld, MonitorMockup) is
-gone. `loading/IntroSplash.tsx` is an Avid-Golf-style brand splash (Riley's
-reference: avid-golf-homepage.riley847668.chatgpt.site): navy, spinning
-logo mark, letter-by-letter LINKGLOBAL / NETWORK, greetings run (Hello ->
-Namaste, 380ms each, no tagline — Riley removed it), Skip intro, bottom
-progress bar, ~4s total (Riley asked for 4s on Sept 26; was 2s).
-Exit = the whole splash slides up off screen (0.8s, starts at 3.2s) to
-reveal the homepage, per Riley ("swipe down to the home page"). Ends early on click/key/wheel/touch. Plays once
-per session (`sessionStorage` key `lg-intro-seen`); `?intro=1` forces a
-replay for testing, `?debugPhase=done` skips.
-Sept 26: the splash now plays over Riley's supplied animated globe
-(`src/lib/globeBackground.js` + `.d.ts`; original lived in
-~/Documents/Codex/2026-09-26/can/outputs). Converted from a window global
-to an ES export (verified it runs under module strict mode). Options in
-IntroSplash: brightness .85, speed 1.4, scale .95, longitude -40.
-Don't put a scale transform on its container — the script sizes the
-canvas from getBoundingClientRect and would draw off-centre. StylizedGlobe/LazyStylizedGlobe
-and data/countryGreetings are now unused (kept in case the cinematic globe
-hero comes back). Verification tip: when the Browser pane is hidden,
-rAF doesn't run, so framer animations freeze — check timing via DOM text
-polling, not opacity. Item 7 below (intro length) is superseded.
+### Intro = first section of the homepage (Sept 27 2026) — Riley's call
+`components/intro/IntroSection.tsx` (the old LoadingScreen/IntroSplash
+overlays are deleted; App no longer gates nav/chat on a loading state).
+- Full-screen section above the Hero: Riley's animated globe
+  (`src/lib/globeBackground.js`), spinning logo, LINKGLOBAL / NETWORK,
+  greetings (quick first run, then a slow 1.4s loop while visible), a
+  dark-to-light ramp div between intro and hero.
+- First visit per session (or `?intro=1`): plays ~3.2s, then a 1.6s eased
+  scroll glides to the hero (parallax: content drifts/fades). Any user
+  wheel/touch cancels the glide. "Skip"/"Explore" cue glides down.
+- Seen this session / arriving from another page / `?debugPhase=done`:
+  a layout effect jumps to the hero before first paint. Visitors can
+  scroll/swipe back up to the intro.
+- `html[data-intro="on"]` hides `.lg-hide-on-intro` (nav + chat launcher);
+  `html[data-hero-top]` tells FloatingNav where the page "top" is.
+- GOTCHA: `html { scroll-behavior: smooth }` is set in index.css, so any
+  programmatic per-frame scroll must use `{ behavior: 'instant' }`
+  (IntroSection's jumpTo; ScrollToTop is now an instant layout effect).
+  History scrollRestoration is set to manual.
+- Don't put a scale transform on the globe's container (canvas sizing).
+- Testing: the hidden Browser pane has innerHeight 0 and frozen rAF; use
+  resize_window 1280x800 to get a real viewport. The glide's fallback
+  timeout lands it even without animation frames.
 
 ### Revision-doc cleanup (Sept 23 2026)
 - Try Now cards rebuilt: no photos, icon badge inside a tinted header,
