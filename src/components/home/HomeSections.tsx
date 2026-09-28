@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import NavyBand from '../NavyBand'
-import AvatarIllustration from '../AvatarIllustration'
 import { CardRow, OutcomeList, Reveal, Section, SectionHeading, TwoRoles } from '../blocks'
 import { PENDING } from '../../content/site'
 
