@@ -26,9 +26,9 @@ const CSS = `
 #people-philosophy .pp-orbit{position:absolute;width:77%;height:73%;border:1px solid #29476080;border-radius:50%;left:11.5%;top:14%}
 #people-philosophy .pp-orbit.pp-inner{width:49%;height:46%;left:25.5%;top:27.5%;border-style:dashed;border-color:#29476065}
 #people-philosophy .pp-connections{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-#people-philosophy .pp-connections path{fill:none;stroke:var(--pp-accent);stroke-width:.4;stroke-dasharray:160;stroke-dashoffset:160;opacity:.6;transition:stroke-dashoffset 1.3s ease}
+#people-philosophy .pp-connections path{fill:none;stroke:var(--pp-accent);stroke-width:.4;stroke-dasharray:160;stroke-dashoffset:160;opacity:.6;transition:stroke-dashoffset .975s ease}
 #people-philosophy[data-step="1"] .pp-connections path,#people-philosophy[data-step="2"] .pp-connections path{stroke-dashoffset:0}
-#people-philosophy .pp-person{position:absolute;display:flex;align-items:center;flex-direction:column;width:74px;transform:translate(-50%,-50%);transition:left 1.3s ease,top 1.3s ease;z-index:2}
+#people-philosophy .pp-person{position:absolute;display:flex;align-items:center;flex-direction:column;width:74px;transform:translate(-50%,-50%);transition:left .975s ease,top .975s ease;z-index:2}
 #people-philosophy .pp-one{left:14%;top:23%}
 #people-philosophy .pp-two{left:86%;top:29%}
 #people-philosophy .pp-three{left:73%;top:88%}
@@ -48,14 +48,14 @@ const CSS = `
 #people-philosophy .pp-you{position:absolute;left:48%;top:54%;transform:translate(-50%,-50%);width:78px;height:78px;border-radius:50%;background:#0c314e;border:1px solid #49c9f599;box-shadow:0 0 0 9px #39bde90a,0 0 40px #25aeec18;display:grid;place-content:center;text-align:center;z-index:3}
 #people-philosophy .pp-you strong{font-size:19px;font-weight:600}
 #people-philosophy .pp-you small{font-size:9px;color:#9dcce0;margin-top:4px;letter-spacing:1px}
-#people-philosophy .pp-message{position:absolute;font-size:12px;line-height:1.4;white-space:nowrap;padding:9px 13px;background:#f2f8fc;color:#15314b;border-radius:12px 12px 12px 2px;box-shadow:0 8px 24px #0002;opacity:0;transform:translateY(10px) scale(.94);transition:opacity .5s,transform .7s;z-index:5}
+#people-philosophy .pp-message{position:absolute;font-size:12px;line-height:1.4;white-space:nowrap;padding:9px 13px;background:#f2f8fc;color:#15314b;border-radius:12px 12px 12px 2px;box-shadow:0 8px 24px #0002;opacity:0;transform:translateY(10px) scale(.94);transition:opacity .375s,transform .525s;z-index:5}
 #people-philosophy .pp-hello{left:28%;top:0%}
 #people-philosophy .pp-response{right:1%;top:51%;background:#34c5f4;color:#05213a;border-radius:12px 12px 2px 12px}
 #people-philosophy .pp-welcome{left:1%;top:76%}
 #people-philosophy[data-step="2"] .pp-message{opacity:1;transform:translateY(0) scale(1)}
-#people-philosophy[data-step="2"] .pp-response{transition-delay:.65s}
-#people-philosophy[data-step="2"] .pp-welcome{transition-delay:1.3s}
-#people-philosophy .pp-ai{position:absolute;left:0;top:49%;font-size:9px;letter-spacing:1px;color:#7fabca;transition:opacity 1s}
+#people-philosophy[data-step="2"] .pp-response{transition-delay:.488s}
+#people-philosophy[data-step="2"] .pp-welcome{transition-delay:.975s}
+#people-philosophy .pp-ai{position:absolute;left:0;top:49%;font-size:9px;letter-spacing:1px;color:#7fabca;transition:opacity .75s}
 #people-philosophy[data-step="2"] .pp-ai{opacity:.45}
 #people-philosophy .pp-controls{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:44px;border-top:1px solid #23415b;max-width:410px;margin:auto}
 #people-philosophy .pp-status{font-size:11px;color:#b4c8da;display:flex;align-items:center;gap:7px}
@@ -108,8 +108,8 @@ export default function PeoplePhilosophy() {
       timer.current = window.setTimeout(() => {
         const next = stepRef.current + 1
         go(next)
-        if (next < 2) advanceIn(2200)
-        else timer.current = window.setTimeout(() => setRunning(false), 2600)
+        if (next < 2) advanceIn(1650)
+        else timer.current = window.setTimeout(() => setRunning(false), 1950)
       }, delay)
     },
     [go],
@@ -123,7 +123,7 @@ export default function PeoplePhilosophy() {
     }
     if (stepRef.current === 2) go(0)
     setRunning(true)
-    advanceIn(stepRef.current === 0 ? 1000 : 1800)
+    advanceIn(stepRef.current === 0 ? 750 : 1350)
   }, [advanceIn, go, reduced, stop])
 
   useEffect(() => {

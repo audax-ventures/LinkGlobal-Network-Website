@@ -96,7 +96,7 @@ export function WhereLearnersGetStuck() {
                 key={step}
                 initial={{ opacity: 0.5, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.25, ease: 'easeOut' }}
+                transition={{ duration: 0.19, ease: 'easeOut' }}
                 className="flex flex-col"
                 aria-live="polite"
               >

@@ -71,6 +71,11 @@ roles "certified educator" / "conversation partner".
   Replay buttons, line fills to the furthest stage reached. The mascot
   "journey character" placeholder is gone (design has none). Keeps
   #how-it-works anchor.
+- Sept 28: Riley found the new section animations slightly slow; every
+  timing in JourneyStrip, PeoplePhilosophy, ThreeParts, TourSections (+ the
+  shared BASE_CSS / useTour used by tours/PageTours) and LearningJourney was
+  scaled x0.75 (step timers, CSS durations/delays, inline --delay values).
+  Loading screen/intro untouched.
 - For You H1 = "Every language you speak is worth something to someone."
   (Riley confirmed Sept 28 2026; the copy doc's SEO section suggested
   "Practise with people who live the language." — not used).

@@ -4,11 +4,11 @@ import type { CSSProperties } from 'react'
 // Journey strip beneath the hero — ported from Riley's supplied design
 // (~/Desktop/journey-strip.html). Five clickable steps on a line with a
 // travelling dot, a detail card with a pointer, and an animated preview per
-// step. The tour auto-plays once when 60% visible (3.8s per step), with
+// step. The tour auto-plays once when 60% visible (2.85s per step), with
 // Play / Pause / Resume / Replay; pauses when the tab is hidden. CSS is the
 // source's, scoped to #learning-journey (site font, light theme only).
 
-const SECONDS = 3.8
+const SECONDS = 2.85
 
 const COPY: [string, string][] = [
   ['Start with what makes you, you.', 'Your goals, interests, and starting point. A journey that begins with your life.'],
@@ -20,7 +20,7 @@ const COPY: [string, string][] = [
 const LABELS = ['Your profile', 'Your path', 'Your lessons', 'Your conversations', 'Your progress']
 
 const CSS = `
-#learning-journey{--j-blue:#129bdc;--j-panel:#fff;--j-ink:#152b46;--j-muted:#637b92;--j-line:#deebf5;--j-soft:#e9f6fe;color:var(--j-ink);padding:30px 0 0;--j-speed:650ms;width:100%}
+#learning-journey{--j-blue:#129bdc;--j-panel:#fff;--j-ink:#152b46;--j-muted:#637b92;--j-line:#deebf5;--j-soft:#e9f6fe;color:var(--j-ink);padding:30px 0 0;--j-speed:488ms;width:100%}
 #learning-journey *{box-sizing:border-box}
 #learning-journey .j-wrap{max-width:1120px;margin:auto}
 #learning-journey .j-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:26px}
@@ -34,8 +34,8 @@ const CSS = `
 #learning-journey .j-fill{position:absolute;inset:0 auto 0 0;width:var(--j-position);background:var(--j-blue);transition:width var(--j-speed) ease}
 #learning-journey .j-traveler{position:absolute;width:8px;height:8px;top:-3px;left:var(--j-position);transform:translateX(-50%);border-radius:50%;background:var(--j-blue);box-shadow:0 0 0 5px color-mix(in srgb,var(--j-blue) 12%,transparent);transition:left var(--j-speed) ease}
 #learning-journey .j-steps{padding:0;margin:0;list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:relative}
-#learning-journey .j-step{border:0;background:transparent;color:var(--j-muted);padding:0 3px 17px;display:flex;flex-direction:column;align-items:center;gap:13px;width:100%;min-height:98px;transition:color .3s}
-#learning-journey .j-number{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--j-panel);border:1px solid var(--j-line);font-size:14px;font-weight:600;transition:transform .45s,background .4s,box-shadow .4s,color .4s;position:relative}
+#learning-journey .j-step{border:0;background:transparent;color:var(--j-muted);padding:0 3px 17px;display:flex;flex-direction:column;align-items:center;gap:13px;width:100%;min-height:98px;transition:color .225s}
+#learning-journey .j-number{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--j-panel);border:1px solid var(--j-line);font-size:14px;font-weight:600;transition:transform .338s,background .3s,box-shadow .3s,color .3s;position:relative}
 #learning-journey .j-step[aria-pressed="true"]{color:var(--j-ink)}
 #learning-journey .j-step[aria-pressed="true"] .j-number{background:var(--j-blue);color:#fff;border-color:transparent;box-shadow:0 0 0 6px color-mix(in srgb,var(--j-blue) 11%,transparent);transform:translateY(-3px)}
 #learning-journey .j-step.j-past .j-number{background:var(--j-soft);color:var(--j-blue);border-color:transparent}
@@ -63,9 +63,9 @@ const CSS = `
 #learning-journey .j-win{font-size:11px;color:var(--j-ink)}
 #learning-journey .j-win span{color:var(--j-blue);margin-right:7px}
 #learning-journey .j-caption{font-size:10px;color:var(--j-muted);text-align:center;margin:14px 0 0}
-#learning-journey .j-enter{animation:j-rise .5s ease both}
-#learning-journey .j-enter .j-item{animation:j-pop .65s cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--delay,0ms)}
-#learning-journey .j-enter .j-practice span{animation:j-wave .8s ease 2;animation-delay:var(--delay,0ms);transform-origin:center}
+#learning-journey .j-enter{animation:j-rise .375s ease both}
+#learning-journey .j-enter .j-item{animation:j-pop .488s cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--delay,0ms)}
+#learning-journey .j-enter .j-practice span{animation:j-wave .6s ease 2;animation-delay:var(--delay,0ms);transform-origin:center}
 @keyframes j-rise{from{transform:translateY(8px);opacity:.5}to{transform:translateY(0);opacity:1}}
 @keyframes j-pop{from{transform:translateY(9px) scale(.9);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
 @keyframes j-wave{50%{transform:scaleY(.35)}}
@@ -84,17 +84,17 @@ function Preview({ step }: { step: number }) {
       return (
         <>
           <span className="j-chip j-item">Spanish</span>
-          <span className="j-chip j-em j-item" style={d(120)}>Travel</span>
-          <span className="j-chip j-item" style={d(240)}>Food &amp; culture</span>
-          <span className="j-chip j-item" style={d(360)}>Starting fresh</span>
+          <span className="j-chip j-em j-item" style={d(90)}>Travel</span>
+          <span className="j-chip j-item" style={d(180)}>Food &amp; culture</span>
+          <span className="j-chip j-item" style={d(270)}>Starting fresh</span>
         </>
       )
     case 1:
       return (
         <>
           <span className="j-chip j-item">Your goal</span>
-          <span className="j-arrow j-item" style={d(150)}>→</span>
-          <span className="j-chip j-em j-item" style={d(300)}>Your next step</span>
+          <span className="j-arrow j-item" style={d(112)}>→</span>
+          <span className="j-chip j-em j-item" style={d(225)}>Your next step</span>
         </>
       )
     case 2:
@@ -106,28 +106,28 @@ function Preview({ step }: { step: number }) {
           </div>
           <div className="j-practice" aria-hidden="true">
             <span style={h(12)} />
-            <span style={h(24, 100)} />
-            <span style={h(34, 200)} />
-            <span style={h(20, 300)} />
-            <span style={h(29, 400)} />
-            <span style={h(12, 500)} />
+            <span style={h(24, 75)} />
+            <span style={h(34, 150)} />
+            <span style={h(20, 225)} />
+            <span style={h(29, 300)} />
+            <span style={h(12, 375)} />
           </div>
-          <span className="j-chip j-item" style={d(300)}>Say it out loud</span>
+          <span className="j-chip j-item" style={d(225)}>Say it out loud</span>
         </>
       )
     case 3:
       return (
         <div className="j-chat">
           <span className="j-chip j-item" lang="es">¿Qué te gusta hacer?</span>
-          <span className="j-chip j-em j-item" style={d(650)} lang="es">¡Me encanta viajar!</span>
+          <span className="j-chip j-em j-item" style={d(488)} lang="es">¡Me encanta viajar!</span>
         </div>
       )
     default:
       return (
         <div className="j-wins">
           <div className="j-win j-item"><span>✓</span>Introduce yourself</div>
-          <div className="j-win j-item" style={d(200)}><span>✓</span>Keep a conversation going</div>
-          <div className="j-win j-item" style={d(400)}><span>↗</span>Find your next challenge</div>
+          <div className="j-win j-item" style={d(150)}><span>✓</span>Keep a conversation going</div>
+          <div className="j-win j-item" style={d(300)}><span>↗</span>Find your next challenge</div>
         </div>
       )
   }
