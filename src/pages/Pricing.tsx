@@ -143,6 +143,29 @@ function PaidCard({
 export default function Pricing() {
   const livePlans = PLAN_SLOTS.filter((p) => p.enabled)
 
+  // Product data (copy v7 section 09: "On Pricing, once prices are set").
+  // Emitted only when a price and the currency are both known.
+  const toAmount = (price: string | null) => {
+    const m = price?.match(/(\d+(?:\.\d+)?)/)
+    return m ? m[1] : null
+  }
+  const offers = [
+    { name: 'Lesson with a certified educator', price: toAmount(PENDING.lessonPrice) },
+    { name: 'Personal AI Feedback', price: toAmount(PENDING.aiFeedbackPrice) },
+  ].filter((o): o is { name: string; price: string } => !!o.price)
+  const productJsonLd =
+    PENDING.currency && offers.length
+      ? JSON.stringify(
+          offers.map((o) => ({
+            '@context': 'https://schema.org',
+            '@type': 'Product',
+            name: o.name,
+            brand: { '@type': 'Brand', name: 'LinkGlobal' },
+            offers: { '@type': 'Offer', price: o.price, priceCurrency: PENDING.currency, availability: 'https://schema.org/InStock' },
+          })),
+        )
+      : null
+
   const faqJsonLd = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -249,6 +272,7 @@ export default function Pricing() {
           ))}
         </div>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqJsonLd }} />
+        {productJsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: productJsonLd }} />}
       </Section>
 
       <CtaBand

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import gsap from 'gsap'
 import Logo from '../Logo'
 import { NAV_ROUTES } from '../../routes'
@@ -152,23 +152,88 @@ export default function FloatingNav() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Phones: the seven icon chips don't fit (they ran off-screen), so below
+  // md the nav is logo + compact Start Your Journey + a menu button.
+  const [menuOpen, setMenuOpen] = useState(false)
+  const { pathname } = useLocation()
+  useEffect(() => setMenuOpen(false), [pathname])
+
   return (
-    <div ref={navRef} className="lg-hide-on-intro fixed top-0 inset-x-0 z-40 flex items-center justify-between px-5 sm:px-8 py-4">
-      <Link to="/" aria-label="LinkGlobal home">
-        <Logo variant="dark" className="h-8 w-auto sm:h-9" />
-      </Link>
-      <div className="flex items-center gap-2 sm:gap-2.5">
-        {NAV_ROUTES.map((route) => (
-          <NavCircle key={route.id} id={route.id} label={route.label} path={route.path} Icon={ICONS[route.id]} />
-        ))}
-        <SmartLink
-          to={LEARNER_SIGNUP_URL}
-          className="ml-1 hidden rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(30,120,190,0.3)] transition-transform hover:scale-105 lg:inline-block"
-          style={{ background: 'linear-gradient(90deg, #1ba3e0, #3ec6ff)' }}
-        >
-          Start Your Journey
-        </SmartLink>
+    <div ref={navRef} className="lg-hide-on-intro fixed top-0 inset-x-0 z-40 px-5 sm:px-8 py-4">
+      <div className="flex items-center justify-between gap-3">
+        <Link to="/" aria-label="LinkGlobal home" className="shrink-0">
+          <Logo variant="dark" className="h-8 w-auto sm:h-9" />
+        </Link>
+        <div className="hidden items-center gap-2.5 md:flex">
+          {NAV_ROUTES.map((route) => (
+            <NavCircle key={route.id} id={route.id} label={route.label} path={route.path} Icon={ICONS[route.id]} />
+          ))}
+          <SmartLink
+            to={LEARNER_SIGNUP_URL}
+            className="ml-1 rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(30,120,190,0.3)] transition-transform hover:scale-105"
+            style={{ background: 'linear-gradient(90deg, #1ba3e0, #3ec6ff)' }}
+          >
+            Start Your Journey
+          </SmartLink>
+        </div>
+        <div className="flex items-center gap-2 md:hidden">
+          <SmartLink
+            to={LEARNER_SIGNUP_URL}
+            className="rounded-full px-3.5 py-2 text-xs font-semibold text-white shadow-[0_6px_18px_rgba(30,120,190,0.3)]"
+            style={{ background: 'linear-gradient(90deg, #1ba3e0, #3ec6ff)' }}
+          >
+            Start Your Journey
+          </SmartLink>
+          <button
+            type="button"
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-expanded={menuOpen}
+            aria-controls="lg-mobile-menu"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-navy-900 shadow-[0_2px_10px_rgba(10,17,40,0.12)] ring-1 ring-navy-900/[0.06]"
+          >
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              {menuOpen ? <path d="M6 6l12 12M18 6 6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+            </svg>
+          </button>
+        </div>
       </div>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.nav
+            id="lg-mobile-menu"
+            aria-label="Site"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-3 overflow-hidden rounded-3xl bg-white p-2 shadow-[0_25px_60px_rgba(10,17,40,0.25)] ring-1 ring-navy-900/[0.06] md:hidden"
+          >
+            {NAV_ROUTES.map((route) => {
+              const Icon = ICONS[route.id]
+              const color = ROUTE_META[route.id].color
+              const current = pathname === route.path
+              return (
+                <Link
+                  key={route.id}
+                  to={route.path}
+                  onClick={() => setMenuOpen(false)}
+                  aria-current={current ? 'page' : undefined}
+                  className={`flex items-center gap-3 rounded-2xl px-3 py-2.5 text-base font-semibold ${
+                    current ? 'bg-navy-900/[0.04] text-navy-950' : 'text-navy-800'
+                  }`}
+                >
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full" style={{ background: `${color}1a`, color }}>
+                    <Icon className="h-[17px] w-[17px]" />
+                  </span>
+                  {route.label}
+                </Link>
+              )
+            })}
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

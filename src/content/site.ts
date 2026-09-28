@@ -23,6 +23,15 @@ export const SOCIAL: { instagram: string | null; linkedin: string | null } = {
   linkedin: null,
 }
 
+// Business address for Google's Organization data (copy v7: "Canadian
+// address"). Fill in when confirmed; country is already CA.
+export const ADDRESS: { street: string | null; city: string | null; region: string | null; postalCode: string | null } = {
+  street: null,
+  city: null,
+  region: null,
+  postalCode: null,
+}
+
 // Legal pages (footer). Hidden until the pages exist.
 export const LEGAL: { privacy: string | null; terms: string | null; cookies: string | null } = {
   privacy: null,
@@ -33,6 +42,9 @@ export const LEGAL: { privacy: string | null; terms: string | null; cookies: str
 export const PENDING = {
   /** Pay-as-you-go lesson price, e.g. '$45'. */
   lessonPrice: null as string | null,
+  /** ISO currency for the prices above, e.g. 'CAD'. Needed for Google's
+   *  Product data on Pricing (only emitted once prices + currency are set). */
+  currency: null as string | null,
   /** Personal AI Feedback price, e.g. '$15'. */
   aiFeedbackPrice: null as string | null,
   /** Languages currently offered, e.g. ['English', 'French']. */

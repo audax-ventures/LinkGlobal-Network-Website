@@ -3,6 +3,7 @@ import FloatingNav from './components/nav/FloatingNav'
 import ChatWidget from './components/chat/ChatWidget'
 import ScrollToTop from './components/ScrollToTop'
 import PageMeta from './components/PageMeta'
+import OrgSchema from './components/OrgSchema'
 import Home from './pages/Home'
 import About from './pages/About'
 import ForYou from './pages/ForYou'
@@ -20,6 +21,7 @@ function App() {
       <ChatWidget />
       <ScrollToTop />
       <PageMeta />
+      <OrgSchema />
 
       <Routes>
         <Route path="/" element={<Home />} />
