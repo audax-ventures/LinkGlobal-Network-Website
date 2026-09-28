@@ -30,6 +30,11 @@ roles "certified educator" / "conversation partner".
   on purpose until hello@linkglobal.com exists).
 - vercel.json rewrite excludes /_vercel/* (analytics script was being
   served index.html because Web Analytics isn't enabled yet).
+- Nav: below md = logo + compact Start Your Journey + menu button (the 7
+  icon chips used to run off-screen on phones); md+ = icon row + button.
+- Structured data: OrgSchema (React, from content/site.ts incl. ADDRESS +
+  SOCIAL); Product JSON-LD on Pricing auto-emits once prices AND
+  PENDING.currency are set; FAQPage on Pricing.
 - Doc conflict: For You SEO H1 ("Practise with people who live the
   language.") differs from its header copy; header copy is used.
 - OG image spec in the doc wants a learner photo; current og-image.jpg is
