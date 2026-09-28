@@ -202,6 +202,13 @@ overlays are deleted; App no longer gates nav/chat on a loading state).
   Pricing (pay-per-session + institutions), Try Now (path cards).
   Contact's email card is a solid navy card.
 
+### Logo replaced (Sept 28 2026)
+`components/Logo.tsx` now uses Riley's LinkGloballogo.svg paths (copy at
+public/brand/linkglobal-logo.svg): static globe (spin + lg-globe-spin
+keyframes removed), `reversed` = white bubble + white "Global". Used by
+nav, footer, intro and 404. NOTE: favicon/app icons/og-image.jpg were
+generated from the OLD traced mark and haven't been regenerated yet.
+
 ### Launch basics (Sept 27 2026)
 - 404: `pages/NotFound.tsx` on `path="*"`; PageMeta adds noindex.
 - `components/PageMeta.tsx`: per-route title/description/canonical/og text
