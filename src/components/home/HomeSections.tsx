@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import NavyBand from '../NavyBand'
+import PeoplePhilosophy from './PeoplePhilosophy'
 import { CardRow, OutcomeList, Reveal, Section, SectionHeading, TwoRoles } from '../blocks'
 import { PENDING } from '../../content/site'
 
@@ -139,13 +140,8 @@ export function WhereLearnersGetStuck() {
 export function PhilosophyAndSystem() {
   return (
     <NavyBand className="py-10 sm:py-16">
-      <SectionHeading
-        dark
-        eyebrow="The philosophy"
-        title="Technology can teach a language. People teach the confidence to use it."
-        line="The AI does not replace them. It arranges them around you."
-      />
-      <div className="mx-auto mt-20 max-w-3xl border-t border-white/10 pt-16">
+      <PeoplePhilosophy />
+      <div className="mx-auto mt-20 max-w-3xl pt-4">
         <SectionHeading
           dark
           eyebrow="Three parts, one system"
