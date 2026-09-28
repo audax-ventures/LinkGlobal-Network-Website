@@ -2,6 +2,7 @@ import PageShell from '../components/PageShell'
 import NavyBand from '../components/NavyBand'
 import PageHeader from '../components/PageHeader'
 import CtaBand from '../components/CtaBand'
+import { FromStudyToSpeaking } from '../components/tours/PageTours'
 import { OutcomeList, Reveal, Section, SectionHeading } from '../components/blocks'
 import { LEARNER_SIGNUP_URL } from '../content/site'
 
@@ -49,13 +50,7 @@ export default function About() {
         image={{ src: '/photos/about-founders.jpg', alt: 'Two colleagues in conversation over a laptop' }}
       />
 
-      <Section className="pt-4 sm:pt-8">
-        <SectionHeading
-          eyebrow="What we saw"
-          title="Study has never been the difficult part."
-          line="Streaks, points, and levels keep people studying. They do not put anyone into a real conversation."
-        />
-      </Section>
+      <FromStudyToSpeaking />
 
       <NavyBand className="py-10 sm:py-16">
         <SectionHeading

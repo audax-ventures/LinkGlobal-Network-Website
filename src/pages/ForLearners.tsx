@@ -2,6 +2,7 @@ import PageShell from '../components/PageShell'
 import NavyBand from '../components/NavyBand'
 import PageHeader from '../components/PageHeader'
 import CtaBand from '../components/CtaBand'
+import { ReasonsToLearn } from '../components/tours/PageTours'
 import SampleCards from '../components/dashboard/SeeWhereItHappens'
 import type { SampleData } from '../components/dashboard/SeeWhereItHappens'
 import { BeforeDuringAfter, CardRow, Reveal, Section, SectionHeading, TwoRoles } from '../components/blocks'
@@ -39,16 +40,7 @@ export default function ForLearners() {
         image={{ src: '/photos/learners-hero.jpg', alt: 'A learner reviewing her LinkGlobal dashboard' }}
       />
 
-      <Section className="pt-4 sm:pt-8">
-        <SectionHeading title="Built around your reason for learning." />
-        <CardRow
-          items={[
-            { title: 'Newcomers', line: 'Language for the situations that arrive first: appointments, interviews, school meetings.' },
-            { title: 'International students', line: 'Admission interviews, seminars, and the IELTS or TOEFL score your program requires.' },
-            { title: 'Professionals', line: 'Leading meetings, presenting without a script, handling client calls.' },
-          ]}
-        />
-      </Section>
+      <ReasonsToLearn />
 
       <NavyBand className="py-10 sm:py-16">
         <SectionHeading

@@ -57,6 +57,14 @@ roles "certified educator" / "conversation partner".
   real-life-progress.html) in home/TourSections.tsx: shared useTour hook
   (3.5s/step, autoplay at 25% visible). House-style edits: practise (verb),
   em dash in progress intro -> comma.
+- Inner-page tours (Sept 28, Riley's designs on Desktop) in
+  tours/PageTours.tsx, reusing useTour/BASE_CSS from home/TourSections:
+  ReasonsToLearn (For Learners, replaced "Built around your reason"),
+  TeachingWithLinkGlobal (For Educators, replaced "Why teach", clickable
+  sample availability slots), ConversationConnections (For You, replaced
+  the "For learners" section; keeps #for-learners anchor), and
+  FromStudyToSpeaking (About, replaced "What we saw"). Em dashes -> commas,
+  "practise"/"practising" as verbs.
 - For You H1 = "Every language you speak is worth something to someone."
   (Riley confirmed Sept 28 2026; the copy doc's SEO section suggested
   "Practise with people who live the language." — not used).

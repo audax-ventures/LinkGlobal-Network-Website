@@ -2,6 +2,7 @@ import PageShell from '../components/PageShell'
 import NavyBand from '../components/NavyBand'
 import PageHeader from '../components/PageHeader'
 import CtaBand from '../components/CtaBand'
+import { TeachingWithLinkGlobal } from '../components/tours/PageTours'
 import SmartLink from '../components/SmartLink'
 import FeatureRows, { CardLabel } from '../components/FeatureRows'
 import type { FeatureRow } from '../components/FeatureRows'
@@ -96,16 +97,7 @@ export default function ForEducators() {
         image={{ src: '/photos/educators-hero.jpg', alt: 'An educator reviewing a lesson plan before an online session' }}
       />
 
-      <Section className="pt-4 sm:pt-8">
-        <SectionHeading title="Why teach with LinkGlobal" />
-        <CardRow
-          items={[
-            { title: 'Arrive already informed', line: 'The hour goes to teaching, not assessment.' },
-            { title: 'Learners around the world', line: 'Newcomers, students, and professionals, wherever you are based.' },
-            { title: 'A schedule built around yours', line: 'You set your own availability.' },
-          ]}
-        />
-      </Section>
+      <TeachingWithLinkGlobal />
 
       <NavyBand className="py-10 sm:py-16">
         <div className="mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-2 md:gap-16">

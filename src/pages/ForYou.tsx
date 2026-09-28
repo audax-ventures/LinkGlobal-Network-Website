@@ -2,6 +2,7 @@ import PageShell from '../components/PageShell'
 import NavyBand from '../components/NavyBand'
 import PageHeader from '../components/PageHeader'
 import CtaBand from '../components/CtaBand'
+import { ConversationConnections } from '../components/tours/PageTours'
 import SmartLink from '../components/SmartLink'
 import { CardRow, Reveal, Section, SectionHeading } from '../components/blocks'
 import { LEARNER_SIGNUP_URL, PARTNER_FIND_URL, PARTNER_SHARE_URL } from '../content/site'
@@ -30,27 +31,7 @@ export default function ForYou() {
         image={{ src: '/photos/hero-learner.jpg', alt: 'A learner in conversation with a native speaker matched to their profession' }}
       />
 
-      <Section className="scroll-mt-24 pt-4 sm:pt-8">
-        <div id="for-learners" className="relative -top-24" aria-hidden="true" />
-        <SectionHeading
-          eyebrow="For learners"
-          title="A conversation with someone who lives the language."
-          line="A lesson teaches the language. A conversation puts you inside it."
-        />
-        <CardRow
-          items={[
-            { title: 'Your profession', line: 'Someone who works in your field.' },
-            { title: 'Your destination', line: 'Someone who has lived where you are going.' },
-            { title: 'Your interests', line: 'Someone who follows what you follow.' },
-          ]}
-        />
-        <Reveal className="mt-10 text-center">
-          <p className="text-lg font-semibold text-navy-950">No lesson plan. No assessment. No correction.</p>
-          <SmartLink to={PARTNER_FIND_URL} className={`mt-6 ${BUTTON}`} style={BUTTON_BG}>
-            Find Your Conversation Partner
-          </SmartLink>
-        </Reveal>
-      </Section>
+      <ConversationConnections id="for-learners" />
 
       <NavyBand className="py-10 sm:py-16">
         <div id="for-native-speakers" className="relative -top-24" aria-hidden="true" />
