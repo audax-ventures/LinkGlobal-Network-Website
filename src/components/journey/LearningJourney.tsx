@@ -1,276 +1,301 @@
-import { useEffect, useRef, useState } from 'react'
-import type { ReactNode } from 'react'
-import { motion } from 'framer-motion'
-import { CheckIcon } from '../icons/LineIcons'
-import AvatarIllustration from '../AvatarIllustration'
-import { Link } from 'react-router-dom'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 
-// Lingoda-style journey: one straight vertical line whose fill grows (and
-// gets more saturated) as the visitor scrolls, numbered nodes, and minimal
-// steps — short title, one line of copy, one small visual that says the same
-// thing. Rows are plain document flow, so nothing here depends on guessed
-// heights; the only measurement is the list's own box (for the fill) and each
-// node's real offset (for activation).
+// Home "How LinkGlobal works" journey — ported from Riley's supplied design
+// (~/Desktop/home-learning-journey.html). Six stages alternate either side
+// of a centre line; each stage's card animates the first time it's 30%
+// visible (and on its Replay button), its node turns blue, and the line fills
+// down to the furthest stage reached. CSS is the source's (site font and
+// background). House-style edits: "Practise" (verb), em dash -> comma.
+// The section keeps the #how-it-works anchor used by the hero button.
 
-interface Step {
-  title: string
-  line: string
-  visual: ReactNode
+const CSS = `#home-learning-journey{--hj-blue:#159fd9;--hj-ink:#10243c;--hj-muted:#637a93;--hj-line:#dce8f1;--hj-space:64px;color:var(--hj-ink);padding:80px 24px 64px}#home-learning-journey *{box-sizing:border-box}#home-learning-journey .hj-wrap{max-width:1120px;margin:auto}#home-learning-journey .hj-header{text-align:center;max-width:650px;margin:0 auto 53px}#home-learning-journey .hj-eyebrow{font-size:10px;letter-spacing:2.5px;font-weight:700;color:var(--hj-blue);margin:0 0 18px}#home-learning-journey h2{font-size:43px;font-weight:750;line-height:1.06;letter-spacing:-1.5px;margin:0;color:var(--hj-ink)}#home-learning-journey h2 span{color:var(--hj-blue)}#home-learning-journey .hj-subtitle{font-size:14px;line-height:1.7;max-width:460px;color:var(--hj-muted);margin:20px auto 0}#home-learning-journey .hj-scroll{font-size:10px;letter-spacing:1px;color:var(--hj-muted);display:block;margin-top:29px}#home-learning-journey .hj-scroll b{display:block;font-size:21px;font-weight:400;color:var(--hj-blue);margin-top:6px}#home-learning-journey .hj-timeline{position:relative;padding:12px 0 24px}#home-learning-journey .hj-spine{position:absolute;width:3px;left:50%;top:0;bottom:0;transform:translateX(-50%);border-radius:8px;background:var(--hj-line);overflow:hidden}#home-learning-journey .hj-fill{height:var(--hj-progress,0px);background:linear-gradient(#87d3f3,var(--hj-blue));width:100%;transition:height 1s ease}#home-learning-journey .hj-row{display:grid;grid-template-columns:minmax(0,1fr) 66px minmax(0,1fr);align-items:center;position:relative;gap:0;min-height:295px;padding:27px 0;margin-bottom:var(--hj-space)}#home-learning-journey .hj-row:last-child{margin-bottom:0}#home-learning-journey .hj-copy{grid-column:3;grid-row:1;padding-left:15px;min-width:0}#home-learning-journey .hj-art{grid-column:1;grid-row:1;margin-right:15px;min-width:0;position:relative}#home-learning-journey .hj-row:nth-of-type(even) .hj-copy{grid-column:1;text-align:right;padding-left:0;padding-right:15px}#home-learning-journey .hj-row:nth-of-type(even) .hj-art{grid-column:3;margin-right:0;margin-left:15px}#home-learning-journey .hj-node{grid-column:2;grid-row:1;justify-self:center;width:40px;height:40px;border-radius:50%;background:white;border:1px solid #cadde9;display:grid;place-items:center;font-size:13px;font-weight:600;color:#7493a8;position:relative;z-index:2;box-shadow:0 3px 8px #18345308;transition:background .5s,color .5s,box-shadow .5s}#home-learning-journey .hj-row.hj-seen .hj-node{background:var(--hj-blue);border-color:transparent;color:white;box-shadow:0 0 0 6px #159fd916}#home-learning-journey .hj-category{font-size:9px;font-weight:700;letter-spacing:1.8px;color:var(--hj-blue);margin:0 0 12px;line-height:1.5}#home-learning-journey h3{font-size:28px;line-height:1.12;letter-spacing:-.8px;font-weight:750;color:var(--hj-ink);margin:0 0 14px}#home-learning-journey .hj-description{font-size:12px;line-height:1.75;color:var(--hj-muted);margin:0}#home-learning-journey .hj-takeaway{font-size:11px;line-height:1.5;color:#148bbc;margin:15px 0 0;font-weight:600}#home-learning-journey .hj-card{background:#fff;border-radius:18px;padding:21px 18px;box-shadow:0 16px 40px #1a477310;border:1px solid #eaf1f6;min-width:0}#home-learning-journey .hj-cardtop{display:flex;justify-content:space-between;align-items:center;gap:9px;margin-bottom:17px;font-size:9px;color:var(--hj-muted);letter-spacing:1px;line-height:1.5}#home-learning-journey .hj-replay{cursor:pointer;border:0;background:transparent;color:#46839e;font-size:10px;font-family:inherit;padding:5px 0 5px 8px;letter-spacing:0;min-height:30px;white-space:nowrap}#home-learning-journey button:focus-visible{outline:2px solid var(--hj-blue);outline-offset:4px}#home-learning-journey .hj-note{font-size:9px;line-height:1.5;color:#7990a4;margin:13px 0 0}#home-learning-journey .hj-profile-goal{font-size:19px;font-weight:600;line-height:1.25;letter-spacing:-.4px;background:#e9f7fe;border-radius:11px;padding:16px 13px;color:#17678e;margin-bottom:12px}#home-learning-journey .hj-profile-goal small{font-size:9px;font-weight:400;letter-spacing:1px;display:block;margin-bottom:7px;color:#4e91ae}#home-learning-journey .hj-chips{display:flex;gap:6px;flex-wrap:wrap}#home-learning-journey .hj-chip{font-size:10px;line-height:1.4;background:#f2f6f9;border-radius:6px;padding:7px 9px;color:#48667d}#home-learning-journey .hj-chip b{font-weight:600;color:#193951}#home-learning-journey .hj-plan-title{font-size:19px;font-weight:600;line-height:1.2;letter-spacing:-.4px;margin-bottom:20px}#home-learning-journey .hj-route{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));position:relative;gap:7px;margin:0 0 17px;padding:0;list-style:none}#home-learning-journey .hj-route:before{content:'';position:absolute;left:14%;right:14%;top:13px;height:2px;background:#d5eaf6}#home-learning-journey .hj-route:after{content:'';position:absolute;left:14%;right:14%;top:13px;height:2px;background:var(--hj-blue);transform-origin:left}#home-learning-journey .hj-route li{position:relative;z-index:1;text-align:center;font-size:10px;line-height:1.4;color:var(--hj-muted)}#home-learning-journey .hj-route i{display:grid;place-items:center;width:27px;height:27px;font-size:10px;font-style:normal;border:4px solid white;margin:0 auto 9px;background:#dff3fc;border-radius:50%;color:#168dbf;box-sizing:content-box;position:relative;top:-4px}#home-learning-journey .hj-route li:last-child i{background:var(--hj-blue);color:white}#home-learning-journey .hj-destination{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px;background:#f0f8fd;border-radius:8px;font-size:10px;color:#3f7997;line-height:1.4}#home-learning-journey .hj-destination strong{font-weight:600;color:#1a668c}#home-learning-journey .hj-insight{border-radius:9px;background:#f1f6fa;padding:12px;font-size:11px;line-height:1.5;color:#4a687e;margin-bottom:11px}#home-learning-journey .hj-insight b{display:block;color:var(--hj-ink);font-weight:500;font-size:12px;margin-top:4px}#home-learning-journey .hj-adjustment{border:1px solid #bce5d8;background:#f1fbf6;border-radius:10px;padding:13px;color:#18765a;font-size:12px;line-height:1.4}#home-learning-journey .hj-adjustment small{font-size:9px;letter-spacing:.8px;color:#519a81;display:block;margin-bottom:7px}#home-learning-journey .hj-old{display:block;color:#819e94;font-size:10px;text-decoration:line-through;margin-bottom:6px}#home-learning-journey .hj-adjustment strong{display:block;font-weight:600}#home-learning-journey .hj-lesson{background:#0b2a43;color:white;border-color:#0b2a43}#home-learning-journey .hj-lesson .hj-cardtop{color:#83b4ce}#home-learning-journey .hj-lesson .hj-replay{color:#86d8f6}#home-learning-journey .hj-people{display:flex;align-items:center;justify-content:center;gap:18px;padding:7px 0 15px}#home-learning-journey .hj-person{text-align:center;font-size:9px;color:#c6dfef}#home-learning-journey .hj-avatar{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:#2d5670;color:#e3f7ff;font-size:12px;font-weight:600;margin:0 auto 7px}#home-learning-journey .hj-person:last-child .hj-avatar{background:#178bb6;color:white}#home-learning-journey .hj-wave{display:flex;gap:3px;align-items:center;height:32px;color:#40c8f3}#home-learning-journey .hj-wave i{width:3px;height:var(--height);border-radius:3px;background:currentColor}#home-learning-journey .hj-brief{background:#173e58;border-radius:9px;padding:13px;font-size:12px;line-height:1.5;color:#eef8ff}#home-learning-journey .hj-brief small{display:block;font-size:9px;letter-spacing:.7px;color:#8bcce6;margin-bottom:6px}#home-learning-journey .hj-lesson .hj-note{color:#83b4ce}#home-learning-journey .hj-match{display:flex;align-items:center;gap:7px;color:#27876d;font-size:10px;line-height:1.4;margin-bottom:13px}#home-learning-journey .hj-match:before{content:'';width:6px;height:6px;flex-shrink:0;background:#28ae87;border-radius:50%}#home-learning-journey .hj-chat{display:flex;flex-direction:column;gap:9px}#home-learning-journey .hj-bubble{font-size:11px;line-height:1.45;color:#294c65;background:#edf5fa;border-radius:11px 11px 11px 2px;padding:10px 12px;max-width:94%;align-self:flex-start}#home-learning-journey .hj-bubble.hj-answer{color:white;background:var(--hj-blue);border-radius:11px 11px 2px 11px;align-self:flex-end}#home-learning-journey .hj-win{border-color:#d4ebdf;background:linear-gradient(140deg,#fff,#f4fcf8)}#home-learning-journey .hj-win-symbol{width:49px;height:49px;border-radius:50%;display:grid;place-items:center;background:#11a980;color:white;font-size:26px;margin-bottom:17px;box-shadow:0 0 0 8px #12ac7d0a}#home-learning-journey .hj-then{font-size:10px;color:#859c95;text-decoration:line-through;margin-bottom:9px}#home-learning-journey .hj-win-title{font-size:23px;line-height:1.18;letter-spacing:-.7px;color:#145d49;font-weight:600;margin:0 0 12px}#home-learning-journey .hj-stamp{display:inline-block;font-size:10px;background:#e2f6eb;color:#278167;border-radius:30px;padding:7px 10px;line-height:1.4}#home-learning-journey .hj-footer{text-align:center;max-width:450px;margin:38px auto 0;font-size:15px;line-height:1.6;color:var(--hj-ink)}#home-learning-journey .hj-footer strong{font-weight:600;color:var(--hj-blue)}#home-learning-journey .hj-footer small{display:block;font-size:10px;line-height:1.6;color:var(--hj-muted);margin-top:10px}#home-learning-journey .hj-running .hj-pop{animation:hj-item .75s cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--delay,0ms)}#home-learning-journey .hj-running .hj-route:after{animation:hj-route 1.6s ease both}#home-learning-journey .hj-running .hj-wave i{animation:hj-speak .6s ease 3;animation-delay:var(--delay,0ms)}#home-learning-journey .hj-running .hj-win-symbol{animation:hj-stamp .8s ease both}#home-learning-journey .hj-running .hj-stamp{animation:hj-stamp .7s ease both;animation-delay:.5s}@keyframes hj-item{from{opacity:.1;transform:translateY(13px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}@keyframes hj-route{from{transform:scaleX(0)}to{transform:scaleX(1)}}@keyframes hj-speak{50%{transform:scaleY(.25)}}@keyframes hj-stamp{from{transform:scale(.5) rotate(-12deg);opacity:0}70%{transform:scale(1.08) rotate(2deg)}to{transform:scale(1) rotate(0);opacity:1}}@media(min-width:950px){#home-learning-journey{padding:112px 24px 80px;--hj-space:85px}#home-learning-journey h2{font-size:60px}#home-learning-journey .hj-header{margin-bottom:65px}#home-learning-journey .hj-subtitle{font-size:17px;max-width:520px}#home-learning-journey .hj-row{grid-template-columns:minmax(0,1fr) 115px minmax(0,1fr);min-height:350px;padding:35px 0}#home-learning-journey .hj-copy{padding-left:18px}#home-learning-journey .hj-art{margin-right:18px}#home-learning-journey .hj-row:nth-of-type(even) .hj-copy{padding-right:18px}#home-learning-journey .hj-row:nth-of-type(even) .hj-art{margin-left:18px}#home-learning-journey .hj-node{width:49px;height:49px;font-size:15px}#home-learning-journey h3{font-size:37px}#home-learning-journey .hj-description{font-size:15px}#home-learning-journey .hj-takeaway{font-size:13px}#home-learning-journey .hj-category{font-size:11px}#home-learning-journey .hj-card{padding:27px 25px;border-radius:21px}#home-learning-journey .hj-cardtop{font-size:10px}#home-learning-journey .hj-profile-goal{font-size:24px}#home-learning-journey .hj-chip,#home-learning-journey .hj-bubble,#home-learning-journey .hj-brief{font-size:13px}#home-learning-journey .hj-plan-title{font-size:24px}#home-learning-journey .hj-route li{font-size:12px}#home-learning-journey .hj-insight,#home-learning-journey .hj-adjustment{font-size:14px}#home-learning-journey .hj-win-title{font-size:30px}#home-learning-journey .hj-note{font-size:10px}#home-learning-journey .hj-footer{font-size:19px}}@media(max-width:560px){#home-learning-journey{padding:56px 16px 40px;--hj-space:37px}#home-learning-journey h2{font-size:35px}#home-learning-journey .hj-header{margin-bottom:37px}#home-learning-journey .hj-spine{left:18px}#home-learning-journey .hj-row{grid-template-columns:36px minmax(0,1fr);row-gap:20px;column-gap:16px;min-height:0;padding:12px 0 25px;align-items:start}#home-learning-journey .hj-node{grid-column:1;grid-row:1;width:32px;height:32px;font-size:11px;margin-top:2px}#home-learning-journey .hj-copy,#home-learning-journey .hj-row:nth-of-type(even) .hj-copy{grid-column:2;grid-row:1;padding:0;text-align:left}#home-learning-journey .hj-art,#home-learning-journey .hj-row:nth-of-type(even) .hj-art{grid-column:2;grid-row:2;margin:0}#home-learning-journey h3{font-size:28px}#home-learning-journey .hj-description{font-size:12px}#home-learning-journey .hj-card{padding:19px 15px}#home-learning-journey .hj-replay{min-height:44px;padding-top:10px;padding-bottom:10px}#home-learning-journey .hj-cardtop{margin-bottom:10px}#home-learning-journey .hj-profile-goal{font-size:19px}#home-learning-journey .hj-cardtop{letter-spacing:.7px}#home-learning-journey .hj-footer{padding-left:35px}#home-learning-journey .hj-route{gap:4px}#home-learning-journey .hj-route li{font-size:9px}}@media(prefers-reduced-motion:reduce){#home-learning-journey *,#home-learning-journey *:before,#home-learning-journey *:after{animation:none!important;transition:none!important}#home-learning-journey .hj-replay{display:none}}`
+
+const v = (vars: Record<string, string>) => vars as CSSProperties
+
+interface Stage {
+  category: string
+  title: ReactNode
+  description: string
+  takeaway: string
+  cardTop: string
+  replayLabel: string
+  cardClass?: string
+  card: ReactNode
 }
 
-function Chip({ children }: { children: ReactNode }) {
-  return (
-    <span className="rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold text-brand-blue">{children}</span>
-  )
-}
-
-const STEPS: Step[] = [
+const STAGES: Stage[] = [
   {
-    title: 'Your profile',
-    line: 'Your goals, your level, your profession, your interests. We start with why you are learning, not with a score.',
-    visual: (
-      <div className="flex flex-wrap gap-2">
-        <Chip>Goal · job interview</Chip>
-        <Chip>Level · B1</Chip>
-        <Chip>Work · nursing</Chip>
-        <Chip>Into · football</Chip>
-      </div>
+    category: '01 · YOUR PROFILE',
+    title: (<>Start with the life<br />you’re learning for.</>),
+    description:
+      'A job interview. A new city. A conversation you want to be part of. Your goals, level, profession, and interests give your learning its direction.',
+    takeaway: 'Your reason comes first.',
+    cardTop: 'YOUR STARTING POINT',
+    replayLabel: 'Replay profile animation',
+    card: (
+      <>
+        <div className="hj-profile-goal hj-pop">
+          <small>I’M LEARNING TO…</small>Feel ready for my<br />nursing interview.
+        </div>
+        <div className="hj-chips">
+          <span className="hj-chip hj-pop" style={v({ '--delay': '160ms' })}>Level <b>B1</b></span>
+          <span className="hj-chip hj-pop" style={v({ '--delay': '320ms' })}>Work <b>Nursing</b></span>
+          <span className="hj-chip hj-pop" style={v({ '--delay': '480ms' })}>Into <b>Football</b></span>
+        </div>
+        <p className="hj-note">An example learner. One goal to follow through the journey.</p>
+      </>
     ),
   },
   {
-    title: 'Your learning path',
-    line: 'A structured route with a clear destination. You see the whole plan, not the next exercise.',
-    visual: (
-      <div>
-        <div className="flex items-center justify-between text-xs font-semibold text-navy-700/60">
-          <span>Today</span>
-          <span>Week 8 · Job interview</span>
+    category: '02 · YOUR LEARNING PATH',
+    title: (<>See where you’re going.<br />Know what comes next.</>),
+    description:
+      'Your goal becomes a structured route. Each lesson and speaking opportunity has a purpose, so you can see how today’s practice moves you forward.',
+    takeaway: 'A clear next step, with the bigger picture in view.',
+    cardTop: 'YOUR ROUTE TAKES SHAPE',
+    replayLabel: 'Replay learning path animation',
+    card: (
+      <>
+        <div className="hj-plan-title">Build toward<br />your interview.</div>
+        <ol className="hj-route">
+          <li className="hj-pop"><i>1</i>Tell your<br />story</li>
+          <li className="hj-pop" style={v({ '--delay': '450ms' })}><i>2</i>Practise<br />follow-ups</li>
+          <li className="hj-pop" style={v({ '--delay': '900ms' })}><i>3</i>Speak<br />naturally</li>
+        </ol>
+        <div className="hj-destination hj-pop" style={v({ '--delay': '1150ms' })}>
+          <span>Your destination</span>
+          <strong>Job interview →</strong>
         </div>
-        <div className="relative mt-3 h-2 rounded-full bg-navy-900/10">
-          <div className="absolute inset-y-0 left-0 w-[35%] rounded-full bg-brand-blue" />
-          {[0, 25, 50, 75, 100].map((x) => (
-            <span
-              key={x}
-              className={`absolute top-1/2 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full ring-2 ring-white ${x <= 35 ? 'bg-brand-blue' : 'bg-navy-900/20'}`}
-              style={{ left: `${x}%` }}
-            />
-          ))}
-        </div>
-      </div>
+        <p className="hj-note">Illustrative path · The route is shaped around your goal.</p>
+      </>
     ),
   },
   {
-    title: 'Continuous adaptation',
-    line: 'The AI tracks how you actually speak, and revises the path as you progress.',
-    visual: (
-      <div className="space-y-2 text-xs text-navy-700/70">
-        {[
-          ['Fluency', '62%'],
-          ['Accuracy', '71%'],
-          ['Confidence', '48%'],
-        ].map(([k, w]) => (
-          <div key={k}>
-            <span>{k}</span>
-            <div className="mt-1 h-1.5 rounded-full bg-navy-900/10">
-              <div className="h-full rounded-full bg-brand-blue" style={{ width: w }} />
-            </div>
+    category: '03 · CONTINUOUS ADAPTATION',
+    title: (<>You keep growing.<br />Your plan keeps up.</>),
+    description:
+      'The AI follows how you actually speak and adjusts what comes next. As you become more comfortable, your practice moves with you.',
+    takeaway: 'The next challenge fits the speaker you’re becoming.',
+    cardTop: 'A PLAN THAT LISTENS',
+    replayLabel: 'Replay plan adaptation animation',
+    card: (
+      <>
+        <div className="hj-insight hj-pop">After your speaking practice<b>Your introduction is flowing.</b></div>
+        <div className="hj-adjustment hj-pop" style={v({ '--delay': '350ms' })}>
+          <small>NEXT STEP, UPDATED</small>
+          <span className="hj-old">Rehearse your introduction</span>
+          <strong className="hj-pop" style={v({ '--delay': '850ms' })}>↳ Try an unexpected follow-up.</strong>
+        </div>
+        <p className="hj-note">Example adjustment based on a learner’s speaking.</p>
+      </>
+    ),
+  },
+  {
+    category: '04 · CERTIFIED EDUCATORS',
+    title: (<>A teacher who knows<br />where to begin.</>),
+    description:
+      'Your educator arrives briefed on your path. Live, structured lessons give you the feedback, technique, and human guidance to work on what matters now.',
+    takeaway: 'Shared context. Focused teaching.',
+    cardTop: 'READY FOR YOUR LESSON',
+    replayLabel: 'Replay educator animation',
+    cardClass: 'hj-lesson',
+    card: (
+      <>
+        <div className="hj-people">
+          <div className="hj-person hj-pop"><div className="hj-avatar">E</div>Your educator</div>
+          <div className="hj-wave" aria-hidden="true">
+            <i style={v({ '--height': '10px' })} />
+            <i style={v({ '--height': '23px', '--delay': '100ms' })} />
+            <i style={v({ '--height': '31px', '--delay': '200ms' })} />
+            <i style={v({ '--height': '17px', '--delay': '300ms' })} />
+            <i style={v({ '--height': '26px', '--delay': '400ms' })} />
           </div>
-        ))}
-        <p className="pt-1 font-semibold text-brand-blue">Path updated after session 7</p>
-      </div>
+          <div className="hj-person hj-pop" style={v({ '--delay': '200ms' })}><div className="hj-avatar">You</div>Your voice</div>
+        </div>
+        <div className="hj-brief hj-pop" style={v({ '--delay': '650ms' })}>
+          <small>WORKING ON FOLLOW-UP QUESTIONS</small>“Try leading with the action you took. Then explain why.”
+        </div>
+        <p className="hj-note">An example of guidance in a live lesson.</p>
+      </>
     ),
   },
   {
-    title: 'Lessons with certified educators',
-    line: 'Live, structured teaching. Your educator is briefed from your path before every session.',
-    visual: (
-      <div className="flex items-center gap-3">
-        <AvatarIllustration color="#1ba3e0" className="h-11 w-11 shrink-0 rounded-full" />
-        <div className="flex-1 text-sm">
-          <p className="font-semibold text-navy-950">Your educator is ready</p>
-          <p className="text-xs text-navy-700/60">Briefed from your path</p>
+    category: '05 · REAL CONVERSATIONS',
+    title: (<>Find common ground.<br />Let the words follow.</>),
+    description:
+      'Meet native speakers connected to your work, interests, or destination. Talk about real things at a natural pace, without a lesson plan.',
+    takeaway: 'You have more to share than a practice sentence.',
+    cardTop: 'SOMETHING IN COMMON',
+    replayLabel: 'Replay conversation animation',
+    card: (
+      <>
+        <div className="hj-match">Example connection · A nurse in Toronto</div>
+        <div className="hj-chat">
+          <div className="hj-bubble hj-pop">What’s a typical shift like for you?</div>
+          <div className="hj-bubble hj-answer hj-pop" style={v({ '--delay': '650ms' })}>Busy, but the people make it worth it.</div>
+          <div className="hj-bubble hj-pop" style={v({ '--delay': '1350ms' })}>I know exactly what you mean.</div>
         </div>
-        <span className="flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 text-[11px] font-semibold text-emerald-600">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" /> Live
-        </span>
-      </div>
+      </>
     ),
   },
   {
-    title: 'Conversation with native speakers',
-    line: 'Real conversation, no lesson plan. Matched to your profession, interests, or destination.',
-    visual: (
-      <div>
-        <div className="flex items-center gap-3">
-          <AvatarIllustration color="#2dd4bf" className="h-11 w-11 shrink-0 rounded-full" />
-          <div className="text-sm">
-            <p className="font-semibold text-navy-950">Matched with a nurse in Toronto</p>
-            <p className="text-xs text-navy-700/60">Same field, no lesson plan</p>
-          </div>
-        </div>
-        <Link to="/for-you" className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue hover:gap-2.5">
-          See How Conversation Practice Works <span aria-hidden="true">→</span>
-        </Link>
-      </div>
-    ),
-  },
-  {
-    title: 'Visible progress',
-    line: 'Measured by what you become able to do, not by lessons completed.',
-    visual: (
-      <div className="flex items-center gap-3 text-sm">
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-white">
-          <CheckIcon className="h-4 w-4" />
-        </span>
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-navy-700/50">Now able to</p>
-          <p className="font-semibold text-navy-950">Answer interview questions without notes</p>
-        </div>
-      </div>
+    category: '06 · VISIBLE PROGRESS',
+    title: (<>One day, the words<br />are simply there.</>),
+    description:
+      'You answer the question. Share your experience. Keep the conversation going. Progress becomes something you can do in the moments that matter.',
+    takeaway: 'The goal you started with becomes a milestone you can reach.',
+    cardTop: 'AN EXAMPLE MILESTONE',
+    replayLabel: 'Replay progress animation',
+    cardClass: 'hj-win',
+    card: (
+      <>
+        <div className="hj-win-symbol" aria-hidden="true">✓</div>
+        <div className="hj-then hj-pop">“I need my notes.”</div>
+        <div className="hj-win-title hj-pop" style={v({ '--delay': '230ms' })}>Answer interview questions<br />in your own words.</div>
+        <div className="hj-stamp">Without reaching for a script.</div>
+      </>
     ),
   },
 ]
 
-// Where on screen the "you are here" head of the line sits.
-const HEAD_VIEWPORT_FRACTION = 0.55
-
 export default function LearningJourney() {
-  const listRef = useRef<HTMLOListElement>(null)
-  const fillRef = useRef<HTMLDivElement>(null)
-  const characterRef = useRef<HTMLDivElement>(null)
-  const nodeRefs = useRef<(HTMLSpanElement | null)[]>([])
-  const [activeCount, setActiveCount] = useState(0)
+  const rootRef = useRef<HTMLElement>(null)
+  const timelineRef = useRef<HTMLDivElement>(null)
+  const rowRefs = useRef<(HTMLElement | null)[]>([])
+  const nodeRefs = useRef<(HTMLDivElement | null)[]>([])
+  const visited = useRef(new Set<number>())
+  const [highest, setHighest] = useState(-1)
+  const [running, setRunning] = useState<boolean[]>(() => STAGES.map(() => false))
+  const [runKeys, setRunKeys] = useState<number[]>(() => STAGES.map(() => 0))
+  const [progress, setProgress] = useState(0)
+  const reduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  const visit = useCallback(
+    (i: number) => {
+      visited.current.add(i)
+      setHighest((h) => Math.max(h, i))
+      if (!reduced) {
+        setRunning((r) => r.map((x, j) => (j === i ? true : x)))
+        setRunKeys((k) => k.map((x, j) => (j === i ? x + 1 : x))) // remount card to replay
+      }
+    },
+    [reduced],
+  )
+
+  // Line fill: down to the centre of the furthest node reached (or the full
+  // line once the last stage is reached).
+  const updateLine = useCallback(() => {
+    const tl = timelineRef.current
+    if (!tl || highest < 0) {
+      setProgress(0)
+      return
+    }
+    const parent = tl.getBoundingClientRect()
+    const node = nodeRefs.current[highest]?.getBoundingClientRect()
+    if (!node) return
+    setProgress(highest === STAGES.length - 1 ? parent.height : Math.max(0, node.top - parent.top + node.height / 2))
+  }, [highest])
+
+  useLayoutEffect(() => updateLine(), [updateLine])
 
   useEffect(() => {
-    const list = listRef.current
-    const fill = fillRef.current
-    if (!list || !fill) return
+    const tl = timelineRef.current
+    if (!tl) return
+    const ro = new ResizeObserver(() => updateLine())
+    ro.observe(tl)
+    return () => ro.disconnect()
+  }, [updateLine])
 
-    let frame = 0
-    const update = () => {
-      frame = 0
-      const rect = list.getBoundingClientRect()
-      const head = Math.min(Math.max(window.innerHeight * HEAD_VIEWPORT_FRACTION - rect.top, 0), rect.height)
-      fill.style.height = `${head}px`
-      // The fill's gradient is sized to the full line, so the colour under
-      // the head gets deeper/more saturated the further down it travels.
-      fill.style.backgroundSize = `100% ${rect.height}px`
-      if (characterRef.current) characterRef.current.style.transform = `translate(-50%, ${head}px) translateY(-50%)`
-
-      let count = 0
-      nodeRefs.current.forEach((node) => {
-        if (!node) return
-        const r = node.getBoundingClientRect()
-        if (r.top + r.height / 2 - rect.top <= head + 1) count++
-      })
-      setActiveCount((prev) => (prev === count ? prev : count))
-    }
-    const schedule = () => {
-      if (!frame) frame = requestAnimationFrame(update)
-    }
-
-    update()
-    window.addEventListener('scroll', schedule, { passive: true })
-    window.addEventListener('resize', schedule)
-    const observer = new ResizeObserver(schedule)
-    observer.observe(list)
-    return () => {
-      window.removeEventListener('scroll', schedule)
-      window.removeEventListener('resize', schedule)
-      observer.disconnect()
-      if (frame) cancelAnimationFrame(frame)
-    }
-  }, [])
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const i = rowRefs.current.indexOf(entry.target as HTMLElement)
+          if (entry.isIntersecting && i >= 0 && !visited.current.has(i)) visit(i)
+        })
+      },
+      { threshold: 0.3 },
+    )
+    rowRefs.current.forEach((r) => r && observer.observe(r))
+    return () => observer.disconnect()
+  }, [visit])
 
   return (
-    <section id="how-it-works" className="relative scroll-mt-10 px-6 pb-24 pt-20 sm:pt-28">
-      <div className="mx-auto max-w-2xl text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-blue">How LinkGlobal works</p>
-        <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-navy-950 sm:text-6xl">
-          One path, shaped by <span className="text-brand-blue">your goal.</span>
-        </h2>
-      </div>
-
-      <ol ref={listRef} className="relative mx-auto mt-16 max-w-5xl sm:mt-24">
-        {/* Track + scroll-driven fill. Mobile: line on the left; md+: centred. */}
-        <div className="pointer-events-none absolute bottom-0 left-5 top-0 w-1 -translate-x-1/2 rounded-full bg-navy-900/10 md:left-1/2" aria-hidden="true">
-          <div
-            ref={fillRef}
-            className="absolute inset-x-0 top-0 rounded-full"
-            style={{
-              height: 0,
-              backgroundImage: 'linear-gradient(180deg, #cfdbe6 0%, #8fc3e0 30%, #1ba3e0 70%, #0a63c9 100%)',
-              backgroundRepeat: 'no-repeat',
-              boxShadow: '0 0 12px rgba(27,163,224,0.35)',
-            }}
-          />
-        </div>
-
-        {/* Character slot: rides the head of the line. Placeholder is the
-            assistant mascot until the client's journey character arrives —
-            swap the <img> only; positioning is handled by the effect. */}
-        <div className="pointer-events-none absolute left-5 top-0 z-20 md:left-1/2" aria-hidden="true">
-          <div ref={characterRef} style={{ transform: 'translate(-50%, 0) translateY(-50%)' }}>
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-[0_8px_24px_rgba(19,41,82,0.25)] ring-4 ring-brand-blue/20 sm:h-14 sm:w-14">
-              <img src="/mascot/assistant-mascot-static.svg" alt="" className="h-9 w-9 sm:h-11 sm:w-11" />
-            </div>
+    <section
+      id="home-learning-journey"
+      ref={rootRef}
+      aria-label="Your learning journey with LinkGlobal"
+      style={v({ '--hj-progress': `${progress}px` })}
+    >
+      <style>{CSS}</style>
+      <div id="how-it-works" className="relative -top-24" aria-hidden="true" />
+      <div className="hj-wrap">
+        <header className="hj-header">
+          <p className="hj-eyebrow">HOW LINKGLOBAL WORKS</p>
+          <h2>
+            One path, shaped by
+            <br />
+            <span>your goal.</span>
+          </h2>
+          <p className="hj-subtitle">
+            A plan that listens. People who help you grow.
+            <br />
+            And progress that comes with you into real life.
+          </p>
+          <span className="hj-scroll">
+            FOLLOW THE JOURNEY<b aria-hidden="true">↓</b>
+          </span>
+        </header>
+        <div className="hj-timeline" ref={timelineRef}>
+          <div className="hj-spine" aria-hidden="true">
+            <div className="hj-fill" />
           </div>
+          {STAGES.map((s, i) => (
+            <article
+              key={s.category}
+              ref={(el) => {
+                rowRefs.current[i] = el
+              }}
+              className={`hj-row${i <= highest ? ' hj-seen' : ''}${running[i] ? ' hj-running' : ''}`}
+              aria-labelledby={`hj-title-${i + 1}`}
+            >
+              <div className="hj-copy">
+                <p className="hj-category">{s.category}</p>
+                <h3 id={`hj-title-${i + 1}`}>{s.title}</h3>
+                <p className="hj-description">{s.description}</p>
+                <p className="hj-takeaway">{s.takeaway}</p>
+              </div>
+              <div
+                className="hj-node"
+                aria-hidden="true"
+                ref={(el) => {
+                  nodeRefs.current[i] = el
+                }}
+              >
+                {i + 1}
+              </div>
+              <div className="hj-art">
+                <div key={runKeys[i]} className={`hj-card${s.cardClass ? ` ${s.cardClass}` : ''}`}>
+                  <div className="hj-cardtop">
+                    <span>{s.cardTop}</span>
+                    <button className="hj-replay" type="button" aria-label={s.replayLabel} onClick={() => visit(i)}>
+                      Replay ↻
+                    </button>
+                  </div>
+                  {s.card}
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
-
-        {STEPS.map((step, i) => {
-          const active = i < activeCount
-          const textLeft = i % 2 === 1
-          return (
-            <li key={step.title} className="relative grid grid-cols-[2.5rem_1fr] gap-x-6 py-10 sm:py-14 md:grid-cols-[1fr_4rem_1fr] md:gap-x-10">
-              {/* Node */}
-              <div className="relative col-start-1 row-span-2 flex justify-center md:col-start-2 md:row-span-1 md:row-start-1 md:items-center">
-                <span
-                  ref={(el) => {
-                    nodeRefs.current[i] = el
-                  }}
-                  className={`relative z-10 flex h-10 w-10 items-center justify-center rounded-full text-sm font-extrabold transition-all duration-500 ${
-                    active
-                      ? 'bg-brand-blue text-white shadow-[0_0_0_6px_rgba(27,163,224,0.18)]'
-                      : 'bg-white text-navy-700/40 shadow-[0_2px_8px_rgba(19,41,82,0.12)] ring-2 ring-navy-900/10'
-                  }`}
-                >
-                  {i + 1}
-                </span>
-              </div>
-
-              {/* Text */}
-              <div
-                className={`col-start-2 row-start-1 transition-[filter,opacity] duration-700 md:row-start-1 md:self-center ${
-                  textLeft ? 'md:col-start-1 md:text-right' : 'md:col-start-3'
-                } ${active ? 'opacity-100' : 'opacity-40 saturate-0'}`}
-              >
-                <p className="text-xs font-semibold tracking-[0.2em] text-brand-blue">0{i + 1}</p>
-                <h3 className="mt-1 text-2xl font-extrabold tracking-tight text-navy-950 sm:text-3xl">{step.title}</h3>
-                <p className="mt-2 text-base text-navy-700/75 sm:text-lg">{step.line}</p>
-              </div>
-
-              {/* Visual — plain wrapper owns placement, motion.div only animates. */}
-              <div
-                className={`col-start-2 row-start-2 mt-5 md:row-start-1 md:mt-0 md:self-center ${
-                  textLeft ? 'md:col-start-3' : 'md:col-start-1 md:flex md:justify-end'
-                }`}
-              >
-                <motion.div
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.5 }}
-                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                  className={`w-full max-w-sm rounded-2xl bg-white p-5 shadow-[0_15px_40px_rgba(19,41,82,0.1)] transition-[filter] duration-700 ${
-                    active ? '' : 'saturate-0'
-                  }`}
-                >
-                  {step.visual}
-                </motion.div>
-              </div>
-            </li>
-          )
-        })}
-      </ol>
+        <footer className="hj-footer">
+          Your goal gives the journey its direction.
+          <br />
+          <strong>Your voice makes it yours.</strong>
+          <small>Illustrative journey · Every learner’s path and pace are different.</small>
+        </footer>
+      </div>
     </section>
   )
 }

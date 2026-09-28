@@ -65,6 +65,12 @@ roles "certified educator" / "conversation partner".
   the "For learners" section; keeps #for-learners anchor), and
   FromStudyToSpeaking (About, replaced "What we saw"). Em dashes -> commas,
   "practise"/"practising" as verbs.
+- Home learning journey replaced (Sept 28) by Riley's design
+  (~/Desktop/home-learning-journey.html) in journey/LearningJourney.tsx:
+  six alternating stages, per-stage card animation on first 30% view and
+  Replay buttons, line fills to the furthest stage reached. The mascot
+  "journey character" placeholder is gone (design has none). Keeps
+  #how-it-works anchor.
 - For You H1 = "Every language you speak is worth something to someone."
   (Riley confirmed Sept 28 2026; the copy doc's SEO section suggested
   "Practise with people who live the language." — not used).
