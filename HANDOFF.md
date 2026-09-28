@@ -34,6 +34,10 @@ roles "certified educator" / "conversation partner".
 - Structured data: OrgSchema (React, from content/site.ts incl. ADDRESS +
   SOCIAL); Product JSON-LD on Pricing auto-emits once prices AND
   PENDING.currency are set; FAQPage on Pricing.
+- Home "Where learners get stuck" was replaced (Sept 28) by Riley's own
+  design (~/Desktop/conversation-section.html): "One conversation can
+  unlock what a month of study couldn't." study-vs-conversation panels
+  with a 3-step café exchange. This intentionally departs from v7 copy.
 - For You H1 = "Every language you speak is worth something to someone."
   (Riley confirmed Sept 28 2026; the copy doc's SEO section suggested
   "Practise with people who live the language." — not used).
