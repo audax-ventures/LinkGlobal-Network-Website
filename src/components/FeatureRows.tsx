@@ -7,17 +7,17 @@ import { motion } from 'framer-motion'
 // block should carry meaning and connect directly to the copy next to it").
 
 export interface FeatureRow {
-  eyebrow: string
+  eyebrow?: string
   title: string
   line: string
   visual: ReactNode
 }
 
-export default function FeatureRows({ heading, eyebrow, rows }: { heading: string; eyebrow: string; rows: FeatureRow[] }) {
+export default function FeatureRows({ heading, eyebrow, rows }: { heading: string; eyebrow?: string; rows: FeatureRow[] }) {
   return (
     <section className="relative px-6 pb-8 pt-4 sm:pb-12">
       <div className="mx-auto max-w-2xl text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-blue">{eyebrow}</p>
+        {eyebrow && <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-blue">{eyebrow}</p>}
         <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-navy-950 sm:text-5xl">{heading}</h2>
       </div>
 
@@ -32,7 +32,8 @@ export default function FeatureRows({ heading, eyebrow, rows }: { heading: strin
               className={i % 2 === 1 ? 'md:order-2' : ''}
             >
               <p className="text-xs font-semibold tracking-[0.2em] text-brand-blue">
-                0{i + 1} · {r.eyebrow.toUpperCase()}
+                0{i + 1}
+                {r.eyebrow ? ` · ${r.eyebrow.toUpperCase()}` : ''}
               </p>
               <h3 className="mt-2 text-3xl font-extrabold tracking-tight text-navy-950">{r.title}</h3>
               <p className="mt-3 text-lg leading-relaxed text-navy-700/75">{r.line}</p>

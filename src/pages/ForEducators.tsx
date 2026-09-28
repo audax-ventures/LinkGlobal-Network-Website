@@ -1,44 +1,33 @@
-import { motion } from 'framer-motion'
 import PageShell from '../components/PageShell'
 import NavyBand from '../components/NavyBand'
 import PageHeader from '../components/PageHeader'
+import CtaBand from '../components/CtaBand'
+import SmartLink from '../components/SmartLink'
 import FeatureRows, { CardLabel } from '../components/FeatureRows'
 import type { FeatureRow } from '../components/FeatureRows'
-import CtaBand from '../components/CtaBand'
-import { CheckIcon } from '../components/icons/LineIcons'
+import { CardRow, Reveal, Section, SectionHeading } from '../components/blocks'
+import { EDUCATOR_SIGNUP_URL, PENDING } from '../content/site'
 
-const ROWS: FeatureRow[] = [
+// For Educators, per Website Copy v7 (section 04).
+
+const BRIEFING = [
+  { k: 'Mastered', v: 'Introductions, describing experience', c: 'text-emerald-600' },
+  { k: 'Still avoiding', v: 'Salary questions, being interrupted', c: 'text-amber-600' },
+  { k: 'Focus today', v: 'Mock interview, follow-up questions', c: 'text-brand-blue' },
+]
+
+const DASHBOARD: FeatureRow[] = [
   {
-    eyebrow: 'Your time',
-    title: 'Your hours. Your rates.',
-    line: 'Teach as much or as little as you want, whenever it works for you. No fixed shifts, no quotas.',
+    title: 'Session briefing',
+    line: 'The learner’s progress and focus areas, ready before you meet.',
     visual: (
       <div>
-        <CardLabel>Your availability</CardLabel>
-        <div className="mt-4 grid grid-cols-7 gap-1.5 text-center text-[10px] font-semibold text-navy-700/50">
-          {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((d, i) => (
-            <span key={i}>{d}</span>
-          ))}
-          {[1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0].map((on, i) => (
-            <span key={i} className={`h-7 rounded-md ${on ? 'bg-brand-blue' : 'bg-navy-900/[0.05]'}`} />
-          ))}
-        </div>
-        <p className="mt-4 text-xs text-navy-700/60">Change it any time — learners only see the slots you open.</p>
-      </div>
-    ),
-  },
-  {
-    eyebrow: 'Your learners',
-    title: 'Learners who arrive ready.',
-    line: 'Placement and a clear learning path mean every student shows up knowing what they need from you.',
-    visual: (
-      <div>
-        <CardLabel>Learner brief</CardLabel>
+        <CardLabel>Before your session</CardLabel>
         <dl className="mt-4 space-y-3 text-sm">
           {[
-            ['Level', 'B1 · Intermediate'],
+            ['Level', 'B1'],
             ['Goal', 'Job interview in English'],
-            ['Today', 'Practise follow-up questions'],
+            ['Focus', 'Follow-up questions'],
           ].map(([k, v]) => (
             <div key={k} className="flex justify-between gap-4 border-b border-navy-900/5 pb-2 last:border-0">
               <dt className="text-navy-700/60">{k}</dt>
@@ -50,28 +39,46 @@ const ROWS: FeatureRow[] = [
     ),
   },
   {
-    eyebrow: 'Your pay',
-    title: 'Paid reliably, every session.',
-    line: 'Transparent, on-time payouts for every session you teach — no chasing invoices or waiting on clients.',
+    title: 'Your schedule',
+    line: 'Sessions arranged around your availability.',
     visual: (
-      <div className="flex items-center gap-4">
-        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600">
-          <CheckIcon className="h-6 w-6" />
-        </span>
-        <div className="text-sm">
-          <p className="font-semibold text-navy-950">Session completed</p>
-          <p className="text-navy-700/60">Added to your next payout</p>
+      <div>
+        <CardLabel>Your availability</CardLabel>
+        <div className="mt-4 grid grid-cols-7 gap-1.5 text-center text-[10px] font-semibold text-navy-700/50">
+          {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((d, i) => (
+            <span key={i}>{d}</span>
+          ))}
+          {[1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0].map((on, i) => (
+            <span key={i} className={`h-7 rounded-md ${on ? 'bg-brand-blue' : 'bg-navy-900/[0.05]'}`} />
+          ))}
         </div>
       </div>
     ),
   },
-]
-
-const STEPS = [
-  { title: 'Apply', description: 'Tell us about your teaching background and the language(s) you teach.', color: '#1ba3e0' },
-  { title: 'Get verified', description: 'A short review confirms you’re a great fit for our learners.', color: '#f5a623' },
-  { title: 'Set your schedule', description: 'Pick your hours and availability — entirely up to you.', color: '#2dd4bf' },
-  { title: 'Start teaching', description: 'Get matched with learners and start your first session.', color: '#a78bfa' },
+  {
+    title: 'Learner progress',
+    line: 'How each learner has developed across sessions.',
+    visual: (
+      <div className="space-y-3 text-sm">
+        <CardLabel>Across 12 sessions</CardLabel>
+        {[
+          ['Fluency', 48, 74],
+          ['Confidence', 35, 72],
+        ].map(([k, from, to]) => (
+          <div key={k as string}>
+            <div className="flex justify-between text-navy-700/70">
+              <span>{k}</span>
+              <span className="font-semibold text-brand-blue">+{(to as number) - (from as number)}%</span>
+            </div>
+            <div className="relative mt-1.5 h-2 overflow-hidden rounded-full bg-navy-900/10">
+              <div className="absolute inset-y-0 left-0 rounded-full bg-navy-900/20" style={{ width: `${from}%` }} />
+              <div className="absolute inset-y-0 rounded-r-full bg-brand-blue" style={{ left: `${from}%`, width: `${(to as number) - (from as number)}%` }} />
+            </div>
+          </div>
+        ))}
+      </div>
+    ),
+  },
 ]
 
 export default function ForEducators() {
@@ -81,80 +88,76 @@ export default function ForEducators() {
         eyebrow="For Educators"
         title={
           <>
-            Teach the world, <span className="text-gradient-brand">on your terms.</span>
+            Spend the session teaching, <span className="text-gradient-brand">not preparing.</span>
           </>
         }
-        description="Set your own hours, connect with motivated learners globally, and get paid reliably for doing what you already love."
-        image={{ src: '/photos/educators-hero.jpg', alt: 'A tutor reviewing his lesson plan before an online session' }}
+        description="Before each lesson you receive a briefing: what the learner has mastered, what they avoid, what to focus on."
+        actions={[{ label: 'Start Teaching With Us', to: EDUCATOR_SIGNUP_URL }]}
+        image={{ src: '/photos/educators-hero.jpg', alt: 'An educator reviewing a lesson plan before an online session' }}
       />
 
-      <FeatureRows eyebrow="Why tutors teach here" heading="Teaching, without the admin." rows={ROWS} />
+      <Section className="pt-4 sm:pt-8">
+        <SectionHeading title="Why teach with LinkGlobal" />
+        <CardRow
+          items={[
+            { title: 'Arrive already informed', line: 'The hour goes to teaching, not assessment.' },
+            { title: 'Learners around the world', line: 'Newcomers, students, and professionals, wherever you are based.' },
+            { title: 'A schedule built around yours', line: 'You set your own availability.' },
+          ]}
+        />
+      </Section>
 
-      <NavyBand className="py-8 sm:py-12">
-        <div className="mx-auto max-w-2xl text-center">
-          <span className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-cyan">
-            Getting Started
-          </span>
-          <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">Become a tutor in four steps.</h2>
-        </div>
-
-        <div className="mx-auto mt-10 grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {STEPS.map((s, i) => (
-            <motion.div
-              key={s.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10"
-            >
-              <span
-                className="flex h-10 w-10 items-center justify-center rounded-xl text-sm font-bold text-white shadow-[0_6px_16px_rgba(0,0,0,0.18)]"
-                style={{ background: s.color }}
-              >
-                {i + 1}
-              </span>
-              <h3 className="mt-4 text-lg font-bold text-white">{s.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/65">{s.description}</p>
-            </motion.div>
-          ))}
+      <NavyBand className="py-10 sm:py-16">
+        <div className="mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-2 md:gap-16">
+          <Reveal>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-cyan">The Loop, from your side</p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+              You see where each learner stands, and what changed.
+            </h2>
+            <p className="mt-4 text-lg text-white/70">After the session, their path updates automatically.</p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="rounded-3xl bg-white p-6 shadow-[0_30px_80px_rgba(0,0,0,0.35)]">
+              <div className="flex items-center justify-between">
+                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-navy-700/60">Sample · Educator briefing</p>
+              </div>
+              <dl className="mt-5 space-y-4 text-sm" aria-label="An educator briefing listing what the learner has mastered and still avoids">
+                {BRIEFING.map((r) => (
+                  <div key={r.k}>
+                    <dt className={`text-[11px] font-bold uppercase tracking-[0.2em] ${r.c}`}>{r.k}</dt>
+                    <dd className="mt-1 text-navy-950">{r.v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </Reveal>
         </div>
       </NavyBand>
 
-      <section className="relative px-6 pb-16 sm:pb-20">
-        {/* Screenshot now paired with copy explaining what it shows. */}
-        <div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:gap-14">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-blue">Before every session</p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-navy-950 sm:text-4xl">
-              Walk in prepared, not guessing.
-            </h2>
-            <p className="mt-4 text-lg leading-relaxed text-navy-700/75">
-              Each session comes with the learner&rsquo;s details and AI-suggested discussion topics, so you can spend
-              the time teaching instead of planning from scratch.
-            </p>
-          </div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden rounded-3xl shadow-[0_25px_60px_rgba(19,41,82,0.18)]"
+      <Section>
+        <SectionHeading
+          eyebrow="How we select educators"
+          title="Selected for teaching ability, not only fluency."
+          line="We look at how you explain, how you correct, and how you read cultural context."
+        />
+        <Reveal className="mx-auto mt-6 max-w-2xl text-center">
+          {PENDING.educatorSelection && <p className="text-navy-700/75">{PENDING.educatorSelection}</p>}
+          <SmartLink
+            to={EDUCATOR_SIGNUP_URL}
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-5 py-2.5 text-sm font-semibold text-emerald-700 transition-colors hover:bg-emerald-500/20"
           >
-            <img
-              src="/gallery/session-details.png"
-              alt="LinkGlobal Network session details with AI-generated discussion topics"
-              className="w-full object-cover"
-            />
-          </motion.div>
-        </div>
-      </section>
+            <span className="h-2 w-2 rounded-full bg-emerald-500" /> Applications are open.
+          </SmartLink>
+        </Reveal>
+      </Section>
 
+      <FeatureRows heading="Your dashboard" rows={DASHBOARD} />
+
+      <div className="pt-12" />
       <CtaBand
-        title="Ready to start teaching?"
-        description="Join tutors in over 120 countries already teaching on LinkGlobal Network."
-        primary={{ label: 'Start Your Journey', to: '/try-now' }}
-        secondary={{ label: 'Contact Us', to: '/contact' }}
+        title="Your fluency is already an asset."
+        description="LinkGlobal connects it with the people who need it."
+        primary={{ label: 'Start Teaching With Us', to: EDUCATOR_SIGNUP_URL }}
       />
     </PageShell>
   )

@@ -1,85 +1,28 @@
-import { motion } from 'framer-motion'
 import PageShell from '../components/PageShell'
 import NavyBand from '../components/NavyBand'
 import PageHeader from '../components/PageHeader'
-import FeatureRows, { CardLabel, Pill } from '../components/FeatureRows'
-import type { FeatureRow } from '../components/FeatureRows'
-import AvatarIllustration from '../components/AvatarIllustration'
 import CtaBand from '../components/CtaBand'
-import { CheckIcon } from '../components/icons/LineIcons'
+import SampleCards from '../components/dashboard/SeeWhereItHappens'
+import type { SampleData } from '../components/dashboard/SeeWhereItHappens'
+import { BeforeDuringAfter, CardRow, Reveal, Section, SectionHeading, TwoRoles } from '../components/blocks'
+import { LEARNER_SIGNUP_URL } from '../content/site'
 
-const ROWS: FeatureRow[] = [
-  {
-    eyebrow: 'Your plan',
-    title: 'A path built around you.',
-    line: 'A short placement conversation finds your level, then every lesson targets exactly what you need next.',
-    visual: (
-      <div>
-        <CardLabel>This week</CardLabel>
-        <ul className="mt-4 space-y-3 text-sm">
-          {[
-            ['Introduce yourself with confidence', true],
-            ['Handle small talk without pausing', true],
-            ['Explain your work clearly', false],
-          ].map(([t, done]) => (
-            <li key={t as string} className="flex items-center gap-3">
-              <span
-                className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${
-                  done ? 'bg-brand-blue text-white' : 'border-2 border-brand-blue/40'
-                }`}
-              >
-                {done && <CheckIcon className="h-3 w-3" />}
-              </span>
-              <span className={done ? 'text-navy-950' : 'text-navy-700/60'}>{t}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    ),
+// For Learners, per Website Copy v7 (section 03).
+
+const STUDENT_SAMPLE: SampleData = {
+  path: [
+    'Week 2 · Ask a question in a seminar without rehearsing it',
+    'Week 4 · Disagree politely in a group discussion',
+    'Week 6 · Admission interview: explain your research in ninety seconds',
+  ],
+  briefing: {
+    mastered: 'Introducing his research, prepared answers',
+    avoiding: 'Interrupting to make a point, unscripted follow-ups',
+    focus: 'Seminar simulation, with prompts to interject',
   },
-  {
-    eyebrow: 'Your schedule',
-    title: 'Native-speaking tutors, when it suits you.',
-    line: 'Book live sessions around your life — mornings, lunch breaks or late evenings. No fixed class times.',
-    visual: (
-      <div>
-        <CardLabel>Pick a time</CardLabel>
-        <div className="mt-4 flex flex-wrap gap-2">
-          <Pill>Mon · 7:00 am</Pill>
-          <Pill on>Wed · 12:30 pm</Pill>
-          <Pill>Thu · 8:00 pm</Pill>
-          <Pill>Sat · 10:00 am</Pill>
-        </div>
-        <div className="mt-5 flex items-center gap-3 border-t border-navy-900/5 pt-4">
-          <AvatarIllustration color="#1ba3e0" className="h-10 w-10 shrink-0 rounded-full" />
-          <div className="text-sm">
-            <p className="font-semibold text-navy-950">Native speaker</p>
-            <p className="text-xs text-navy-700/60">Matched to your goals</p>
-          </div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    eyebrow: 'Your language',
-    title: '40+ languages, 120+ countries.',
-    line: 'From widely spoken languages to less common ones — find a tutor for the language you actually need.',
-    visual: (
-      <div>
-        <CardLabel>I want to speak</CardLabel>
-        <div className="mt-4 flex flex-wrap gap-2">
-          <Pill on>Spanish</Pill>
-          <Pill>French</Pill>
-          <Pill>Japanese</Pill>
-          <Pill>Arabic</Pill>
-          <Pill>Portuguese</Pill>
-          <Pill>German</Pill>
-          <Pill>+ 35 more</Pill>
-        </div>
-      </div>
-    ),
-  },
-]
+  sessions: 9,
+  progressLine: 'The pause before speaking is getting shorter. Unprompted questions are increasing.',
+}
 
 export default function ForLearners() {
   return (
@@ -88,53 +31,76 @@ export default function ForLearners() {
         eyebrow="For Learners"
         title={
           <>
-            Learn at the speed of <span className="text-gradient-brand">real life.</span>
+            Language for the conversations <span className="text-gradient-brand">ahead of you.</span>
           </>
         }
-        description="Personalized lessons, flexible scheduling, and real conversations with native speakers — so progress fits around your life, not the other way around."
-        image={{ src: '/photos/learners-hero.jpg', alt: 'A learner reviewing her LinkGlobal Network dashboard in a modern office' }}
+        description="Most learners know more than they can use under pressure. LinkGlobal closes that gap."
+        actions={[{ label: 'Start Your Journey', to: LEARNER_SIGNUP_URL }]}
+        image={{ src: '/photos/learners-hero.jpg', alt: 'A learner reviewing her LinkGlobal dashboard' }}
       />
 
-      <FeatureRows eyebrow="Why learners choose us" heading="Built for how you actually learn." rows={ROWS} />
+      <Section className="pt-4 sm:pt-8">
+        <SectionHeading title="Built around your reason for learning." />
+        <CardRow
+          items={[
+            { title: 'Newcomers', line: 'Language for the situations that arrive first: appointments, interviews, school meetings.' },
+            { title: 'International students', line: 'Admission interviews, seminars, and the IELTS or TOEFL score your program requires.' },
+            { title: 'Professionals', line: 'Leading meetings, presenting without a script, handling client calls.' },
+          ]}
+        />
+      </Section>
 
-      <NavyBand className="py-8 sm:py-12">
-        <div className="mx-auto grid max-w-6xl items-center gap-16 md:grid-cols-2">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden rounded-3xl shadow-[0_30px_80px_rgba(0,0,0,0.4)] ring-1 ring-white/10 md:order-2"
-          >
-            <img src="/gallery/practice-report.png" alt="LinkGlobal Network AI practice session report" className="w-full object-cover" />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="px-1 sm:px-2"
-          >
-            <span className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-cyan">
-              See Your Progress
-            </span>
-            <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
-              Know exactly what to work on next.
-            </h2>
-            <p className="mt-5 text-lg leading-relaxed text-white/75">
-              Every session ends with a clear, AI-supported report — what you handled well, what tripped
-              you up, and what to focus on in your next lesson. No guessing, no vague progress bars.
-            </p>
-          </motion.div>
-        </div>
+      <NavyBand className="py-10 sm:py-16">
+        <SectionHeading
+          dark
+          eyebrow="Your learning path"
+          title="Built from what you tell us before you start."
+          line="You describe your goals, your level, and how you intend to use the language. The path shows what you are working toward and what comes first."
+        />
+        <Reveal className="mx-auto mt-8 max-w-2xl text-center">
+          <p className="text-lg font-semibold text-white">
+            Material you have mastered returns only when it is useful. The areas you avoid are not skipped.
+          </p>
+        </Reveal>
       </NavyBand>
 
+      <Section>
+        <SectionHeading title="Your educator prepares before you arrive." />
+        <BeforeDuringAfter
+          items={[
+            { label: 'Before', line: 'A briefing on where you need support.' },
+            { label: 'During', line: 'A lesson that starts at your level.' },
+            { label: 'After', line: 'Your path updates for the next session.' },
+          ]}
+        />
+      </Section>
+
+      <Section className="pt-0 sm:pt-4">
+        <SectionHeading title="Who you will be speaking with." />
+        <TwoRoles
+          educator="Qualified teachers who deliver your lessons and guide your path over time."
+          partner="Native speakers matched to your profession, interests, or destination. Conversation, not a lesson."
+        />
+      </Section>
+
+      <Section className="pb-10 sm:pb-12">
+        <SectionHeading title="Inside the platform" />
+        <CardRow
+          cols={4}
+          items={[
+            { title: 'Your learning path', line: 'A route drawn from your goals, revised as you progress.' },
+            { title: 'Live sessions', line: 'Lessons with an educator who already knows your plan.' },
+            { title: 'Conversation practice', line: 'Native speakers, on the subjects that matter to you.' },
+            { title: 'Progress overview', line: 'Specific, visible, and moving.' },
+          ]}
+        />
+      </Section>
+      <SampleCards data={STUDENT_SAMPLE} />
+
       <CtaBand
-        title="Ready to start learning?"
-        description="Get matched with a tutor and have your first real conversation this week."
-        primary={{ label: 'Start Your Journey', to: '/try-now' }}
-        secondary={{ label: 'View Pricing', to: '/pricing' }}
+        title="The path starts with where you are going."
+        description="We ask about your goal first, then build the route to it."
+        primary={{ label: 'Start Your Journey', to: LEARNER_SIGNUP_URL }}
       />
     </PageShell>
   )

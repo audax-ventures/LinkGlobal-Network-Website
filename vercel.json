@@ -6,5 +6,5 @@
     { "source": "/learners", "destination": "/for-learners", "permanent": true },
     { "source": "/educators", "destination": "/for-educators", "permanent": true }
   ],
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [{ "source": "/((?!_vercel/).*)", "destination": "/index.html" }]
 }
