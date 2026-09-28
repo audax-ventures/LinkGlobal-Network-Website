@@ -3,7 +3,8 @@ import { motion } from 'framer-motion'
 import NavyBand from '../NavyBand'
 import PeoplePhilosophy from './PeoplePhilosophy'
 import ThreeParts from './ThreeParts'
-import { CardRow, OutcomeList, Reveal, Section, SectionHeading, TwoRoles } from '../blocks'
+import { LessonsAndConversationTour, PersonalizedPathsTour, RealLifeProgressTour } from './TourSections'
+import { Reveal, Section, SectionHeading } from '../blocks'
 import { PENDING } from '../../content/site'
 
 // Homepage sections from Website Copy v7 (section 02), in reading order.
@@ -150,44 +151,17 @@ export function PhilosophyAndSystem() {
 }
 
 export function LessonsAndConversation() {
-  return (
-    <Section>
-      <SectionHeading eyebrow="Lessons and conversation" title="Two kinds of speaking. Two different jobs." />
-      <TwoRoles
-        educator="Structured lessons: correction, technique, direct feedback."
-        partner="Native speakers you talk with. Real subjects, real pace, no assessment."
-      />
-    </Section>
-  )
+  return <LessonsAndConversationTour />
 }
 
 export function BuiltForConversations() {
-  return (
-    <Section className="pt-0 sm:pt-4">
-      <SectionHeading eyebrow="Built for conversations that matter" title="A path shaped by what you are preparing for." />
-      <CardRow
-        items={[
-          { title: 'Newcomers', line: "A bank appointment, a job interview, a meeting at your child's school." },
-          { title: 'International students', line: 'Admission interviews, seminar discussions, IELTS and TOEFL preparation.' },
-          { title: 'Professionals', line: 'Meetings, presentations, and client calls in the language your work requires.' },
-        ]}
-      />
-      <Reveal className="mx-auto mt-10 max-w-2xl text-center">
-        <p className="text-navy-700/70">Every educator is assessed before joining, and briefed before every session.</p>
-      </Reveal>
-    </Section>
-  )
+  return <PersonalizedPathsTour />
 }
 
 export const OUTCOMES = ['An interview attended.', 'An idea raised in a meeting.', 'An acceptance letter.', 'A friendship in a second language.']
 
 export function HowWeMeasureProgress() {
-  return (
-    <Section>
-      <SectionHeading eyebrow="How we measure progress" title="Not lessons completed. What learners become able to do." />
-      <OutcomeList items={OUTCOMES} />
-    </Section>
-  )
+  return <RealLifeProgressTour />
 }
 
 const QUOTES = [

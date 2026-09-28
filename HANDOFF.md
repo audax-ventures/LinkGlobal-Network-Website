@@ -51,6 +51,12 @@ roles "certified educator" / "conversation partner".
   (~/Desktop/three-parts-section.html) as home/ThreeParts.tsx (3.4s/part
   overview ending on all three, autoplay at 25% visible). Footer em dash
   changed to a comma (house style).
+- Home "Lessons and conversation", "Built for conversations that matter"
+  and "How we measure progress" replaced (Sept 28) by Riley's designs
+  (~/Desktop/lessons-and-conversations.html, personalized-paths.html,
+  real-life-progress.html) in home/TourSections.tsx: shared useTour hook
+  (3.5s/step, autoplay at 25% visible). House-style edits: practise (verb),
+  em dash in progress intro -> comma.
 - For You H1 = "Every language you speak is worth something to someone."
   (Riley confirmed Sept 28 2026; the copy doc's SEO section suggested
   "Practise with people who live the language." — not used).
