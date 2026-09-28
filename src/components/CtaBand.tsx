@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 interface CtaBandProps {
   title: string
-  description: string
+  description?: string
   primary: { label: string; to: string }
   secondary?: { label: string; to: string }
 }
@@ -20,7 +20,7 @@ export default function CtaBand({ title, description, primary, secondary }: CtaB
         style={{ background: 'linear-gradient(135deg, #0e2a4d, #1ba3e0)' }}
       >
         <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-5xl">{title}</h2>
-        <p className="mt-4 text-white/85">{description}</p>
+        {description && <p className="mt-4 text-white/85">{description}</p>}
         <div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4">
           <SmartLink
             to={primary.to}

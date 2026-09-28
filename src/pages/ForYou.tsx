@@ -1,147 +1,89 @@
-import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
 import PageShell from '../components/PageShell'
 import NavyBand from '../components/NavyBand'
 import PageHeader from '../components/PageHeader'
 import CtaBand from '../components/CtaBand'
-import { CheckIcon } from '../components/icons/LineIcons'
+import SmartLink from '../components/SmartLink'
+import { CardRow, Reveal, Section, SectionHeading } from '../components/blocks'
+import { LEARNER_SIGNUP_URL, PARTNER_FIND_URL, PARTNER_SHARE_URL } from '../content/site'
 
-interface Audience {
-  eyebrow: string
-  title: string
-  image: string
-  color: string
-  points: string[]
-  cta: { label: string; to: string }
-}
+// For You · Conversation Partners, per Website Copy v7 (section 05).
 
-const AUDIENCES: Audience[] = [
-  {
-    eyebrow: 'For Learners',
-    title: 'Learn the way a language is actually spoken.',
-    image: '/photos/learners.jpg',
-    color: '#1ba3e0',
-    points: [
-      'Personalized pacing built around your goals and schedule',
-      '1:1 sessions with real, native-speaking tutors',
-      'AI-supported practice reports that track real progress',
-    ],
-    cta: { label: 'Explore For Learners', to: '/learners' },
-  },
-  {
-    eyebrow: 'For Educators',
-    title: 'Teach on your own schedule, from anywhere.',
-    image: '/photos/educators.jpg',
-    color: '#f5a623',
-    points: [
-      'Set your own hours and rates',
-      'Get paid reliably for sessions you already love giving',
-      'Connect with motivated learners across 120+ countries',
-    ],
-    cta: { label: 'Explore For Educators', to: '/educators' },
-  },
-  {
-    eyebrow: 'For Institutions',
-    title: 'Bring real conversation practice to your classroom or team.',
-    image: '/photos/institutions.jpg',
-    color: '#2dd4bf',
-    points: [
-      'Bulk seats for schools, companies, and language programs',
-      'Admin dashboards to track cohort progress at a glance',
-      'Dedicated onboarding support for your organization',
-    ],
-    cta: { label: 'Get in Touch', to: '/contact' },
-  },
-]
-
-function AudienceRow({ a, i, dark = false }: { a: (typeof AUDIENCES)[number]; i: number; dark?: boolean }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className={`grid items-center gap-10 md:grid-cols-2 md:gap-16 ${
-        i % 2 === 1 ? 'md:[&>*:first-child]:order-2' : ''
-      }`}
-    >
-      <div className="overflow-hidden rounded-3xl shadow-[0_30px_80px_rgba(0,0,0,0.25)]">
-        <img src={a.image} alt={a.title} className="aspect-[4/3] w-full object-cover" />
-      </div>
-
-      <div className={dark ? 'px-1 sm:px-4' : 'rounded-3xl bg-white px-6 py-8 sm:px-9 sm:py-9 shadow-[0_15px_40px_rgba(19,41,82,0.1)]'}>
-        <span
-          className="inline-block rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-white"
-          style={{ background: a.color }}
-        >
-          {a.eyebrow}
-        </span>
-        <h2 className={`mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl ${dark ? 'text-white' : 'text-navy-950'}`}>{a.title}</h2>
-        <ul className="mt-6 space-y-3">
-          {a.points.map((p) => (
-            <li key={p} className={`flex items-start gap-3 ${dark ? 'text-white/80' : 'text-navy-700/80'}`}>
-              <span
-                className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-white"
-                style={{ background: a.color }}
-              >
-                <CheckIcon className="h-3 w-3" />
-              </span>
-              <span>{p}</span>
-            </li>
-          ))}
-        </ul>
-        <Link
-          to={a.cta.to}
-          className="mt-8 inline-block rounded-full border-2 px-7 py-3 text-sm font-semibold transition-colors hover:text-white"
-          style={{ borderColor: a.color, color: a.color }}
-          onMouseEnter={(e) => (e.currentTarget.style.background = a.color)}
-          onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
-        >
-          {a.cta.label}
-        </Link>
-      </div>
-    </motion.div>
-  )
-}
+const BUTTON =
+  'inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(30,120,190,0.3)] transition-transform hover:scale-105'
+const BUTTON_BG = { background: 'linear-gradient(90deg, #1ba3e0, #3ec6ff)' }
 
 export default function ForYou() {
   return (
     <PageShell>
       <PageHeader
-        eyebrow="Who It's For"
+        eyebrow="Conversation Partners"
         title={
           <>
-            Made for learners, tutors, <span className="text-gradient-brand">and institutions alike.</span>
+            Every language you speak is worth something <span className="text-gradient-brand">to someone.</span>
           </>
         }
-        description="Whoever you are in the language-learning equation, LinkGlobal Network was built with your side of it in mind."
-        image={{ src: '/photos/hero-learner.jpg', alt: 'A student learning with LinkGlobal Network' }}
+        description="You do not have to be a teacher to help someone speak. You just have to speak."
+        actions={[
+          { label: 'Find Your Conversation Partner', to: '#for-learners' },
+          { label: 'Share Your Language', to: '#for-native-speakers' },
+        ]}
+        image={{ src: '/photos/hero-learner.jpg', alt: 'A learner in conversation with a native speaker matched to their profession' }}
       />
 
-      <section className="relative px-6 pb-4">
-        <div className="mx-auto max-w-6xl">
-          <AudienceRow a={AUDIENCES[0]} i={0} />
-        </div>
-      </section>
+      <Section className="scroll-mt-24 pt-4 sm:pt-8">
+        <div id="for-learners" className="relative -top-24" aria-hidden="true" />
+        <SectionHeading
+          eyebrow="For learners"
+          title="A conversation with someone who lives the language."
+          line="A lesson teaches the language. A conversation puts you inside it."
+        />
+        <CardRow
+          items={[
+            { title: 'Your profession', line: 'Someone who works in your field.' },
+            { title: 'Your destination', line: 'Someone who has lived where you are going.' },
+            { title: 'Your interests', line: 'Someone who follows what you follow.' },
+          ]}
+        />
+        <Reveal className="mt-10 text-center">
+          <p className="text-lg font-semibold text-navy-950">No lesson plan. No assessment. No correction.</p>
+          <SmartLink to={PARTNER_FIND_URL} className={`mt-6 ${BUTTON}`} style={BUTTON_BG}>
+            Find Your Conversation Partner
+          </SmartLink>
+        </Reveal>
+      </Section>
 
-      {/* Middle row on navy, like the homepage's dark sections. */}
-      <NavyBand className="py-10 sm:py-14">
-        <div className="mx-auto max-w-6xl">
-          <AudienceRow a={AUDIENCES[1]} i={1} dark />
-        </div>
+      <NavyBand className="py-10 sm:py-16">
+        <div id="for-native-speakers" className="relative -top-24" aria-hidden="true" />
+        <SectionHeading
+          dark
+          eyebrow="For native speakers"
+          title="Share the language you already speak, on your terms."
+          line="Someone is studying for years to speak the language you grew up with."
+        />
+        <Reveal className="mx-auto mt-4 max-w-2xl text-center">
+          <p className="text-lg text-white/70">Nothing to teach and nothing to prepare. Talk the way you always talk.</p>
+        </Reveal>
+        <CardRow
+          dark
+          items={[
+            { title: 'A conversation, not a class', line: 'Your language, your subjects, your opinions.' },
+            { title: 'People close to your world', line: 'Matched by your field, your city, or what you follow.' },
+            { title: 'Whenever it suits you', line: 'No fixed hours, and nothing to commit to.' },
+          ]}
+        />
+        <Reveal className="mt-10 text-center">
+          <p className="text-lg font-semibold text-white">Every learner remembers the first person who was patient with them.</p>
+          <SmartLink to={PARTNER_SHARE_URL} className={`mt-6 ${BUTTON}`} style={BUTTON_BG}>
+            Share Your Language
+          </SmartLink>
+        </Reveal>
       </NavyBand>
 
-      <section className="relative px-6 pb-16 sm:pb-20">
-        <div className="mx-auto max-w-6xl">
-          <AudienceRow a={AUDIENCES[2]} i={2} />
-        </div>
-      </section>
-
+      <div className="pt-8" />
       <CtaBand
-        title="Not sure where to start?"
-        description="Jump straight in and try a session, or talk to us about what would work best for you."
-        primary={{ label: 'Start Your Journey', to: '/try-now' }}
-        secondary={{ label: 'Contact Us', to: '/contact' }}
+        title="A language becomes yours the moment you use it with someone."
+        primary={{ label: 'Start Your Journey', to: LEARNER_SIGNUP_URL }}
+        secondary={{ label: 'Share Your Language', to: PARTNER_SHARE_URL }}
       />
     </PageShell>
   )

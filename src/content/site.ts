@@ -12,6 +12,12 @@ export const EDUCATOR_SIGNUP_URL = '/try-now'
 
 export const CONTACT_EMAIL = 'hello@linkglobal.com'
 
+// For You (Conversation Partners) buttons. The copy doc defers their real
+// destinations; until then they go to Contact (whose form has an
+// "I want to be a conversation partner" option).
+export const PARTNER_FIND_URL = '/contact'
+export const PARTNER_SHARE_URL = '/contact'
+
 export const SOCIAL: { instagram: string | null; linkedin: string | null } = {
   instagram: null,
   linkedin: null,
