@@ -10,7 +10,7 @@ export const BRAND = 'LinkGlobal'
 export const LEARNER_SIGNUP_URL = '/try-now'
 export const EDUCATOR_SIGNUP_URL = '/try-now'
 
-export const CONTACT_EMAIL = 'hello@linkglobal.com'
+export const CONTACT_EMAIL = 'info@linkglobalnetwork.ca'
 
 // For You (Conversation Partners) buttons. The copy doc defers their real
 // destinations; until then they go to Contact (whose form has an

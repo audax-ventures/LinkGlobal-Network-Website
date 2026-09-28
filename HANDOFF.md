@@ -12,7 +12,7 @@ English, no em dashes, no exclamation marks, brand "LinkGlobal",
 roles "certified educator" / "conversation partner".
 - `src/content/site.ts`: signup URLs (LEARNER/EDUCATOR_SIGNUP_URL, now
   /try-now), PARTNER_FIND/SHARE_URL (/contact), CONTACT_EMAIL
-  (hello@linkglobal.com), SOCIAL + LEGAL links (null = hidden), and PENDING
+  (info@linkglobalnetwork.ca; Riley rejected the doc's hello@linkglobal.com), SOCIAL + LEGAL links (null = hidden), and PENDING
   values the doc left blank: lessonPrice, aiFeedbackPrice, languages,
   replyDays, educatorSelection, proof numbers, testimonialNames. Null =
   hidden or neutral fallback ("Price to be announced", "LinkGlobal learner").
@@ -26,8 +26,7 @@ roles "certified educator" / "conversation partner".
   BeforeDuringAfter, TwoRoles, OutcomeList, Reveal), home/HomeSections.tsx,
   SampleCards (dashboard/SeeWhereItHappens.tsx, takes SampleData).
 - api/chat.ts facts rewritten to v7 (pay as you go, no prices quoted).
-  api/contact.ts still delivers to info@linkglobalnetwork.ca (unchanged
-  on purpose until hello@linkglobal.com exists).
+  api/contact.ts delivers to info@linkglobalnetwork.ca (same as shown).
 - vercel.json rewrite excludes /_vercel/* (analytics script was being
   served index.html because Web Analytics isn't enabled yet).
 - Nav: below md = logo + compact Start Your Journey + menu button (the 7
