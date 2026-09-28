@@ -29,7 +29,7 @@ function RoadmapView() {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <p className="text-lg font-bold text-white">Your 8-week roadmap</p>
+        <p className="text-lg font-bold text-white">Your learning path · 8 weeks</p>
         <SampleTag />
       </div>
       <ol className="mt-5 space-y-3">
@@ -68,7 +68,7 @@ function SessionView() {
       </div>
       <div className="mt-5 grid grid-cols-2 gap-3">
         {[
-          { name: 'Your tutor', color: '#3ec6ff' },
+          { name: 'Your educator', color: '#3ec6ff' },
           { name: 'You', color: '#8fe0ff' },
         ].map((p) => (
           <div key={p.name} className="relative flex aspect-[4/3] items-center justify-center rounded-xl bg-white/5">
@@ -79,7 +79,7 @@ function SessionView() {
       </div>
       <div className="mt-3 rounded-xl bg-white/5 px-4 py-3">
         <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-brand-cyan">Today&rsquo;s focus</p>
-        <p className="mt-1 text-sm text-white">Describing your experience — no notes</p>
+        <p className="mt-1 text-sm text-white">Describing your experience without notes</p>
       </div>
     </div>
   )
@@ -123,10 +123,63 @@ function ProgressView() {
   )
 }
 
+function ConversationView() {
+  return (
+    <div>
+      <div className="flex items-center justify-between">
+        <p className="text-lg font-bold text-white">Your conversation partner</p>
+        <SampleTag />
+      </div>
+      <div className="mt-5 flex items-center gap-4 rounded-xl bg-white/5 px-4 py-4">
+        <AvatarIllustration color="#2dd4bf" className="h-12 w-12 shrink-0 rounded-full" />
+        <div className="min-w-0">
+          <p className="font-semibold text-white">Native speaker · Toronto</p>
+          <p className="text-sm text-white/60">Works in nursing · follows football</p>
+        </div>
+      </div>
+      <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.15em] text-white/45">Matched on</p>
+      <div className="mt-2 flex flex-wrap gap-2">
+        {['Your profession', 'Your destination', 'Your interests'].map((t) => (
+          <span key={t} className="rounded-full bg-brand-cyan/15 px-3 py-1 text-xs font-semibold text-brand-cyan">
+            {t}
+          </span>
+        ))}
+      </div>
+      <p className="mt-4 text-sm text-white/60">No lesson plan. No assessment. Just conversation.</p>
+    </div>
+  )
+}
+
+function FeedbackView() {
+  const notes = [
+    { k: 'Fluency', v: 'Longer answers without restarting.' },
+    { k: 'Hesitation', v: 'Pauses before past tense are shorter.' },
+    { k: 'Accuracy', v: 'Focus next: articles with job titles.' },
+  ]
+  return (
+    <div>
+      <div className="flex items-center justify-between">
+        <p className="text-lg font-bold text-white">Your speaking analysis</p>
+        <SampleTag />
+      </div>
+      <ul className="mt-5 space-y-3">
+        {notes.map((n) => (
+          <li key={n.k} className="rounded-xl bg-white/5 px-4 py-3">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-brand-cyan">{n.k}</p>
+            <p className="mt-1 text-sm text-white">{n.v}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
 const TABS: { title: string; copy: string; view: ReactNode }[] = [
-  { title: 'Your Roadmap', copy: 'A plan built from your goals, updated after every conversation.', view: <RoadmapView /> },
-  { title: 'Live Sessions', copy: 'Unscripted conversation with a native speaker who already knows you.', view: <SessionView /> },
-  { title: 'Your Progress', copy: 'Every session updates the picture — hesitation shrinking, fluency rising.', view: <ProgressView /> },
+  { title: 'Your learning path', copy: 'The full route, and the stage you are on.', view: <RoadmapView /> },
+  { title: 'Live sessions', copy: 'Lessons with an educator who already knows your plan.', view: <SessionView /> },
+  { title: 'Conversation practice', copy: 'Native speakers matched to your goals and interests.', view: <ConversationView /> },
+  { title: 'Progress overview', copy: 'What is easier now, and what comes next.', view: <ProgressView /> },
+  { title: 'AI feedback', copy: 'Personal analysis of how you speak.', view: <FeedbackView /> },
 ]
 
 export default function JourneyDashboard() {
@@ -145,8 +198,7 @@ export default function JourneyDashboard() {
     <section ref={sectionRef} className="relative px-6 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl">
         <div className="text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-blue">A look inside</p>
-          <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-navy-950 sm:text-6xl">Your journey has a dashboard.</h2>
+          <h2 className="text-4xl font-extrabold tracking-tight text-navy-950 sm:text-6xl">Inside the platform</h2>
         </div>
 
         <div className="mt-12 grid items-center gap-10 sm:mt-16 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-16">

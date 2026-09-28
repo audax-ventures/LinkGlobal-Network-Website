@@ -7,22 +7,22 @@ import { useEffect, useRef, useState } from 'react'
 
 const NODES = [
   { label: 'AI analyzes', angle: -90 },
-  { label: 'Teacher briefed', angle: 30 },
+  { label: 'Educator briefed', angle: 30 },
   { label: 'You converse', angle: 150 },
 ]
 
 const PHASES = [
   {
-    kicker: 'Before your session',
-    copy: 'The AI briefs your teacher on what you’ve mastered and what you’re still avoiding.',
+    kicker: 'Before',
+    copy: 'The AI briefs your educator on where you hesitate.',
   },
   {
-    kicker: 'During your session',
-    copy: 'No diagnosis, no level-guessing. The conversation starts where you need it.',
+    kicker: 'During',
+    copy: 'The lesson starts at your level. No time spent on assessment.',
   },
   {
-    kicker: 'After your session',
-    copy: 'Everything that happened feeds back into your roadmap, which adjusts before your next lesson.',
+    kicker: 'After',
+    copy: 'Your path updates before the next session.',
   },
 ]
 
@@ -85,14 +85,14 @@ export default function LinkGlobalLoop() {
       <div className="sticky top-0 flex min-h-screen items-center overflow-hidden px-6 py-8 md:py-16">
         <div className="mx-auto grid w-full max-w-6xl items-center gap-10 md:grid-cols-2 md:gap-16">
           <div className="text-center md:col-span-2">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-cyan">How it works</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-cyan">The Loop</p>
             <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
-              Every session makes the next one better.
+              Every session moves the path forward.
             </h2>
           </div>
 
           <div className="mx-auto w-full max-w-[250px] sm:max-w-[380px]">
-            <svg viewBox="0 0 320 320" className="h-auto w-full overflow-visible" role="img" aria-label="The LinkGlobal Loop: AI analyzes, teacher briefed, you converse">
+            <svg viewBox="0 0 320 320" className="h-auto w-full overflow-visible" role="img" aria-label="The LinkGlobal Loop: AI analyzes, educator briefed, you converse">
               <circle cx="160" cy="160" r={R} fill="none" stroke="rgba(62,198,255,0.18)" strokeWidth="2" />
               <circle
                 ref={arcRef}

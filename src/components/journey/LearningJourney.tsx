@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import { CheckIcon } from '../icons/LineIcons'
 import AvatarIllustration from '../AvatarIllustration'
+import { Link } from 'react-router-dom'
 
 // Lingoda-style journey: one straight vertical line whose fill grows (and
 // gets more saturated) as the visitor scrolls, numbered nodes, and minimal
@@ -25,66 +26,69 @@ function Chip({ children }: { children: ReactNode }) {
 
 const STEPS: Step[] = [
   {
-    title: 'Discover',
-    line: 'Your goals, your situation — not a placement test.',
+    title: 'Your profile',
+    line: 'Your goals, your level, your profession, your interests. We start with why you are learning, not with a score.',
     visual: (
-      <ul className="space-y-2.5 text-sm text-navy-700">
-        {['Your goals', 'Your situation', 'What you’re preparing for'].map((t) => (
-          <li key={t} className="flex items-center gap-2.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-brand-blue" />
-            {t}
-          </li>
-        ))}
-      </ul>
+      <div className="flex flex-wrap gap-2">
+        <Chip>Goal · job interview</Chip>
+        <Chip>Level · B1</Chip>
+        <Chip>Work · nursing</Chip>
+        <Chip>Into · football</Chip>
+      </div>
     ),
   },
   {
-    title: 'Understand',
-    line: 'The AI learns how you actually speak.',
+    title: 'Your learning path',
+    line: 'A structured route with a clear destination. You see the whole plan, not the next exercise.',
     visual: (
-      <div className="flex items-center gap-4">
-        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-[3px] border-brand-blue text-lg font-extrabold text-navy-950">
-          B1
+      <div>
+        <div className="flex items-center justify-between text-xs font-semibold text-navy-700/60">
+          <span>Today</span>
+          <span>Week 8 · Job interview</span>
         </div>
-        <div className="flex-1 space-y-2 text-xs text-navy-700/70">
-          {[
-            ['Fluency', '62%'],
-            ['Vocabulary', '71%'],
-            ['Confidence', '48%'],
-          ].map(([k, w]) => (
-            <div key={k}>
-              <div className="flex justify-between">
-                <span>{k}</span>
-              </div>
-              <div className="mt-1 h-1.5 rounded-full bg-navy-900/10">
-                <div className="h-full rounded-full bg-brand-blue" style={{ width: w }} />
-              </div>
-            </div>
+        <div className="relative mt-3 h-2 rounded-full bg-navy-900/10">
+          <div className="absolute inset-y-0 left-0 w-[35%] rounded-full bg-brand-blue" />
+          {[0, 25, 50, 75, 100].map((x) => (
+            <span
+              key={x}
+              className={`absolute top-1/2 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full ring-2 ring-white ${x <= 35 ? 'bg-brand-blue' : 'bg-navy-900/20'}`}
+              style={{ left: `${x}%` }}
+            />
           ))}
         </div>
       </div>
     ),
   },
   {
-    title: 'Plan',
-    line: 'A roadmap built around where you’re headed.',
+    title: 'Continuous adaptation',
+    line: 'The AI tracks how you actually speak, and revises the path as you progress.',
     visual: (
-      <div className="flex flex-wrap gap-2">
-        <Chip>Job interview</Chip>
-        <Chip>8 weeks</Chip>
-        <Chip>Speaking focus</Chip>
+      <div className="space-y-2 text-xs text-navy-700/70">
+        {[
+          ['Fluency', '62%'],
+          ['Accuracy', '71%'],
+          ['Confidence', '48%'],
+        ].map(([k, w]) => (
+          <div key={k}>
+            <span>{k}</span>
+            <div className="mt-1 h-1.5 rounded-full bg-navy-900/10">
+              <div className="h-full rounded-full bg-brand-blue" style={{ width: w }} />
+            </div>
+          </div>
+        ))}
+        <p className="pt-1 font-semibold text-brand-blue">Path updated after session 7</p>
       </div>
     ),
   },
   {
-    title: 'Converse',
-    line: 'Live sessions with a native speaker who already knows you.',
+    title: 'Lessons with certified educators',
+    line: 'Live, structured teaching. Your educator is briefed from your path before every session.',
     visual: (
       <div className="flex items-center gap-3">
         <AvatarIllustration color="#1ba3e0" className="h-11 w-11 shrink-0 rounded-full" />
         <div className="flex-1 text-sm">
-          <p className="font-semibold text-navy-950">Your tutor is ready</p>
-          <p className="text-xs text-navy-700/60">Briefed on your last session</p>
+          <p className="font-semibold text-navy-950">Your educator is ready</p>
+          <p className="text-xs text-navy-700/60">Briefed from your path</p>
         </div>
         <span className="flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 text-[11px] font-semibold text-emerald-600">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" /> Live
@@ -93,14 +97,35 @@ const STEPS: Step[] = [
     ),
   },
   {
-    title: 'Grow',
-    line: 'Every conversation moves you forward.',
+    title: 'Conversation with native speakers',
+    line: 'Real conversation, no lesson plan. Matched to your profession, interests, or destination.',
     visual: (
-      <div className="flex items-center gap-3 text-sm font-bold">
-        <span className="rounded-lg bg-navy-900/5 px-3 py-1.5 text-navy-700/60">B1</span>
-        <span className="h-px flex-1 bg-gradient-to-r from-navy-900/15 to-brand-blue" />
-        <span className="rounded-lg bg-brand-blue px-3 py-1.5 text-white">B2</span>
-        <CheckIcon className="h-4 w-4 text-emerald-500" />
+      <div>
+        <div className="flex items-center gap-3">
+          <AvatarIllustration color="#2dd4bf" className="h-11 w-11 shrink-0 rounded-full" />
+          <div className="text-sm">
+            <p className="font-semibold text-navy-950">Matched with a nurse in Toronto</p>
+            <p className="text-xs text-navy-700/60">Same field, no lesson plan</p>
+          </div>
+        </div>
+        <Link to="/for-you" className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue hover:gap-2.5">
+          See How Conversation Practice Works <span aria-hidden="true">→</span>
+        </Link>
+      </div>
+    ),
+  },
+  {
+    title: 'Visible progress',
+    line: 'Measured by what you become able to do, not by lessons completed.',
+    visual: (
+      <div className="flex items-center gap-3 text-sm">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-white">
+          <CheckIcon className="h-4 w-4" />
+        </span>
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-navy-700/50">Now able to</p>
+          <p className="font-semibold text-navy-950">Answer interview questions without notes</p>
+        </div>
       </div>
     ),
   },
@@ -158,11 +183,11 @@ export default function LearningJourney() {
   }, [])
 
   return (
-    <section className="relative px-6 pb-24 pt-20 sm:pt-28">
+    <section id="how-it-works" className="relative scroll-mt-10 px-6 pb-24 pt-20 sm:pt-28">
       <div className="mx-auto max-w-2xl text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-blue">Your path, step by step</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-blue">How LinkGlobal works</p>
         <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-navy-950 sm:text-6xl">
-          Your learning journey <span className="text-brand-blue">starts here</span>
+          One path, shaped by <span className="text-brand-blue">your goal.</span>
         </h2>
       </div>
 
@@ -220,7 +245,7 @@ export default function LearningJourney() {
                 } ${active ? 'opacity-100' : 'opacity-40 saturate-0'}`}
               >
                 <p className="text-xs font-semibold tracking-[0.2em] text-brand-blue">0{i + 1}</p>
-                <h3 className="mt-1 text-3xl font-extrabold tracking-tight text-navy-950 sm:text-4xl">{step.title}</h3>
+                <h3 className="mt-1 text-2xl font-extrabold tracking-tight text-navy-950 sm:text-3xl">{step.title}</h3>
                 <p className="mt-2 text-base text-navy-700/75 sm:text-lg">{step.line}</p>
               </div>
 

@@ -283,10 +283,20 @@ export default function IntroSection() {
               )}
             </AnimatePresence>
           </div>
+
+          {/* Opening line (copy v7). */}
+          <motion.p
+            className="mt-6 max-w-md text-base text-white/75 sm:text-lg"
+            initial={autoplay && !reduced ? { opacity: 0, y: 8 } : false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          >
+            Every opportunity begins with a conversation.
+          </motion.p>
         </div>
 
         <p className="absolute bottom-6 left-5 hidden text-[11px] font-medium uppercase tracking-[0.3em] text-white/50 sm:bottom-8 sm:left-8 sm:block">
-          40+ languages · 120+ countries
+          Headquartered in Canada
         </p>
 
         {/* Scroll cue — also the way on for anyone who scrolled back up. */}

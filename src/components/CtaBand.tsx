@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import SmartLink from './SmartLink'
 import { motion } from 'framer-motion'
 
 interface CtaBandProps {
@@ -22,19 +22,19 @@ export default function CtaBand({ title, description, primary, secondary }: CtaB
         <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-5xl">{title}</h2>
         <p className="mt-4 text-white/85">{description}</p>
         <div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link
+          <SmartLink
             to={primary.to}
             className="rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-navy-950 shadow-[0_8px_24px_rgba(0,0,0,0.2)] transition-transform hover:scale-105"
           >
             {primary.label}
-          </Link>
+          </SmartLink>
           {secondary && (
-            <Link
+            <SmartLink
               to={secondary.to}
               className="rounded-full border-2 border-white/70 px-8 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
             >
               {secondary.label}
-            </Link>
+            </SmartLink>
           )}
         </div>
       </motion.div>

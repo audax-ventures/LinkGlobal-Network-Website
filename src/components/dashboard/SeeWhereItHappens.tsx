@@ -2,10 +2,8 @@ import type { ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import { CheckIcon } from '../icons/LineIcons'
 
-// One sample learner's story in three cards — the plan, the teacher's
-// briefing, and the result (B1 today → C1 two months out). Illustrative, so
-// every card carries a SAMPLE tag. Cards rise in on scroll; the progress line
-// draws itself once visible.
+// Sample cards (copy v7): a learning path, an educator briefing and a
+// progress overview. The progress line draws itself once visible.
 
 function SampleTag() {
   return (
@@ -15,24 +13,20 @@ function SampleTag() {
   )
 }
 
-function Card({ title, caption, sub, delay, children }: { title: string; caption: string; sub: string; delay: number; children: ReactNode }) {
+function Card({ title, delay, children }: { title: string; delay: number; children: ReactNode }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
-      className="flex flex-col"
+      className="h-full rounded-3xl bg-white p-6 shadow-[0_20px_50px_rgba(19,41,82,0.1)]"
     >
-      <div className="flex-1 rounded-3xl bg-white p-6 shadow-[0_20px_50px_rgba(19,41,82,0.1)]">
-        <div className="flex items-center justify-between gap-3">
-          <p className="font-bold text-navy-950">{title}</p>
-          <SampleTag />
-        </div>
-        <div className="mt-5">{children}</div>
+      <div className="flex items-center justify-between gap-3">
+        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-navy-700/60">{title}</p>
+        <SampleTag />
       </div>
-      <p className="mt-5 text-center text-lg font-bold text-navy-950">{caption}</p>
-      <p className="mt-1 text-center text-sm text-navy-700/70">{sub}</p>
+      <div className="mt-5">{children}</div>
     </motion.div>
   )
 }
@@ -49,7 +43,7 @@ const LINE = 'M34,136 C70,134 90,118 120,104 S180,70 210,56 S262,30 286,24'
 
 function ProgressChart() {
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label="Sample progress from B1 today to C1 in two months">
+    <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label="Sample progress rising across sessions">
       {LEVELS.map((l) => (
         <g key={l.label}>
           <line x1="34" x2={W - 8} y1={l.y} y2={l.y} stroke="rgba(19,41,82,0.08)" strokeDasharray="3 4" />
@@ -89,76 +83,83 @@ function ProgressChart() {
         <circle cx="286" cy="24" r="5" fill="#fff" stroke="#1ba3e0" strokeWidth="3" />
       </motion.g>
       <text x="34" y={H - 2} className="fill-navy-700/60 text-[13px]">
-        Today
-      </text>
-      <text x="160" y={H - 2} textAnchor="middle" className="fill-navy-700/60 text-[13px]">
-        Month 1
+        First session
       </text>
       <text x={W - 8} y={H - 2} textAnchor="end" className="fill-navy-700/60 text-[13px]">
-        Month 2
+        Now
       </text>
     </svg>
   )
 }
 
-export default function SeeWhereItHappens() {
-  return (
-    <section className="relative px-6 py-20 sm:py-28">
-      <div className="mx-auto max-w-6xl">
-        <div className="text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-blue">Meet Leyla</p>
-          <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-navy-950 sm:text-6xl">See where it happens.</h2>
-          <p className="mx-auto mt-4 max-w-xl text-base text-navy-700/75 sm:text-lg">
-            B1 today. C1 two months from now. Here&rsquo;s what that looks like.
-          </p>
-        </div>
+export interface SampleData {
+  /** Learning-path lines; the last one is the upcoming step. */
+  path: string[]
+  briefing: { mastered: string; avoiding: string; focus: string }
+  sessions: number
+  progressLine: string
+}
 
-        <div className="mt-14 grid gap-10 md:grid-cols-3 md:gap-6">
-          <Card title="Leyla’s Roadmap" caption="The plan" sub="Built from her goal: a job interview in English." delay={0}>
-            <ul className="divide-y divide-navy-900/5 text-sm">
-              {[
-                { t: 'Week 2 — Describe your experience without notes', s: 'done' },
-                { t: 'Week 4 — Answer unexpected questions', s: 'done' },
-                { t: 'Week 6 — Mock interview: tough follow-ups', s: 'next' },
-              ].map((r) => (
-                <li key={r.t} className="flex items-start gap-3 py-3 first:pt-0">
+export const HOME_SAMPLE: SampleData = {
+  path: [
+    'Week 2 · Describe your experience without notes',
+    'Week 4 · Answer unexpected questions',
+    'Week 6 · Mock interview with follow-up questions',
+  ],
+  briefing: {
+    mastered: 'Introductions, describing experience',
+    avoiding: 'Salary questions, being interrupted',
+    focus: 'Mock interview, follow-up questions',
+  },
+  sessions: 12,
+  progressLine: 'Hesitation is getting shorter. Self-corrections are increasing. Next milestone in sight.',
+}
+
+// Three SAMPLE cards: learning path, educator briefing, progress overview
+// (copy v7). Illustrative, so each carries a SAMPLE tag.
+export default function SampleCards({ data = HOME_SAMPLE }: { data?: SampleData }) {
+  return (
+    <section className="relative px-6 pb-16 sm:pb-24">
+      <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-3">
+        <Card title="Sample · Learning path" delay={0}>
+          <ul className="divide-y divide-navy-900/5 text-sm" aria-label="A learner's personalized path showing weekly speaking goals">
+            {data.path.map((t, i) => {
+              const done = i < data.path.length - 1
+              return (
+                <li key={t} className="flex items-start gap-3 py-3 first:pt-0">
                   <span
                     className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${
-                      r.s === 'done' ? 'bg-brand-blue text-white' : 'border-2 border-brand-blue/40'
+                      done ? 'bg-brand-blue text-white' : 'border-2 border-brand-blue/40'
                     }`}
                   >
-                    {r.s === 'done' && <CheckIcon className="h-3 w-3" />}
+                    {done && <CheckIcon className="h-3 w-3" />}
                   </span>
-                  <span className={r.s === 'done' ? 'text-navy-950' : 'text-navy-700/60'}>{r.t}</span>
+                  <span className={done ? 'text-navy-950' : 'text-navy-700/60'}>{t}</span>
                 </li>
-              ))}
-            </ul>
-          </Card>
+              )
+            })}
+          </ul>
+        </Card>
 
-          <Card title="Teacher Briefing" caption="The briefing" sub="Her tutor walks in already knowing where to push." delay={0.12}>
-            <dl className="space-y-4 text-sm">
-              {[
-                { k: 'Mastered', v: 'Introductions, describing experience', c: 'text-emerald-600' },
-                { k: 'Still avoiding', v: 'Salary questions, being interrupted', c: 'text-amber-600' },
-                { k: 'Today', v: 'Full mock interview — push the follow-ups', c: 'text-brand-blue' },
-              ].map((r) => (
-                <div key={r.k}>
-                  <dt className={`text-[11px] font-bold uppercase tracking-[0.2em] ${r.c}`}>{r.k}</dt>
-                  <dd className="mt-1 text-navy-950">{r.v}</dd>
-                </div>
-              ))}
-            </dl>
-          </Card>
+        <Card title="Sample · Educator briefing" delay={0.12}>
+          <dl className="space-y-4 text-sm" aria-label="An educator briefing listing what the learner has mastered and still avoids">
+            {[
+              { k: 'Mastered', v: data.briefing.mastered, c: 'text-emerald-600' },
+              { k: 'Still avoiding', v: data.briefing.avoiding, c: 'text-amber-600' },
+              { k: 'Focus today', v: data.briefing.focus, c: 'text-brand-blue' },
+            ].map((r) => (
+              <div key={r.k}>
+                <dt className={`text-[11px] font-bold uppercase tracking-[0.2em] ${r.c}`}>{r.k}</dt>
+                <dd className="mt-1 text-navy-950">{r.v}</dd>
+              </div>
+            ))}
+          </dl>
+        </Card>
 
-          <Card title="Leyla’s Progress" caption="The result" sub="Specific, visible, and moving." delay={0.24}>
-            <ProgressChart />
-            <p className="mt-4 text-sm text-navy-700/80">
-              <span className="font-semibold text-navy-950">12 sessions.</span>{' '}
-              <span className="font-semibold text-navy-950">Hesitation:</span> shrinking.{' '}
-              <span className="font-semibold text-navy-950">Self-corrections:</span> rising.
-            </p>
-          </Card>
-        </div>
+        <Card title={`Sample · Progress overview · ${data.sessions} sessions`} delay={0.24}>
+          <ProgressChart />
+          <p className="mt-4 text-sm text-navy-700/80">{data.progressLine}</p>
+        </Card>
       </div>
     </section>
   )

@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion'
 import HeroBackground from './HeroBackground'
 import LaptopMockup from '../loading/LaptopMockup'
-import AvatarIllustration from '../AvatarIllustration'
+import SmartLink from '../SmartLink'
+import { LEARNER_SIGNUP_URL } from '../../content/site'
 
 const container = {
   hidden: {},
@@ -13,15 +14,7 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
 }
 
-const AVATAR_COLORS = ['#1ba3e0', '#f5a623', '#2dd4bf', '#a78bfa']
-
-function LightningIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor">
-      <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" />
-    </svg>
-  )
-}
+const JOURNEY = ['Your profile', 'Your path', 'Your lessons', 'Your conversations', 'Your progress']
 
 function PlayIcon() {
   return (
@@ -46,67 +39,40 @@ export default function Hero() {
           animate="show"
           className="flex flex-col items-center text-center md:items-start md:text-left"
         >
-          <motion.span
-            variants={item}
-            className="mb-5 inline-flex items-center gap-1.5 rounded-full bg-brand-blue/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-blue"
-          >
-            <LightningIcon />
-            #1 Platform for Real Conversations
-          </motion.span>
-
           <motion.h1
             variants={item}
-            // "Real Conversations." is forced onto one line (whitespace-nowrap
-            // below), and at 60px it's ~569px wide — wider than the half-width
-            // column between ~768-1360px (overlapping the laptop) and wider than
-            // a <390px phone screen (clipping). Fluid sizes keep it on one line
-            // without colliding at any width; 60px is the cap on wide screens.
-            className="text-[length:clamp(1.75rem,8.5vw,2.25rem)] sm:text-6xl md:text-[length:clamp(2rem,4.4vw,3.75rem)] font-extrabold leading-[1.05] tracking-tight text-navy-950"
+            className="text-[length:clamp(2.25rem,10vw,3rem)] sm:text-6xl md:text-[length:clamp(2.5rem,5vw,4.25rem)] font-extrabold leading-[1.04] tracking-tight text-navy-950"
           >
-            Real People.
-            <br />
-            <span className="whitespace-nowrap">Real Conversations.</span>
+            Learn the language.
             <br />
             <span style={{ background: 'linear-gradient(90deg, #1ba3e0, #a78bfa)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
-              Real Progress.
+              Own the conversation.
             </span>
           </motion.h1>
 
           <motion.p variants={item} className="mt-6 max-w-lg text-base sm:text-lg text-navy-700/80">
-            LinkGlobal Network connects learners with native-speaking tutors in over 120
-            countries for personalized 1-on-1 sessions.
+            A personalized learning path, live lessons with certified educators, and real conversation with native
+            speakers.
           </motion.p>
 
           <motion.div variants={item} className="mt-9 flex flex-col sm:flex-row items-center gap-4">
-            <button
-              type="button"
+            <SmartLink
+              to={LEARNER_SIGNUP_URL}
               className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold text-white shadow-[0_8px_30px_rgba(30,120,190,0.3)] transition-transform hover:scale-105"
               style={{ background: 'linear-gradient(90deg, #1ba3e0, #3ec6ff)' }}
             >
               Start Your Journey
               <span aria-hidden="true">→</span>
-            </button>
-            <button
-              type="button"
+            </SmartLink>
+            <a
+              href="#how-it-works"
               className="inline-flex items-center gap-2.5 rounded-full border border-navy-900/15 bg-white px-8 py-3.5 text-sm font-semibold text-navy-800 shadow-[0_4px_16px_rgba(19,41,82,0.06)] transition-colors hover:bg-navy-900/[0.03]"
             >
               <span className="flex h-5 w-5 items-center justify-center rounded-full bg-navy-900/[0.06]">
                 <PlayIcon />
               </span>
-              Learn More
-            </button>
-          </motion.div>
-
-          <motion.div variants={item} className="mt-9 flex items-center gap-3">
-            <div className="flex -space-x-3">
-              {AVATAR_COLORS.map((color) => (
-                <AvatarIllustration key={color} color={color} className="h-9 w-9 rounded-full ring-2 ring-white" />
-              ))}
-            </div>
-            <p className="text-sm text-navy-700/70">
-              Join thousands of learners
-              <br className="hidden sm:block" /> growing every day
-            </p>
+              See How It Works
+            </a>
           </motion.div>
         </motion.div>
 
@@ -118,16 +84,41 @@ export default function Hero() {
         >
           <LaptopMockup
             src="/gallery/dashboard.png"
-            alt="LinkGlobal Network learner dashboard"
+            alt="The LinkGlobal learner dashboard"
             className="relative z-10 w-full max-w-md"
           />
           <img
             src="/gallery/mobile-dashboard-mockup.png"
-            alt="LinkGlobal Network dashboard on mobile"
+            alt="The LinkGlobal dashboard on mobile"
             className="absolute -bottom-6 -left-2 z-20 w-24 drop-shadow-[0_20px_45px_rgba(10,20,45,0.32)] -rotate-6 sm:-left-8 sm:w-32"
           />
         </motion.div>
       </div>
+
+      {/* Journey strip beneath the hero (copy v7). */}
+      <motion.ol
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="relative z-10 mt-16 flex w-full max-w-6xl flex-wrap items-center justify-center gap-x-2 gap-y-3 md:justify-between"
+        aria-label="The LinkGlobal journey: profile, path, lessons, conversations, progress"
+      >
+        {JOURNEY.map((step, i) => (
+          <li key={step} className="flex items-center gap-2">
+            <span className="flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-navy-800 shadow-[0_6px_20px_rgba(19,41,82,0.08)] ring-1 ring-navy-900/[0.05]">
+              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-blue/10 text-[11px] font-bold text-brand-blue">
+                {i + 1}
+              </span>
+              {step}
+            </span>
+            {i < JOURNEY.length - 1 && (
+              <span className="hidden text-brand-blue/50 md:inline" aria-hidden="true">
+                →
+              </span>
+            )}
+          </li>
+        ))}
+      </motion.ol>
     </section>
   )
 }

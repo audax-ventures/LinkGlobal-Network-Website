@@ -35,7 +35,7 @@
   }
 }
 
-/* Testimonial marquee (GlobalReach.tsx) — the track holds two back-to-back
+/* Testimonial marquee (home/HomeSections.tsx LearnerOutcomes) — the track holds two back-to-back
    copies of the same content, so animating exactly -50% loops seamlessly. */
 @keyframes lg-marquee {
   from {
