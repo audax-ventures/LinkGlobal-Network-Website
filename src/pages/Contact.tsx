@@ -4,10 +4,17 @@ import { motion } from 'framer-motion'
 import PageShell from '../components/PageShell'
 import PageHeader from '../components/PageHeader'
 import { MailIcon } from '../components/icons/LineIcons'
+import { CONTACT_EMAIL, PENDING, SOCIAL } from '../content/site'
 
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
-const SUBJECTS = ['General Inquiry', 'Learner Support', 'Become a Tutor', 'Partnership / Institution', 'Press', 'Other']
+// 'What brings you here?' options (copy v7). Sent to /api/contact as `subject`.
+const SUBJECTS = [
+  'I want to learn a language',
+  'I want to teach with LinkGlobal',
+  'I want to be a conversation partner',
+  'Something else',
+]
 
 export default function Contact() {
   const [status, setStatus] = useState<Status>('idle')
@@ -55,13 +62,15 @@ export default function Contact() {
   return (
     <PageShell>
       <PageHeader
-        eyebrow="Get in Touch"
+        eyebrow="Get in touch"
         title={
           <>
-            We'd love to <span className="text-gradient-brand">hear from you.</span>
+            Not sure where <span className="text-gradient-brand">to start?</span>
           </>
         }
-        description="Questions about learning, teaching, or bringing LinkGlobal Network to your organization — send us a message and we'll get back to you."
+        description={`Tell us what brought you here. Every message is read by a person${
+          PENDING.replyDays ? `, and we reply within ${PENDING.replyDays} business days` : ''
+        }.`}
         image={{ src: '/photos/journey-5.jpg', alt: 'Two people connecting in conversation' }}
       />
 
@@ -73,10 +82,8 @@ export default function Contact() {
               animate={{ opacity: 1, y: 0 }}
               className="rounded-3xl bg-white p-8 text-center shadow-[0_15px_40px_rgba(19,41,82,0.1)]"
             >
-              <h2 className="text-2xl font-bold text-navy-950">Message sent.</h2>
-              <p className="mt-3 text-navy-700/80">
-                Thanks for reaching out — we'll get back to you as soon as we can.
-              </p>
+              <h2 className="text-2xl font-bold text-navy-950">Thank you.</h2>
+              <p className="mt-3 text-navy-700/80">Your message is with us, and a person will reply.</p>
             </motion.div>
           ) : (
             <motion.form
@@ -99,7 +106,7 @@ export default function Contact() {
 
               <div className="grid gap-5 sm:grid-cols-2">
                 <label className="block">
-                  <span className="text-sm font-semibold text-navy-800">Name</span>
+                  <span className="text-sm font-semibold text-navy-800">Your name</span>
                   <input
                     type="text"
                     name="name"
@@ -119,7 +126,7 @@ export default function Contact() {
               </div>
 
               <label className="mt-5 block">
-                <span className="text-sm font-semibold text-navy-800">Topic</span>
+                <span className="text-sm font-semibold text-navy-800">What brings you here?</span>
                 <select
                   name="subject"
                   defaultValue={SUBJECTS[0]}
@@ -134,7 +141,7 @@ export default function Contact() {
               </label>
 
               <label className="mt-5 block">
-                <span className="text-sm font-semibold text-navy-800">Message</span>
+                <span className="text-sm font-semibold text-navy-800">Your message</span>
                 <textarea
                   name="message"
                   required
@@ -153,7 +160,7 @@ export default function Contact() {
                 className="mt-7 w-full rounded-full px-8 py-3.5 text-sm font-semibold text-white shadow-[0_8px_30px_rgba(30,120,190,0.3)] transition-transform hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-60"
                 style={{ background: 'linear-gradient(90deg, #1ba3e0, #3ec6ff)' }}
               >
-                {status === 'submitting' ? 'Sending…' : 'Send Message'}
+                {status === 'submitting' ? 'Sending...' : 'Start the Conversation'}
               </button>
             </motion.form>
           )}
@@ -170,13 +177,28 @@ export default function Contact() {
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue shadow-[0_6px_16px_rgba(0,0,0,0.18)]">
                 <MailIcon className="h-5 w-5 text-white" />
               </div>
-              <p className="mt-4 text-sm text-white/60">Prefer email?</p>
-              <a
-                href="mailto:info@linkglobalnetwork.ca"
-                className="mt-1 block font-semibold text-brand-cyan hover:underline"
-              >
-                info@linkglobalnetwork.ca
+              <p className="mt-4 text-xs font-semibold uppercase tracking-[0.25em] text-white/50">Other ways to reach us</p>
+              <p className="mt-3 text-sm text-white/60">Email</p>
+              <a href={`mailto:${CONTACT_EMAIL}`} className="mt-1 block font-semibold text-brand-cyan hover:underline">
+                {CONTACT_EMAIL}
               </a>
+              {(SOCIAL.instagram || SOCIAL.linkedin) && (
+                <>
+                  <p className="mt-5 text-sm text-white/60">Follow</p>
+                  <p className="mt-1 flex gap-4 font-semibold">
+                    {SOCIAL.instagram && (
+                      <a href={SOCIAL.instagram} target="_blank" rel="noreferrer" className="text-brand-cyan hover:underline">
+                        Instagram
+                      </a>
+                    )}
+                    {SOCIAL.linkedin && (
+                      <a href={SOCIAL.linkedin} target="_blank" rel="noreferrer" className="text-brand-cyan hover:underline">
+                        LinkedIn
+                      </a>
+                    )}
+                  </p>
+                </>
+              )}
             </motion.div>
           </div>
         </div>
