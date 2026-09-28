@@ -1,3 +1,5 @@
+import { useId } from 'react'
+
 interface LogoProps {
   variant?: 'dark' | 'reversed'
   markOnly?: boolean
@@ -5,64 +7,58 @@ interface LogoProps {
 }
 
 /**
- * Solid black chat-bubble circle with a curled tail and a blue globe, paired
- * with the "Link"/"Global" wordmark. `variant="reversed"` swaps the bubble
- * to white for use on dark backgrounds.
- *
- * The continent path is traced pixel-for-pixel from the client's actual
- * reference asset (not hand-drawn/eyeballed): flood-filled the globe disk,
- * classified white vs. blue pixels by color distance, ran Moore-neighbor
- * boundary tracing on the resulting mask, then simplified with Douglas-
- * Peucker (~1700 points down to 42). That tracing process also showed there
- * is no white gap ring between the black bubble and the globe in the real
- * asset — earlier versions had invented one.
- *
- * The mark renders at only ~32px total (h-8/h-9 in the nav) — confirmed via
- * a true-size raster (not a scaled-up copy, which looks fine regardless of
- * whether the real small size does) that this traced shape stays legible at
- * that size despite its detail, unlike earlier hand-drawn attempts.
+ * LinkGlobal logo — paths from the client-supplied LinkGlobalLogo.svg
+ * (Sept 2026; all lettering outlined, so no font dependency). Static: the
+ * globe no longer spins. `variant="reversed"` makes the bubble and "Global"
+ * white for dark backgrounds (footer, homepage intro); "Link" and the globe
+ * keep their brand blues.
  */
 export default function Logo({ variant = 'dark', markOnly = false, className = '' }: LogoProps) {
-  const isReversed = variant === 'reversed'
-  const bubbleFill = isReversed ? '#ffffff' : '#0b0d12'
-  const globalTextFill = isReversed ? '#ffffff' : '#0b0d12'
-  const linkTextFill = '#1ba3e0'
-  const globeFill = '#1ba3e0'
+  const reversed = variant === 'reversed'
+  const bubble = reversed ? '#ffffff' : '#020708'
+  const globalText = reversed ? '#ffffff' : '#414345'
+  // Unique clip-path id per instance (the logo appears several times per page).
+  const clipId = `lg-globe-${useId().replace(/[^a-zA-Z0-9-]/g, '')}`
 
   return (
     <svg
-      viewBox={markOnly ? '0 0 64 64' : '0 0 232 64'}
+      viewBox={markOnly ? '24 12.5 28 30' : '24.5 12.5 118 30'}
       className={className}
       role="img"
       aria-label="LinkGlobal Network"
     >
-      <g id="lg-mark">
-        <path
-          d="M17.5,40.5c-3,4.6-7.7,8.2-13,10.8 5.6-1.3 10.9-3.8 15.2-7.4-.9-1.1-1.6-2.2-2.2-3.4Z"
-          fill={bubbleFill}
-        />
-        <circle cx="32" cy="29" r="22" fill={bubbleFill} />
-        {/* Only the globe (circle + continent) spins — the outer bubble and
-            tail stay fixed, since the tail has a fixed direction and
-            spinning the whole mark would look broken. transformOrigin is
-            set to the globe's own center so it rotates in place. */}
-        <g style={{ animation: 'lg-globe-spin 12s linear infinite', transformOrigin: '32px 29px' }}>
-          <circle cx="32" cy="29" r="16.5" fill={globeFill} />
-          <path
-            fill="#ffffff"
-            d="M33.3,14.87 L36.35,15.71 L35.9,17.08 L37.88,20.37 L37.19,21.82 L37.81,22.89 L37.35,24.42 L38.34,25.94 L39.64,27.4 L42.85,27.93 L42.92,33.43 L41.85,36.64 L43.08,37.94 L38.65,41.83 L35.51,43.06 L29.1,43.28 L25.35,41.83 L20.01,36.94 L17.56,30.83 L17.49,27.4 L18.86,22.66 L20.62,22.89 L21.23,24.88 L24.67,27.85 L24.13,30.6 L27.11,35.03 L27.26,38.4 L28.49,41.53 L29.33,41.68 L30.55,39.92 L31.08,37.63 L34.22,33.89 L34.52,30.38 L31.16,28.47 L29.02,26.17 L24.13,25.87 L22.53,22.81 L24.06,21.74 L25.35,22.05 L26.12,20.37 L30.01,17.39 L29.78,15.33 Z"
-          />
-        </g>
+      <defs>
+        <clipPath id={clipId}>
+          <ellipse cx="38" cy="26.4" rx="8.2" ry="8.6" />
+        </clipPath>
+      </defs>
+      <path
+        fill={bubble}
+        d="M38 13.5C30.9 13.5 25.3 19.1 25.3 26.4C25.3 29.8 26.6 32.8 28.6 35.1L25.8 41.4L32.1 37.8C33.9 38.7 35.9 39.2 38 39.2C45.1 39.2 50.6 33.5 50.6 26.4C50.6 19.2 45.1 13.5 38 13.5Z"
+      />
+      <ellipse fill="#03ADE9" cx="38" cy="26.4" rx="8.2" ry="8.6" />
+      <g clipPath={`url(#${clipId})`} fill="#FFFFFF">
+        <path d="M37.8 17.8L39.5 18.3L40.1 20.6L40 23.3L41.3 24.5L40.8 25.6L42.9 26.2L43.4 28.4L42.9 30.4L43.1 32.2L41 34.2L37.1 35L36.7 32.9L38.1 30.7L38.4 28.6L39.2 27.7L38.2 26.5L35.9 25.7L35.7 24.6L33.1 24.4L33.5 22.8L35.4 21.8L36.6 21.5L36.7 19.8Z" />
+        <path d="M30.4 22.6L31.5 24.2L31.5 25.6L33 26.8L33.8 29.2L34.2 31.4L35.5 33.7L35.9 35.3L32.4 34.3L30.3 31.9L29.6 28.2Z" />
       </g>
+
       {!markOnly && (
-        <g id="lg-wordmark" fontFamily="Inter, system-ui, sans-serif" fontWeight="800">
-          <text x="70" y="40" fontSize="30" fill={linkTextFill} letterSpacing="-0.5">
-            Link
-          </text>
-          <text x="141" y="40" fontSize="30" fill={globalTextFill} letterSpacing="-0.5">
-            Global
-          </text>
-        </g>
+        <>
+          <g fill="#06A9E4">
+            <path d="M56.3239 33.0000L56.3239 20.2207L58.8198 20.2207L58.8198 30.8291L65.0260 30.8291L65.0260 33.0000Z" />
+            <path d="M66.7884 22.4004L66.7884 20.1152L69.1578 20.1152L69.1578 22.4004ZM66.7884 33.0000L66.7884 23.6660L69.1578 23.6660L69.1578 33.0000Z" />
+            <path d="M79.7319 33.0000L77.3625 33.0000L77.3625 28.2363Q77.3625 26.7246 77.2107 26.2808Q77.0589 25.8369 76.7174 25.5908Q76.3759 25.3447 75.8952 25.3447Q75.2797 25.3447 74.7906 25.6963Q74.3015 26.0479 74.1202 26.6279Q73.9390 27.2080 73.9390 28.7725L73.9390 33.0000L71.5695 33.0000L71.5695 23.6660L73.7703 23.6660L73.7703 25.0371Q74.9424 23.4551 76.7216 23.4551Q77.5058 23.4551 78.1551 23.7495Q78.8044 24.0439 79.1375 24.5010Q79.4705 24.9580 79.6012 25.5381Q79.7319 26.1182 79.7319 27.1992Z" />
+            <path d="M82.0508 33.0000L82.0508 20.1152L84.4203 20.1152L84.4203 26.9531L87.1945 23.6660L90.1121 23.6660L87.0512 27.0762L90.3314 33.0000L87.7764 33.0000L85.5249 28.8076L84.4203 30.0117L84.4203 33.0000Z" />
+          </g>
+          <g fill={globalText}>
+            <path d="M97.9278 27.9463L97.9278 26.4346L103.3930 26.4258L103.3930 31.2070Q102.1345 32.2090 100.7968 32.7144Q99.4591 33.2197 98.0510 33.2197Q96.1500 33.2197 94.5967 32.4067Q93.0434 31.5938 92.2513 30.0557Q91.4593 28.5176 91.4593 26.6191Q91.4593 24.7383 92.2469 23.1079Q93.0346 21.4775 94.5131 20.6865Q95.9916 19.8955 97.9190 19.8955Q99.3183 19.8955 100.4492 20.3481Q101.5801 20.8008 102.2225 21.6094Q102.8649 22.4180 103.1994 23.7188L101.6593 24.1406Q101.3688 23.1562 100.9376 22.5938Q100.5064 22.0312 99.7055 21.6929Q98.9046 21.3545 97.9278 21.3545Q96.7573 21.3545 95.9036 21.7104Q95.0499 22.0664 94.5263 22.6465Q94.0027 23.2266 93.7122 23.9209Q93.2194 25.1162 93.2194 26.5137Q93.2194 28.2363 93.8135 29.3965Q94.4075 30.5566 95.5428 31.1191Q96.6781 31.6816 97.9542 31.6816Q99.0631 31.6816 100.1191 31.2554Q101.1752 30.8291 101.7209 30.3457L101.7209 27.9463Z" />
+            <path d="M105.6724 33.0000L105.6724 20.1152L107.2565 20.1152L107.2565 33.0000Z" />
+            <path d="M109.1222 28.3330Q109.1222 25.7402 110.5655 24.4922Q111.7712 23.4551 113.5050 23.4551Q115.4323 23.4551 116.6556 24.7163Q117.8789 25.9775 117.8789 28.2012Q117.8789 30.0029 117.3377 31.0356Q116.7964 32.0684 115.7623 32.6396Q114.7283 33.2109 113.5050 33.2109Q111.5424 33.2109 110.3323 31.9541Q109.1222 30.6973 109.1222 28.3330ZM110.7504 28.3330Q110.7504 30.1260 111.5336 31.0181Q112.3169 31.9102 113.5050 31.9102Q114.6843 31.9102 115.4675 31.0137Q116.2508 30.1172 116.2508 28.2803Q116.2508 26.5488 115.4631 25.6567Q114.6755 24.7646 113.5050 24.7646Q112.3169 24.7646 111.5336 25.6523Q110.7504 26.5400 110.7504 28.3330Z" />
+            <path d="M121.1968 33.0000L119.7270 33.0000L119.7270 20.1152L121.3112 20.1152L121.3112 24.7119Q122.3144 23.4551 123.8722 23.4551Q124.7346 23.4551 125.5047 23.8022Q126.2747 24.1494 126.7720 24.7778Q127.2692 25.4062 127.5508 26.2939Q127.8325 27.1816 127.8325 28.1924Q127.8325 30.5918 126.6444 31.9014Q125.4563 33.2109 123.7930 33.2109Q122.1384 33.2109 121.1968 31.8311ZM121.1792 28.2627Q121.1792 29.9414 121.6368 30.6885Q122.3848 31.9102 123.6609 31.9102Q124.6994 31.9102 125.4563 31.0093Q126.2131 30.1084 126.2131 28.3242Q126.2131 26.4961 125.4871 25.6260Q124.7610 24.7559 123.7314 24.7559Q122.6929 24.7559 121.9360 25.6567Q121.1792 26.5576 121.1792 28.2627Z" />
+            <path d="M135.8587 31.8486Q134.9786 32.5957 134.1646 32.9033Q133.3505 33.2109 132.4176 33.2109Q130.8775 33.2109 130.0502 32.4595Q129.2230 31.7080 129.2230 30.5391Q129.2230 29.8535 129.5354 29.2866Q129.8478 28.7197 130.3539 28.3770Q130.8599 28.0342 131.4935 27.8584Q131.9600 27.7354 132.9017 27.6211Q134.8202 27.3926 135.7267 27.0762Q135.7355 26.7510 135.7355 26.6631Q135.7355 25.6963 135.2866 25.3008Q134.6794 24.7646 133.4825 24.7646Q132.3648 24.7646 131.8324 25.1558Q131.2999 25.5469 131.0447 26.5400L129.4958 26.3291Q129.7070 25.3359 130.1910 24.7251Q130.6751 24.1143 131.5904 23.7847Q132.5056 23.4551 133.7113 23.4551Q134.9082 23.4551 135.6563 23.7363Q136.4043 24.0176 136.7564 24.4438Q137.1084 24.8701 137.2492 25.5205Q137.3284 25.9248 137.3284 26.9795L137.3284 29.0889Q137.3284 31.2949 137.4296 31.8794Q137.5308 32.4639 137.8300 33.0000L136.1755 33.0000Q135.9291 32.5078 135.8587 31.8486ZM135.7267 28.3154Q134.8642 28.6670 133.1393 28.9131Q132.1624 29.0537 131.7576 29.2295Q131.3527 29.4053 131.1327 29.7437Q130.9127 30.0820 130.9127 30.4951Q130.9127 31.1279 131.3923 31.5498Q131.8720 31.9717 132.7960 31.9717Q133.7113 31.9717 134.4242 31.5718Q135.1370 31.1719 135.4715 30.4775Q135.7267 29.9414 135.7267 28.8955Z" />
+            <path d="M139.7486 33.0000L139.7486 20.1152L141.3327 20.1152L141.3327 33.0000Z" />
+          </g>
+        </>
       )}
     </svg>
   )
