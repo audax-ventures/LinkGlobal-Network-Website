@@ -2,46 +2,82 @@ import { motion } from 'framer-motion'
 import PageShell from '../components/PageShell'
 import NavyBand from '../components/NavyBand'
 import PageHeader from '../components/PageHeader'
-import FeatureCard from '../components/FeatureCard'
+import FeatureRows, { CardLabel, Pill } from '../components/FeatureRows'
+import type { FeatureRow } from '../components/FeatureRows'
+import AvatarIllustration from '../components/AvatarIllustration'
 import CtaBand from '../components/CtaBand'
-import { TargetIcon, HeartIcon, ClockIcon, ChatIcon, BookIcon, GlobeIcon } from '../components/icons/LineIcons'
+import { CheckIcon } from '../components/icons/LineIcons'
 
-const FEATURES = [
+const ROWS: FeatureRow[] = [
   {
-    icon: <TargetIcon className="h-full w-full" />,
-    title: 'A path built around you',
-    description: 'A guided placement assessment figures out where you’re starting from, so lessons target exactly what you need next.',
-    color: '#1ba3e0',
+    eyebrow: 'Your plan',
+    title: 'A path built around you.',
+    line: 'A short placement conversation finds your level, then every lesson targets exactly what you need next.',
+    visual: (
+      <div>
+        <CardLabel>This week</CardLabel>
+        <ul className="mt-4 space-y-3 text-sm">
+          {[
+            ['Introduce yourself with confidence', true],
+            ['Handle small talk without pausing', true],
+            ['Explain your work clearly', false],
+          ].map(([t, done]) => (
+            <li key={t as string} className="flex items-center gap-3">
+              <span
+                className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${
+                  done ? 'bg-brand-blue text-white' : 'border-2 border-brand-blue/40'
+                }`}
+              >
+                {done && <CheckIcon className="h-3 w-3" />}
+              </span>
+              <span className={done ? 'text-navy-950' : 'text-navy-700/60'}>{t}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ),
   },
   {
-    icon: <HeartIcon className="h-full w-full" />,
-    title: 'Real, native-speaking tutors',
-    description: 'Practice with people who actually speak the language, not a chatbot reciting the same three sentences.',
-    color: '#f5a623',
+    eyebrow: 'Your schedule',
+    title: 'Native-speaking tutors, when it suits you.',
+    line: 'Book live sessions around your life — mornings, lunch breaks or late evenings. No fixed class times.',
+    visual: (
+      <div>
+        <CardLabel>Pick a time</CardLabel>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Pill>Mon · 7:00 am</Pill>
+          <Pill on>Wed · 12:30 pm</Pill>
+          <Pill>Thu · 8:00 pm</Pill>
+          <Pill>Sat · 10:00 am</Pill>
+        </div>
+        <div className="mt-5 flex items-center gap-3 border-t border-navy-900/5 pt-4">
+          <AvatarIllustration color="#1ba3e0" className="h-10 w-10 shrink-0 rounded-full" />
+          <div className="text-sm">
+            <p className="font-semibold text-navy-950">Native speaker</p>
+            <p className="text-xs text-navy-700/60">Matched to your goals</p>
+          </div>
+        </div>
+      </div>
+    ),
   },
   {
-    icon: <ClockIcon className="h-full w-full" />,
-    title: 'Fits your schedule',
-    description: 'Book sessions around your life, not the other way around. No fixed class times, no missed makeup work.',
-    color: '#2dd4bf',
-  },
-  {
-    icon: <ChatIcon className="h-full w-full" />,
-    title: 'AI-supported practice reports',
-    description: 'Every session comes with a breakdown of what you did well and what to focus on next time.',
-    color: '#a78bfa',
-  },
-  {
-    icon: <BookIcon className="h-full w-full" />,
-    title: '40+ languages',
-    description: 'From widely-spoken languages to less common ones, find a tutor for the language you actually need.',
-    color: '#f472b6',
-  },
-  {
-    icon: <GlobeIcon className="h-full w-full" />,
-    title: 'A global community',
-    description: 'Learners and tutors in over 120 countries — meet people, not just material.',
-    color: '#4ade80',
+    eyebrow: 'Your language',
+    title: '40+ languages, 120+ countries.',
+    line: 'From widely spoken languages to less common ones — find a tutor for the language you actually need.',
+    visual: (
+      <div>
+        <CardLabel>I want to speak</CardLabel>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Pill on>Spanish</Pill>
+          <Pill>French</Pill>
+          <Pill>Japanese</Pill>
+          <Pill>Arabic</Pill>
+          <Pill>Portuguese</Pill>
+          <Pill>German</Pill>
+          <Pill>+ 35 more</Pill>
+        </div>
+      </div>
+    ),
   },
 ]
 
@@ -59,20 +95,7 @@ export default function ForLearners() {
         image={{ src: '/photos/learners-hero.jpg', alt: 'A learner reviewing her LinkGlobal Network dashboard in a modern office' }}
       />
 
-      <section className="relative px-6 pb-16 sm:pb-20">
-        <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {FEATURES.map((f, i) => (
-            <FeatureCard
-              key={f.title}
-              icon={f.icon}
-              title={f.title}
-              description={f.description}
-              color={f.color}
-              delay={(i % 3) * 0.1}
-            />
-          ))}
-        </div>
-      </section>
+      <FeatureRows eyebrow="Why learners choose us" heading="Built for how you actually learn." rows={ROWS} />
 
       <NavyBand className="py-8 sm:py-12">
         <div className="mx-auto grid max-w-6xl items-center gap-16 md:grid-cols-2">

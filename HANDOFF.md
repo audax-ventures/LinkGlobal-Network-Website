@@ -206,8 +206,12 @@ overlays are deleted; App no longer gates nav/chat on a loading state).
 `components/Logo.tsx` now uses Riley's LinkGloballogo.svg paths (copy at
 public/brand/linkglobal-logo.svg): static globe (spin + lg-globe-spin
 keyframes removed), `reversed` = white bubble + white "Global". Used by
-nav, footer, intro and 404. NOTE: favicon/app icons/og-image.jpg were
-generated from the OLD traced mark and haven't been regenerated yet.
+nav, footer, intro and 404. favicon.svg/.ico/PNGs, app icons and
+og-image.jpg were regenerated from the new logo (scratchpad make_assets2.py:
+small SVG-path rasterizer, even-odd fill, globe clip).
+For Learners / For Educators: 6-card icon grids replaced by FeatureRows
+(3 benefit rows, each with a matching mini UI visual); FeatureCard deleted.
+For Educators' session-details screenshot now has heading + copy.
 
 ### Launch basics (Sept 27 2026)
 - 404: `pages/NotFound.tsx` on `path="*"`; PageMeta adds noindex.

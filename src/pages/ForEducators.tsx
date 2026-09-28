@@ -2,46 +2,68 @@ import { motion } from 'framer-motion'
 import PageShell from '../components/PageShell'
 import NavyBand from '../components/NavyBand'
 import PageHeader from '../components/PageHeader'
-import FeatureCard from '../components/FeatureCard'
+import FeatureRows, { CardLabel } from '../components/FeatureRows'
+import type { FeatureRow } from '../components/FeatureRows'
 import CtaBand from '../components/CtaBand'
-import { CalendarIcon, DollarIcon, GlobeIcon, UsersIcon, ShieldIcon, ChatIcon } from '../components/icons/LineIcons'
+import { CheckIcon } from '../components/icons/LineIcons'
 
-const FEATURES = [
+const ROWS: FeatureRow[] = [
   {
-    icon: <CalendarIcon className="h-full w-full" />,
-    title: 'Set your own hours',
-    description: 'Teach as much or as little as you want, whenever it works for you. No fixed shifts, no quotas.',
-    color: '#1ba3e0',
+    eyebrow: 'Your time',
+    title: 'Your hours. Your rates.',
+    line: 'Teach as much or as little as you want, whenever it works for you. No fixed shifts, no quotas.',
+    visual: (
+      <div>
+        <CardLabel>Your availability</CardLabel>
+        <div className="mt-4 grid grid-cols-7 gap-1.5 text-center text-[10px] font-semibold text-navy-700/50">
+          {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((d, i) => (
+            <span key={i}>{d}</span>
+          ))}
+          {[1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0].map((on, i) => (
+            <span key={i} className={`h-7 rounded-md ${on ? 'bg-brand-blue' : 'bg-navy-900/[0.05]'}`} />
+          ))}
+        </div>
+        <p className="mt-4 text-xs text-navy-700/60">Change it any time — learners only see the slots you open.</p>
+      </div>
+    ),
   },
   {
-    icon: <DollarIcon className="h-full w-full" />,
-    title: 'Get paid reliably',
-    description: 'Transparent, on-time payouts for every session — no chasing invoices or waiting on clients.',
-    color: '#f5a623',
+    eyebrow: 'Your learners',
+    title: 'Learners who arrive ready.',
+    line: 'Placement and a clear learning path mean every student shows up knowing what they need from you.',
+    visual: (
+      <div>
+        <CardLabel>Learner brief</CardLabel>
+        <dl className="mt-4 space-y-3 text-sm">
+          {[
+            ['Level', 'B1 · Intermediate'],
+            ['Goal', 'Job interview in English'],
+            ['Today', 'Practise follow-up questions'],
+          ].map(([k, v]) => (
+            <div key={k} className="flex justify-between gap-4 border-b border-navy-900/5 pb-2 last:border-0">
+              <dt className="text-navy-700/60">{k}</dt>
+              <dd className="text-right font-semibold text-navy-950">{v}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    ),
   },
   {
-    icon: <GlobeIcon className="h-full w-full" />,
-    title: 'Learners in 120+ countries',
-    description: 'Connect with motivated learners from around the world, not just whoever happens to be nearby.',
-    color: '#2dd4bf',
-  },
-  {
-    icon: <UsersIcon className="h-full w-full" />,
-    title: 'Learners who show up ready',
-    description: 'Placement testing and clear learning paths mean your students arrive knowing what they need.',
-    color: '#a78bfa',
-  },
-  {
-    icon: <ShieldIcon className="h-full w-full" />,
-    title: 'A platform that has your back',
-    description: 'Built-in scheduling, session tools, and support so you can focus on teaching, not admin.',
-    color: '#f472b6',
-  },
-  {
-    icon: <ChatIcon className="h-full w-full" />,
-    title: 'Real teaching, not scripts',
-    description: 'Bring your own style and lesson approach — we match you with learners who fit it.',
-    color: '#4ade80',
+    eyebrow: 'Your pay',
+    title: 'Paid reliably, every session.',
+    line: 'Transparent, on-time payouts for every session you teach — no chasing invoices or waiting on clients.',
+    visual: (
+      <div className="flex items-center gap-4">
+        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600">
+          <CheckIcon className="h-6 w-6" />
+        </span>
+        <div className="text-sm">
+          <p className="font-semibold text-navy-950">Session completed</p>
+          <p className="text-navy-700/60">Added to your next payout</p>
+        </div>
+      </div>
+    ),
   },
 ]
 
@@ -66,20 +88,7 @@ export default function ForEducators() {
         image={{ src: '/photos/educators-hero.jpg', alt: 'A tutor reviewing his lesson plan before an online session' }}
       />
 
-      <section className="relative px-6 pb-16 sm:pb-20">
-        <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {FEATURES.map((f, i) => (
-            <FeatureCard
-              key={f.title}
-              icon={f.icon}
-              title={f.title}
-              description={f.description}
-              color={f.color}
-              delay={(i % 3) * 0.1}
-            />
-          ))}
-        </div>
-      </section>
+      <FeatureRows eyebrow="Why tutors teach here" heading="Teaching, without the admin." rows={ROWS} />
 
       <NavyBand className="py-8 sm:py-12">
         <div className="mx-auto max-w-2xl text-center">
@@ -113,7 +122,18 @@ export default function ForEducators() {
       </NavyBand>
 
       <section className="relative px-6 pb-16 sm:pb-20">
-        <div className="mx-auto max-w-4xl">
+        {/* Screenshot now paired with copy explaining what it shows. */}
+        <div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:gap-14">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-blue">Before every session</p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-navy-950 sm:text-4xl">
+              Walk in prepared, not guessing.
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-navy-700/75">
+              Each session comes with the learner&rsquo;s details and AI-suggested discussion topics, so you can spend
+              the time teaching instead of planning from scratch.
+            </p>
+          </div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -121,7 +141,11 @@ export default function ForEducators() {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden rounded-3xl shadow-[0_25px_60px_rgba(19,41,82,0.18)]"
           >
-            <img src="/gallery/session-details.png" alt="LinkGlobal Network session management details" className="w-full object-cover" />
+            <img
+              src="/gallery/session-details.png"
+              alt="LinkGlobal Network session details with AI-generated discussion topics"
+              className="w-full object-cover"
+            />
           </motion.div>
         </div>
       </section>
