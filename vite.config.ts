@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 
 // Public pages, for sitemap.xml. Keep in sync with src/routes.ts (not
 // imported here: the config is type-checked as its own TS project).
-const SITEMAP_PATHS = ['/', '/about', '/for-you', '/learners', '/educators', '/try-now', '/pricing', '/contact']
+const SITEMAP_PATHS = ['/', '/for-learners', '/for-educators', '/for-you', '/about', '/pricing', '/contact']
 
 const FALLBACK_SITE_URL = 'https://link-global-network-website-v1.vercel.app'
 

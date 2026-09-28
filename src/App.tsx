@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import FloatingNav from './components/nav/FloatingNav'
 import ChatWidget from './components/chat/ChatWidget'
 import ScrollToTop from './components/ScrollToTop'
@@ -25,8 +25,11 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/for-you" element={<ForYou />} />
-        <Route path="/learners" element={<ForLearners />} />
-        <Route path="/educators" element={<ForEducators />} />
+        <Route path="/for-learners" element={<ForLearners />} />
+        <Route path="/for-educators" element={<ForEducators />} />
+        {/* Old addresses (also 301'd in vercel.json for direct visits). */}
+        <Route path="/learners" element={<Navigate to="/for-learners" replace />} />
+        <Route path="/educators" element={<Navigate to="/for-educators" replace />} />
         <Route path="/try-now" element={<TryNow />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/contact" element={<Contact />} />

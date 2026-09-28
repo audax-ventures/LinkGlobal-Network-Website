@@ -7,9 +7,9 @@ import Logo from '../components/Logo'
 // router decides). PageMeta marks these pages noindex.
 
 const SUGGESTIONS = [
-  { label: 'For Learners', to: '/learners', line: 'Learn with a native-speaking tutor.' },
-  { label: 'For Educators', to: '/educators', line: 'Teach on your own schedule.' },
-  { label: 'Pricing', to: '/pricing', line: 'Plans, pay-per-session and institutions.' },
+  { label: 'For Learners', to: '/for-learners' },
+  { label: 'Pricing', to: '/pricing' },
+  { label: 'Contact', to: '/contact' },
 ]
 
 export default function NotFound() {
@@ -28,11 +28,10 @@ export default function NotFound() {
             <span>4</span>
           </div>
           <h1 className="mt-8 text-4xl font-extrabold tracking-tight text-navy-950 sm:text-5xl">
-            This page got lost in <span className="text-brand-blue">translation.</span>
+            This page has <span className="text-brand-blue">moved.</span>
           </h1>
           <p className="mx-auto mt-4 max-w-md text-base text-navy-700/75 sm:text-lg">
-            The page you&rsquo;re looking for doesn&rsquo;t exist or has moved. Let&rsquo;s get you back to a real
-            conversation.
+            Everything else is where you left it.
           </p>
           <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
@@ -40,34 +39,21 @@ export default function NotFound() {
               className="rounded-full px-8 py-3.5 text-sm font-semibold text-white shadow-[0_8px_30px_rgba(30,120,190,0.3)] transition-transform hover:scale-105"
               style={{ background: 'linear-gradient(90deg, #1ba3e0, #3ec6ff)' }}
             >
-              Back to home
-            </Link>
-            <Link
-              to="/contact"
-              className="rounded-full border border-navy-900/15 bg-white px-8 py-3.5 text-sm font-semibold text-navy-800 transition-colors hover:bg-navy-900/[0.03]"
-            >
-              Contact us
+              Back to Homepage
             </Link>
           </div>
         </motion.div>
 
-        <div className="mx-auto mt-16 grid max-w-4xl gap-4 sm:grid-cols-3">
-          {SUGGESTIONS.map((s) => (
-            <Link
-              key={s.to}
-              to={s.to}
-              className="group rounded-2xl bg-white p-5 shadow-[0_15px_40px_rgba(19,41,82,0.08)] transition-shadow hover:shadow-[0_20px_50px_rgba(19,41,82,0.14)]"
-            >
-              <p className="flex items-center justify-between font-bold text-navy-950">
-                {s.label}
-                <span className="text-brand-blue transition-transform group-hover:translate-x-1" aria-hidden="true">
-                  →
-                </span>
-              </p>
-              <p className="mt-1 text-sm text-navy-700/70">{s.line}</p>
-            </Link>
+        <nav className="mx-auto mt-10 flex items-center justify-center gap-3 text-sm font-semibold text-navy-700/70" aria-label="Popular pages">
+          {SUGGESTIONS.map((l, i) => (
+            <span key={l.to} className="flex items-center gap-3">
+              {i > 0 && <span aria-hidden="true">·</span>}
+              <Link to={l.to} className="transition-colors hover:text-brand-blue">
+                {l.label}
+              </Link>
+            </span>
           ))}
-        </div>
+        </nav>
       </section>
     </PageShell>
   )

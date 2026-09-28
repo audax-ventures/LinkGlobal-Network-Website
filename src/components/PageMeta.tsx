@@ -6,54 +6,52 @@ import { useLocation } from 'react-router-dom'
 // history, Google — which runs JavaScript). Link-preview scrapers that don't
 // run JavaScript fall back to the site-wide defaults in index.html.
 
-const SITE = 'LinkGlobal Network'
-
+// Titles and descriptions from Website Copy v7, section 09 (Search Listings).
 const META: Record<string, { title: string; description: string }> = {
   '/': {
-    title: `${SITE} — Learn a Language, Meet the World`,
+    title: 'AI Language Learning with Live Native Speakers | LinkGlobal',
     description:
-      'LinkGlobal Network connects learners with real, native-speaking tutors in 120+ countries. Personalized language learning, built for how the world actually talks.',
+      'A personalized AI learning path, live lessons with certified educators, and real conversation with native speakers. For newcomers, students, and professionals.',
   },
-  '/about': {
-    title: `About Us | ${SITE}`,
+  '/for-learners': {
+    title: 'Learn a Language with Native Speakers | LinkGlobal',
     description:
-      'Why we built LinkGlobal Network: language apps got good at drills, not conversation. Real tutors, real people, real practice.',
+      'A personalized learning path for newcomers, international students, and professionals. Live lessons with certified educators, plus IELTS and TOEFL preparation.',
+  },
+  '/for-educators': {
+    title: 'Teach Languages Online as a Native Speaker | LinkGlobal',
+    description:
+      'Teach motivated learners worldwide on your own schedule. LinkGlobal briefs you before every session, so the hour goes to teaching, not assessment.',
   },
   '/for-you': {
-    title: `Who It's For | ${SITE}`,
+    title: 'Conversation Practice with Native Speakers | LinkGlobal',
     description:
-      'Made for learners, tutors and institutions alike — see how LinkGlobal Network fits your side of the language-learning equation.',
+      'Speak with native speakers matched to your profession, interests, or destination. Real conversation practice, with no lesson plan and no assessment.',
   },
-  '/learners': {
-    title: `For Learners | ${SITE}`,
+  '/about': {
+    title: 'About LinkGlobal | Language Learning Built Around People',
     description:
-      'Personalized lessons, flexible scheduling and real conversations with native speakers — so progress fits around your life.',
-  },
-  '/educators': {
-    title: `For Educators | ${SITE}`,
-    description:
-      'Teach on your own schedule, from anywhere. Set your own hours, connect with motivated learners worldwide and get paid reliably.',
-  },
-  '/try-now': {
-    title: `Get Started | ${SITE}`,
-    description:
-      "Whether you're here to learn or to teach, getting started takes just a few minutes. Your first real conversation starts here.",
+      'LinkGlobal combines an adaptive AI learning path with live educators and native speakers, so learners build confidence in the conversations that matter.',
   },
   '/pricing': {
-    title: `Pricing | ${SITE}`,
+    title: 'LinkGlobal Pricing | Pay As You Go Language Lessons',
     description:
-      'Straightforward monthly plans for live, 1-on-1 language learning — plus pay-per-session and institution options. Switch or cancel anytime.',
+      'No subscription. Free assessment, learning path, and AI-guided practice. Pay for individual lessons with certified educators and personal AI feedback.',
   },
   '/contact': {
-    title: `Contact | ${SITE}`,
+    title: 'Contact LinkGlobal | Learn, Teach, or Speak With Learners',
     description:
-      "Questions about learning, teaching, or bringing LinkGlobal Network to your organization? Send us a message and we'll get back to you.",
+      'Questions about learning a language, teaching with LinkGlobal, or becoming a conversation partner? Every message is read by a person.',
+  },
+  '/try-now': {
+    title: 'Start Your Journey | LinkGlobal',
+    description: 'Tell us your goal. Your plan follows from your answers.',
   },
 }
 
 const NOT_FOUND = {
-  title: `Page Not Found | ${SITE}`,
-  description: "The page you're looking for doesn't exist or has moved.",
+  title: 'Page Not Found | LinkGlobal',
+  description: 'This page has moved. Everything else is where you left it.',
 }
 
 function setMeta(selector: string, attr: 'name' | 'property', key: string, content: string) {

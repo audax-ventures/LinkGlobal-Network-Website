@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import Logo from '../Logo'
 import { NAV_ROUTES } from '../../routes'
+import SmartLink from '../SmartLink'
+import { LEARNER_SIGNUP_URL } from '../../content/site'
 import {
   HomeIcon,
   AboutIcon,
@@ -32,14 +34,13 @@ const ICONS: Record<string, typeof HomeIcon> = {
 // keeps every preview automatically accurate (no asset pipeline to keep in
 // sync) and reuses images already shipped in the bundle.
 const ROUTE_META: Record<string, { color: string; image: string; blurb: string }> = {
-  home: { color: '#1ba3e0', image: '/gallery/dashboard.png', blurb: 'Real people. Real conversations.' },
-  about: { color: '#f5a623', image: '/photos/about-founders.jpg', blurb: 'Why we built LinkGlobal Network.' },
-  'for-you': { color: '#2dd4bf', image: '/photos/hero-learner.jpg', blurb: 'Made for learners, tutors & institutions.' },
-  learners: { color: '#a78bfa', image: '/photos/learners-hero.jpg', blurb: 'Learn at the speed of real life.' },
-  educators: { color: '#f472b6', image: '/photos/educators-hero.jpg', blurb: 'Teach the world, on your terms.' },
-  'try-now': { color: '#4ade80', image: '/gallery/onboarding.png', blurb: 'Your first real conversation starts here.' },
-  pricing: { color: '#1ba3e0', image: '/gallery/dashboard.png', blurb: 'Plans built around how you learn.' },
-  contact: { color: '#f5a623', image: '/photos/journey-5.jpg', blurb: "Have a question? We're here." },
+  home: { color: '#1ba3e0', image: '/gallery/dashboard.png', blurb: 'Learn the language. Own the conversation.' },
+  learners: { color: '#a78bfa', image: '/photos/learners-hero.jpg', blurb: 'Language for the conversations ahead of you.' },
+  educators: { color: '#f472b6', image: '/photos/educators-hero.jpg', blurb: 'Spend the session teaching, not preparing.' },
+  'for-you': { color: '#2dd4bf', image: '/photos/hero-learner.jpg', blurb: 'Conversation practice with native speakers.' },
+  about: { color: '#f5a623', image: '/photos/about-founders.jpg', blurb: 'Language should carry your ideas, not limit them.' },
+  pricing: { color: '#1ba3e0', image: '/photos/journey-app-2.png', blurb: 'Pay for the lessons you take.' },
+  contact: { color: '#f5a623', image: '/photos/journey-5.jpg', blurb: 'Not sure where to start?' },
 }
 
 const MotionLink = motion(Link)
@@ -153,13 +154,20 @@ export default function FloatingNav() {
 
   return (
     <div ref={navRef} className="lg-hide-on-intro fixed top-0 inset-x-0 z-40 flex items-center justify-between px-5 sm:px-8 py-4">
-      <Link to="/" aria-label="LinkGlobal Network home">
+      <Link to="/" aria-label="LinkGlobal home">
         <Logo variant="dark" className="h-8 w-auto sm:h-9" />
       </Link>
       <div className="flex items-center gap-2 sm:gap-2.5">
         {NAV_ROUTES.map((route) => (
           <NavCircle key={route.id} id={route.id} label={route.label} path={route.path} Icon={ICONS[route.id]} />
         ))}
+        <SmartLink
+          to={LEARNER_SIGNUP_URL}
+          className="ml-1 hidden rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(30,120,190,0.3)] transition-transform hover:scale-105 lg:inline-block"
+          style={{ background: 'linear-gradient(90deg, #1ba3e0, #3ec6ff)' }}
+        >
+          Start Your Journey
+        </SmartLink>
       </div>
     </div>
   )
