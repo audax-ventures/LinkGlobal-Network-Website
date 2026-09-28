@@ -43,6 +43,10 @@ roles "certified educator" / "conversation partner".
   CSS ported verbatim, animation re-implemented in React (autoplay at 30%
   visible, Play/Pause/Replay). Departs from v7 copy intentionally. "Three
   parts, one system" cards remain below it in the same NavyBand.
+- Hero journey strip replaced (Sept 28) by Riley's design
+  (~/Desktop/journey-strip.html) as hero/JourneyStrip.tsx: 5-step
+  interactive tour (3.8s/step, autoplay at 60% visible, Play/Pause/Resume/
+  Replay), CSS ported (light-dark() resolved to light values).
 - For You H1 = "Every language you speak is worth something to someone."
   (Riley confirmed Sept 28 2026; the copy doc's SEO section suggested
   "Practise with people who live the language." — not used).

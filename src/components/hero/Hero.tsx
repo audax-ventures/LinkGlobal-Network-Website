@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import HeroBackground from './HeroBackground'
+import JourneyStrip from './JourneyStrip'
 import LaptopMockup from '../loading/LaptopMockup'
 import SmartLink from '../SmartLink'
 import { LEARNER_SIGNUP_URL } from '../../content/site'
@@ -14,7 +15,6 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
 }
 
-const JOURNEY = ['Your profile', 'Your path', 'Your lessons', 'Your conversations', 'Your progress']
 
 function PlayIcon() {
   return (
@@ -95,30 +95,10 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Journey strip beneath the hero (copy v7). */}
-      <motion.ol
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 mt-16 flex w-full max-w-6xl flex-wrap items-center justify-center gap-x-2 gap-y-3 md:justify-between"
-        aria-label="The LinkGlobal journey: profile, path, lessons, conversations, progress"
-      >
-        {JOURNEY.map((step, i) => (
-          <li key={step} className="flex items-center gap-2">
-            <span className="flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-navy-800 shadow-[0_6px_20px_rgba(19,41,82,0.08)] ring-1 ring-navy-900/[0.05]">
-              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-blue/10 text-[11px] font-bold text-brand-blue">
-                {i + 1}
-              </span>
-              {step}
-            </span>
-            {i < JOURNEY.length - 1 && (
-              <span className="hidden text-brand-blue/50 md:inline" aria-hidden="true">
-                →
-              </span>
-            )}
-          </li>
-        ))}
-      </motion.ol>
+      {/* Journey strip beneath the hero: Riley's interactive tour design. */}
+      <div className="relative z-10 mt-10 w-full max-w-6xl">
+        <JourneyStrip />
+      </div>
     </section>
   )
 }
