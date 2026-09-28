@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { motion } from 'framer-motion'
 import NavyBand from '../NavyBand'
 import AvatarIllustration from '../AvatarIllustration'
 import { CardRow, OutcomeList, Reveal, Section, SectionHeading, TwoRoles } from '../blocks'
@@ -5,39 +7,132 @@ import { PENDING } from '../../content/site'
 
 // Homepage sections from Website Copy v7 (section 02), in reading order.
 
+// "From studying to speaking" comparison (Riley's supplied design,
+// conversation-section.html): a month of study vs one real conversation.
+// The conversation panel cycles through three café exchanges.
+const CAFE_SCENES = [
+  { them: '¡Hola! ¿Qué te pongo?', themEn: 'Hi! What can I get you?', you: 'Un café con leche, por favor.', youEn: 'A coffee with milk, please.', win: 'You found the words. Out loud.' },
+  { them: '¿Para aquí o para llevar?', themEn: 'For here or to go?', you: 'Para aquí, gracias.', youEn: 'For here, thank you.', win: 'You understood. And answered.' },
+  { them: '¿Algo más?', themEn: 'Anything else?', you: 'Sí, un croissant, por favor.', youEn: 'Yes, a croissant, please.', win: 'You kept the conversation going.' },
+]
+
+function StudyPanelTop({ label, meta, speaking = false }: { label: string; meta: string; speaking?: boolean }) {
+  return (
+    <div className="mb-2.5 flex items-center justify-between gap-2">
+      <span className={`text-[11px] font-bold uppercase tracking-[0.15em] ${speaking ? 'text-brand-blue' : 'text-navy-700/60'}`}>{label}</span>
+      <span className="text-xs text-navy-700/60">{meta}</span>
+    </div>
+  )
+}
+
 export function WhereLearnersGetStuck() {
+  const [step, setStep] = useState(0)
+  const scene = CAFE_SCENES[step]
+  const last = step === CAFE_SCENES.length - 1
+
   return (
     <Section>
       <SectionHeading
-        eyebrow="Where learners get stuck"
-        title="Understanding a language and speaking it are two different abilities."
-        line="The gap is rarely vocabulary. It is practice under real conditions."
+        eyebrow="Less rehearsing. More living."
+        title={
+          <>
+            One conversation can unlock
+            <br className="hidden sm:block" /> what a month of study <span className="text-brand-blue">couldn’t.</span>
+          </>
+        }
+        line="You’ve learned the words. Now feel what happens when you use them with someone."
       />
-      <div className="mx-auto mt-12 grid max-w-4xl gap-5 sm:grid-cols-2">
+
+      <div className="mx-auto mt-12 grid max-w-4xl gap-4 md:grid-cols-2">
+        {/* A month of study */}
         <Reveal>
-          <div className="h-full rounded-3xl bg-white p-7 shadow-[0_15px_40px_rgba(19,41,82,0.08)]">
-            <div className="grid grid-cols-8 gap-1.5" aria-hidden="true">
-              {Array.from({ length: 40 }).map((_, i) => (
-                <span key={i} className="aspect-square rounded-[4px] bg-brand-blue/70" style={{ opacity: 0.35 + (i % 5) * 0.13 }} />
-              ))}
-            </div>
-            <p className="mt-6 text-xs font-bold uppercase tracking-[0.25em] text-navy-700/60">months of study</p>
-          </div>
-        </Reveal>
-        <Reveal delay={0.1}>
-          <div className="flex h-full flex-col rounded-3xl bg-white p-7 shadow-[0_15px_40px_rgba(19,41,82,0.08)]">
-            <div className="flex flex-1 items-center justify-center" aria-hidden="true">
-              <div className="flex items-end gap-3">
-                <AvatarIllustration color="#f5a623" className="h-12 w-12 shrink-0 rounded-full" />
-                <p className="rounded-2xl rounded-bl-sm bg-navy-900/[0.05] px-5 py-3 text-2xl font-bold tracking-widest text-navy-700/40">
-                  . . .
-                </p>
+          <article className="flex h-full flex-col rounded-3xl bg-white p-6 shadow-[0_12px_34px_rgba(11,53,84,0.05)]">
+            <StudyPanelTop label="A month of study" meta="30 days" />
+            <h3 className="text-2xl font-bold tracking-tight text-navy-950">“I know this word.”</h3>
+            <div className="my-6 flex min-h-[224px] flex-col justify-center">
+              <div className="mb-5 grid grid-cols-10 gap-1.5" aria-label="Thirty days of studying" role="img">
+                {Array.from({ length: 30 }).map((_, i) => (
+                  <span
+                    key={i}
+                    className="h-4 rounded-[3px]"
+                    style={{ background: (i + 1) % 3 === 0 ? '#bde4f6' : (i + 1) % 3 === 1 ? '#d6edf7' : '#edf3f7' }}
+                  />
+                ))}
               </div>
+              <div className="mx-2 -rotate-3 rounded-xl border border-navy-900/10 p-4 text-center shadow-[4px_6px_0_#edf3f7]">
+                <small className="text-[10px] font-semibold uppercase tracking-[0.15em] text-navy-700/60">Vocabulary · At the café</small>
+                <strong lang="es" className="my-1.5 block text-2xl font-bold tracking-tight text-navy-950">
+                  un café
+                </strong>
+                <em className="text-sm not-italic text-navy-700/60">a coffee</em>
+              </div>
+              <p className="mt-4 text-center text-sm text-navy-700/60">But when it’s your turn to order…</p>
             </div>
-            <p className="mt-6 text-xs font-bold uppercase tracking-[0.25em] text-navy-700/60">one real conversation</p>
-          </div>
+            <div className="mt-auto border-t border-navy-900/10 pt-5">
+              <strong className="block font-bold text-navy-950">The words look familiar.</strong>
+              <p className="mt-2 text-sm leading-relaxed text-navy-700/65">
+                You recognize the answer on a flashcard.
+                <br />
+                Finding it in the moment feels different.
+              </p>
+              <div className="min-h-[38px]" aria-hidden="true" />
+            </div>
+          </article>
+        </Reveal>
+
+        {/* One real conversation */}
+        <Reveal delay={0.1}>
+          <article
+            className="flex h-full flex-col rounded-3xl bg-white p-6 shadow-[inset_0_0_0_1.5px_#1ba3e0,0_12px_34px_rgba(27,163,224,0.08)]"
+            aria-label="Conversation preview"
+          >
+            <StudyPanelTop label="One real conversation" meta="1 moment" speaking />
+            <h3 className="text-2xl font-bold tracking-tight text-navy-950">“I can actually say it.”</h3>
+            <div className="my-6 flex min-h-[224px] flex-col justify-center">
+              <p className="mb-4 text-center text-[11px] font-semibold uppercase tracking-[0.15em] text-navy-700/60">Same words. Real life.</p>
+              <motion.div
+                key={step}
+                initial={{ opacity: 0.5, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+                className="flex flex-col"
+                aria-live="polite"
+              >
+                <div className="mb-2.5 max-w-[92%] self-start rounded-2xl rounded-bl-[3px] bg-[#edf3f7] px-3.5 py-3 text-sm leading-snug text-navy-950">
+                  <span lang="es">{scene.them}</span>
+                  <small className="mt-1 block text-[11px] opacity-70">{scene.themEn}</small>
+                </div>
+                <div className="mb-2.5 max-w-[92%] self-end rounded-2xl rounded-br-[3px] bg-brand-blue px-3.5 py-3 text-sm leading-snug text-white">
+                  <span lang="es">{scene.you}</span>
+                  <small className="mt-1 block text-[11px] opacity-80">{scene.youEn}</small>
+                </div>
+                <p className="flex min-h-[42px] items-center justify-center gap-1.5 text-xs font-semibold text-emerald-700">✓ {scene.win}</p>
+              </motion.div>
+            </div>
+            <div className="mt-auto border-t border-navy-900/10 pt-5">
+              <strong className="block font-bold text-navy-950">The words become yours.</strong>
+              <p className="mt-2 text-sm leading-relaxed text-navy-700/65">
+                You recall them, say them, and respond.
+                <br />
+                A little less hesitation. A real step forward.
+              </p>
+              <button
+                type="button"
+                onClick={() => setStep((s) => (s + 1) % CAFE_SCENES.length)}
+                className="min-h-[38px] pt-3 text-left text-sm font-semibold text-brand-blue hover:underline"
+              >
+                {last ? 'Replay the conversation ↻' : 'Keep the conversation going →'}
+              </button>
+            </div>
+          </article>
         </Reveal>
       </div>
+
+      <Reveal className="mt-8 text-center">
+        <p className="text-navy-700/70">
+          Study builds your knowledge. <strong className="font-bold text-navy-950">Conversation puts it to work.</strong>
+        </p>
+      </Reveal>
     </Section>
   )
 }
