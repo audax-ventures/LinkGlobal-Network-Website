@@ -35,8 +35,9 @@ roles "certified educator" / "conversation partner".
 - Structured data: OrgSchema (React, from content/site.ts incl. ADDRESS +
   SOCIAL); Product JSON-LD on Pricing auto-emits once prices AND
   PENDING.currency are set; FAQPage on Pricing.
-- Doc conflict: For You SEO H1 ("Practise with people who live the
-  language.") differs from its header copy; header copy is used.
+- For You H1 = "Every language you speak is worth something to someone."
+  (Riley confirmed Sept 28 2026; the copy doc's SEO section suggested
+  "Practise with people who live the language." — not used).
 - OG image spec in the doc wants a learner photo; current og-image.jpg is
   the globe + logo until a real photo exists.
 
