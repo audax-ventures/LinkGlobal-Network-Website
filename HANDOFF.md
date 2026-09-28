@@ -47,6 +47,10 @@ roles "certified educator" / "conversation partner".
   (~/Desktop/journey-strip.html) as hero/JourneyStrip.tsx: 5-step
   interactive tour (3.8s/step, autoplay at 60% visible, Play/Pause/Resume/
   Replay), CSS ported (light-dark() resolved to light values).
+- Home "Three parts, one system" replaced (Sept 28) by Riley's design
+  (~/Desktop/three-parts-section.html) as home/ThreeParts.tsx (3.4s/part
+  overview ending on all three, autoplay at 25% visible). Footer em dash
+  changed to a comma (house style).
 - For You H1 = "Every language you speak is worth something to someone."
   (Riley confirmed Sept 28 2026; the copy doc's SEO section suggested
   "Practise with people who live the language." — not used).

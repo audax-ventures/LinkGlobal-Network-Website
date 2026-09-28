@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import NavyBand from '../NavyBand'
 import PeoplePhilosophy from './PeoplePhilosophy'
+import ThreeParts from './ThreeParts'
 import { CardRow, OutcomeList, Reveal, Section, SectionHeading, TwoRoles } from '../blocks'
 import { PENDING } from '../../content/site'
 
@@ -141,31 +142,9 @@ export function PhilosophyAndSystem() {
   return (
     <NavyBand className="py-10 sm:py-16">
       <PeoplePhilosophy />
-      <div className="mx-auto mt-20 max-w-3xl pt-4">
-        <SectionHeading
-          dark
-          eyebrow="Three parts, one system"
-          title={<span className="text-3xl sm:text-4xl">Most language platforms focus on one. LinkGlobal brings all three together around a single learner.</span>}
-        />
+      <div className="mt-20">
+        <ThreeParts />
       </div>
-      <CardRow
-        dark
-        items={[
-          { title: 'Personalization', line: 'The AI analyzes how you speak and shapes what comes next.' },
-          { title: 'Teaching', line: 'Certified educators arrive already briefed on your plan.' },
-          { title: 'Real conversation', line: 'Native speakers matched to your work, your city, or what you follow.' },
-        ].map((it, i) => ({
-          ...it,
-          visual: (
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-cyan/15 text-sm font-extrabold text-brand-cyan">
-              {i + 1}
-            </span>
-          ),
-        }))}
-      />
-      <Reveal className="mx-auto mt-10 max-w-2xl text-center">
-        <p className="text-lg font-semibold text-white">The AI never teaches you. It makes sure the right person does.</p>
-      </Reveal>
     </NavyBand>
   )
 }
