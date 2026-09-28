@@ -10,13 +10,13 @@ const MASCOT_SRC = '/mascot/assistant-mascot.svg'
 const MAX_INPUT_LENGTH = 500
 const HISTORY_SENT = 12
 
-const GREETING = `Hi, I'm ${ASSISTANT_NAME}, LinkGlobal's AI assistant. Ask me how it works, about plans and pricing, or how to become a tutor.`
+const GREETING = `Hi, I'm ${ASSISTANT_NAME}, LinkGlobal's AI assistant. Ask me how it works, about lessons and pricing, or how to teach with LinkGlobal.`
 
 const SUGGESTIONS = [
   'How does LinkGlobal work?',
-  'What are the pricing plans?',
-  'Can I pay per session?',
-  'How do I become a tutor?',
+  'Is there a subscription?',
+  'What is a conversation partner?',
+  'How do I teach with LinkGlobal?',
 ]
 
 type ErrorKind = 'unavailable' | 'rate' | 'failed'
@@ -222,7 +222,7 @@ export default function ChatWidget() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   maxLength={MAX_INPUT_LENGTH}
-                  placeholder="Ask about plans, tutors, how it works…"
+                  placeholder="Ask about lessons, pricing, how it works..."
                   aria-label={`Message ${ASSISTANT_NAME}`}
                   className="min-w-0 flex-1 rounded-full border border-navy-900/15 bg-white px-4 py-2.5 text-sm text-navy-950 placeholder:text-navy-700/50 focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/25"
                 />

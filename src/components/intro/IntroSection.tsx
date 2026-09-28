@@ -213,7 +213,7 @@ export default function IntroSection() {
         ref={sectionRef}
         className="relative flex h-[100svh] min-h-[480px] select-none flex-col items-center justify-center overflow-hidden px-6 text-center"
         style={{ background: '#02070f' }}
-        aria-label="LinkGlobal Network intro"
+        aria-label="LinkGlobal intro"
       >
         {/* Globe fills the section; a soft dark vignette in the centre keeps
             the wordmark and greetings readable. Opacity-only entrance: the

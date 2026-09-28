@@ -25,7 +25,7 @@ export default function Logo({ variant = 'dark', markOnly = false, className = '
       viewBox={markOnly ? '24 12.5 28 30' : '24.5 12.5 118 30'}
       className={className}
       role="img"
-      aria-label="LinkGlobal Network"
+      aria-label="LinkGlobal"
     >
       <defs>
         <clipPath id={clipId}>

@@ -28,30 +28,30 @@ interface Path {
 const PATHS: Path[] = [
   {
     eyebrow: 'I want to learn',
-    title: 'Start as a Learner',
-    description: 'From sign-up to your first real conversation — here’s the whole path.',
+    title: 'Start as a learner',
+    description: 'Tell us your goal. Your plan follows from your answers.',
     steps: [
-      { title: 'Take the free placement check', line: 'Find your starting level.' },
-      { title: 'Get matched with a tutor', line: 'A native speaker in your language.' },
-      { title: 'Have your first conversation', line: 'This week, not someday.' },
+      { title: 'Take the free assessment', line: 'Your goals, your level, your interests.' },
+      { title: 'See your learning path', line: 'The whole route, before you book anything.' },
+      { title: 'Book your first lesson', line: 'With a certified educator, briefed from your path.' },
     ],
-    perk: 'No fixed contracts',
-    cta: 'Start Learning',
+    perk: 'No subscription',
+    cta: 'Start Your Journey',
     color: '#1ba3e0',
     tint: 'linear-gradient(135deg, rgba(27,163,224,0.14), rgba(62,198,255,0.05))',
     icon: <TargetIcon className="h-full w-full" />,
   },
   {
     eyebrow: 'I want to teach',
-    title: 'Become a Tutor',
-    description: 'Teach motivated learners from anywhere, on a schedule you set.',
+    title: 'Teach with LinkGlobal',
+    description: 'Your fluency is already an asset.',
     steps: [
-      { title: 'Apply and get verified', line: 'Tell us about your teaching.' },
-      { title: 'Set your hours and rates', line: 'Teach when it suits you.' },
-      { title: 'Start teaching', line: 'Learners in 120+ countries.' },
+      { title: 'Apply', line: 'Applications are open.' },
+      { title: 'Get selected', line: 'For teaching ability, not only fluency.' },
+      { title: 'Start teaching', line: 'With a briefing before every lesson.' },
     ],
-    perk: 'Reliable, on-time payouts',
-    cta: 'Apply to Teach',
+    perk: 'You set your own availability',
+    cta: 'Start Teaching With Us',
     color: '#f5a623',
     tint: 'linear-gradient(135deg, rgba(245,166,35,0.16), rgba(245,166,35,0.04))',
     icon: <ChatIcon className="h-full w-full" />,
@@ -62,14 +62,14 @@ export default function TryNow() {
   return (
     <PageShell footerFade={false}>
       <PageHeader
-        eyebrow="Try Now"
+        eyebrow="Start Your Journey"
         title={
           <>
-            Your first real conversation <span className="text-gradient-brand">starts here.</span>
+            Your path begins with a conversation <span className="text-gradient-brand">about you.</span>
           </>
         }
-        description="Whether you're here to learn or here to teach, getting started takes just a few minutes."
-        image={{ src: '/gallery/onboarding.png', alt: 'LinkGlobal Network onboarding flow' }}
+        description="Tell us your goal. Your plan follows from your answers."
+        image={{ src: '/gallery/onboarding.png', alt: 'The LinkGlobal onboarding flow' }}
         imageAspect="1000/540"
       />
 
@@ -150,11 +150,10 @@ export default function TryNow() {
         </div>
 
         <p className="mx-auto mt-10 max-w-md text-center text-sm text-white/70">
-          Have questions before you start?{' '}
-          <a href="mailto:info@linkglobalnetwork.ca" className="font-bold text-brand-cyan underline underline-offset-2 hover:text-white">
-            Reach out
-          </a>{' '}
-          — we're happy to help you figure out the right fit.
+          Not sure where to start?{' '}
+          <a href="/contact" className="font-bold text-brand-cyan underline underline-offset-2 hover:text-white">
+            Tell us what brought you here.
+          </a>
         </p>
       </NavyBand>
       <div className="pointer-events-none h-16" style={{ background: 'linear-gradient(180deg, #081b33, #050f1f)' }} aria-hidden="true" />

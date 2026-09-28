@@ -3,6 +3,38 @@
 Written to let a fresh chat pick up this project without re-deriving context.
 Read this file first, then the codebase, before making changes.
 
+# >>> NEWEST (Sept 28 2026): SITE COPY = "Website Copy v7" <<<
+The whole site was rewritten to the client's final copy doc
+`~/Downloads/LinkGlobal_Website_Copy_v7_send 2 (1).pdf` (22 pages). That
+doc is the source of truth for wording; don't invent headings (where the
+doc has only a label, the label is the heading). House style: Canadian
+English, no em dashes, no exclamation marks, brand "LinkGlobal",
+roles "certified educator" / "conversation partner".
+- `src/content/site.ts`: signup URLs (LEARNER/EDUCATOR_SIGNUP_URL, now
+  /try-now), PARTNER_FIND/SHARE_URL (/contact), CONTACT_EMAIL
+  (hello@linkglobal.com), SOCIAL + LEGAL links (null = hidden), and PENDING
+  values the doc left blank: lessonPrice, aiFeedbackPrice, languages,
+  replyDays, educatorSelection, proof numbers, testimonialNames. Null =
+  hidden or neutral fallback ("Price to be announced", "LinkGlobal learner").
+- Pricing is PAY AS YOU GO at launch (Riley confirmed); old $39/$89/$159
+  monthly plans are gone. PLAN_SLOTS in Pricing.tsx hold the future
+  subscription/P2P/AI/exam cards (enabled:false).
+- Routes: /for-learners, /for-educators (old /learners, /educators 301 via
+  vercel.json + router Navigate). Try Now is out of the nav but kept as
+  the interim signup page. Nav has a "Start Your Journey" button (lg+).
+- Shared blocks: components/blocks.tsx (SectionHeading, CardRow,
+  BeforeDuringAfter, TwoRoles, OutcomeList, Reveal), home/HomeSections.tsx,
+  SampleCards (dashboard/SeeWhereItHappens.tsx, takes SampleData).
+- api/chat.ts facts rewritten to v7 (pay as you go, no prices quoted).
+  api/contact.ts still delivers to info@linkglobalnetwork.ca (unchanged
+  on purpose until hello@linkglobal.com exists).
+- vercel.json rewrite excludes /_vercel/* (analytics script was being
+  served index.html because Web Analytics isn't enabled yet).
+- Doc conflict: For You SEO H1 ("Practise with people who live the
+  language.") differs from its header copy; header copy is used.
+- OG image spec in the doc wants a learner photo; current og-image.jpg is
+  the globe + logo until a real photo exists.
+
 # >>> LATEST UPDATE (Sept 2026) — READ THIS BLOCK FIRST <<<
 
 Everything in this block supersedes the older sections below wherever they
