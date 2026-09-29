@@ -68,9 +68,10 @@ roles "certified educator" / "conversation partner".
 - Home learning journey replaced (Sept 28) by Riley's design
   (~/Desktop/home-learning-journey.html) in journey/LearningJourney.tsx:
   six alternating stages, per-stage card animation on first 30% view and
-  Replay buttons, line fills to the furthest stage reached. The mascot
-  "journey character" placeholder is gone (design has none). Keeps
-  #how-it-works anchor.
+  Replay buttons, line fills to the furthest stage reached. Keeps
+  #how-it-works anchor. Journey character = public/journey-companion.svg
+  (Riley's, Sept 28; its float/blink/wave loops sped up 25%: 3s / 6s),
+  riding the fill head just above the next stage's node.
 - Sept 28: Riley found the new section animations slightly slow; every
   timing in JourneyStrip, PeoplePhilosophy, ThreeParts, TourSections (+ the
   shared BASE_CSS / useTour used by tours/PageTours) and LearningJourney was

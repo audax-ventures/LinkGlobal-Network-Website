@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" fill="none" role="img" aria-labelledby="jc-title jc-desc">
+  <title id="jc-title">LinkGlobal journey companion</title>
+  <desc id="jc-desc">A friendly blue speech-bubble character wearing navy headphones. It gently floats, blinks, and occasionally waves.</desc>
+  <defs>
+    <linearGradient id="jc-shell" x1="76" y1="65" x2="181" y2="202" gradientUnits="userSpaceOnUse"><stop stop-color="#55D4FA"/><stop offset=".55" stop-color="#18AFE6"/><stop offset="1" stop-color="#078BCB"/></linearGradient>
+    <linearGradient id="jc-face" x1="92" y1="84" x2="164" y2="173" gradientUnits="userSpaceOnUse"><stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#EAF8FF"/></linearGradient>
+    <linearGradient id="jc-ear" x1="42" y1="107" x2="71" y2="153" gradientUnits="userSpaceOnUse"><stop stop-color="#254F6B"/><stop offset="1" stop-color="#09283E"/></linearGradient>
+  </defs>
+  <style>
+    .jc-float{animation:jc-float 3s ease-in-out infinite;transform-origin:128px 132px}
+    .jc-shadow{animation:jc-shadow 3s ease-in-out infinite;transform-origin:128px 229px}
+    .jc-wave{animation:jc-wave 6s ease-in-out infinite;transform-origin:0 0}
+    .jc-eyes{animation:jc-blink 6s linear infinite;transform-origin:128px 124px}
+    @keyframes jc-float{0%,100%{transform:translateY(2px) rotate(-1.5deg)}50%{transform:translateY(-5px) rotate(1.5deg)}}
+    @keyframes jc-shadow{0%,100%{transform:scaleX(1);opacity:.12}50%{transform:scaleX(.84);opacity:.08}}
+    @keyframes jc-wave{0%,60%,100%{transform:rotate(0deg)}66%{transform:rotate(15deg)}72%{transform:rotate(-10deg)}78%{transform:rotate(15deg)}84%{transform:rotate(-7deg)}90%{transform:rotate(0deg)}}
+    @keyframes jc-blink{0%,42%,46%,100%{transform:scaleY(1)}43%,45%{transform:scaleY(.1)}}
+    @media(prefers-reduced-motion:reduce){.jc-float,.jc-shadow,.jc-wave,.jc-eyes{animation:none!important}}
+  </style>
+  <ellipse class="jc-shadow" cx="128" cy="229" rx="46" ry="7" fill="#0B3556" opacity=".12"/>
+  <g class="jc-float">
+    <!-- A white edge keeps the character legible over the journey line. -->
+    <path d="M58 127C58 85 87 56 128 56C169 56 198 85 198 126C198 167 169 194 130 194L98 212C94 214 90 211 91 207L96 188C72 178 58 157 58 127Z" fill="white" stroke="white" stroke-width="9" stroke-linejoin="round"/>
+    <!-- Left arm and a small resting mitten. -->
+    <path d="M65 154Q50 174 38 163" stroke="#078FCB" stroke-width="12" stroke-linecap="round"/>
+    <path d="M36 152C30 148 26 151 27 156C18 152 15 158 21 163C13 165 17 171 24 172C24 180 34 181 42 173C48 167 43 155 36 152Z" fill="#EFFAFF" stroke="#0F668F" stroke-width="2.5" stroke-linejoin="round"/>
+    <!-- Speech-bubble silhouette and its expressive tail. -->
+    <path d="M58 127C58 85 87 56 128 56C169 56 198 85 198 126C198 167 169 194 130 194L98 212C94 214 90 211 91 207L96 188C72 178 58 157 58 127Z" fill="url(#jc-shell)"/>
+    <path d="M83 82C93 72 106 67 120 66" stroke="#B9EEFF" stroke-width="5" stroke-linecap="round" opacity=".75"/>
+    <!-- Comfortable over-ear headphones. -->
+    <path d="M53 123V110C53 67 84 40 128 40C172 40 203 67 203 110V123" stroke="white" stroke-width="16" stroke-linecap="round"/>
+    <path d="M53 123V110C53 67 84 40 128 40C172 40 203 67 203 110V123" stroke="#12364F" stroke-width="10" stroke-linecap="round"/>
+    <path d="M96 46Q128 34 160 46" stroke="#376780" stroke-width="5" stroke-linecap="round"/>
+    <rect x="42" y="107" width="23" height="45" rx="11.5" fill="url(#jc-ear)" stroke="white" stroke-width="3"/>
+    <rect x="57" y="113" width="10" height="33" rx="5" fill="#78D8F4"/>
+    <rect x="191" y="107" width="23" height="45" rx="11.5" fill="#12364F" stroke="white" stroke-width="3"/>
+    <rect x="189" y="113" width="10" height="33" rx="5" fill="#78D8F4"/>
+    <!-- One large face stays readable at small icon sizes. -->
+    <path d="M77 125C77 96 97 82 128 82C159 82 179 96 179 125C179 156 158 174 128 174C98 174 77 156 77 125Z" fill="url(#jc-face)"/>
+    <path d="M97 109Q103 105 109 108M144 108Q150 104 156 108" stroke="#163A52" stroke-width="3" stroke-linecap="round"/>
+    <g class="jc-eyes">
+      <ellipse cx="106" cy="125" rx="6" ry="9" fill="#12334B"/>
+      <ellipse cx="150" cy="125" rx="6" ry="9" fill="#12334B"/>
+      <circle cx="108" cy="122" r="1.8" fill="white"/>
+      <circle cx="152" cy="122" r="1.8" fill="white"/>
+    </g>
+    <ellipse cx="93" cy="141" rx="8" ry="4" fill="#9FDFF2" opacity=".7"/>
+    <ellipse cx="163" cy="141" rx="8" ry="4" fill="#9FDFF2" opacity=".7"/>
+    <path d="M116 143Q128 156 140 143" stroke="#12334B" stroke-width="4" stroke-linecap="round"/>
+    <!-- A tiny microphone ties the character to real speaking. -->
+    <path d="M202 148C202 164 185 171 166 171" stroke="#12364F" stroke-width="4" stroke-linecap="round"/>
+    <rect x="153" y="167" width="17" height="8" rx="4" fill="#12364F"/>
+    <!-- Waving arm has its own local pivot. -->
+    <g transform="translate(194 162)"><g class="jc-wave">
+      <path d="M-6 2Q19 3 22-22" stroke="#078FCB" stroke-width="11" stroke-linecap="round"/>
+      <path d="M17-22L12-34Q9-40 13-42Q17-44 20-36L19-48Q19-54 23-54Q28-54 28-47L29-40L32-49Q34-54 38-52Q42-50 39-44L36-35Q42-40 45-36Q48-31 40-26L36-20Q31-13 23-15Q19-16 17-22Z" fill="#F4FCFF" stroke="#0F668F" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M22-28Q27-31 31-26" stroke="#9BCADD" stroke-width="2" stroke-linecap="round"/>
+    </g></g>
+  </g>
+</svg>
