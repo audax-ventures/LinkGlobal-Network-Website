@@ -627,3 +627,9 @@ already fairly tight compositions).
   reference images so far.
 - Pricing numbers are explicitly placeholders — don't treat them as real
   when discussing the site with the user.
+
+- Home order change (client request): the Philosophy band ("Powered by technology.
+  Built around people.") now sits directly under the hero, ABOVE "Less rehearsing.
+  More living." ThreeParts ("Three parts, one system") stays after the café
+  section in its own NavyBand (HomeSections: Philosophy + ThreePartsSystem replace
+  PhilosophyAndSystem).

@@ -11,7 +11,8 @@ import {
   HowWeMeasureProgress,
   LearnerOutcomes,
   LessonsAndConversation,
-  PhilosophyAndSystem,
+  Philosophy,
+  ThreePartsSystem,
   WhereLearnersGetStuck,
 } from '../components/home/HomeSections'
 import { LEARNER_SIGNUP_URL } from '../content/site'
@@ -28,8 +29,9 @@ export default function Home() {
     <PageShell footerFade={false}>
       <IntroSection />
       <Hero />
+      <Philosophy />
       <WhereLearnersGetStuck />
-      <PhilosophyAndSystem />
+      <ThreePartsSystem />
       <LearningJourney />
       <LinkGlobalLoop />
       <LessonsAndConversation />

@@ -139,13 +139,18 @@ export function WhereLearnersGetStuck() {
   )
 }
 
-export function PhilosophyAndSystem() {
+export function Philosophy() {
   return (
     <NavyBand className="py-10 sm:py-16">
       <PeoplePhilosophy />
-      <div className="mt-20">
-        <ThreeParts />
-      </div>
+    </NavyBand>
+  )
+}
+
+export function ThreePartsSystem() {
+  return (
+    <NavyBand className="py-10 sm:py-16">
+      <ThreeParts />
     </NavyBand>
   )
 }
