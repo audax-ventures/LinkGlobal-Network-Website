@@ -71,7 +71,9 @@ roles "certified educator" / "conversation partner".
   Replay buttons, line fills to the furthest stage reached. Keeps
   #how-it-works anchor. Journey character = public/journey-companion.svg
   (Riley's, Sept 28; its float/blink/wave loops sped up 25%: 3s / 6s),
-  riding the fill head just above the next stage's node.
+  riding the fill head. Sept 28: the fill + companion now follow scroll
+  continuously (head = 55% of viewport, via --hj-progress set in a scroll
+  handler); nodes use data-seen and un-light when scrolled back above.
 - Sept 28: Riley found the new section animations slightly slow; every
   timing in JourneyStrip, PeoplePhilosophy, ThreeParts, TourSections (+ the
   shared BASE_CSS / useTour used by tours/PageTours) and LearningJourney was
