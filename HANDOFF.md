@@ -638,3 +638,16 @@ already fairly tight compositions).
   to GREETINGS; globe made more prominent (IntroSection: brightness 1, scale 1.12,
   smaller/lighter centre vignette; globeBackground.js: blue ocean + sheen, bright
   atmosphere rim, brighter coastlines/dots/routes).
+
+- Home trim (client design notes, Oct 2026: less text, more imagery, Lingoda as
+  reference; Riley approved placeholders + moving copy). Home is now: Intro, Hero
+  (photo /photos/journey-4.jpg + chat bubbles + phone mockup; JourneyStrip moved
+  out), Philosophy (one line, no footer row), café comparison (card paragraphs
+  cut), ThreePartsPhotos (new, HomeSections: 3 photo rows, one line each),
+  LearningJourney compact (prop: hides descriptions/notes/subtitle), Inside the
+  platform, testimonials + CTA.
+  Moved: For Learners gets JourneyStrip, full LearningJourney, LinkGlobalLoop,
+  ThreePartsSystem (animated), LessonsAndConversation + PersonalizedPaths tours.
+  About gets the RealLifeProgress tour. Home SampleCards dropped (For Learners
+  already has its own). PLACEHOLDER PHOTOS on Home: journey-4, learners,
+  educators, journey-5. Swap for the client's photos when supplied.

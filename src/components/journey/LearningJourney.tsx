@@ -159,7 +159,11 @@ const STAGES: Stage[] = [
   },
 ]
 
-export default function LearningJourney() {
+// compact (Home): each stage keeps its title, takeaway line and animated card;
+// the longer descriptions, notes and intro copy live on For Learners.
+const COMPACT_CSS = `#home-learning-journey.hj-compact .hj-description,#home-learning-journey.hj-compact .hj-note,#home-learning-journey.hj-compact .hj-subtitle,#home-learning-journey.hj-compact .hj-footer small{display:none}#home-learning-journey.hj-compact .hj-takeaway{margin-top:0;font-size:15px}#home-learning-journey.hj-compact .hj-row{min-height:0}@media(min-width:950px){#home-learning-journey.hj-compact{--hj-space:40px}#home-learning-journey.hj-compact .hj-takeaway{font-size:17px}}`
+
+export default function LearningJourney({ compact = false }: { compact?: boolean }) {
   const rootRef = useRef<HTMLElement>(null)
   const timelineRef = useRef<HTMLDivElement>(null)
   const rowRefs = useRef<(HTMLElement | null)[]>([])
@@ -234,9 +238,11 @@ export default function LearningJourney() {
     <section
       id="home-learning-journey"
       ref={rootRef}
+      className={compact ? 'hj-compact' : undefined}
       aria-label="Your learning journey with LinkGlobal"
     >
       <style>{CSS}</style>
+      {compact && <style>{COMPACT_CSS}</style>}
       <div id="how-it-works" className="relative -top-24" aria-hidden="true" />
       <div className="hj-wrap">
         <header className="hj-header">

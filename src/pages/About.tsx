@@ -3,6 +3,7 @@ import NavyBand from '../components/NavyBand'
 import PageHeader from '../components/PageHeader'
 import CtaBand from '../components/CtaBand'
 import { FromStudyToSpeaking } from '../components/tours/PageTours'
+import { HowWeMeasureProgress } from '../components/home/HomeSections'
 import { OutcomeList, Reveal, Section, SectionHeading } from '../components/blocks'
 import { LEARNER_SIGNUP_URL } from '../content/site'
 
@@ -73,6 +74,8 @@ export default function About() {
           ]}
         />
       </Section>
+
+      <HowWeMeasureProgress />
 
       <Section className="pt-0 sm:pt-4">
         <SectionHeading eyebrow="The people behind LinkGlobal" title="Technology starts it. People make it matter." />

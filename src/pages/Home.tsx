@@ -2,23 +2,16 @@ import PageShell from '../components/PageShell'
 import IntroSection from '../components/intro/IntroSection'
 import Hero from '../components/hero/Hero'
 import LearningJourney from '../components/journey/LearningJourney'
-import LinkGlobalLoop from '../components/loop/LinkGlobalLoop'
 import JourneyDashboard from '../components/dashboard/JourneyDashboard'
-import SampleCards from '../components/dashboard/SeeWhereItHappens'
 import CtaBand from '../components/CtaBand'
-import {
-  BuiltForConversations,
-  HowWeMeasureProgress,
-  LearnerOutcomes,
-  LessonsAndConversation,
-  Philosophy,
-  ThreePartsSystem,
-  WhereLearnersGetStuck,
-} from '../components/home/HomeSections'
+import { LearnerOutcomes, Philosophy, ThreePartsPhotos, WhereLearnersGetStuck } from '../components/home/HomeSections'
 import { LEARNER_SIGNUP_URL } from '../content/site'
 
-// Home, in the reading order of Website Copy v7 (section 02). Home manages
-// its own backgrounds: light base, navy bands (Philosophy, the Loop), then
+// Home, trimmed per the client's Oct 2026 design notes (less text, more
+// imagery, Lingoda as reference). The fuller v7 sections now live on For
+// Learners (journey strip, full journey, Loop, ThreeParts, the two tours)
+// and About (real-life progress tour). Home manages its own backgrounds:
+// light base, the navy Philosophy band, then
 // FADE_TO_DARK over the closing stretch so it lands on the footer's dark
 // tone. Hence PageShell footerFade={false}.
 const FADE_TO_DARK =
@@ -31,14 +24,9 @@ export default function Home() {
       <Hero />
       <Philosophy />
       <WhereLearnersGetStuck />
-      <ThreePartsSystem />
-      <LearningJourney />
-      <LinkGlobalLoop />
-      <LessonsAndConversation />
-      <BuiltForConversations />
+      <ThreePartsPhotos />
+      <LearningJourney compact />
       <JourneyDashboard />
-      <SampleCards />
-      <HowWeMeasureProgress />
       <div style={{ background: FADE_TO_DARK }}>
         <LearnerOutcomes />
         <CtaBand

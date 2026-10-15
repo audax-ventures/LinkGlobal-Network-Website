@@ -72,11 +72,6 @@ export function WhereLearnersGetStuck() {
             </div>
             <div className="mt-auto border-t border-navy-900/10 pt-5">
               <strong className="block font-bold text-navy-950">The words look familiar.</strong>
-              <p className="mt-2 text-sm leading-relaxed text-navy-700/65">
-                You recognize the answer on a flashcard.
-                <br />
-                Finding it in the moment feels different.
-              </p>
               <div className="min-h-[38px]" aria-hidden="true" />
             </div>
           </article>
@@ -113,11 +108,6 @@ export function WhereLearnersGetStuck() {
             </div>
             <div className="mt-auto border-t border-navy-900/10 pt-5">
               <strong className="block font-bold text-navy-950">The words become yours.</strong>
-              <p className="mt-2 text-sm leading-relaxed text-navy-700/65">
-                You recall them, say them, and respond.
-                <br />
-                A little less hesitation. A real step forward.
-              </p>
               <button
                 type="button"
                 onClick={() => setStep((s) => (s + 1) % CAFE_SCENES.length)}
@@ -152,6 +142,81 @@ export function ThreePartsSystem() {
     <NavyBand className="py-10 sm:py-16">
       <ThreeParts />
     </NavyBand>
+  )
+}
+
+// Home's version of "three parts, one system": photo-led rows (Lingoda
+// reference), one line each. The animated ThreeParts lives on For Learners.
+// Photos are placeholders until the client's own set arrives.
+const PARTS = [
+  {
+    kicker: 'AI personalizes',
+    title: 'A plan that listens.',
+    line: 'AI analyzes how you speak and shapes what comes next around you.',
+    photo: '/photos/learners.jpg',
+    alt: 'A learner reviewing his personalized LinkGlobal plan',
+    chip: 'Next focus: everyday phrases',
+  },
+  {
+    kicker: 'Educators teach',
+    title: 'A teacher who’s ready.',
+    line: 'Certified educators arrive briefed on your plan, ready to help you move forward.',
+    photo: '/photos/educators.jpg',
+    alt: 'An educator preparing for a live online lesson',
+    chip: '✓ Ready for your lesson',
+  },
+  {
+    kicker: 'People connect',
+    title: 'A reason to speak.',
+    line: 'Meet native speakers connected to your work, your city, and what you love.',
+    photo: '/photos/journey-5.jpg',
+    alt: 'Two people chatting and laughing on a train',
+    chip: '¡Sí! Vamos juntos.',
+  },
+]
+
+export function ThreePartsPhotos() {
+  return (
+    <Section>
+      <SectionHeading
+        eyebrow="Three parts. One connected experience."
+        title={
+          <>
+            A plan that gets you.
+            <br className="hidden sm:block" /> People who <span className="text-brand-blue">get you speaking.</span>
+          </>
+        }
+      />
+      <div className="mx-auto mt-14 flex max-w-5xl flex-col gap-14 sm:gap-20">
+        {PARTS.map((p, i) => (
+          <div key={p.title} className="grid items-center gap-8 md:grid-cols-2 md:gap-14">
+            <Reveal className={i % 2 ? 'md:order-2' : ''}>
+              <div className="relative">
+                <img
+                  src={p.photo}
+                  alt={p.alt}
+                  loading="lazy"
+                  className="aspect-[4/3] w-full rounded-[1.75rem] object-cover shadow-[0_24px_60px_rgba(19,41,82,0.16)]"
+                />
+                <span
+                  className={`absolute -bottom-4 ${i % 2 ? '-left-3 sm:-left-6' : '-right-3 sm:-right-6'} rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-navy-950 shadow-[0_14px_40px_rgba(19,41,82,0.16)]`}
+                  aria-hidden="true"
+                >
+                  {p.chip}
+                </span>
+              </div>
+            </Reveal>
+            <Reveal delay={0.1} className="text-center md:text-left">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-blue">
+                0{i + 1} · {p.kicker}
+              </p>
+              <h3 className="mt-3 text-3xl font-extrabold tracking-tight text-navy-950 sm:text-4xl">{p.title}</h3>
+              <p className="mx-auto mt-4 max-w-sm text-lg text-navy-700/75 md:mx-0">{p.line}</p>
+            </Reveal>
+          </div>
+        ))}
+      </div>
+    </Section>
   )
 }
 

@@ -1,7 +1,5 @@
 import { motion } from 'framer-motion'
 import HeroBackground from './HeroBackground'
-import JourneyStrip from './JourneyStrip'
-import LaptopMockup from '../loading/LaptopMockup'
 import SmartLink from '../SmartLink'
 import { LEARNER_SIGNUP_URL } from '../../content/site'
 
@@ -76,28 +74,45 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
+        {/* Photo-led, Lingoda-style. Placeholder photo until the client's
+            own set arrives: swap the src, keep the overlays. */}
         <motion.div
           variants={item}
           initial="hidden"
           animate="show"
-          className="relative flex justify-center md:justify-end"
+          className="relative mx-auto w-full max-w-lg md:mr-0"
         >
-          <LaptopMockup
-            src="/gallery/dashboard.png"
-            alt="The LinkGlobal learner dashboard"
-            className="relative z-10 w-full max-w-md"
-          />
+          <div className="relative overflow-hidden rounded-[2rem] shadow-[0_30px_80px_rgba(19,41,82,0.22)]">
+            <img
+              src="/photos/journey-4.jpg"
+              alt="A learner waving hello on a video call with a native speaker"
+              className="aspect-[4/5] w-full object-cover sm:aspect-[5/4]"
+            />
+          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute -left-3 top-6 rounded-2xl rounded-bl-[4px] bg-white px-4 py-3 text-sm font-semibold text-navy-950 shadow-[0_14px_40px_rgba(19,41,82,0.18)] sm:-left-8"
+            aria-hidden="true"
+          >
+            <span lang="es">¡Hola! ¿Cómo estás?</span>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.4, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute -right-2 bottom-24 rounded-2xl rounded-br-[4px] bg-brand-blue px-4 py-3 text-sm font-semibold text-white shadow-[0_14px_40px_rgba(27,163,224,0.35)] sm:-right-6"
+            aria-hidden="true"
+          >
+            <span lang="es">¡Muy bien! ¿Y tú?</span>
+          </motion.div>
           <img
             src="/gallery/mobile-dashboard-mockup.png"
             alt="The LinkGlobal dashboard on mobile"
-            className="absolute -bottom-6 -left-2 z-20 w-24 drop-shadow-[0_20px_45px_rgba(10,20,45,0.32)] -rotate-6 sm:-left-8 sm:w-32"
+            className="absolute -bottom-8 -left-2 z-20 w-24 -rotate-6 drop-shadow-[0_20px_45px_rgba(10,20,45,0.32)] sm:-left-10 sm:w-28"
           />
         </motion.div>
-      </div>
-
-      {/* Journey strip beneath the hero: Riley's interactive tour design. */}
-      <div className="relative z-10 mt-10 w-full max-w-6xl">
-        <JourneyStrip />
       </div>
     </section>
   )

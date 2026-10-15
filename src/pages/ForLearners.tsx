@@ -7,8 +7,14 @@ import SampleCards from '../components/dashboard/SeeWhereItHappens'
 import type { SampleData } from '../components/dashboard/SeeWhereItHappens'
 import { BeforeDuringAfter, CardRow, Reveal, Section, SectionHeading, TwoRoles } from '../components/blocks'
 import { LEARNER_SIGNUP_URL } from '../content/site'
+import JourneyStrip from '../components/hero/JourneyStrip'
+import LearningJourney from '../components/journey/LearningJourney'
+import LinkGlobalLoop from '../components/loop/LinkGlobalLoop'
+import { BuiltForConversations, LessonsAndConversation, ThreePartsSystem } from '../components/home/HomeSections'
 
-// For Learners, per Website Copy v7 (section 03).
+// For Learners, per Website Copy v7 (section 03), plus the fuller sections
+// moved off Home in the Oct 2026 trim (journey strip, full learning journey,
+// the Loop, ThreeParts, and the lessons / personalized-paths tours).
 
 const STUDENT_SAMPLE: SampleData = {
   path: [
@@ -40,6 +46,12 @@ export default function ForLearners() {
         image={{ src: '/photos/learners-hero.jpg', alt: 'A learner reviewing her LinkGlobal dashboard' }}
       />
 
+      <section className="relative px-6 pb-4 pt-2">
+        <div className="mx-auto w-full max-w-6xl">
+          <JourneyStrip />
+        </div>
+      </section>
+
       <ReasonsToLearn />
 
       <NavyBand className="py-10 sm:py-16">
@@ -56,6 +68,9 @@ export default function ForLearners() {
         </Reveal>
       </NavyBand>
 
+      <LearningJourney />
+      <LinkGlobalLoop />
+
       <Section>
         <SectionHeading title="Your educator prepares before you arrive." />
         <BeforeDuringAfter
@@ -66,6 +81,10 @@ export default function ForLearners() {
           ]}
         />
       </Section>
+
+      <ThreePartsSystem />
+      <LessonsAndConversation />
+      <BuiltForConversations />
 
       <Section className="pt-0 sm:pt-4">
         <SectionHeading title="Who you will be speaking with." />
