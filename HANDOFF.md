@@ -633,3 +633,8 @@ already fairly tight compositions).
   More living." ThreeParts ("Three parts, one system") stays after the café
   section in its own NavyBand (HomeSections: Philosophy + ThreePartsSystem replace
   PhilosophyAndSystem).
+
+- Loading screen (client design comments, Oct 2026): Persian greeting "سلام" added
+  to GREETINGS; globe made more prominent (IntroSection: brightness 1, scale 1.12,
+  smaller/lighter centre vignette; globeBackground.js: blue ocean + sheen, bright
+  atmosphere rim, brighter coastlines/dots/routes).

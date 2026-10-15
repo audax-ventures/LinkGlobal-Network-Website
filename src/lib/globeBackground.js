@@ -53,12 +53,12 @@ export function createGlobeBackground(container, options = {}) {
     if(!w||!h)return;
     ctx.clearRect(0,0,w,h);ctx.globalAlpha=Math.max(0,Math.min(1,config.brightness));
     yaw=(config.longitude+time*.0008*config.speed)*rad;
-    let halo=ctx.createRadialGradient(cx,cy,r*.88,cx,cy,r*1.12);halo.addColorStop(0,'rgba(26,99,145,0)');halo.addColorStop(.48,'rgba(43,120,170,.11)');halo.addColorStop(.55,'rgba(132,201,234,.18)');halo.addColorStop(.64,'rgba(28,110,170,.05)');halo.addColorStop(1,'rgba(0,40,80,0)');ctx.fillStyle=halo;ctx.fillRect(cx-r*1.12,cy-r*1.12,r*2.24,r*2.24);
-    const ocean=ctx.createRadialGradient(cx-r*.25,cy-r*.35,0,cx,cy,r);ocean.addColorStop(0,'#030b12');ocean.addColorStop(.83,'#01060b');ocean.addColorStop(1,'#07131e');ctx.fillStyle=ocean;ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fill();
-    grid.forEach(p=>path(p,'rgba(141,184,209,.15)',.6));
-    coast.forEach(p=>path(p,'rgba(188,221,241,.68)',.85,3));
-    for(const d of dots){const p=project(d.p);if(p[2]<0)continue;const alpha=d.a*(.25+.75*Math.sqrt(p[2]))*(.8+.2*Math.sin(time*.001+d.phase));ctx.fillStyle=`rgba(197,224,239,${alpha})`;ctx.fillRect(p[0],p[1],d.s,d.s);}
-    routes.forEach((p,i)=>{path(p,'rgba(74,181,235,.12)',3.6,7);path(p,'rgba(135,214,251,.65)',.8,4);const t=(time*.00007+i*.139)%1,q=project(p[Math.floor(t*84)]);if(q[2]>.03)light(q[0],q[1],8,.8);});
+    let halo=ctx.createRadialGradient(cx,cy,r*.9,cx,cy,r*1.3);halo.addColorStop(0,'rgba(40,150,220,0)');halo.addColorStop(.22,'rgba(90,200,250,.42)');halo.addColorStop(.32,'rgba(60,170,240,.2)');halo.addColorStop(.6,'rgba(30,110,190,.07)');halo.addColorStop(1,'rgba(0,40,80,0)');ctx.fillStyle=halo;ctx.fillRect(cx-r*1.3,cy-r*1.3,r*2.6,r*2.6);
+    const ocean=ctx.createRadialGradient(cx-r*.25,cy-r*.35,0,cx,cy,r);ocean.addColorStop(0,'#0e3a63');ocean.addColorStop(.6,'#072443');ocean.addColorStop(.9,'#05192f');ocean.addColorStop(1,'#0d3a66');ctx.fillStyle=ocean;ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fill();const sheen=ctx.createRadialGradient(cx-r*.35,cy-r*.4,0,cx-r*.35,cy-r*.4,r*.9);sheen.addColorStop(0,'rgba(120,200,255,.16)');sheen.addColorStop(1,'rgba(120,200,255,0)');ctx.fillStyle=sheen;ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fill();
+    grid.forEach(p=>path(p,'rgba(141,200,235,.2)',.6));
+    coast.forEach(p=>path(p,'rgba(170,228,255,.9)',1,6));
+    for(const d of dots){const p=project(d.p);if(p[2]<0)continue;const alpha=d.a*(.25+.75*Math.sqrt(p[2]))*(.8+.2*Math.sin(time*.001+d.phase));ctx.fillStyle=`rgba(190,235,255,${Math.min(1,alpha*1.25)})`;ctx.fillRect(p[0],p[1],d.s,d.s);}
+    routes.forEach((p,i)=>{path(p,'rgba(74,190,245,.2)',4,9);path(p,'rgba(150,224,255,.85)',1.1,6);const t=(time*.00007+i*.139)%1,q=project(p[Math.floor(t*84)]);if(q[2]>.03)light(q[0],q[1],11,.95);});
     cities.forEach((p,i)=>{const q=project(p);if(q[2]<.03)return;light(q[0],q[1],14*(r/340),.7+.2*Math.sin(time*.0015+i));ctx.fillStyle='rgba(233,251,255,.95)';ctx.beginPath();ctx.arc(q[0],q[1],1.4,0,Math.PI*2);ctx.fill();});
     ctx.globalAlpha=1;
   }

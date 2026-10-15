@@ -16,7 +16,7 @@ import { createGlobeBackground } from '../../lib/globeBackground'
 //
 // ?intro=1 forces the auto-play; ?debugPhase=done skips straight to the hero.
 
-const GREETINGS = ['Hello', 'Hola', 'Bonjour', 'こんにちは', 'Olá', 'مرحبا', 'Namaste']
+const GREETINGS = ['Hello', 'Hola', 'Bonjour', 'こんにちは', 'Olá', 'مرحبا', 'سلام', 'Namaste']
 const WORD = 'LinkGlobal'
 const SEEN_KEY = 'lg-intro-seen'
 
@@ -119,7 +119,7 @@ export default function IntroSection() {
   // Globe (Riley's supplied animation). It pauses itself when off-screen.
   useEffect(() => {
     if (!globeRef.current) return
-    return createGlobeBackground(globeRef.current, { brightness: 0.85, speed: 1.4, scale: 0.95, longitude: -40 })
+    return createGlobeBackground(globeRef.current, { brightness: 1, speed: 1.4, scale: 1.12, longitude: -40 })
   }, [])
 
   // Entry position, before first paint (so returning visitors never see a
@@ -229,7 +229,7 @@ export default function IntroSection() {
         />
         <div
           className="pointer-events-none absolute inset-0"
-          style={{ background: 'radial-gradient(ellipse 55% 45% at 50% 50%, rgba(2,7,15,0.72) 0%, rgba(2,7,15,0.35) 60%, rgba(2,7,15,0) 100%)' }}
+          style={{ background: 'radial-gradient(ellipse 34% 30% at 50% 50%, rgba(2,7,15,0.62) 0%, rgba(2,7,15,0.3) 60%, rgba(2,7,15,0) 100%)' }}
           aria-hidden="true"
         />
 
