@@ -30,7 +30,7 @@ export default function Hero() {
     >
       <HeroBackground />
 
-      <div className="relative z-10 grid w-full max-w-6xl items-center gap-16 md:grid-cols-2 md:gap-10">
+      <div className="relative z-10 grid w-full max-w-6xl items-center gap-16 md:grid-cols-[1.15fr_1fr] md:gap-10">
         <motion.div
           variants={container}
           initial="hidden"
@@ -86,7 +86,7 @@ export default function Hero() {
             <img
               src="/photos/journey-4.jpg"
               alt="A learner waving hello on a video call with a native speaker"
-              className="aspect-[4/5] w-full object-cover sm:aspect-[5/4]"
+              className="aspect-[4/3] w-full object-cover sm:aspect-[5/4]"
             />
           </div>
           <motion.div
