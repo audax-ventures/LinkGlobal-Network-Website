@@ -699,3 +699,14 @@ the picture source for ~25 picture items.
   paired cards slide in from the sides; <main> has overflow-x: clip. Type pass:
   every font-size 8-13px in scoped CSS -> 14px, text-xs/text-[9-13px] ->
   text-sm, desktop intro/body copy up to 18px.
+- Verified live (Oct 20): intro FX, philosophy loop, café flip, compact journey,
+  clickable Loop, B/D/A visuals, educator brief rows, loop panel, dashboard
+  slide-ins, For You merged section + sparks, About side graphics, team edits.
+  No horizontal overflow at 375px on any page.
+- Repetition audit (for client approval, not applied): "a plan that listens"
+  x2 on Home (photo row + journey card 3 label); "a teacher who's ready" vs
+  journey stage 4; "Inside the platform" heading on Home and For Learners;
+  native-speaker matching shown 3x (Home row 3, journey stage 5, For You);
+  briefing shown 3x on For Educators; Before/During/After on For Learners twice
+  (Loop + educator section, both kept by the client). "path" ~30 uses site-wide,
+  "educator" ~26.
