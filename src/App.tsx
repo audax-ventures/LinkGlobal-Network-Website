@@ -13,6 +13,8 @@ import TryNow from './pages/TryNow'
 import Pricing from './pages/Pricing'
 import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
+import Privacy from './pages/Privacy'
+import Terms from './pages/Terms'
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
         <Route path="/try-now" element={<TryNow />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

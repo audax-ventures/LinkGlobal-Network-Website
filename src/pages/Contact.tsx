@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import PageShell from '../components/PageShell'
 import PageHeader from '../components/PageHeader'
 import { MailIcon } from '../components/icons/LineIcons'
@@ -181,6 +182,13 @@ export default function Contact() {
               >
                 {status === 'submitting' ? 'Sending...' : 'Start the Conversation'}
               </button>
+              <p className="mt-4 text-center text-sm text-navy-700/60">
+                We use your details only to reply to you. See our{' '}
+                <Link to="/privacy" className="font-semibold text-brand-blue hover:underline">
+                  Privacy Policy
+                </Link>
+                .
+              </p>
             </motion.form>
           )}
 

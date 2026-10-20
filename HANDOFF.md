@@ -720,3 +720,12 @@ the picture source for ~25 picture items.
   under info@linkglobalnetwork.io) and the form posts to
   api.web3forms.com/submit; while null it still uses api/contact.ts. Once the
   key is live and tested, delete api/contact.ts and RESEND_API_KEY.
+- Domain confirmed live (Oct 2026): www.linkglobalnetwork.io serves the site;
+  apex and http 308 to it; canonical/og/sitemap/robots already on .io.
+- Privacy Policy (/privacy) and Terms of Service (/terms): PLACEHOLDERS written
+  by Audax from how the site works; client must confirm (ideally with counsel).
+  Shared layout components/LegalPage.tsx; footer Legal links via LEGAL in
+  site.ts; in sitemap + PageMeta; privacy note under the Contact form.
+  Assumptions to confirm: platform sign-in cookies, payment processor, video
+  calls via a third party, 18+ (or guardian consent), cancellation rule as in
+  the site copy, 12-month liability cap, head-office province law.

@@ -38,6 +38,14 @@ const META: Record<string, { title: string; description: string }> = {
     description:
       'Book individual lessons with certified educators, with a free personalized learning path and progress overview. Personal AI feedback is available as an add-on.',
   },
+  '/privacy': {
+    title: 'Privacy Policy | LinkGlobal',
+    description: 'How LinkGlobal collects, uses, and protects your personal information, and the choices you have.',
+  },
+  '/terms': {
+    title: 'Terms of Service | LinkGlobal',
+    description: 'The terms for using the LinkGlobal website and learning platform, including bookings, payments, and cancellations.',
+  },
   '/contact': {
     title: 'Contact LinkGlobal | Learn, Teach, or Speak With Learners',
     description:
