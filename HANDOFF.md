@@ -680,3 +680,11 @@ the picture source for ~25 picture items.
   photo (placeholder hero-learner.jpg) and bigger text (26); dashboard cards
   bigger, coloured headers with icons, slide in from the sides (FeatureRows,
   items 28-29).
+- Batch 4: For You native-speaker section merged into the top of the
+  ConversationConnections section (new `intro` slot) with a class-vs-conversation
+  visual; cards 2-3, closing line and Share button deleted (item 30). Connection
+  examples: bigger type, emoji symbol on the common-ground chip, sparks
+  travelling both ways along the bridge (31-33; photos still pending). About
+  "From words to a moment": faster (useTour `seconds` option, 1.7s), bigger,
+  4th step with the closing "Perfect. See you then." reply (34). About approach
+  band: floating AI / people graphics either side (36).

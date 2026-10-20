@@ -271,12 +271,13 @@ export function TeachingWithLinkGlobal() {
 
 /* ---------------- For You: conversation connections ---------------- */
 
-const CONNECTIONS_CSS = `#lg-connections .co-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:19px}#lg-connections .co-option{padding:15px 12px;border-radius:12px;background:white;border:1px solid var(--lg-line);color:var(--lg-ink);text-align:left;transition:background .225s,border-color .225s}#lg-connections .co-option strong{font-size:13px;display:block;margin-bottom:5px}#lg-connections .co-option small{font-size:10px;line-height:1.5;color:var(--lg-muted);display:block}#lg-connections .co-option[aria-pressed="true"]{background:#eaf7ff;border-color:var(--lg-blue)}#lg-connections .co-stage{background:white;border-radius:20px;padding:25px 26px 21px;box-shadow:0 12px 35px #254e7608}#lg-connections .co-example{font-size:9px;color:var(--lg-muted);letter-spacing:1.2px;text-align:center;margin:0 0 20px}#lg-connections .co-match{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;gap:6px;position:relative}#lg-connections .co-person{text-align:center;position:relative;z-index:2}#lg-connections .co-avatar{width:55px;height:55px;border-radius:50%;display:grid;place-items:center;margin:0 auto 10px;background:#e6f5ff;color:#0c80b4;font-weight:600;font-size:12px;box-shadow:0 0 0 5px white}#lg-connections .co-person:last-child .co-avatar{background:#e3f4ed;color:#178469}#lg-connections .co-person strong{display:block;font-size:12px;font-weight:600;line-height:1.4}#lg-connections .co-person small{display:block;font-size:10px;color:var(--lg-muted);margin-top:5px;line-height:1.45;min-height:28px}#lg-connections .co-bridge{align-self:start;margin-top:26px;height:1px;background:#bddeee;position:relative}#lg-connections .co-bridge:before{content:'';position:absolute;inset:0;background:var(--lg-blue);transform:scaleX(1);transform-origin:left}#lg-connections .co-topic{position:absolute;top:0;left:50%;transform:translate(-50%,-50%);background:#eff8fd;color:#0b7bad;border:5px solid white;padding:7px 12px;border-radius:30px;font-size:10px;white-space:nowrap;z-index:1}#lg-connections .co-dialogue{display:flex;flex-direction:column;gap:9px;max-width:430px;margin:21px auto 0;min-height:96px;justify-content:center}#lg-connections .co-bubble{padding:12px 15px;background:#edf4f8;color:var(--lg-ink);border-radius:13px 13px 13px 3px;font-size:13px;line-height:1.4;max-width:88%;align-self:flex-start}#lg-connections .co-bubble.co-answer{background:var(--lg-blue);color:white;border-radius:13px 13px 3px 13px;align-self:flex-end}#lg-connections .co-stage.lg-enter .co-bridge:before{animation:co-connect .675s ease both}@keyframes co-connect{from{transform:scaleX(0)}to{transform:scaleX(1)}}#lg-connections .co-footer{text-align:center;border-top:1px solid var(--lg-line);padding-top:18px;margin-top:8px}#lg-connections .co-footer strong{font-size:14px;font-weight:600;display:block;line-height:1.4}#lg-connections .co-footer p{font-size:11px;color:var(--lg-muted);margin:7px 0 0}@media(max-width:540px){#lg-connections .co-options{grid-template-columns:1fr;gap:8px}#lg-connections .co-option{padding:13px 15px}#lg-connections .co-stage{padding:23px 16px}#lg-connections .co-match{grid-template-columns:1fr 58px 1fr}#lg-connections .co-person strong{font-size:11px}#lg-connections .co-topic{font-size:9px;padding:5px 7px}#lg-connections .co-bubble{font-size:12px}#lg-connections .co-person small{min-height:36px}}`
+const CONNECTIONS_CSS = `#lg-connections .co-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:19px}#lg-connections .co-option{padding:15px 12px;border-radius:12px;background:white;border:1px solid var(--lg-line);color:var(--lg-ink);text-align:left;transition:background .225s,border-color .225s}#lg-connections .co-option strong{font-size:18px;display:block;margin-bottom:5px}#lg-connections .co-option small{font-size:15px;line-height:1.5;color:var(--lg-muted);display:block}#lg-connections .co-option[aria-pressed="true"]{background:#eaf7ff;border-color:var(--lg-blue)}#lg-connections .co-stage{background:white;border-radius:20px;padding:25px 26px 21px;box-shadow:0 12px 35px #254e7608}#lg-connections .co-example{font-size:13px;color:var(--lg-muted);letter-spacing:1.2px;text-align:center;margin:0 0 20px}#lg-connections .co-match{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;gap:6px;position:relative}#lg-connections .co-person{text-align:center;position:relative;z-index:2}#lg-connections .co-avatar{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;margin:0 auto 12px;background:#e6f5ff;color:#0c80b4;font-weight:600;font-size:16px;box-shadow:0 0 0 5px white}#lg-connections .co-person:last-child .co-avatar{background:#e3f4ed;color:#178469}#lg-connections .co-person strong{display:block;font-size:17px;font-weight:600;line-height:1.4}#lg-connections .co-person small{display:block;font-size:15px;color:var(--lg-muted);margin-top:5px;line-height:1.45;min-height:28px}#lg-connections .co-bridge{align-self:start;margin-top:37px;height:2px;background:#bddeee;position:relative}#lg-connections .co-bridge:before{content:'';position:absolute;inset:0;background:var(--lg-blue);transform:scaleX(1);transform-origin:left}#lg-connections .co-topic{position:absolute;top:0;left:50%;transform:translate(-50%,-50%);background:#eff8fd;color:#0b7bad;border:5px solid white;padding:9px 16px;border-radius:30px;font-size:19px;font-weight:700;white-space:nowrap;z-index:1;display:flex;align-items:center;gap:8px;box-shadow:0 8px 22px #1ba3e026}#lg-connections .co-topic i{font-style:normal;font-size:22px}#lg-connections .co-spark{position:absolute;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;background:var(--lg-blue);box-shadow:0 0 10px #1ba3e0;animation:co-travel 2.4s linear infinite;animation-delay:var(--delay,0s);opacity:0}#lg-connections .co-spark.co-back{background:#18a77e;box-shadow:0 0 10px #18a77e;animation-name:co-travel-back}@keyframes co-travel{0%{left:0;opacity:0}10%{opacity:1}90%{opacity:1}100%{left:100%;opacity:0}}@keyframes co-travel-back{0%{left:100%;opacity:0}10%{opacity:1}90%{opacity:1}100%{left:0;opacity:0}}@media(prefers-reduced-motion:reduce){#lg-connections .co-spark{display:none}}#lg-connections .co-dialogue{display:flex;flex-direction:column;gap:9px;max-width:560px;margin:24px auto 0;min-height:130px;justify-content:center}#lg-connections .co-bubble{padding:14px 18px;background:#edf4f8;color:var(--lg-ink);border-radius:13px 13px 13px 3px;font-size:18px;line-height:1.4;max-width:88%;align-self:flex-start}#lg-connections .co-bubble.co-answer{background:var(--lg-blue);color:white;border-radius:13px 13px 3px 13px;align-self:flex-end}#lg-connections .co-stage.lg-enter .co-bridge:before{animation:co-connect .675s ease both}@keyframes co-connect{from{transform:scaleX(0)}to{transform:scaleX(1)}}#lg-connections .co-footer{text-align:center;border-top:1px solid var(--lg-line);padding-top:18px;margin-top:8px}#lg-connections .co-footer strong{font-size:19px;font-weight:600;display:block;line-height:1.4}#lg-connections .co-footer p{font-size:15px;color:var(--lg-muted);margin:7px 0 0}@media(max-width:540px){#lg-connections .co-options{grid-template-columns:1fr;gap:8px}#lg-connections .co-option{padding:13px 15px}#lg-connections .co-stage{padding:23px 16px}#lg-connections .co-match{grid-template-columns:1fr 58px 1fr}#lg-connections .co-person strong{font-size:14px}#lg-connections .co-person small{font-size:13px}#lg-connections .co-avatar{width:58px;height:58px}#lg-connections .co-topic{font-size:14px;padding:6px 9px}#lg-connections .co-topic i{font-size:16px}#lg-connections .co-bubble{font-size:16px}#lg-connections .co-person small{min-height:36px}}`
 const EXAMPLES = [
   {
     name: 'Your profession',
     sub: 'Someone who understands your field.',
     topic: 'Design',
+    icon: '🎨',
     you: 'You work in design.',
     them: 'They work in design, too.',
     question: 'What are you working on lately?',
@@ -286,6 +287,7 @@ const EXAMPLES = [
     name: 'Your destination',
     sub: 'Someone who knows where you’re going.',
     topic: 'New city',
+    icon: '✈️',
     you: 'You’re moving somewhere new.',
     them: 'They’ve lived where you’re going.',
     question: 'What are you looking forward to most?',
@@ -295,6 +297,7 @@ const EXAMPLES = [
     name: 'Your interests',
     sub: 'Someone who’s into what you’re into.',
     topic: 'Music',
+    icon: '🎵',
     you: 'You love live music.',
     them: 'They always have a gig to recommend.',
     question: 'What’s the best concert you’ve been to?',
@@ -307,7 +310,7 @@ const CO_CAPTIONS = [
   'Follow a shared interest into a real conversation.',
 ]
 
-export function ConversationConnections({ id }: { id?: string }) {
+export function ConversationConnections({ id, intro }: { id?: string; intro?: ReactNode }) {
   const t = useTour({ last: 2 })
   const e = EXAMPLES[t.index]
   return (
@@ -315,6 +318,7 @@ export function ConversationConnections({ id }: { id?: string }) {
       <style>{BASE_CSS + CONNECTIONS_CSS}</style>
       {id && <div id={id} className="relative -top-24" aria-hidden="true" />}
       <div className="lg-wrap">
+        {intro}
         <header className="lg-header">
           <p className="lg-eyebrow">FOR LEARNERS · REAL CONVERSATION</p>
           <h2>
@@ -341,7 +345,15 @@ export function ConversationConnections({ id }: { id?: string }) {
               <small>{e.you}</small>
             </div>
             <div className="co-bridge" aria-hidden="true">
-              <span className="co-topic">{e.topic}</span>
+              {/* Sparks travel both ways: the connection being built. */}
+              <i className="co-spark" />
+              <i className="co-spark" style={v({ '--delay': '0.8s' })} />
+              <i className="co-spark co-back" style={v({ '--delay': '0.4s' })} />
+              <i className="co-spark co-back" style={v({ '--delay': '1.6s' })} />
+              <span className="co-topic">
+                <i>{e.icon}</i>
+                {e.topic}
+              </span>
             </div>
             <div className="co-person">
               <div className="co-avatar">Hello</div>
@@ -377,13 +389,14 @@ export function ConversationConnections({ id }: { id?: string }) {
 
 /* ---------------- About: from study to speaking ---------------- */
 
-const STUDY_CSS = `#lg-speaking-gap .ga-stage{border:1px solid var(--lg-line);background:var(--lg-panel);border-radius:21px;padding:27px 26px 20px;position:relative;box-shadow:0 12px 35px #254e7608}#lg-speaking-gap .ga-top{display:flex;justify-content:space-between;gap:13px;align-items:center}#lg-speaking-gap .ga-label{font-size:10px;letter-spacing:1.1px;color:var(--lg-muted);line-height:1.5}#lg-speaking-gap .ga-dots{display:flex;gap:6px}#lg-speaking-gap .ga-dots span{width:6px;height:6px;background:#d9e8f2;border-radius:50%;transition:background .3s}#lg-speaking-gap .ga-dots span.ga-active{background:var(--lg-blue)}#lg-speaking-gap .ga-scene{min-height:218px;display:flex;flex-direction:column;justify-content:center;gap:17px;max-width:520px;margin:auto;padding:25px 0 8px}#lg-speaking-gap .ga-words{position:relative;display:flex;justify-content:center;gap:7px;flex-wrap:wrap;padding:23px 14px;isolation:isolate;align-self:stretch}#lg-speaking-gap .ga-words:before{content:'';position:absolute;inset:0;background:var(--lg-blue);border-radius:18px 18px 3px 18px;z-index:-1;opacity:0;transform:scale(.9);transition:opacity .525s,transform .525s}#lg-speaking-gap .ga-word{font-size:19px;line-height:1.4;font-weight:500;letter-spacing:-.4px;padding:7px 10px;background:#f1f7fb;border-radius:8px;box-shadow:0 3px 0 #dceaf4;transform:translateY(var(--shift)) rotate(var(--tilt));transition:transform .6s cubic-bezier(.2,.8,.2,1),color .525s,background .525s,box-shadow .525s,padding .525s;color:var(--lg-ink)}#lg-speaking-gap[data-step="1"] .ga-word,#lg-speaking-gap[data-step="2"] .ga-word{transform:translateY(0) rotate(0);background:transparent;box-shadow:none;color:white;padding:7px 1px}#lg-speaking-gap[data-step="1"] .ga-words:before,#lg-speaking-gap[data-step="2"] .ga-words:before{opacity:1;transform:scale(1)}#lg-speaking-gap .ga-reply{align-self:flex-start;padding:13px 17px;background:#eaf3f8;font-size:15px;line-height:1.5;border-radius:14px 14px 14px 3px;color:var(--lg-ink);opacity:0;transform:translateY(12px);transition:opacity .45s,transform .45s}#lg-speaking-gap[data-step="2"] .ga-reply{opacity:1;transform:translateY(0)}#lg-speaking-gap .ga-caption{text-align:center;font-size:12px;color:var(--lg-muted);line-height:1.5;min-height:36px;margin:0}#lg-speaking-gap .ga-marks{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--lg-line);padding-top:17px;margin-top:12px;color:var(--lg-muted);font-size:10px;line-height:1.5}#lg-speaking-gap .ga-marks span{display:flex;align-items:center;gap:6px}#lg-speaking-gap .ga-marks i{font-style:normal;color:var(--lg-blue)}#lg-speaking-gap .ga-ending{text-align:center;font-size:13px;color:var(--lg-ink);margin:10px auto 0;max-width:450px;line-height:1.6}#lg-speaking-gap .ga-ending strong{font-weight:600}@media(max-width:540px){#lg-speaking-gap .ga-stage{padding:22px 15px 18px}#lg-speaking-gap .ga-word{font-size:16px;padding:6px 7px}#lg-speaking-gap .ga-words{gap:5px;padding:22px 10px}#lg-speaking-gap .ga-scene{min-height:230px}#lg-speaking-gap .ga-reply{font-size:13px}}`
+const STUDY_CSS = `#lg-speaking-gap .ga-stage{border:1px solid var(--lg-line);background:var(--lg-panel);border-radius:21px;padding:27px 26px 20px;position:relative;box-shadow:0 12px 35px #254e7608}#lg-speaking-gap .ga-top{display:flex;justify-content:space-between;gap:13px;align-items:center}#lg-speaking-gap .ga-label{font-size:13px;letter-spacing:1.1px;color:var(--lg-muted);line-height:1.5}#lg-speaking-gap .ga-dots{display:flex;gap:6px}#lg-speaking-gap .ga-dots span{width:6px;height:6px;background:#d9e8f2;border-radius:50%;transition:background .3s}#lg-speaking-gap .ga-dots span.ga-active{background:var(--lg-blue)}#lg-speaking-gap .ga-scene{min-height:300px;display:flex;flex-direction:column;justify-content:center;gap:17px;max-width:640px;margin:auto;padding:25px 0 8px}#lg-speaking-gap .ga-words{position:relative;display:flex;justify-content:center;gap:7px;flex-wrap:wrap;padding:23px 14px;isolation:isolate;align-self:stretch}#lg-speaking-gap .ga-words:before{content:'';position:absolute;inset:0;background:var(--lg-blue);border-radius:18px 18px 3px 18px;z-index:-1;opacity:0;transform:scale(.9);transition:opacity .35s,transform .35s}#lg-speaking-gap .ga-word{font-size:25px;line-height:1.4;font-weight:500;letter-spacing:-.4px;padding:7px 10px;background:#f1f7fb;border-radius:8px;box-shadow:0 3px 0 #dceaf4;transform:translateY(var(--shift)) rotate(var(--tilt));transition:transform .4s cubic-bezier(.2,.8,.2,1),color .35s,background .35s,box-shadow .35s,padding .35s;color:var(--lg-ink)}#lg-speaking-gap[data-step="1"] .ga-word,#lg-speaking-gap[data-step="2"] .ga-word,#lg-speaking-gap[data-step="3"] .ga-word{transform:translateY(0) rotate(0);background:transparent;box-shadow:none;color:white;padding:7px 1px}#lg-speaking-gap[data-step="1"] .ga-words:before,#lg-speaking-gap[data-step="2"] .ga-words:before,#lg-speaking-gap[data-step="3"] .ga-words:before{opacity:1;transform:scale(1)}#lg-speaking-gap .ga-reply{align-self:flex-start;padding:13px 17px;background:#eaf3f8;font-size:19px;line-height:1.5;border-radius:14px 14px 14px 3px;color:var(--lg-ink);opacity:0;transform:translateY(12px);transition:opacity .3s,transform .3s}#lg-speaking-gap[data-step="2"] .ga-reply:not(.ga-final),#lg-speaking-gap[data-step="3"] .ga-reply{opacity:1;transform:translateY(0)}#lg-speaking-gap .ga-final{align-self:flex-end;background:var(--lg-blue);color:white;border-radius:14px 14px 3px 14px}#lg-speaking-gap .ga-caption{text-align:center;font-size:16px;color:var(--lg-muted);line-height:1.5;min-height:36px;margin:0}#lg-speaking-gap .ga-marks{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--lg-line);padding-top:17px;margin-top:12px;color:var(--lg-muted);font-size:14px;line-height:1.5}#lg-speaking-gap .ga-marks span{display:flex;align-items:center;gap:6px}#lg-speaking-gap .ga-marks i{font-style:normal;color:var(--lg-blue)}#lg-speaking-gap .ga-ending{text-align:center;font-size:17px;color:var(--lg-ink);margin:10px auto 0;max-width:450px;line-height:1.6}#lg-speaking-gap .ga-ending strong{font-weight:600}@media(max-width:540px){#lg-speaking-gap .ga-stage{padding:22px 15px 18px}#lg-speaking-gap .ga-word{font-size:19px;padding:6px 7px}#lg-speaking-gap .ga-words{gap:5px;padding:22px 10px}#lg-speaking-gap .ga-scene{min-height:230px}#lg-speaking-gap .ga-reply{font-size:16px}}`
 const GA_CAPTIONS = [
   'Familiar words. Waiting to become your words.',
   'You put them together. You take your turn.',
-  'An invitation. An answer. A real connection.',
+  'An invitation. An answer.',
+  'A plan. A real connection.',
 ]
-const GA_STATUS = ['Start with the words you already know.', 'Bring them into a conversation.', 'Let the conversation take you somewhere.']
+const GA_STATUS = ['Start with the words you already know.', 'Bring them into a conversation.', 'Let the conversation take you somewhere.', 'And see it through.']
 const WORDS: [string, string, string][] = [
   ['Would you', '-8px', '-5deg'],
   ['like to', '9px', '4deg'],
@@ -392,7 +405,7 @@ const WORDS: [string, string, string][] = [
 ]
 
 export function FromStudyToSpeaking() {
-  const t = useTour({ last: 2, reducedInitial: 2 })
+  const t = useTour({ last: 3, reducedInitial: 3, seconds: 1.7 })
   return (
     <section
       className="lgx"
@@ -417,7 +430,7 @@ export function FromStudyToSpeaking() {
           <div className="ga-top">
             <span className="ga-label">FROM WORDS TO A MOMENT</span>
             <div className="ga-dots" aria-hidden="true">
-              {[0, 1, 2].map((i) => (
+              {[0, 1, 2, 3].map((i) => (
                 <span key={i} className={i <= t.index ? 'ga-active' : ''} />
               ))}
             </div>
@@ -431,6 +444,7 @@ export function FromStudyToSpeaking() {
               ))}
             </div>
             <div className="ga-reply">I’d love to. How about tomorrow?</div>
+            <div className="ga-reply ga-final">Perfect. See you then.</div>
           </div>
           <p className="ga-caption">{GA_CAPTIONS[t.index]}</p>
           <div className="ga-marks">
