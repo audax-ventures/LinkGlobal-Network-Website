@@ -39,7 +39,7 @@ const ROUTE_META: Record<string, { color: string; image: string; blurb: string }
   educators: { color: '#f472b6', image: '/photos/educators-hero.jpg', blurb: 'For educators who want to teach, not prepare.' },
   'for-you': { color: '#2dd4bf', image: '/photos/hero-learner.jpg', blurb: 'For native speakers who want to share their language.' },
   about: { color: '#f5a623', image: '/photos/about-founders.jpg', blurb: 'The story behind LinkGlobal.' },
-  pricing: { color: '#1ba3e0', image: '/photos/journey-app-2.png', blurb: 'Simple, flexible pricing.' },
+  pricing: { color: '#1ba3e0', image: '/photos/journey-2.jpg', blurb: 'Simple, flexible pricing.' },
   contact: { color: '#f5a623', image: '/photos/journey-5.jpg', blurb: 'Questions? We are here to help.' },
 }
 
@@ -77,9 +77,9 @@ function NavCircle({ label, path, Icon, id }: { label: string; path: string; Ico
                   className="absolute inset-0"
                   style={{ background: `linear-gradient(180deg, transparent 40%, ${meta.color}cc 100%)` }}
                 />
-                <span className="absolute bottom-2 left-2.5 text-xs font-bold text-white drop-shadow">{label}</span>
+                <span className="absolute bottom-2 left-2.5 text-sm font-bold text-white drop-shadow">{label}</span>
               </div>
-              <p className="px-2.5 py-2 text-[11px] leading-snug text-navy-700/75">{meta.blurb}</p>
+              <p className="px-2.5 py-2 text-sm leading-snug text-navy-700/75">{meta.blurb}</p>
             </motion.div>
           </div>
         )}
@@ -179,7 +179,7 @@ export default function FloatingNav() {
         <div className="flex items-center gap-2 md:hidden">
           <SmartLink
             to={LEARNER_SIGNUP_URL}
-            className="rounded-full px-3.5 py-2 text-xs font-semibold text-white shadow-[0_6px_18px_rgba(30,120,190,0.3)]"
+            className="rounded-full px-3.5 py-2 text-sm font-semibold text-white shadow-[0_6px_18px_rgba(30,120,190,0.3)]"
             style={{ background: 'linear-gradient(90deg, #1ba3e0, #3ec6ff)' }}
           >
             Start Your Journey

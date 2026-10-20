@@ -98,7 +98,7 @@ export default function LinkGlobalLoop() {
       <div className="sticky top-0 flex min-h-screen items-center overflow-hidden px-6 py-8 md:py-16">
         <div className="mx-auto grid w-full max-w-6xl items-center gap-10 md:grid-cols-2 md:gap-16">
           <div className="text-center md:col-span-2">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-cyan">The Loop</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-brand-cyan">The Loop</p>
             <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
               Every session moves the path forward.
             </h2>

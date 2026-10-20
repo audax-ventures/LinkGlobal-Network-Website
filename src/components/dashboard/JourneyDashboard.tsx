@@ -13,7 +13,7 @@ const AUTO_MS = 6000
 
 function SampleTag() {
   return (
-    <span className="rounded-full bg-white/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-white/60">
+    <span className="rounded-full bg-white/10 px-2.5 py-1 text-sm font-bold uppercase tracking-[0.2em] text-white/60">
       Sample
     </span>
   )
@@ -46,10 +46,10 @@ function RoadmapView() {
               {x.done && <CheckIcon className="h-3.5 w-3.5" />}
             </span>
             <div className="min-w-0">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-white/45">{x.w}</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-white/45">{x.w}</p>
               <p className="truncate text-sm text-white">{x.t}</p>
             </div>
-            {x.now && <span className="ml-auto shrink-0 text-[11px] font-semibold text-brand-cyan">This week</span>}
+            {x.now && <span className="ml-auto shrink-0 text-sm font-semibold text-brand-cyan">This week</span>}
           </li>
         ))}
       </ol>
@@ -73,12 +73,12 @@ function SessionView() {
         ].map((p) => (
           <div key={p.name} className="relative flex aspect-[4/3] items-center justify-center rounded-xl bg-white/5">
             <AvatarIllustration color={p.color} className="h-14 w-14 rounded-full" />
-            <span className="absolute bottom-2 left-2 rounded-md bg-black/40 px-2 py-0.5 text-[11px] text-white">{p.name}</span>
+            <span className="absolute bottom-2 left-2 rounded-md bg-black/40 px-2 py-0.5 text-sm text-white">{p.name}</span>
           </div>
         ))}
       </div>
       <div className="mt-3 rounded-xl bg-white/5 px-4 py-3">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-brand-cyan">Today&rsquo;s focus</p>
+        <p className="text-sm font-semibold uppercase tracking-[0.15em] text-brand-cyan">Today&rsquo;s focus</p>
         <p className="mt-1 text-sm text-white">Describing your experience without notes</p>
       </div>
     </div>
@@ -118,7 +118,7 @@ function ProgressView() {
           </div>
         ))}
       </div>
-      <p className="mt-5 text-xs text-white/50">Grey: where you started. Blue: what 12 sessions added.</p>
+      <p className="mt-5 text-sm text-white/50">Grey: where you started. Blue: what 12 sessions added.</p>
     </div>
   )
 }
@@ -137,10 +137,10 @@ function ConversationView() {
           <p className="text-sm text-white/60">Works in nursing · follows football</p>
         </div>
       </div>
-      <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.15em] text-white/45">Matched on</p>
+      <p className="mt-4 text-sm font-semibold uppercase tracking-[0.15em] text-white/45">Matched on</p>
       <div className="mt-2 flex flex-wrap gap-2">
         {['Your profession', 'Your destination', 'Your interests'].map((t) => (
-          <span key={t} className="rounded-full bg-brand-cyan/15 px-3 py-1 text-xs font-semibold text-brand-cyan">
+          <span key={t} className="rounded-full bg-brand-cyan/15 px-3 py-1 text-sm font-semibold text-brand-cyan">
             {t}
           </span>
         ))}
@@ -165,7 +165,7 @@ function FeedbackView() {
       <ul className="mt-5 space-y-3">
         {notes.map((n) => (
           <li key={n.k} className="rounded-xl bg-white/5 px-4 py-3">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-brand-cyan">{n.k}</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-brand-cyan">{n.k}</p>
             <p className="mt-1 text-sm text-white">{n.v}</p>
           </li>
         ))}
@@ -217,7 +217,7 @@ export default function JourneyDashboard() {
                   className={`relative -ml-0.5 block w-full rounded-r-2xl py-4 pl-6 pr-4 text-left transition-colors ${on ? 'bg-white shadow-[0_10px_30px_rgba(19,41,82,0.08)]' : 'hover:bg-white/60'}`}
                 >
                   <span className={`absolute left-0 top-0 h-full w-0.5 ${on ? 'bg-brand-blue' : 'bg-transparent'}`} />
-                  <span className={`text-xs font-semibold tracking-[0.2em] ${on ? 'text-brand-blue' : 'text-navy-700/40'}`}>0{i + 1}</span>
+                  <span className={`text-sm font-semibold tracking-[0.2em] ${on ? 'text-brand-blue' : 'text-navy-700/40'}`}>0{i + 1}</span>
                   <span className={`mt-1 block text-xl font-bold sm:text-2xl ${on ? 'text-navy-950' : 'text-navy-700/50'}`}>{t.title}</span>
                   {on && <span className="mt-1.5 block text-sm leading-relaxed text-navy-700/75 sm:text-base">{t.copy}</span>}
                   {on && auto && inView && (

@@ -13,7 +13,7 @@ const CSS = `
 #people-philosophy *{box-sizing:border-box}
 #people-philosophy:before{content:'';position:absolute;z-index:-1;inset:0;background:radial-gradient(ellipse at 81% 45%,#10466870,transparent 54%)}
 #people-philosophy .pp-layout{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:16px;max-width:1040px;margin:auto}
-#people-philosophy .pp-eyebrow{font-size:12px;letter-spacing:.3em;font-weight:600;text-transform:uppercase;color:var(--pp-accent);margin:0 0 21px}
+#people-philosophy .pp-eyebrow{font-size:14px;letter-spacing:.3em;font-weight:600;text-transform:uppercase;color:var(--pp-accent);margin:0 0 21px}
 #people-philosophy h2{font-size:clamp(32px,4.6vw,43px);line-height:1.08;letter-spacing:-1.5px;font-weight:800;margin:0;color:var(--pp-ink)}
 #people-philosophy h2 span{display:block;color:var(--pp-accent);margin-top:7px}
 #people-philosophy .pp-copy{font-size:19px;line-height:1.6;color:#d3e2ee;margin:24px 0 0;max-width:420px}
@@ -45,7 +45,7 @@ const CSS = `
 #people-philosophy .pp-three .pp-hair{height:40px;width:34px;left:10px}
 #people-philosophy .pp-you{position:absolute;left:48%;top:54%;transform:translate(-50%,-50%);width:78px;height:78px;border-radius:50%;background:#0c314e;border:1px solid #49c9f599;box-shadow:0 0 0 9px #39bde90a,0 0 40px #25aeec18;display:grid;place-content:center;text-align:center;z-index:3}
 #people-philosophy .pp-you strong{font-size:19px;font-weight:600}
-#people-philosophy .pp-you small{font-size:10px;color:#9dcce0;margin-top:4px;letter-spacing:1px}
+#people-philosophy .pp-you small{font-size:14px;color:#9dcce0;margin-top:4px;letter-spacing:1px}
 #people-philosophy .pp-message{position:absolute;font-size:14px;line-height:1.4;white-space:nowrap;padding:9px 13px;background:#f2f8fc;color:#15314b;border-radius:12px 12px 12px 2px;box-shadow:0 8px 24px #0002;opacity:0;transform:translateY(10px) scale(.94);transition:opacity .375s,transform .525s;z-index:5}
 #people-philosophy .pp-hello{left:28%;top:0%}
 #people-philosophy .pp-response{right:1%;top:51%;background:#34c5f4;color:#05213a;border-radius:12px 12px 2px 12px}
@@ -53,14 +53,14 @@ const CSS = `
 #people-philosophy[data-step="2"] .pp-message{opacity:1;transform:translateY(0) scale(1)}
 #people-philosophy[data-step="2"] .pp-response{transition-delay:.488s}
 #people-philosophy[data-step="2"] .pp-welcome{transition-delay:.975s}
-#people-philosophy .pp-ai{position:absolute;left:0;top:49%;font-size:12px;letter-spacing:1px;color:#7fabca;transition:opacity .75s}
+#people-philosophy .pp-ai{position:absolute;left:0;top:49%;font-size:14px;letter-spacing:1px;color:#7fabca;transition:opacity .75s}
 #people-philosophy[data-step="2"] .pp-ai{opacity:.45}
 #people-philosophy .pp-controls{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:44px;border-top:1px solid #23415b;max-width:410px;margin:auto}
-#people-philosophy .pp-status{font-size:11px;color:#b4c8da;display:flex;align-items:center;gap:7px}
+#people-philosophy .pp-status{font-size:14px;color:#b4c8da;display:flex;align-items:center;gap:7px}
 #people-philosophy .pp-status:before{content:'';width:5px;height:5px;border-radius:50%;background:var(--pp-accent);flex-shrink:0}
-#people-philosophy .pp-button{border:0;background:transparent;color:var(--pp-accent);font-size:11px;padding:12px 0 12px 8px;min-height:44px;white-space:nowrap;cursor:pointer}
+#people-philosophy .pp-button{border:0;background:transparent;color:var(--pp-accent);font-size:14px;padding:12px 0 12px 8px;min-height:44px;white-space:nowrap;cursor:pointer}
 #people-philosophy .pp-button:focus-visible{outline:2px solid var(--pp-accent);outline-offset:3px}
-#people-philosophy .pp-footer{max-width:1040px;margin:30px auto 0;padding-top:19px;border-top:1px solid #23415b;display:flex;justify-content:space-between;gap:12px;font-size:10px;color:#8eabc2;letter-spacing:.2px}
+#people-philosophy .pp-footer{max-width:1040px;margin:30px auto 0;padding-top:19px;border-top:1px solid #23415b;display:flex;justify-content:space-between;gap:12px;font-size:14px;color:#8eabc2;letter-spacing:.2px}
 #people-philosophy .pp-footer strong{color:#c5daeb;font-weight:400}
 @media(min-width:900px){#people-philosophy h2{font-size:49px}#people-philosophy .pp-copy{font-size:22px;max-width:440px}}
 @media(max-width:620px){#people-philosophy .pp-layout{grid-template-columns:1fr;gap:18px}#people-philosophy h2{font-size:37px;max-width:370px}#people-philosophy .pp-copy{max-width:390px;margin-top:18px}#people-philosophy .pp-scene{max-width:340px}#people-philosophy .pp-footer{margin-top:18px;flex-wrap:wrap}#people-philosophy .pp-signature{margin-top:18px}}

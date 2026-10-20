@@ -17,7 +17,7 @@ export default function FeatureRows({ heading, eyebrow, rows }: { heading: strin
   return (
     <section className="relative px-6 pb-8 pt-4 sm:pb-12">
       <div className="mx-auto max-w-2xl text-center">
-        {eyebrow && <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-blue">{eyebrow}</p>}
+        {eyebrow && <p className="text-sm font-semibold uppercase tracking-[0.3em] text-brand-blue">{eyebrow}</p>}
         <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-navy-950 sm:text-5xl">{heading}</h2>
       </div>
 
@@ -62,7 +62,7 @@ export default function FeatureRows({ heading, eyebrow, rows }: { heading: strin
 export function Pill({ children, on = false }: { children: ReactNode; on?: boolean }) {
   return (
     <span
-      className={`rounded-full px-3 py-1.5 text-xs font-semibold ${
+      className={`rounded-full px-3 py-1.5 text-sm font-semibold ${
         on ? 'bg-brand-blue text-white' : 'bg-navy-900/[0.05] text-navy-700/70'
       }`}
     >

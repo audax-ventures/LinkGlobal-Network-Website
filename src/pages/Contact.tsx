@@ -177,7 +177,7 @@ export default function Contact() {
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue shadow-[0_6px_16px_rgba(0,0,0,0.18)]">
                 <MailIcon className="h-5 w-5 text-white" />
               </div>
-              <p className="mt-4 text-xs font-semibold uppercase tracking-[0.25em] text-white/50">Other ways to reach us</p>
+              <p className="mt-4 text-sm font-semibold uppercase tracking-[0.25em] text-white/50">Other ways to reach us</p>
               <p className="mt-3 text-sm text-white/60">Email</p>
               <a href={`mailto:${CONTACT_EMAIL}`} className="mt-1 block font-semibold text-brand-cyan hover:underline">
                 {CONTACT_EMAIL}

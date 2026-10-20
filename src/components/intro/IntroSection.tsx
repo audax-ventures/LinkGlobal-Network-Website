@@ -42,7 +42,7 @@ const POPS = [
   { text: 'Hallo!', left: '30%', top: '86%' },
   { text: 'Salut!', left: '66%', top: '84%' },
 ]
-const INTRO_FX_CSS = `.lg-intro-fx .lg-star{position:absolute;border-radius:50%;background:#cfefff;animation:lg-twinkle 3.6s ease-in-out infinite}.lg-intro-fx .lg-orbit{position:absolute;left:50%;top:50%;border-radius:50%;border:1px dashed rgba(120,210,255,.28);transform:translate(-50%,-50%) rotateX(72deg) rotate(0deg);animation:lg-orbit 16s linear infinite}.lg-intro-fx .lg-orbit.lg-o2{border-style:solid;border-color:rgba(120,210,255,.16);animation-duration:24s;animation-direction:reverse}.lg-intro-fx .lg-sat{position:absolute;left:50%;top:-6px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#7fdcff;box-shadow:0 0 16px 4px rgba(62,198,255,.7)}.lg-intro-fx .lg-pop{position:absolute;padding:6px 12px;border-radius:14px 14px 14px 3px;background:rgba(255,255,255,.92);color:#0b2341;font-size:14px;font-weight:600;opacity:0;transform:translateY(8px) scale(.9);animation:lg-pop 7.2s ease-in-out infinite;box-shadow:0 8px 24px rgba(0,0,0,.25)}@keyframes lg-twinkle{0%,100%{opacity:.2}50%{opacity:.9}}@keyframes lg-orbit{to{transform:translate(-50%,-50%) rotateX(72deg) rotate(360deg)}}@keyframes lg-pop{0%,4%{opacity:0;transform:translateY(8px) scale(.9)}9%,22%{opacity:1;transform:translateY(0) scale(1)}28%,100%{opacity:0;transform:translateY(-6px) scale(.95)}}@media(max-width:640px){.lg-intro-fx .lg-pop{font-size:12px}}@media(prefers-reduced-motion:reduce){.lg-intro-fx *{animation:none!important}.lg-intro-fx .lg-pop{display:none}}`
+const INTRO_FX_CSS = `.lg-intro-fx .lg-star{position:absolute;border-radius:50%;background:#cfefff;animation:lg-twinkle 3.6s ease-in-out infinite}.lg-intro-fx .lg-orbit{position:absolute;left:50%;top:50%;border-radius:50%;border:1px dashed rgba(120,210,255,.28);transform:translate(-50%,-50%) rotateX(72deg) rotate(0deg);animation:lg-orbit 16s linear infinite}.lg-intro-fx .lg-orbit.lg-o2{border-style:solid;border-color:rgba(120,210,255,.16);animation-duration:24s;animation-direction:reverse}.lg-intro-fx .lg-sat{position:absolute;left:50%;top:-6px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#7fdcff;box-shadow:0 0 16px 4px rgba(62,198,255,.7)}.lg-intro-fx .lg-pop{position:absolute;padding:6px 12px;border-radius:14px 14px 14px 3px;background:rgba(255,255,255,.92);color:#0b2341;font-size:14px;font-weight:600;opacity:0;transform:translateY(8px) scale(.9);animation:lg-pop 7.2s ease-in-out infinite;box-shadow:0 8px 24px rgba(0,0,0,.25)}@keyframes lg-twinkle{0%,100%{opacity:.2}50%{opacity:.9}}@keyframes lg-orbit{to{transform:translate(-50%,-50%) rotateX(72deg) rotate(360deg)}}@keyframes lg-pop{0%,4%{opacity:0;transform:translateY(8px) scale(.9)}9%,22%{opacity:1;transform:translateY(0) scale(1)}28%,100%{opacity:0;transform:translateY(-6px) scale(.95)}}@media(max-width:640px){.lg-intro-fx .lg-pop{font-size:14px}}@media(prefers-reduced-motion:reduce){.lg-intro-fx *{animation:none!important}.lg-intro-fx .lg-pop{display:none}}`
 
 const RAMP_BG = 'linear-gradient(180deg, #02070f 0%, #0b1f3a 22%, #3a6698 50%, #b9d3ee 78%, #f8fbff 100%)'
 
@@ -342,7 +342,7 @@ export default function IntroSection() {
           </motion.p>
         </div>
 
-        <p className="absolute bottom-6 left-5 hidden text-[11px] font-medium uppercase tracking-[0.3em] text-white/50 sm:bottom-8 sm:left-8 sm:block">
+        <p className="absolute bottom-6 left-5 hidden text-sm font-medium uppercase tracking-[0.3em] text-white/50 sm:bottom-8 sm:left-8 sm:block">
           Headquartered in Canada
         </p>
 
@@ -350,7 +350,7 @@ export default function IntroSection() {
         <button
           type="button"
           onClick={glideToHero}
-          className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.3em] text-white/60 transition-colors hover:text-white sm:bottom-8"
+          className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1.5 text-sm font-semibold uppercase tracking-[0.3em] text-white/60 transition-colors hover:text-white sm:bottom-8"
         >
           {autoplay && !firstRunDone ? 'Skip' : 'Explore'}
           <svg className="h-5 w-5 animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

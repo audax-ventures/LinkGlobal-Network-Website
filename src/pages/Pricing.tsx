@@ -104,7 +104,7 @@ function PaidCard({
   return (
     <Reveal delay={delay}>
       <div className="flex h-full flex-col rounded-3xl bg-white p-8 shadow-[0_30px_80px_rgba(0,0,0,0.35)]">
-        <p className="text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">{eyebrow}</p>
+        <p className="text-sm font-bold uppercase tracking-[0.25em] text-brand-blue">{eyebrow}</p>
         <h3 className="mt-3 text-2xl font-extrabold tracking-tight text-navy-950">{title}</h3>
         <p className="mt-5 flex items-baseline gap-2">
           {price ? (
@@ -182,8 +182,7 @@ export default function Pricing() {
           </>
         }
         actions={[{ label: 'Start Your Journey', to: LEARNER_SIGNUP_URL }]}
-        image={{ src: '/photos/journey-app-2.png', alt: 'The placement conversation that builds your LinkGlobal path' }}
-        imageAspect="3/2"
+        image={{ src: '/photos/journey-2.jpg', alt: 'A learner in a live online lesson with headphones on' }}
       />
 
       <Section className="pt-4 sm:pt-8">
@@ -191,7 +190,7 @@ export default function Pricing() {
         <ul className="mx-auto mt-10 grid max-w-4xl gap-3 sm:grid-cols-2">
           {['Your personalized learning path', 'Progress overview'].map(
             (t, i) => (
-              <Reveal key={t} delay={i * 0.06}>
+              <Reveal key={t} delay={i * 0.06} from={i % 2 ? 'right' : 'left'}>
                 <li className="flex items-center gap-4 rounded-2xl bg-white p-5 text-lg font-semibold text-navy-950 shadow-[0_10px_30px_rgba(19,41,82,0.07)]">
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-white">
                     <CheckIcon className="h-4 w-4" />

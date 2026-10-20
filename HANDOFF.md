@@ -693,3 +693,9 @@ the picture source for ~25 picture items.
   (INTRO_FX_CSS); intro mark spins in then turns on Y every ~3s. Logo
   `reversed` now draws a navy ring round the globe so it separates from the
   white bubble (nav/footer dark uses get it too).
+- Batch 6: Pricing header image swapped from the glitchy AI-assessment
+  screenshot to placeholder journey-2.jpg (item 39; also nav preview). Reveal
+  takes `from` ('up'|'left'|'right') + `side(i)` helper; grids, photo rows and
+  paired cards slide in from the sides; <main> has overflow-x: clip. Type pass:
+  every font-size 8-13px in scoped CSS -> 14px, text-xs/text-[9-13px] ->
+  text-sm, desktop intro/body copy up to 18px.

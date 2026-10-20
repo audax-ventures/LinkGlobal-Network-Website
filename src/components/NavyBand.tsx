@@ -43,5 +43,5 @@ export default function NavyBand({ children, className = '', fadeIn = true, fade
 }
 
 export function NavyEyebrow({ children }: { children: ReactNode }) {
-  return <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-cyan">{children}</p>
+  return <p className="text-sm font-semibold uppercase tracking-[0.3em] text-brand-cyan">{children}</p>
 }

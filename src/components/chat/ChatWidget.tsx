@@ -138,7 +138,7 @@ export default function ChatWidget() {
               </span>
               <div className="min-w-0 flex-1">
                 <p className="font-bold leading-tight">{ASSISTANT_NAME}</p>
-                <p className="text-xs text-white/85">LinkGlobal&rsquo;s AI assistant</p>
+                <p className="text-sm text-white/85">LinkGlobal&rsquo;s AI assistant</p>
               </div>
               <button
                 type="button"
@@ -237,7 +237,7 @@ export default function ChatWidget() {
                   </svg>
                 </button>
               </div>
-              <p className="mt-2 text-center text-xs text-navy-700/60">
+              <p className="mt-2 text-center text-sm text-navy-700/60">
                 {ASSISTANT_NAME} is an AI assistant and can make mistakes.
               </p>
             </form>

@@ -92,7 +92,7 @@ export default function TryNow() {
                   <span className="h-6 w-6 text-white">{p.icon}</span>
                 </div>
                 <div>
-                  <span className="text-xs font-semibold uppercase tracking-[0.25em]" style={{ color: p.color }}>
+                  <span className="text-sm font-semibold uppercase tracking-[0.25em]" style={{ color: p.color }}>
                     {p.eyebrow}
                   </span>
                   <h2 className="mt-1 text-2xl font-extrabold tracking-tight text-navy-950 sm:text-3xl">{p.title}</h2>
@@ -131,7 +131,7 @@ export default function TryNow() {
                   ))}
                 </ol>
 
-                <span className="mt-6 inline-flex items-center gap-2 self-start rounded-full px-3 py-1.5 text-xs font-semibold" style={{ background: p.tint, color: p.color }}>
+                <span className="mt-6 inline-flex items-center gap-2 self-start rounded-full px-3 py-1.5 text-sm font-semibold" style={{ background: p.tint, color: p.color }}>
                   <CheckIcon className="h-3.5 w-3.5" />
                   {p.perk}
                 </span>

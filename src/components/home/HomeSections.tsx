@@ -3,7 +3,7 @@ import { motion, useInView } from 'framer-motion'
 import NavyBand from '../NavyBand'
 import PeoplePhilosophy from './PeoplePhilosophy'
 import { PersonalizedPathsTour } from './TourSections'
-import { Reveal, Section, SectionHeading } from '../blocks'
+import { Reveal, Section, SectionHeading, side } from '../blocks'
 import { PENDING } from '../../content/site'
 
 // Homepage sections from Website Copy v7 (section 02), in reading order.
@@ -124,7 +124,7 @@ export function WhereLearnersGetStuck() {
       />
 
       <div className="mx-auto mt-12 grid max-w-4xl gap-5 md:grid-cols-2">
-        <Reveal>
+        <Reveal from="left">
           <article className="flex h-full flex-col rounded-3xl bg-white p-7 shadow-[0_12px_34px_rgba(11,53,84,0.06)]">
             <StudyPanelTop label="A month of study" meta="30 days" />
             <h3 className="text-2xl font-bold tracking-tight text-navy-950 sm:text-3xl">“I know this word.”</h3>
@@ -135,7 +135,7 @@ export function WhereLearnersGetStuck() {
           </article>
         </Reveal>
 
-        <Reveal delay={0.1}>
+        <Reveal delay={0.1} from="right">
           <article
             className="flex h-full flex-col rounded-3xl bg-white p-7 shadow-[inset_0_0_0_2px_#1ba3e0,0_12px_34px_rgba(27,163,224,0.1)]"
             aria-label="Conversation preview"
@@ -211,7 +211,7 @@ export function ThreePartsPhotos() {
       <div className="mx-auto mt-14 flex max-w-5xl flex-col gap-14 sm:gap-20">
         {PARTS.map((p, i) => (
           <div key={p.title} className="grid items-center gap-8 md:grid-cols-2 md:gap-14">
-            <Reveal className={i % 2 ? 'md:order-2' : ''}>
+            <Reveal className={i % 2 ? 'md:order-2' : ''} from={side(i)}>
               <div className="relative">
                 <img
                   src={p.photo}
@@ -227,8 +227,8 @@ export function ThreePartsPhotos() {
                 </span>
               </div>
             </Reveal>
-            <Reveal delay={0.1} className="text-center md:text-left">
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-blue">
+            <Reveal delay={0.1} className="text-center md:text-left" from={side(i + 1)}>
+              <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">
                 0{i + 1} · {p.kicker}
               </p>
               <h3 className="mt-3 text-3xl font-extrabold tracking-tight text-navy-950 sm:text-4xl">{p.title}</h3>

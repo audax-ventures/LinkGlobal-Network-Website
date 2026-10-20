@@ -46,7 +46,7 @@ const COLUMNS: { title: string; links: { label: string; to: string }[] }[] = [
 ]
 
 function ColumnTitle({ children }: { children: string }) {
-  return <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40">{children}</span>
+  return <span className="text-sm font-semibold uppercase tracking-[0.2em] text-white/40">{children}</span>
 }
 
 export default function Footer() {
@@ -69,7 +69,7 @@ export default function Footer() {
             <p className="mt-2 max-w-xs text-sm text-white/55">
               A personalized learning path, live lessons, and real conversation with native speakers.
             </p>
-            <p className="mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-white/40">Headquartered in Canada</p>
+            <p className="mt-3 text-sm font-semibold uppercase tracking-[0.2em] text-white/40">Headquartered in Canada</p>
           </div>
 
           {COLUMNS.map((col) => (
@@ -125,8 +125,8 @@ export default function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col-reverse items-center gap-4 border-t border-white/10 pt-8 sm:flex-row sm:justify-between">
-          <p className="text-xs text-white/35">&copy; {new Date().getFullYear()} {BRAND}. All rights reserved.</p>
-          <p className="text-xs text-white/35">
+          <p className="text-sm text-white/35">&copy; {new Date().getFullYear()} {BRAND}. All rights reserved.</p>
+          <p className="text-sm text-white/35">
             Built by{' '}
             <a
               href="https://www.audaxventures.ca"

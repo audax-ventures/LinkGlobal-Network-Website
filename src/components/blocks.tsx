@@ -10,19 +10,35 @@ import AvatarIllustration from './AvatarIllustration'
 
 const ease = [0.16, 1, 0.3, 1] as [number, number, number, number]
 
-export function Reveal({ children, delay = 0, className = '' }: { children: ReactNode; delay?: number; className?: string }) {
+// Brief 2: entrances slide in from the sides as you scroll. `from` picks the
+// direction ('up' keeps the original rise); grids alternate left / right.
+export function Reveal({
+  children,
+  delay = 0,
+  className = '',
+  from = 'up',
+}: {
+  children: ReactNode
+  delay?: number
+  className?: string
+  from?: 'up' | 'left' | 'right'
+}) {
+  const offset = from === 'left' ? { x: -64 } : from === 'right' ? { x: 64 } : { y: 28 }
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.7, delay, ease }}
+      initial={{ opacity: 0, ...offset }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.8, delay, ease }}
       className={className}
     >
       {children}
     </motion.div>
   )
 }
+
+/** Alternate grid items in from the left and right. */
+export const side = (i: number) => (i % 2 === 0 ? 'left' : 'right') as 'left' | 'right'
 
 export function SectionHeading({
   eyebrow,
@@ -41,7 +57,7 @@ export function SectionHeading({
   return (
     <Reveal className="mx-auto max-w-3xl text-center">
       {eyebrow && (
-        <p className={`text-xs font-semibold uppercase tracking-[0.3em] ${dark ? 'text-brand-cyan' : 'text-brand-blue'}`}>
+        <p className={`text-sm font-semibold uppercase tracking-[0.3em] ${dark ? 'text-brand-cyan' : 'text-brand-blue'}`}>
           {eyebrow}
         </p>
       )}
@@ -71,7 +87,7 @@ export function CardRow({
   return (
     <div className={`mx-auto mt-12 grid max-w-6xl gap-5 ${grid}`}>
       {items.map((it, i) => (
-        <Reveal key={it.title} delay={i * 0.08}>
+        <Reveal key={it.title} delay={i * 0.08} from={side(i)}>
           <div
             className={`h-full rounded-3xl p-7 ${
               dark ? 'bg-white/5 ring-1 ring-white/10' : 'bg-white shadow-[0_15px_40px_rgba(19,41,82,0.08)]'
@@ -79,7 +95,7 @@ export function CardRow({
           >
             {it.visual}
             <h3 className={`text-xl font-bold ${it.visual ? 'mt-5' : ''} ${dark ? 'text-white' : 'text-navy-950'}`}>{it.title}</h3>
-            <p className={`mt-2 leading-relaxed ${dark ? 'text-white/65' : 'text-navy-700/75'}`}>{it.line}</p>
+            <p className={`mt-2 text-lg leading-relaxed ${dark ? 'text-white/65' : 'text-navy-700/75'}`}>{it.line}</p>
           </div>
         </Reveal>
       ))}
@@ -171,7 +187,7 @@ export function BeforeDuringAfter({ items }: { items: { label: string; line: str
       {items.map((it, i) => {
         const Visual = BDA_VISUALS[i % BDA_VISUALS.length]
         return (
-          <Reveal key={it.label} delay={i * 0.08}>
+          <Reveal key={it.label} delay={i * 0.08} from={i === 1 ? 'up' : side(i === 2 ? 1 : 0)}>
             <button
               type="button"
               onClick={() => setReplay((r) => r.map((n, j) => (j === i ? n + 1 : n)))}
@@ -196,7 +212,7 @@ export function BeforeDuringAfter({ items }: { items: { label: string; line: str
 /** Certified educators vs Conversation partners, with the For You button. */
 export function TwoRoles({ educator, partner }: { educator: string; partner: string }) {
   const card = (title: string, line: string, visual: ReactNode, i: number) => (
-    <Reveal delay={i * 0.1}>
+    <Reveal delay={i * 0.1} from={side(i)}>
       <div className="h-full rounded-3xl bg-white p-7 shadow-[0_15px_40px_rgba(19,41,82,0.08)]">
         {visual}
         <h3 className="mt-6 text-2xl font-extrabold tracking-tight text-navy-950">{title}</h3>
@@ -215,7 +231,7 @@ export function TwoRoles({ educator, partner }: { educator: string; partner: str
               I <span className="rounded bg-rose-500/10 px-1 text-rose-600 line-through">have went</span>{' '}
               <span className="rounded bg-emerald-500/10 px-1 font-semibold text-emerald-700">went</span> to the meeting.
             </p>
-            <p className="mt-2 text-xs font-semibold text-brand-blue">Correction · technique · direct feedback</p>
+            <p className="mt-2 text-sm font-semibold text-brand-blue">Correction · technique · direct feedback</p>
           </div>,
           0,
         )}
@@ -251,7 +267,7 @@ export function OutcomeList({ items, dark = false }: { items: string[]; dark?: b
   return (
     <ul className="mx-auto mt-12 grid max-w-4xl gap-4 sm:grid-cols-2">
       {items.map((t, i) => (
-        <Reveal key={t} delay={i * 0.06}>
+        <Reveal key={t} delay={i * 0.06} from={side(i)}>
           <li
             className={`flex items-center gap-4 rounded-2xl p-5 text-lg font-semibold ${
               dark ? 'bg-white/5 text-white ring-1 ring-white/10' : 'bg-white text-navy-950 shadow-[0_10px_30px_rgba(19,41,82,0.07)]'

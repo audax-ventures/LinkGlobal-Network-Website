@@ -15,7 +15,9 @@ const FOOTER_BG = '#050f1f'
 
 export default function PageShell({ children, footerFade = true }: { children: ReactNode; footerFade?: boolean }) {
   return (
-    <main style={{ background: LIGHT }}>
+    // overflow-x: clip (not hidden) keeps side slide-ins from adding a
+    // sideways scroll without breaking the sticky Loop section.
+    <main className="overflow-x-clip" style={{ background: LIGHT }}>
       {children}
       {footerFade && (
         <div

@@ -53,7 +53,7 @@ export default function PageHeader({
         >
           <motion.span
             variants={item}
-            className="mb-5 inline-block rounded-full bg-brand-blue/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-brand-blue"
+            className="mb-5 inline-block rounded-full bg-brand-blue/10 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.25em] text-brand-blue"
           >
             {eyebrow}
           </motion.span>

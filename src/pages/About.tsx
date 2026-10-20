@@ -53,7 +53,7 @@ export default function About() {
           side, people on the other) with gentle floating motion. */}
       <NavyBand className="py-10 sm:py-16">
         <div className="mx-auto grid max-w-6xl items-center gap-8 lg:grid-cols-[1fr_2fr_1fr]">
-          <Reveal className="hidden justify-center lg:flex">
+          <Reveal className="hidden justify-center lg:flex" from="left">
             <motion.div
               className="relative flex h-40 w-40 items-center justify-center"
               animate={{ y: [0, -10, 0] }}
@@ -72,7 +72,7 @@ export default function About() {
             title="We combined the two instead of choosing between them."
             line="The AI plans and updates the path. Educators teach. Native speakers give learners someone to speak with."
           />
-          <Reveal delay={0.15} className="hidden justify-center lg:flex">
+          <Reveal delay={0.15} className="hidden justify-center lg:flex" from="right">
             <motion.div
               className="relative h-40 w-44"
               animate={{ y: [0, 10, 0] }}

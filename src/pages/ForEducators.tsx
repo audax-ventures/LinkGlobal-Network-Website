@@ -123,14 +123,14 @@ export default function ForEducators() {
           Photo is a placeholder until the client's set arrives. */}
       <NavyBand className="py-10 sm:py-16">
         <div className="mx-auto grid max-w-6xl items-start gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-14">
-          <Reveal className="md:pl-8 md:pt-4">
+          <Reveal className="md:pl-8 md:pt-4" from="left">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-brand-cyan">The Loop, from your side</p>
             <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
               You see where each learner stands, and what changed.
             </h2>
             <p className="mt-5 text-xl text-white/75">After the session, their path updates automatically.</p>
           </Reveal>
-          <Reveal delay={0.1}>
+          <Reveal delay={0.1} from="right">
             <div className="rounded-[2rem] bg-white p-7 shadow-[0_30px_80px_rgba(0,0,0,0.35)] sm:p-9">
               <div className="flex items-center gap-4">
                 <img src="/photos/hero-learner.jpg" alt="" className="h-20 w-20 rounded-full object-cover object-top ring-4 ring-brand-blue/20" loading="lazy" />

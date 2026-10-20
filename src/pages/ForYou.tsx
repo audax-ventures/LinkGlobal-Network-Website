@@ -23,7 +23,7 @@ function NativeSpeakers() {
         line="Someone is studying for years to speak the language you grew up with. Nothing to teach and nothing to prepare. Talk the way you always talk."
       />
       <div className="mx-auto mt-12 grid max-w-4xl items-center gap-8 md:grid-cols-[1.2fr_1fr]">
-        <Reveal>
+        <Reveal from="left">
           <div className="grid grid-cols-2 gap-4" aria-hidden="true">
             {/* A class: crossed out */}
             <div className="relative flex flex-col items-center justify-center gap-3 rounded-3xl bg-white p-6 opacity-70 shadow-[0_12px_34px_rgba(11,53,84,0.06)]">
@@ -62,7 +62,7 @@ function NativeSpeakers() {
             </div>
           </div>
         </Reveal>
-        <Reveal delay={0.1} className="text-center md:text-left">
+        <Reveal delay={0.1} className="text-center md:text-left" from="right">
           <h3 className="text-3xl font-extrabold tracking-tight text-navy-950 sm:text-4xl">A conversation, not a class.</h3>
           <p className="mt-4 text-xl leading-relaxed text-navy-700/75">Your language, your subjects, your opinions. No lesson plan, no grammar drills, no fixed hours.</p>
         </Reveal>
