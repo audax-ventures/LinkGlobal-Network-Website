@@ -25,27 +25,27 @@ export default function FeatureRows({ heading, eyebrow, rows }: { heading: strin
         {rows.map((r, i) => (
           <div key={r.title} className="grid items-center gap-8 md:grid-cols-2 md:gap-16">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: i % 2 === 1 ? 70 : -70 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className={i % 2 === 1 ? 'md:order-2' : ''}
             >
-              <p className="text-xs font-semibold tracking-[0.2em] text-brand-blue">
+              <p className="text-sm font-semibold tracking-[0.2em] text-brand-blue">
                 0{i + 1}
                 {r.eyebrow ? ` · ${r.eyebrow.toUpperCase()}` : ''}
               </p>
-              <h3 className="mt-2 text-3xl font-extrabold tracking-tight text-navy-950">{r.title}</h3>
-              <p className="mt-3 text-lg leading-relaxed text-navy-700/75">{r.line}</p>
+              <h3 className="mt-2 text-4xl font-extrabold tracking-tight text-navy-950 sm:text-5xl">{r.title}</h3>
+              <p className="mt-4 text-xl leading-relaxed text-navy-700/75">{r.line}</p>
             </motion.div>
             {/* Plain wrapper owns placement; motion.div only animates. */}
             <div className={`flex ${i % 2 === 1 ? 'md:order-1 md:justify-start' : 'md:justify-end'}`}>
               <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.4 }}
-                transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="w-full max-w-sm rounded-3xl bg-white p-6 shadow-[0_20px_50px_rgba(19,41,82,0.12)]"
+                initial={{ opacity: 0, x: i % 2 === 1 ? -90 : 90, rotate: i % 2 === 1 ? -3 : 3 }}
+                whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full max-w-md overflow-hidden rounded-3xl bg-white p-7 shadow-[0_24px_60px_rgba(19,41,82,0.16)] sm:p-8"
               >
                 {r.visual}
               </motion.div>
@@ -72,5 +72,5 @@ export function Pill({ children, on = false }: { children: ReactNode; on?: boole
 }
 
 export function CardLabel({ children }: { children: ReactNode }) {
-  return <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-navy-700/50">{children}</p>
+  return <p className="text-sm font-bold uppercase tracking-[0.2em] text-navy-700/55">{children}</p>
 }

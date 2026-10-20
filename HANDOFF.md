@@ -674,3 +674,9 @@ the picture source for ~25 picture items.
   (item 21): Before/During/After are buttons that scroll to that phase; dot
   pulses; section 220vh. Before/During/After cards (item 20, blocks.tsx) each
   have a looping text-free visual; click replays.
+- Batch 3 (For Educators): brief card in the teaching tour has no label or
+  headline, big Goal/Focus/Practice rows with icons (item 24); "The Loop, from
+  your side" headline moved up/in, much bigger briefing card with a learner
+  photo (placeholder hero-learner.jpg) and bigger text (26); dashboard cards
+  bigger, coloured headers with icons, slide in from the sides (FeatureRows,
+  items 28-29).
