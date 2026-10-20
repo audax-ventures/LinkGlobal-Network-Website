@@ -34,7 +34,7 @@ const PLAN_SLOTS: PlanSlot[] = [
 
 const FAQ: { q: string; a: string }[] = [
   { q: 'Do I have to subscribe?', a: 'No. You pay for the lessons you book, and nothing more.' },
-  { q: 'What is free?', a: 'Your assessment, learning path, AI-guided practice, and progress overview.' },
+  { q: 'What is free?', a: 'Your personalized learning path and your progress overview.' },
   { q: 'Is there a demo lesson?', a: 'No. Your level and path are created before you book, so you can see the direction first.' },
   {
     q: 'What if I cancel a lesson?',
@@ -181,7 +181,6 @@ export default function Pricing() {
             Pay for the lessons <span className="text-gradient-brand">you take.</span>
           </>
         }
-        description="No subscription. Your assessment, learning path, and AI-guided practice are free."
         actions={[{ label: 'Start Your Journey', to: LEARNER_SIGNUP_URL }]}
         image={{ src: '/photos/journey-app-2.png', alt: 'The placement conversation that builds your LinkGlobal path' }}
         imageAspect="3/2"
@@ -190,7 +189,7 @@ export default function Pricing() {
       <Section className="pt-4 sm:pt-8">
         <SectionHeading title="Free to use" />
         <ul className="mx-auto mt-10 grid max-w-4xl gap-3 sm:grid-cols-2">
-          {['Assessment and level determination', 'Your personalized learning path', 'AI-guided practice', 'Progress overview'].map(
+          {['Your personalized learning path', 'Progress overview'].map(
             (t, i) => (
               <Reveal key={t} delay={i * 0.06}>
                 <li className="flex items-center gap-4 rounded-2xl bg-white p-5 text-lg font-semibold text-navy-950 shadow-[0_10px_30px_rgba(19,41,82,0.07)]">
@@ -203,9 +202,6 @@ export default function Pricing() {
             ),
           )}
         </ul>
-        <Reveal className="mx-auto mt-8 max-w-2xl text-center">
-          <p className="text-navy-700/75">There is no demo lesson. Your level and your path are ready before you book anything.</p>
-        </Reveal>
       </Section>
 
       <NavyBand className="py-10 sm:py-16">
@@ -275,11 +271,7 @@ export default function Pricing() {
         {productJsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: productJsonLd }} />}
       </Section>
 
-      <CtaBand
-        title="Start with one lesson."
-        description="Nothing to subscribe to, nothing to cancel."
-        primary={{ label: 'Start Your Journey', to: LEARNER_SIGNUP_URL }}
-      />
+      <CtaBand primary={{ label: 'Start Your Journey', to: LEARNER_SIGNUP_URL }} />
     </PageShell>
   )
 }

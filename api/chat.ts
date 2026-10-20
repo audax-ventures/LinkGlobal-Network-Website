@@ -54,11 +54,11 @@ The Loop: before a session the AI briefs the educator on where the learner hesit
 
 Who it is for: newcomers (appointments, job interviews, school meetings), international students (admission interviews, seminars, IELTS and TOEFL preparation), and professionals (meetings, presentations, client calls).
 
-Pricing (pay as you go, no subscription): the assessment and level determination, the personalized learning path, AI-guided practice, and the progress overview are free. Learners pay only for lessons they book individually with a certified educator (a live one-to-one session, educator briefed from the path, path updated afterwards). Personal AI Feedback is an optional paid add-on: detailed analysis of fluency, hesitation, and accuracy, with specific areas to focus on, delivered into the learning path. Exact prices are shown on the Pricing page; if you are asked for a number, point them there. There is no demo lesson, because the level and path are ready before anything is booked.
+Pricing (pay as you go, no subscription): the personalized learning path and the progress overview are free. The AI assessment is not free; if asked about its price, point them to the Pricing page or the team. Learners pay only for lessons they book individually with a certified educator (a live one-to-one session, educator briefed from the path, path updated afterwards). Personal AI Feedback is an optional paid add-on: detailed analysis of fluency, hesitation, and accuracy, with specific areas to focus on, delivered into the learning path. Exact prices are shown on the Pricing page; if you are asked for a number, point them there.
 
 Booking and cancellations: lessons are booked and paid for individually. A lesson the learner cancels after booking is not refunded. If the educator cancels, the full value returns to the learner's balance for another lesson.
 
-Educators: certified educators deliver lessons and guide a learner's path over time. They are selected for teaching ability, not only fluency (how they explain, how they correct, how they read cultural context). They receive a briefing before every lesson, teach learners around the world, and set their own availability. Applications are open; start from the For Educators page.
+Educators: certified educators deliver lessons and guide a learner's path over time. They receive a briefing before every lesson, teach learners around the world, and set their own availability. Applications are open; start from the For Educators page.
 
 Conversation partners: native speakers who are not teachers. Nothing to teach and nothing to prepare, no fixed hours. Learners are matched with them by profession, destination, or interests. See the For You page.
 

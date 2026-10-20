@@ -126,31 +126,10 @@ export default function ForEducators() {
         </div>
       </NavyBand>
 
-      <Section>
-        <SectionHeading
-          eyebrow="How we select educators"
-          title="Selected for teaching ability, not only fluency."
-          line="We look at how you explain, how you correct, and how you read cultural context."
-        />
-        <Reveal className="mx-auto mt-6 max-w-2xl text-center">
-          {PENDING.educatorSelection && <p className="text-navy-700/75">{PENDING.educatorSelection}</p>}
-          <SmartLink
-            to={EDUCATOR_SIGNUP_URL}
-            className="mt-6 inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-5 py-2.5 text-sm font-semibold text-emerald-700 transition-colors hover:bg-emerald-500/20"
-          >
-            <span className="h-2 w-2 rounded-full bg-emerald-500" /> Applications are open.
-          </SmartLink>
-        </Reveal>
-      </Section>
-
       <FeatureRows heading="Your dashboard" rows={DASHBOARD} />
 
       <div className="pt-12" />
-      <CtaBand
-        title="Your fluency is already an asset."
-        description="LinkGlobal connects it with the people who need it."
-        primary={{ label: 'Start Teaching With Us', to: EDUCATOR_SIGNUP_URL }}
-      />
+      <CtaBand primary={{ label: 'Start Teaching With Us', to: EDUCATOR_SIGNUP_URL }} />
     </PageShell>
   )
 }

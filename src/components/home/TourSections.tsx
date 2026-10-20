@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-// Three homepage sections ported from Riley's supplied designs
-// (~/Desktop/lessons-and-conversations.html, personalized-paths.html,
-// real-life-progress.html). They share the source's tour engine: auto-play
+// Personalized-paths tour ported from Riley's supplied design
+// (~/Desktop/personalized-paths.html), plus the shared tour engine used by
+// tours/PageTours. (The lessons and real-life-progress tours were deleted in
+// revision brief 2, items 13 and 17.) They share the source's tour engine: auto-play
 // once when 25% visible, 2.6s per step, Play / Pause / Replay, pause when the
 // tab is hidden, reduced motion gets a "Next example" button. CSS is the
 // source's (shared .lgx base + per-section rules), on the site background and
@@ -109,85 +110,6 @@ export function useTour(opts: { last: number; reducedInitial?: number }) {
     reduced ? 'Next example →' : playing ? 'Pause Ⅱ' : index === last ? 'Replay ↻' : playLabel
 
   return { rootRef, index, paused, animate, nonce, go, onControl, label }
-}
-
-/* ---------------- Lessons + conversation ---------------- */
-
-const SPEAKING_CSS = `#lg-speaking .sp-panels{display:grid;grid-template-columns:1fr 1fr;gap:17px}#lg-speaking .sp-panel{background:var(--lg-panel);border-radius:20px;padding:22px;box-shadow:0 12px 35px #254e7608;min-width:0;display:flex;flex-direction:column}#lg-speaking .sp-category{font-size:10px;letter-spacing:1.1px;color:var(--lg-muted);font-weight:700;margin:0 0 12px}#lg-speaking .sp-panel p{font-size:12px;color:var(--lg-muted);margin:11px 0 0}#lg-speaking .sp-demo{margin:22px 0 20px;min-height:185px;background:#f3f7fa;border-radius:13px;padding:17px;display:flex;flex-direction:column;justify-content:center;position:relative}#lg-speaking .sp-demo-label{font-size:9px;letter-spacing:1.3px;color:var(--lg-muted);margin-bottom:16px}#lg-speaking .sp-sentence{font-size:18px;line-height:1.8;color:var(--lg-ink)}#lg-speaking .sp-wrong{position:relative;color:#86565c;border-radius:3px;background:#f7e9eb;padding:2px 4px}#lg-speaking .sp-wrong:after{position:absolute;content:'';height:1px;background:#b65063;left:2px;right:2px;top:50%;transform:scaleX(0);transform-origin:left;transition:transform .338s}#lg-speaking[data-step="1"] .sp-wrong:after,#lg-speaking[data-step="2"] .sp-wrong:after{transform:scaleX(1)}#lg-speaking .sp-right{display:inline-block;color:var(--lg-green);background:#e1f2eb;padding:0 5px;border-radius:3px;opacity:0;transform:translateY(-8px);transition:opacity .375s,transform .375s}#lg-speaking[data-step="1"] .sp-right,#lg-speaking[data-step="2"] .sp-right{opacity:1;transform:translateY(0)}#lg-speaking .sp-coach{font-size:11px;line-height:1.5;color:var(--lg-green);margin-top:15px;min-height:33px;opacity:0;transform:translateY(6px);transition:.375s}#lg-speaking[data-step="2"] .sp-coach{opacity:1;transform:translateY(0)}#lg-speaking .sp-chat{gap:9px;justify-content:center}#lg-speaking .sp-bubble{max-width:94%;padding:10px 12px;border-radius:11px 11px 11px 2px;background:white;color:var(--lg-ink);font-size:12px;line-height:1.4;align-self:flex-start;box-shadow:0 3px 9px #18355204}#lg-speaking .sp-bubble.sp-answer{background:var(--lg-blue);color:white;border-radius:11px 11px 2px 11px;align-self:flex-end}#lg-speaking .sp-answer,#lg-speaking .sp-follow{opacity:0;transform:translateY(8px);transition:opacity .375s,transform .375s}#lg-speaking[data-step="1"] .sp-answer,#lg-speaking[data-step="2"] .sp-answer,#lg-speaking[data-step="2"] .sp-follow{opacity:1;transform:translateY(0)}#lg-speaking .sp-tags{border-top:1px solid var(--lg-line);padding-top:15px;color:var(--lg-blue);font-size:10px;line-height:1.6;margin-top:auto}#lg-speaking .sp-summary{text-align:center;color:var(--lg-ink);font-size:13px;margin:23px 0 0}#lg-speaking .sp-summary strong{font-weight:600}@media(max-width:560px){#lg-speaking .sp-panels{grid-template-columns:1fr}#lg-speaking .sp-demo{min-height:170px}#lg-speaking .sp-panel{padding:21px}}`
-const SPEAKING_CAPTIONS = [
-  'Two different ways to grow your voice.',
-  'A correction helps you improve. A reply keeps you talking.',
-  'Guidance builds the skill. Conversation builds the flow.',
-]
-
-export function LessonsAndConversationTour() {
-  const t = useTour({ last: 2, reducedInitial: 2 })
-  return (
-    <section
-      className="lgx"
-      id="lg-speaking"
-      ref={t.rootRef}
-      aria-label="Lessons and conversation"
-      data-step={t.index}
-      data-paused={t.paused ? 'true' : 'false'}
-    >
-      <style>{BASE_CSS + SPEAKING_CSS}</style>
-      <div className="lg-wrap">
-        <header className="lg-header">
-          <p className="lg-eyebrow">LESSONS + CONVERSATION</p>
-          <h2>
-            Build the skill.
-            <br />
-            <span>Find your flow.</span>
-          </h2>
-          <p className="lg-intro">Two kinds of speaking practice. Each brings something different to your voice.</p>
-        </header>
-        <div className="sp-panels">
-          <article className="sp-panel">
-            <div className="sp-category">WITH A CERTIFIED EDUCATOR</div>
-            <h3>Get the guidance.</h3>
-            <p>Work on technique, get clear corrections, and understand what to try next.</p>
-            <div className="sp-demo">
-              <div className="sp-demo-label">A MOMENT IN YOUR LESSON</div>
-              <div className="sp-sentence">
-                I <span className="sp-wrong">have went</span> <span className="sp-right">went</span>
-                <br />
-                to the meeting.
-              </div>
-              <div className="sp-coach">
-                “It’s a finished action.
-                <br />
-                Here, use the simple past: went.”
-              </div>
-            </div>
-            <div className="sp-tags">Structured practice · Clear feedback</div>
-          </article>
-          <article className="sp-panel">
-            <div className="sp-category">WITH A CONVERSATION PARTNER</div>
-            <h3>Get into the conversation.</h3>
-            <p>Talk with native speakers about things you care about. Real pace. No assessment.</p>
-            <div className="sp-demo sp-chat">
-              <div className="sp-bubble">So, what got you into design?</div>
-              <div className="sp-bubble sp-answer">Honestly, it started with posters.</div>
-              <div className="sp-bubble sp-follow">Really? What kind of posters?</div>
-            </div>
-            <div className="sp-tags">Shared interests · Natural back-and-forth</div>
-          </article>
-        </div>
-        <p className="sp-summary">
-          Learn it with guidance. <strong>Make it yours through conversation.</strong>
-        </p>
-        <div className="lg-bottom">
-          <span className="lg-status" aria-live="polite">
-            {SPEAKING_CAPTIONS[t.index]}
-          </span>
-          <button className="lg-play" type="button" onClick={t.onControl}>
-            {t.label('Play examples ▷')}
-          </button>
-        </div>
-      </div>
-    </section>
-  )
 }
 
 /* ---------------- Personalized paths ---------------- */
@@ -301,108 +223,6 @@ export function PersonalizedPathsTour() {
           </button>
         </div>
         <p className="pa-quality">Every educator is assessed before joining and briefed before each session.</p>
-      </div>
-    </section>
-  )
-}
-
-/* ---------------- Real-life progress ---------------- */
-
-const PROGRESS_CSS = `#lg-progress .pr-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:20px;align-items:stretch}#lg-progress .pr-choices{display:grid;gap:9px}#lg-progress .pr-choice{width:100%;display:flex;gap:12px;align-items:center;padding:15px 14px;background:var(--lg-panel);border:1px solid var(--lg-line);border-radius:12px;text-align:left;color:var(--lg-ink);transition:transform .3s,border-color .3s,background .3s}#lg-progress .pr-choice>span{width:27px;height:27px;display:grid;place-items:center;background:#eaf3f9;border-radius:50%;font-size:11px;color:var(--lg-muted);flex-shrink:0}#lg-progress .pr-choice strong{display:block;font-size:12px;font-weight:600;line-height:1.35}#lg-progress .pr-choice small{display:block;margin-top:3px;font-size:10px;color:var(--lg-muted);line-height:1.4}#lg-progress .pr-choice[aria-pressed="true"]{border-color:#16a785;background:#f0fbf7;transform:translateX(3px)}#lg-progress .pr-choice[aria-pressed="true"]>span{background:#098567;color:white}#lg-progress .pr-story{border-radius:19px;background:var(--lg-panel);box-shadow:0 12px 35px #254e7608;padding:26px 24px;display:flex;flex-direction:column;justify-content:space-between;min-width:0;position:relative;overflow:hidden}#lg-progress .pr-top{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:9px;letter-spacing:1.2px;color:var(--lg-muted)}#lg-progress .pr-stamp{display:grid;place-items:center;background:#e3f6ee;color:#07825f;border-radius:50%;width:33px;height:33px;font-size:17px;letter-spacing:0;flex-shrink:0}#lg-progress .pr-quote{font-size:26px;font-weight:500;line-height:1.22;letter-spacing:-.8px;margin:18px 0;color:var(--lg-ink)}#lg-progress .pr-quote:before{content:'“';display:block;font-family:Georgia,serif;font-size:68px;color:var(--lg-blue);height:39px;line-height:1}#lg-progress .pr-context{font-size:12px;line-height:1.6;color:var(--lg-muted);margin:0}#lg-progress .pr-line{width:42px;height:2px;background:#20ac8b;margin:17px 0 12px;transform-origin:left}#lg-progress .pr-footer{font-size:10px;color:var(--lg-green);line-height:1.5}#lg-progress .pr-story.lg-enter .pr-stamp{animation:pr-stamp .525s ease both;animation-delay:.15s}#lg-progress .pr-story.lg-enter .pr-line{animation:pr-line .6s ease both}@keyframes pr-stamp{from{transform:scale(.6) rotate(-30deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}@keyframes pr-line{from{transform:scaleX(0)}to{transform:scaleX(1)}}#lg-progress .pr-ending{text-align:center;border-top:1px solid var(--lg-line);padding-top:19px;margin:9px 0 0;font-size:13px;color:var(--lg-ink)}@media(max-width:540px){#lg-progress .pr-layout{grid-template-columns:1fr;gap:16px}#lg-progress .pr-choice[aria-pressed="true"]{transform:none}#lg-progress .pr-choice strong{font-size:13px}#lg-progress .pr-story{min-height:290px}#lg-progress .pr-quote{font-size:27px}#lg-progress .pr-choices{grid-template-columns:1fr 1fr;gap:8px}#lg-progress .pr-choice{padding:13px 11px;align-items:flex-start;gap:8px}#lg-progress .pr-choice>span{width:23px;height:23px}#lg-progress .pr-choice small{display:none}}@media(max-width:360px){#lg-progress .pr-choices{grid-template-columns:1fr}#lg-progress .pr-choice small{display:block}}`
-const MOMENTS = [
-  {
-    name: 'An interview attended',
-    title: 'An interview attended.',
-    sub: 'Tell your story with confidence.',
-    quote: 'Let me tell you what I can bring to this role.”',
-    context: 'Finding the words to show someone what you’re capable of.',
-  },
-  {
-    name: 'An idea shared',
-    title: 'An idea shared.',
-    sub: 'Have your voice in the room.',
-    quote: 'I’d like to build on that idea.”',
-    context: 'Joining the discussion when you have something to say.',
-  },
-  {
-    name: 'An acceptance letter',
-    title: 'An acceptance letter.',
-    sub: 'A new academic chapter.',
-    quote: 'I’m excited to accept my place.”',
-    context: 'A new chapter to work toward, with language as part of your preparation.',
-  },
-  {
-    name: 'A friendship formed',
-    title: 'A friendship formed.',
-    sub: 'Feel at home in another language.',
-    quote: 'Same time next week?”',
-    context: 'When a conversation becomes a connection you want to keep.',
-  },
-]
-
-export function RealLifeProgressTour() {
-  const t = useTour({ last: 3 })
-  const m = MOMENTS[t.index]
-  return (
-    <section
-      className="lgx"
-      id="lg-progress"
-      ref={t.rootRef}
-      aria-label="Progress in real life"
-      data-step={t.index}
-      data-paused={t.paused ? 'true' : 'false'}
-    >
-      <style>{BASE_CSS + PROGRESS_CSS}</style>
-      <div className="lg-wrap">
-        <header className="lg-header">
-          <p className="lg-eyebrow">WHAT PROGRESS LOOKS LIKE</p>
-          <h2>
-            A stronger voice.
-            <br />
-            <span>A bigger world.</span>
-          </h2>
-          <p className="lg-intro">
-            Measure progress in the things you become able to do, and the doors they can open.
-          </p>
-        </header>
-        <div className="pr-layout">
-          <div className="pr-choices" role="group" aria-label="Explore moments to work toward">
-            {MOMENTS.map((x, i) => (
-              <button key={x.name} className="pr-choice" type="button" aria-pressed={i === t.index} onClick={() => t.go(i)}>
-                <span aria-hidden="true">0{i + 1}</span>
-                <div>
-                  <strong>{x.title}</strong>
-                  <small>{x.sub}</small>
-                </div>
-              </button>
-            ))}
-          </div>
-          <div key={t.nonce} className={`pr-story${t.animate ? ' lg-enter' : ''}`}>
-            <div className="pr-top">
-              PICTURE YOUR NEXT MILESTONE{' '}
-              <span className="pr-stamp" aria-hidden="true">
-                ✓
-              </span>
-            </div>
-            <div>
-              <blockquote className="pr-quote">{m.quote}</blockquote>
-              <p className="pr-context">{m.context}</p>
-            </div>
-            <div>
-              <div className="pr-line" aria-hidden="true" />
-              <div className="pr-footer">A moment to work toward.</div>
-            </div>
-          </div>
-        </div>
-        <div className="lg-bottom">
-          <span className="lg-status" aria-live="polite">
-            {m.name}. A moment to work toward.
-          </span>
-          <button className="lg-play" type="button" onClick={t.onControl}>
-            {t.label('Play moments ▷')}
-          </button>
-        </div>
-        <p className="pr-ending">Your progress belongs in your life.</p>
       </div>
     </section>
   )

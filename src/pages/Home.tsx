@@ -25,15 +25,13 @@ export default function Home() {
       <Philosophy />
       <WhereLearnersGetStuck />
       <ThreePartsPhotos />
+      {/* Mid-page Start strip (brief item 43): Home only. */}
+      <CtaBand compact primary={{ label: 'Start Your Journey', to: LEARNER_SIGNUP_URL }} />
       <LearningJourney compact />
       <JourneyDashboard />
       <div style={{ background: FADE_TO_DARK }}>
         <LearnerOutcomes />
-        <CtaBand
-          title="Your path begins with a conversation about you."
-          description="Tell us your goal. Your plan follows from your answers."
-          primary={{ label: 'Start Your Journey', to: LEARNER_SIGNUP_URL }}
-        />
+        <CtaBand primary={{ label: 'Start Your Journey', to: LEARNER_SIGNUP_URL }} />
       </div>
     </PageShell>
   )

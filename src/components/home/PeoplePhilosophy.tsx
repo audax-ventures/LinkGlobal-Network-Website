@@ -160,7 +160,7 @@ export default function PeoplePhilosophy() {
           <h2>
             Powered by technology.<span>Built around people.</span>
           </h2>
-          <p className="pp-copy">Technology helps you learn the words. People give you the confidence to use them.</p>
+          <p className="pp-copy">Our AI brings those people into your world. The connection you make is human.</p>
           <div className="pp-signature">A little technology. A lot more connection.</div>
         </div>
         <div className="pp-visual" aria-label="Animation showing AI connecting a learner with people for real conversations">

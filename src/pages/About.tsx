@@ -3,7 +3,6 @@ import NavyBand from '../components/NavyBand'
 import PageHeader from '../components/PageHeader'
 import CtaBand from '../components/CtaBand'
 import { FromStudyToSpeaking } from '../components/tours/PageTours'
-import { HowWeMeasureProgress } from '../components/home/HomeSections'
 import { OutcomeList, Reveal, Section, SectionHeading } from '../components/blocks'
 import { LEARNER_SIGNUP_URL } from '../content/site'
 
@@ -19,12 +18,7 @@ const TEAM: { name: string; role: string; line: string; photo?: string }[] = [
   },
   { name: 'Mahmud Rahimov', role: 'Project Advisor', line: 'Turns what learners struggle with into what the platform does next.' },
   { name: 'Davood Zivar', role: 'Project Manager', line: 'Makes sure what we promise a learner actually arrives.' },
-  { name: 'Banu Akhundova', role: 'Content Manager & Coordinator', line: 'Writes so that nobody ever feels behind.' },
-  {
-    name: 'Samad Abbasov',
-    role: 'Meta Ads Specialist & Creative Visual Strategist',
-    line: 'Finds the people who stopped speaking, and gives them a reason to start again.',
-  },
+  { name: 'Banu Akhundlu', role: 'Manager', line: 'Writes so that nobody ever feels behind.' },
 ]
 
 const COLORS = ['#1ba3e0', '#f5a623', '#2dd4bf', '#a78bfa', '#f472b6', '#4ade80']
@@ -75,8 +69,6 @@ export default function About() {
         />
       </Section>
 
-      <HowWeMeasureProgress />
-
       <Section className="pt-0 sm:pt-4">
         <SectionHeading eyebrow="The people behind LinkGlobal" title="Technology starts it. People make it matter." />
         <div className="mx-auto mt-12 grid max-w-6xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -103,7 +95,7 @@ export default function About() {
         </div>
       </Section>
 
-      <CtaBand title="One conversation can change what comes next." primary={{ label: 'Start Your Journey', to: LEARNER_SIGNUP_URL }} />
+      <CtaBand primary={{ label: 'Start Your Journey', to: LEARNER_SIGNUP_URL }} />
     </PageShell>
   )
 }

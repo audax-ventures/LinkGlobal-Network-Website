@@ -14,5 +14,5 @@ export const NAV_ROUTES: NavRoute[] = [
   { id: 'for-you', label: 'For You', path: '/for-you' },
   { id: 'about', label: 'About', path: '/about' },
   { id: 'pricing', label: 'Pricing', path: '/pricing' },
-  { id: 'contact', label: 'Contact', path: '/contact' },
+  { id: 'contact', label: 'Contact us', path: '/contact' },
 ]

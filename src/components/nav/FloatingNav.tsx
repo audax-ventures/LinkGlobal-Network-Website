@@ -35,12 +35,12 @@ const ICONS: Record<string, typeof HomeIcon> = {
 // sync) and reuses images already shipped in the bundle.
 const ROUTE_META: Record<string, { color: string; image: string; blurb: string }> = {
   home: { color: '#1ba3e0', image: '/gallery/dashboard.png', blurb: 'Learn the language. Own the conversation.' },
-  learners: { color: '#a78bfa', image: '/photos/learners-hero.jpg', blurb: 'Language for the conversations ahead of you.' },
-  educators: { color: '#f472b6', image: '/photos/educators-hero.jpg', blurb: 'Spend the session teaching, not preparing.' },
-  'for-you': { color: '#2dd4bf', image: '/photos/hero-learner.jpg', blurb: 'Conversation practice with native speakers.' },
-  about: { color: '#f5a623', image: '/photos/about-founders.jpg', blurb: 'Language should carry your ideas, not limit them.' },
-  pricing: { color: '#1ba3e0', image: '/photos/journey-app-2.png', blurb: 'Pay for the lessons you take.' },
-  contact: { color: '#f5a623', image: '/photos/journey-5.jpg', blurb: 'Not sure where to start?' },
+  learners: { color: '#a78bfa', image: '/photos/learners-hero.jpg', blurb: 'Made for language learners.' },
+  educators: { color: '#f472b6', image: '/photos/educators-hero.jpg', blurb: 'For educators who want to teach, not prepare.' },
+  'for-you': { color: '#2dd4bf', image: '/photos/hero-learner.jpg', blurb: 'For native speakers who want to share their language.' },
+  about: { color: '#f5a623', image: '/photos/about-founders.jpg', blurb: 'The story behind LinkGlobal.' },
+  pricing: { color: '#1ba3e0', image: '/photos/journey-app-2.png', blurb: 'Simple, flexible pricing.' },
+  contact: { color: '#f5a623', image: '/photos/journey-5.jpg', blurb: 'Questions? We are here to help.' },
 }
 
 const MotionLink = motion(Link)

@@ -1,35 +1,17 @@
 import PageShell from '../components/PageShell'
-import NavyBand from '../components/NavyBand'
 import PageHeader from '../components/PageHeader'
 import CtaBand from '../components/CtaBand'
 import { ReasonsToLearn } from '../components/tours/PageTours'
-import SampleCards from '../components/dashboard/SeeWhereItHappens'
-import type { SampleData } from '../components/dashboard/SeeWhereItHappens'
 import { BeforeDuringAfter, CardRow, Reveal, Section, SectionHeading, TwoRoles } from '../components/blocks'
 import { LEARNER_SIGNUP_URL } from '../content/site'
-import JourneyStrip from '../components/hero/JourneyStrip'
-import LearningJourney from '../components/journey/LearningJourney'
 import LinkGlobalLoop from '../components/loop/LinkGlobalLoop'
-import { BuiltForConversations, LessonsAndConversation, ThreePartsSystem } from '../components/home/HomeSections'
+import { BuiltForConversations } from '../components/home/HomeSections'
 
-// For Learners, per Website Copy v7 (section 03), plus the fuller sections
-// moved off Home in the Oct 2026 trim (journey strip, full learning journey,
-// the Loop, ThreeParts, and the lessons / personalized-paths tours).
-
-const STUDENT_SAMPLE: SampleData = {
-  path: [
-    'Week 2 · Ask a question in a seminar without rehearsing it',
-    'Week 4 · Disagree politely in a group discussion',
-    'Week 6 · Admission interview: explain your research in ninety seconds',
-  ],
-  briefing: {
-    mastered: 'Introducing his research, prepared answers',
-    avoiding: 'Interrupting to make a point, unscripted follow-ups',
-    focus: 'Seminar simulation, with prompts to interject',
-  },
-  sessions: 9,
-  progressLine: 'The pause before speaking is getting shorter. Unprompted questions are increasing.',
-}
+// For Learners, per Website Copy v7 (section 03), plus the Loop and the
+// "What are you getting ready for?" tabs moved off Home. Revision brief 2
+// (Oct 2026) deleted the journey stepper, the dark "Built from what you tell
+// us" band, "Build the skill", and the sample cards; the full journey and
+// ThreeParts came off too, since Home already shows those ideas (no repeats).
 
 export default function ForLearners() {
   return (
@@ -46,29 +28,8 @@ export default function ForLearners() {
         image={{ src: '/photos/learners-hero.jpg', alt: 'A learner reviewing her LinkGlobal dashboard' }}
       />
 
-      <section className="relative px-6 pb-4 pt-2">
-        <div className="mx-auto w-full max-w-6xl">
-          <JourneyStrip />
-        </div>
-      </section>
-
       <ReasonsToLearn />
 
-      <NavyBand className="py-10 sm:py-16">
-        <SectionHeading
-          dark
-          eyebrow="Your learning path"
-          title="Built from what you tell us before you start."
-          line="You describe your goals, your level, and how you intend to use the language. The path shows what you are working toward and what comes first."
-        />
-        <Reveal className="mx-auto mt-8 max-w-2xl text-center">
-          <p className="text-lg font-semibold text-white">
-            Material you have mastered returns only when it is useful. The areas you avoid are not skipped.
-          </p>
-        </Reveal>
-      </NavyBand>
-
-      <LearningJourney />
       <LinkGlobalLoop />
 
       <Section>
@@ -82,8 +43,6 @@ export default function ForLearners() {
         />
       </Section>
 
-      <ThreePartsSystem />
-      <LessonsAndConversation />
       <BuiltForConversations />
 
       <Section className="pt-0 sm:pt-4">
@@ -106,13 +65,8 @@ export default function ForLearners() {
           ]}
         />
       </Section>
-      <SampleCards data={STUDENT_SAMPLE} />
 
-      <CtaBand
-        title="The path starts with where you are going."
-        description="We ask about your goal first, then build the route to it."
-        primary={{ label: 'Start Your Journey', to: LEARNER_SIGNUP_URL }}
-      />
+      <CtaBand primary={{ label: 'Start Your Journey', to: LEARNER_SIGNUP_URL }} />
     </PageShell>
   )
 }

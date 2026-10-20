@@ -31,7 +31,7 @@ const PATHS: Path[] = [
     title: 'Start as a learner',
     description: 'Tell us your goal. Your plan follows from your answers.',
     steps: [
-      { title: 'Take the free assessment', line: 'Your goals, your level, your interests.' },
+      { title: 'Take the assessment', line: 'Your goals, your level, your interests.' },
       { title: 'See your learning path', line: 'The whole route, before you book anything.' },
       { title: 'Book your first lesson', line: 'With a certified educator, briefed from your path.' },
     ],

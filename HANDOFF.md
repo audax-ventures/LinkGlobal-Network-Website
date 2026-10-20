@@ -651,3 +651,19 @@ already fairly tight compositions).
   About gets the RealLifeProgress tour. Home SampleCards dropped (For Learners
   already has its own). PLACEHOLDER PHOTOS on Home: journey-4, learners,
   educators, journey-5. Swap for the client's photos when supplied.
+
+## Revision brief 2 (client, Oct 15 2026; ~/Downloads/LinkGlobal Website Revision 2.pdf)
+Riley approved the "can do now" list. Blocked on client: email (brief says
+info@linkglobal.io; site keeps info@linkglobalnetwork.ca until confirmed), final
+free list, subscription prices/currency (two candidate sets: old site 39/89/159,
+copy v7 slots 79/199), 3 roadmap steps, Home map sign-off, item 35 wording, and
+the picture source for ~25 picture items.
+- Batch 1: menu blurbs rewritten (distinct per tab), "Contact" -> "Contact us";
+  CtaBand is now a slim Start strip only (all pages) + one mid-Home strip;
+  deleted JourneyStrip (item 6), "Built from what you tell us" (19), "Build the
+  skill" tour (13), sample cards (16/23), "A stronger voice" tour (17),
+  "Selected for teaching ability" (27); For Learners also lost the full journey
+  and ThreeParts (repeats of Home). Team: Samad removed, Banu Akhundlu, Manager.
+  Philosophy keeps "Our AI brings those people…". AI assessment + AI-guided
+  practice no longer called free (Pricing, FAQ, Try Now, meta, chatbot); Pricing
+  header line removed. Home journey compact = label + title + card only.

@@ -159,9 +159,9 @@ const STAGES: Stage[] = [
   },
 ]
 
-// compact (Home): each stage keeps its title, takeaway line and animated card;
-// the longer descriptions, notes and intro copy live on For Learners.
-const COMPACT_CSS = `#home-learning-journey.hj-compact .hj-description,#home-learning-journey.hj-compact .hj-note,#home-learning-journey.hj-compact .hj-subtitle,#home-learning-journey.hj-compact .hj-footer small{display:none}#home-learning-journey.hj-compact .hj-takeaway{margin-top:0;font-size:15px}#home-learning-journey.hj-compact .hj-row{min-height:0}@media(min-width:950px){#home-learning-journey.hj-compact{--hj-space:40px}#home-learning-journey.hj-compact .hj-takeaway{font-size:17px}}`
+// compact (Home, revision brief 2 items 10-12): each stage shows only its
+// label, title and animated card, with the steps pulled close together.
+const COMPACT_CSS = `#home-learning-journey.hj-compact .hj-description,#home-learning-journey.hj-compact .hj-takeaway,#home-learning-journey.hj-compact .hj-note,#home-learning-journey.hj-compact .hj-subtitle,#home-learning-journey.hj-compact .hj-scroll,#home-learning-journey.hj-compact .hj-footer small{display:none}#home-learning-journey.hj-compact h3{margin-bottom:0}#home-learning-journey.hj-compact .hj-row{min-height:0;padding:12px 0;--hj-space:20px}#home-learning-journey.hj-compact .hj-header{margin-bottom:36px}@media(min-width:950px){#home-learning-journey.hj-compact{padding-top:80px}#home-learning-journey.hj-compact .hj-row{padding:16px 0;margin-bottom:24px}}`
 
 export default function LearningJourney({ compact = false }: { compact?: boolean }) {
   const rootRef = useRef<HTMLElement>(null)

@@ -2,8 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import NavyBand from '../NavyBand'
 import PeoplePhilosophy from './PeoplePhilosophy'
-import ThreeParts from './ThreeParts'
-import { LessonsAndConversationTour, PersonalizedPathsTour, RealLifeProgressTour } from './TourSections'
+import { PersonalizedPathsTour } from './TourSections'
 import { Reveal, Section, SectionHeading } from '../blocks'
 import { PENDING } from '../../content/site'
 
@@ -137,16 +136,8 @@ export function Philosophy() {
   )
 }
 
-export function ThreePartsSystem() {
-  return (
-    <NavyBand className="py-10 sm:py-16">
-      <ThreeParts />
-    </NavyBand>
-  )
-}
-
 // Home's version of "three parts, one system": photo-led rows (Lingoda
-// reference), one line each. The animated ThreeParts lives on For Learners.
+// reference), one line each.
 // Photos are placeholders until the client's own set arrives.
 const PARTS = [
   {
@@ -220,19 +211,11 @@ export function ThreePartsPhotos() {
   )
 }
 
-export function LessonsAndConversation() {
-  return <LessonsAndConversationTour />
-}
-
 export function BuiltForConversations() {
   return <PersonalizedPathsTour />
 }
 
 export const OUTCOMES = ['An interview attended.', 'An idea raised in a meeting.', 'An acceptance letter.', 'A friendship in a second language.']
-
-export function HowWeMeasureProgress() {
-  return <RealLifeProgressTour />
-}
 
 const QUOTES = [
   'For months I read my points from notes in every meeting. Last week I answered a client without them.',

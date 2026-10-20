@@ -61,11 +61,7 @@ export default function ForYou() {
       </NavyBand>
 
       <div className="pt-8" />
-      <CtaBand
-        title="A language becomes yours the moment you use it with someone."
-        primary={{ label: 'Start Your Journey', to: LEARNER_SIGNUP_URL }}
-        secondary={{ label: 'Share Your Language', to: PARTNER_SHARE_URL }}
-      />
+      <CtaBand primary={{ label: 'Start Your Journey', to: LEARNER_SIGNUP_URL }} />
     </PageShell>
   )
 }

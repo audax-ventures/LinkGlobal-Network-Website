@@ -36,7 +36,7 @@ const META: Record<string, { title: string; description: string }> = {
   '/pricing': {
     title: 'LinkGlobal Pricing | Pay As You Go Language Lessons',
     description:
-      'No subscription. Free assessment, learning path, and AI-guided practice. Pay for individual lessons with certified educators and personal AI feedback.',
+      'Book individual lessons with certified educators, with a free personalized learning path and progress overview. Personal AI feedback is available as an add-on.',
   },
   '/contact': {
     title: 'Contact LinkGlobal | Learn, Teach, or Speak With Learners',
