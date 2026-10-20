@@ -4,11 +4,11 @@ import { motion } from 'framer-motion'
 import PageShell from '../components/PageShell'
 import PageHeader from '../components/PageHeader'
 import { MailIcon } from '../components/icons/LineIcons'
-import { CONTACT_EMAIL, PENDING, SOCIAL } from '../content/site'
+import { CONTACT_EMAIL, PENDING, SOCIAL, WEB3FORMS_KEY } from '../content/site'
 
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
-// 'What brings you here?' options (copy v7). Sent to /api/contact as `subject`.
+// 'What brings you here?' options (copy v7). Sent as the message topic.
 const SUBJECTS = [
   'I want to learn a language',
   'I want to teach with LinkGlobal',
@@ -35,20 +35,39 @@ export default function Contact() {
     setErrorMessage('')
 
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.get('name'),
-          email: formData.get('email'),
-          subject: formData.get('subject'),
-          message: formData.get('message'),
-        }),
-      })
+      const name = String(formData.get('name') ?? '')
+      const email = String(formData.get('email') ?? '')
+      const subject = String(formData.get('subject') || 'General Inquiry')
+      const message = String(formData.get('message') ?? '')
 
-      if (!res.ok) {
+      if (WEB3FORMS_KEY) {
+        // Web3Forms emails the submission to the inbox the key belongs to.
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_KEY,
+            subject: `[Contact Form] ${subject}: ${name}`,
+            from_name: 'LinkGlobal website',
+            replyto: email,
+            name,
+            email,
+            topic: subject,
+            message,
+          }),
+        })
         const data = await res.json().catch(() => null)
-        throw new Error(data?.error || 'Something went wrong. Please try again.')
+        if (!res.ok || !data?.success) throw new Error('Something went wrong. Please try again.')
+      } else {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, subject, message }),
+        })
+        if (!res.ok) {
+          const data = await res.json().catch(() => null)
+          throw new Error(data?.error || 'Something went wrong. Please try again.')
+        }
       }
 
       setStatus('success')

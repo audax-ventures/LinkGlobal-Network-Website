@@ -12,6 +12,11 @@ export const EDUCATOR_SIGNUP_URL = '/try-now'
 
 export const CONTACT_EMAIL = 'info@linkglobalnetwork.io'
 
+// Web3Forms access key for the Contact form (web3forms.com, account under
+// CONTACT_EMAIL). It's a public key by design and safe in client code.
+// null = fall back to the old /api/contact route.
+export const WEB3FORMS_KEY: string | null = null
+
 // For You (Conversation Partners) buttons. The copy doc defers their real
 // destinations; until then they go to Contact (whose form has an
 // "I want to be a conversation partner" option).

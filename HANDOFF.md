@@ -715,3 +715,8 @@ the picture source for ~25 picture items.
   contact form recipient (api/contact.ts) and the chatbot facts. The form still
   sends from onboarding@resend.dev until linkglobalnetwork.io is verified in
   Resend; Resend's test sender only delivers to the Resend account's own email.
+- Contact form -> Web3Forms (Riley's choice over Resend; no DNS). Code is ready:
+  set WEB3FORMS_KEY in content/site.ts (key from the web3forms.com account
+  under info@linkglobalnetwork.io) and the form posts to
+  api.web3forms.com/submit; while null it still uses api/contact.ts. Once the
+  key is live and tested, delete api/contact.ts and RESEND_API_KEY.
