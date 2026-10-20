@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { motion, useInView } from 'framer-motion'
 import NavyBand from '../NavyBand'
 import PeoplePhilosophy from './PeoplePhilosophy'
 import { PersonalizedPathsTour } from './TourSections'
@@ -8,29 +8,108 @@ import { PENDING } from '../../content/site'
 
 // Homepage sections from Website Copy v7 (section 02), in reading order.
 
-// "From studying to speaking" comparison (Riley's supplied design,
-// conversation-section.html): a month of study vs one real conversation.
-// The conversation panel cycles through three café exchanges.
-const CAFE_SCENES = [
-  { them: '¡Hola! ¿Qué te pongo?', themEn: 'Hi! What can I get you?', you: 'Un café con leche, por favor.', youEn: 'A coffee with milk, please.', win: 'You found the words. Out loud.' },
-  { them: '¿Para aquí o para llevar?', themEn: 'For here or to go?', you: 'Para aquí, gracias.', youEn: 'For here, thank you.', win: 'You understood. And answered.' },
-  { them: '¿Algo más?', themEn: 'Anything else?', you: 'Sí, un croissant, por favor.', youEn: 'Yes, a croissant, please.', win: 'You kept the conversation going.' },
-]
+// "From studying to speaking" comparison, simplified per revision brief 2
+// (item 8, the client's suggestion): the left card is one big flashcard next
+// to a silent "..." bubble; on the right the same flashcard flips into the
+// spoken reply, with the word highlighted and a tick. Loops while on screen.
+function Flashcard({ className = '' }: { className?: string }) {
+  return (
+    <div className={`rounded-2xl border border-navy-900/10 bg-white px-6 py-5 text-center shadow-[5px_7px_0_#e3eef5] ${className}`}>
+      <strong lang="es" className="block text-3xl font-extrabold tracking-tight text-navy-950">
+        un café
+      </strong>
+      <span className="mt-1 block text-base text-navy-700/60">a coffee</span>
+    </div>
+  )
+}
+
+function SilentBubble() {
+  return (
+    <div className="flex items-center gap-1.5 rounded-2xl rounded-bl-[4px] bg-[#edf3f7] px-5 py-4" aria-label="No reply">
+      {[0, 1, 2].map((i) => (
+        <motion.span
+          key={i}
+          className="h-2.5 w-2.5 rounded-full bg-navy-700/30"
+          animate={{ opacity: [0.25, 0.8, 0.25] }}
+          transition={{ duration: 1.4, repeat: Infinity, delay: i * 0.2 }}
+        />
+      ))}
+    </div>
+  )
+}
+
+function SpokenReply() {
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { amount: 0.5 })
+  const [phase, setPhase] = useState(0) // 0 flashcard, 1 flipping, 2 spoken + tick
+  useEffect(() => {
+    if (!inView) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setPhase(2)
+      return
+    }
+    const steps = [1100, 450, 2800] // time on phases 0, 1, 2
+    let t: number
+    const run = (p: number) => {
+      setPhase(p)
+      t = window.setTimeout(() => run((p + 1) % 3), steps[p])
+    }
+    run(0)
+    return () => window.clearTimeout(t)
+  }, [inView])
+
+  return (
+    <div ref={ref} className="flex flex-col gap-4" style={{ perspective: 900 }}>
+      <div className="max-w-[88%] self-start rounded-2xl rounded-bl-[4px] bg-[#edf3f7] px-4 py-3 text-lg leading-snug text-navy-950">
+        <span lang="es">¡Hola! ¿Qué te pongo?</span>
+        <small className="mt-0.5 block text-sm text-navy-700/60">Hi! What can I get you?</small>
+      </div>
+      <div className="relative min-h-[112px] self-end">
+        <motion.div
+          animate={{ rotateY: phase === 0 ? 0 : 90, opacity: phase === 2 ? 0 : 1 }}
+          transition={{ duration: 0.45, ease: 'easeIn' }}
+          className="absolute right-0 top-0"
+          style={{ transformOrigin: 'center', display: phase === 2 ? 'none' : 'block' }}
+          aria-hidden="true"
+        >
+          <Flashcard />
+        </motion.div>
+        <motion.div
+          initial={false}
+          animate={{ rotateY: phase === 2 ? 0 : -90, opacity: phase === 2 ? 1 : 0 }}
+          transition={{ duration: 0.45, ease: 'easeOut' }}
+          className="rounded-2xl rounded-br-[4px] bg-brand-blue px-4 py-3 text-lg leading-snug text-white"
+        >
+          <span lang="es">
+            Un <mark className="rounded-md bg-white px-1.5 font-bold text-brand-blue">café</mark>, por favor.
+          </span>
+          <small className="mt-0.5 block text-sm text-white/80">A coffee, please.</small>
+        </motion.div>
+      </div>
+      <motion.p
+        animate={{ opacity: phase === 2 ? 1 : 0, y: phase === 2 ? 0 : 6 }}
+        transition={{ duration: 0.3, delay: phase === 2 ? 0.25 : 0 }}
+        className="flex items-center justify-end gap-2 text-base font-semibold text-emerald-700"
+      >
+        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-500 text-white" aria-hidden="true">
+          ✓
+        </span>
+        You said it.
+      </motion.p>
+    </div>
+  )
+}
 
 function StudyPanelTop({ label, meta, speaking = false }: { label: string; meta: string; speaking?: boolean }) {
   return (
-    <div className="mb-2.5 flex items-center justify-between gap-2">
-      <span className={`text-[11px] font-bold uppercase tracking-[0.15em] ${speaking ? 'text-brand-blue' : 'text-navy-700/60'}`}>{label}</span>
-      <span className="text-xs text-navy-700/60">{meta}</span>
+    <div className="mb-3 flex items-center justify-between gap-2">
+      <span className={`text-sm font-bold uppercase tracking-[0.15em] ${speaking ? 'text-brand-blue' : 'text-navy-700/60'}`}>{label}</span>
+      <span className="text-sm text-navy-700/60">{meta}</span>
     </div>
   )
 }
 
 export function WhereLearnersGetStuck() {
-  const [step, setStep] = useState(0)
-  const scene = CAFE_SCENES[step]
-  const last = step === CAFE_SCENES.length - 1
-
   return (
     <Section>
       <SectionHeading
@@ -44,83 +123,34 @@ export function WhereLearnersGetStuck() {
         line="You’ve learned the words. Now feel what happens when you use them with someone."
       />
 
-      <div className="mx-auto mt-12 grid max-w-4xl gap-4 md:grid-cols-2">
-        {/* A month of study */}
+      <div className="mx-auto mt-12 grid max-w-4xl gap-5 md:grid-cols-2">
         <Reveal>
-          <article className="flex h-full flex-col rounded-3xl bg-white p-6 shadow-[0_12px_34px_rgba(11,53,84,0.05)]">
+          <article className="flex h-full flex-col rounded-3xl bg-white p-7 shadow-[0_12px_34px_rgba(11,53,84,0.06)]">
             <StudyPanelTop label="A month of study" meta="30 days" />
-            <h3 className="text-2xl font-bold tracking-tight text-navy-950">“I know this word.”</h3>
-            <div className="my-6 flex min-h-[224px] flex-col justify-center">
-              <div className="mb-5 grid grid-cols-10 gap-1.5" aria-label="Thirty days of studying" role="img">
-                {Array.from({ length: 30 }).map((_, i) => (
-                  <span
-                    key={i}
-                    className="h-4 rounded-[3px]"
-                    style={{ background: (i + 1) % 3 === 0 ? '#bde4f6' : (i + 1) % 3 === 1 ? '#d6edf7' : '#edf3f7' }}
-                  />
-                ))}
-              </div>
-              <div className="mx-2 -rotate-3 rounded-xl border border-navy-900/10 p-4 text-center shadow-[4px_6px_0_#edf3f7]">
-                <small className="text-[10px] font-semibold uppercase tracking-[0.15em] text-navy-700/60">Vocabulary · At the café</small>
-                <strong lang="es" className="my-1.5 block text-2xl font-bold tracking-tight text-navy-950">
-                  un café
-                </strong>
-                <em className="text-sm not-italic text-navy-700/60">a coffee</em>
-              </div>
-              <p className="mt-4 text-center text-sm text-navy-700/60">But when it’s your turn to order…</p>
-            </div>
-            <div className="mt-auto border-t border-navy-900/10 pt-5">
-              <strong className="block font-bold text-navy-950">The words look familiar.</strong>
-              <div className="min-h-[38px]" aria-hidden="true" />
+            <h3 className="text-2xl font-bold tracking-tight text-navy-950 sm:text-3xl">“I know this word.”</h3>
+            <div className="mt-8 flex flex-1 items-center justify-center gap-4">
+              <Flashcard className="-rotate-2" />
+              <SilentBubble />
             </div>
           </article>
         </Reveal>
 
-        {/* One real conversation */}
         <Reveal delay={0.1}>
           <article
-            className="flex h-full flex-col rounded-3xl bg-white p-6 shadow-[inset_0_0_0_1.5px_#1ba3e0,0_12px_34px_rgba(27,163,224,0.08)]"
+            className="flex h-full flex-col rounded-3xl bg-white p-7 shadow-[inset_0_0_0_2px_#1ba3e0,0_12px_34px_rgba(27,163,224,0.1)]"
             aria-label="Conversation preview"
           >
             <StudyPanelTop label="One real conversation" meta="1 moment" speaking />
-            <h3 className="text-2xl font-bold tracking-tight text-navy-950">“I can actually say it.”</h3>
-            <div className="my-6 flex min-h-[224px] flex-col justify-center">
-              <p className="mb-4 text-center text-[11px] font-semibold uppercase tracking-[0.15em] text-navy-700/60">Same words. Real life.</p>
-              <motion.div
-                key={step}
-                initial={{ opacity: 0.5, y: 5 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.19, ease: 'easeOut' }}
-                className="flex flex-col"
-                aria-live="polite"
-              >
-                <div className="mb-2.5 max-w-[92%] self-start rounded-2xl rounded-bl-[3px] bg-[#edf3f7] px-3.5 py-3 text-sm leading-snug text-navy-950">
-                  <span lang="es">{scene.them}</span>
-                  <small className="mt-1 block text-[11px] opacity-70">{scene.themEn}</small>
-                </div>
-                <div className="mb-2.5 max-w-[92%] self-end rounded-2xl rounded-br-[3px] bg-brand-blue px-3.5 py-3 text-sm leading-snug text-white">
-                  <span lang="es">{scene.you}</span>
-                  <small className="mt-1 block text-[11px] opacity-80">{scene.youEn}</small>
-                </div>
-                <p className="flex min-h-[42px] items-center justify-center gap-1.5 text-xs font-semibold text-emerald-700">✓ {scene.win}</p>
-              </motion.div>
-            </div>
-            <div className="mt-auto border-t border-navy-900/10 pt-5">
-              <strong className="block font-bold text-navy-950">The words become yours.</strong>
-              <button
-                type="button"
-                onClick={() => setStep((s) => (s + 1) % CAFE_SCENES.length)}
-                className="min-h-[38px] pt-3 text-left text-sm font-semibold text-brand-blue hover:underline"
-              >
-                {last ? 'Replay the conversation ↻' : 'Keep the conversation going →'}
-              </button>
+            <h3 className="text-2xl font-bold tracking-tight text-navy-950 sm:text-3xl">“I can actually say it.”</h3>
+            <div className="mt-8">
+              <SpokenReply />
             </div>
           </article>
         </Reveal>
       </div>
 
-      <Reveal className="mt-8 text-center">
-        <p className="text-navy-700/70">
+      <Reveal className="mt-10 text-center">
+        <p className="text-lg text-navy-700/75 sm:text-xl">
           Study builds your knowledge. <strong className="font-bold text-navy-950">Conversation puts it to work.</strong>
         </p>
       </Reveal>

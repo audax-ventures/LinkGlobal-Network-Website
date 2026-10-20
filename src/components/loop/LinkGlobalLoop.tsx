@@ -4,6 +4,10 @@ import { useEffect, useRef, useState } from 'react'
 // whose orbiting dot travels) as the visitor scrolls through the section,
 // with the Before / During / After copy highlighting in sync. The SVG uses a
 // square viewBox rendered square, so circles stay circles.
+// Revision brief 2 (item 21): Before / During / After are buttons, so a
+// visitor can jump to any phase (it scrolls to that point of the loop, which
+// keeps the circle in sync) or keep scrolling through it naturally. The dot
+// pulses continuously so the circle is always alive.
 
 const NODES = [
   { label: 'AI analyzes', angle: -90 },
@@ -39,6 +43,15 @@ export default function LinkGlobalLoop() {
   const dotRef = useRef<SVGGElement>(null)
   const [phase, setPhase] = useState(0)
   const [reached, setReached] = useState(1)
+
+  // Scroll to the middle of a phase's share of the pinned section.
+  const jumpTo = (i: number) => {
+    const section = sectionRef.current
+    if (!section) return
+    const travel = section.offsetHeight - window.innerHeight
+    const top = section.getBoundingClientRect().top + window.scrollY
+    window.scrollTo({ top: top + travel * ((i + 0.5) / 3) })
+  }
 
   useEffect(() => {
     const section = sectionRef.current
@@ -81,7 +94,7 @@ export default function LinkGlobalLoop() {
       style={{ background: 'linear-gradient(180deg, rgba(248,251,255,0) 0%, #d6e8f8 22%, #8fb6dc 45%, #3a6698 68%, #14325a 86%, #081b33 100%)' }}
       aria-hidden="true"
     />
-    <section ref={sectionRef} className="relative h-[260vh]" style={{ background: '#081b33' }}>
+    <section ref={sectionRef} className="relative h-[220vh]" style={{ background: '#081b33' }}>
       <div className="sticky top-0 flex min-h-screen items-center overflow-hidden px-6 py-8 md:py-16">
         <div className="mx-auto grid w-full max-w-6xl items-center gap-10 md:grid-cols-2 md:gap-16">
           <div className="text-center md:col-span-2">
@@ -139,7 +152,10 @@ export default function LinkGlobalLoop() {
               })}
 
               <g ref={dotRef} transform={`translate(${point(-90).x} ${point(-90).y})`}>
-                <circle r="14" fill="rgba(62,198,255,0.25)" />
+                <circle r="14" fill="rgba(62,198,255,0.25)">
+                  <animate attributeName="r" values="12;20;12" dur="1.8s" repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="0.9;0.3;0.9" dur="1.8s" repeatCount="indefinite" />
+                </circle>
                 <circle r="5" fill="#ffffff" />
               </g>
             </svg>
@@ -149,13 +165,24 @@ export default function LinkGlobalLoop() {
             {PHASES.map((ph, i) => {
               const on = i === phase
               return (
-                <li key={ph.kicker} className="relative py-4 pl-5 md:py-5 transition-opacity duration-500" style={{ opacity: on ? 1 : 0.35 }}>
-                  <span
-                    className="absolute left-0 top-5 bottom-5 w-0.5 rounded-full bg-brand-cyan transition-transform duration-500 origin-top"
-                    style={{ transform: `scaleY(${on ? 1 : 0})` }}
-                  />
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-brand-cyan">{ph.kicker}</p>
-                  <p className={`mt-2 text-base leading-relaxed text-white sm:text-lg ${on ? '' : 'hidden md:block'}`}>{ph.copy}</p>
+                <li key={ph.kicker}>
+                  <button
+                    type="button"
+                    onClick={() => jumpTo(i)}
+                    aria-current={on ? 'step' : undefined}
+                    className="relative block w-full py-4 pl-5 text-left transition-opacity duration-500 hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-cyan md:py-5"
+                    style={{ opacity: on ? 1 : 0.45 }}
+                  >
+                    <span
+                      className="absolute bottom-5 left-0 top-5 w-0.5 origin-top rounded-full bg-brand-cyan transition-transform duration-500"
+                      style={{ transform: `scaleY(${on ? 1 : 0})` }}
+                    />
+                    <span className="flex items-center justify-between gap-3">
+                      <span className="text-sm font-semibold uppercase tracking-[0.25em] text-brand-cyan">{ph.kicker}</span>
+                      {!on && <span className="text-sm text-white/60" aria-hidden="true">Open →</span>}
+                    </span>
+                    <span className={`mt-2 block text-lg leading-relaxed text-white sm:text-xl ${on ? '' : 'hidden md:block'}`}>{ph.copy}</span>
+                  </button>
                 </li>
               )
             })}

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
@@ -87,20 +88,107 @@ export function CardRow({
 }
 
 /** Before / During / After strip (For Learners; the Loop covers Home). */
+// Brief 2, item 20: each step gets its own small animated visual (no text
+// inside). Visuals loop while on screen; clicking a card replays its own.
+function BriefVisual() {
+  return (
+    <div className="relative mx-auto flex h-full w-40 flex-col gap-2.5 rounded-xl bg-white p-4 shadow-[0_8px_24px_rgba(19,41,82,0.1)]">
+      <span className="flex items-center gap-2">
+        <span className="h-6 w-6 rounded-full bg-brand-blue/20" />
+        <span className="h-2 w-16 rounded-full bg-navy-900/15" />
+      </span>
+      {[0.85, 0.65, 0.75].map((w, i) => (
+        <motion.span
+          key={i}
+          className="h-2 origin-left rounded-full bg-brand-blue/60"
+          style={{ width: `${w * 100}%` }}
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: [0, 1, 1, 0] }}
+          transition={{ duration: 3.2, times: [0, 0.25, 0.85, 1], repeat: Infinity, delay: 0.25 + i * 0.25 }}
+        />
+      ))}
+      <motion.span
+        className="absolute -right-3 -top-3 flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg"
+        animate={{ scale: [0, 0, 1.15, 1, 1, 0] }}
+        transition={{ duration: 3.2, times: [0, 0.4, 0.5, 0.55, 0.9, 1], repeat: Infinity }}
+      >
+        ✓
+      </motion.span>
+    </div>
+  )
+}
+
+function LessonVisual() {
+  const bars = [14, 26, 34, 20, 30, 16, 24]
+  return (
+    <div className="flex h-full items-center justify-center gap-4">
+      <span className="h-14 w-14 rounded-full bg-gradient-to-br from-brand-blue to-[#a78bfa] shadow-[0_8px_20px_rgba(27,163,224,0.35)]" />
+      <span className="flex h-10 items-center gap-1">
+        {bars.map((h, i) => (
+          <motion.span
+            key={i}
+            className="w-1.5 rounded-full bg-brand-blue"
+            style={{ height: h }}
+            animate={{ scaleY: [1, 0.3, 1] }}
+            transition={{ duration: 0.9, repeat: Infinity, delay: i * 0.1 }}
+          />
+        ))}
+      </span>
+      <span className="h-14 w-14 rounded-full bg-gradient-to-br from-[#f5a623] to-[#f472b6] shadow-[0_8px_20px_rgba(245,166,35,0.35)]" />
+    </div>
+  )
+}
+
+function PathVisual() {
+  return (
+    <div className="relative mx-auto flex h-full w-48 items-center justify-between">
+      <span className="absolute left-3 right-3 top-1/2 h-1 -translate-y-1/2 rounded-full bg-navy-900/10" />
+      <motion.span
+        className="absolute left-3 right-3 top-1/2 h-1 origin-left -translate-y-1/2 rounded-full bg-brand-blue"
+        animate={{ scaleX: [0, 1, 1, 0] }}
+        transition={{ duration: 3.2, times: [0, 0.6, 0.9, 1], repeat: Infinity }}
+      />
+      {[0, 1, 2].map((i) => (
+        <motion.span
+          key={i}
+          className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 border-brand-blue bg-white text-sm font-bold text-white"
+          animate={{ backgroundColor: ['#ffffff', '#ffffff', '#1ba3e0', '#1ba3e0', '#ffffff'] }}
+          transition={{ duration: 3.2, times: [0, i * 0.28, i * 0.28 + 0.05, 0.9, 1], repeat: Infinity }}
+        >
+          ✓
+        </motion.span>
+      ))}
+    </div>
+  )
+}
+
+const BDA_VISUALS = [BriefVisual, LessonVisual, PathVisual]
+
 export function BeforeDuringAfter({ items }: { items: { label: string; line: string }[] }) {
+  const [replay, setReplay] = useState([0, 0, 0])
   return (
     <div className="mx-auto mt-12 grid max-w-5xl gap-5 md:grid-cols-3">
-      {items.map((it, i) => (
-        <Reveal key={it.label} delay={i * 0.08}>
-          <div className="relative h-full rounded-3xl bg-white p-7 shadow-[0_15px_40px_rgba(19,41,82,0.08)]">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-blue text-sm font-extrabold text-white">
-              {i + 1}
-            </span>
-            <p className="mt-4 text-xs font-bold uppercase tracking-[0.25em] text-brand-blue">{it.label}</p>
-            <p className="mt-2 text-lg font-semibold leading-snug text-navy-950">{it.line}</p>
-          </div>
-        </Reveal>
-      ))}
+      {items.map((it, i) => {
+        const Visual = BDA_VISUALS[i % BDA_VISUALS.length]
+        return (
+          <Reveal key={it.label} delay={i * 0.08}>
+            <button
+              type="button"
+              onClick={() => setReplay((r) => r.map((n, j) => (j === i ? n + 1 : n)))}
+              className="group relative h-full w-full rounded-3xl bg-white p-7 text-left shadow-[0_15px_40px_rgba(19,41,82,0.08)] transition-transform hover:-translate-y-1"
+              aria-label={`${it.label}: ${it.line} Replay animation`}
+            >
+              <div className="h-32 rounded-2xl bg-gradient-to-br from-[#eaf6fd] to-[#f4f0ff] p-4" aria-hidden="true">
+                <Visual key={replay[i]} />
+              </div>
+              <p className="mt-6 text-sm font-bold uppercase tracking-[0.25em] text-brand-blue">
+                {i + 1} · {it.label}
+              </p>
+              <p className="mt-2 text-xl font-semibold leading-snug text-navy-950">{it.line}</p>
+            </button>
+          </Reveal>
+        )
+      })}
     </div>
   )
 }

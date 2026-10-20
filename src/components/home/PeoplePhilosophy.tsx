@@ -1,14 +1,12 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 // "The philosophy" block — ported from Riley's supplied design
 // (~/Desktop/philosophy-section.html): text column + an animated scene where
 // the AI brings three people into the learner's circle, lines draw in, then
 // chat bubbles appear. Same CSS and timings as the source; the site's font is
 // used instead of Arial, and it sits on the surrounding NavyBand background.
-// Auto-plays once when 30% visible; Play / Pause / Replay button; reduced
-// motion shows the final state.
-
-const LABELS = ['It starts with you.', 'AI brings people into your circle.', 'People bring your language to life.']
+// Loops continuously while on screen (brief 2, item 7); bigger copy and
+// labels per the brief's type sizes.
 
 const CSS = `
 #people-philosophy{--pp-accent:#37c5f6;--pp-ink:#f5f9ff;--pp-muted:#a8bdd1;color:var(--pp-ink);padding:8px 0 0;position:relative;isolation:isolate}
@@ -18,8 +16,8 @@ const CSS = `
 #people-philosophy .pp-eyebrow{font-size:12px;letter-spacing:.3em;font-weight:600;text-transform:uppercase;color:var(--pp-accent);margin:0 0 21px}
 #people-philosophy h2{font-size:clamp(32px,4.6vw,43px);line-height:1.08;letter-spacing:-1.5px;font-weight:800;margin:0;color:var(--pp-ink)}
 #people-philosophy h2 span{display:block;color:var(--pp-accent);margin-top:7px}
-#people-philosophy .pp-copy{font-size:14px;line-height:1.75;color:var(--pp-muted);margin:22px 0 0;max-width:330px}
-#people-philosophy .pp-signature{display:flex;gap:8px;align-items:center;color:#deedf8;font-size:11px;margin-top:25px}
+#people-philosophy .pp-copy{font-size:19px;line-height:1.6;color:#d3e2ee;margin:24px 0 0;max-width:420px}
+#people-philosophy .pp-signature{display:flex;gap:8px;align-items:center;color:#deedf8;font-size:15px;margin-top:25px}
 #people-philosophy .pp-signature:before{content:'';width:22px;height:1px;background:var(--pp-accent)}
 #people-philosophy .pp-visual{min-width:0}
 #people-philosophy .pp-scene{position:relative;aspect-ratio:1/1.06;width:100%;max-width:410px;margin:0 auto}
@@ -35,7 +33,7 @@ const CSS = `
 #people-philosophy[data-step="1"] .pp-one,#people-philosophy[data-step="2"] .pp-one{left:22%;top:28%}
 #people-philosophy[data-step="1"] .pp-two,#people-philosophy[data-step="2"] .pp-two{left:81%;top:34%}
 #people-philosophy[data-step="1"] .pp-three,#people-philosophy[data-step="2"] .pp-three{left:66%;top:81%}
-#people-philosophy .pp-person-label{font-size:11px;color:#c1d3e2;margin-top:8px;white-space:nowrap}
+#people-philosophy .pp-person-label{font-size:14px;color:#c1d3e2;margin-top:8px;white-space:nowrap}
 #people-philosophy .pp-portrait{width:57px;height:57px;position:relative;border-radius:50%;overflow:hidden;background:#bce4ea;border:3px solid #0d2c44;box-shadow:0 0 0 1px #47677d;--skin:#d89b73;--hair:#43302b;--shirt:#d99160}
 #people-philosophy .pp-two .pp-portrait{background:#e3d4c8;--skin:#ae7658;--hair:#302620;--shirt:#7777b6}
 #people-philosophy .pp-three .pp-portrait{background:#c8d3ec;--skin:#e8b58c;--hair:#7a4932;--shirt:#548a78}
@@ -47,15 +45,15 @@ const CSS = `
 #people-philosophy .pp-three .pp-hair{height:40px;width:34px;left:10px}
 #people-philosophy .pp-you{position:absolute;left:48%;top:54%;transform:translate(-50%,-50%);width:78px;height:78px;border-radius:50%;background:#0c314e;border:1px solid #49c9f599;box-shadow:0 0 0 9px #39bde90a,0 0 40px #25aeec18;display:grid;place-content:center;text-align:center;z-index:3}
 #people-philosophy .pp-you strong{font-size:19px;font-weight:600}
-#people-philosophy .pp-you small{font-size:9px;color:#9dcce0;margin-top:4px;letter-spacing:1px}
-#people-philosophy .pp-message{position:absolute;font-size:12px;line-height:1.4;white-space:nowrap;padding:9px 13px;background:#f2f8fc;color:#15314b;border-radius:12px 12px 12px 2px;box-shadow:0 8px 24px #0002;opacity:0;transform:translateY(10px) scale(.94);transition:opacity .375s,transform .525s;z-index:5}
+#people-philosophy .pp-you small{font-size:10px;color:#9dcce0;margin-top:4px;letter-spacing:1px}
+#people-philosophy .pp-message{position:absolute;font-size:14px;line-height:1.4;white-space:nowrap;padding:9px 13px;background:#f2f8fc;color:#15314b;border-radius:12px 12px 12px 2px;box-shadow:0 8px 24px #0002;opacity:0;transform:translateY(10px) scale(.94);transition:opacity .375s,transform .525s;z-index:5}
 #people-philosophy .pp-hello{left:28%;top:0%}
 #people-philosophy .pp-response{right:1%;top:51%;background:#34c5f4;color:#05213a;border-radius:12px 12px 2px 12px}
 #people-philosophy .pp-welcome{left:1%;top:76%}
 #people-philosophy[data-step="2"] .pp-message{opacity:1;transform:translateY(0) scale(1)}
 #people-philosophy[data-step="2"] .pp-response{transition-delay:.488s}
 #people-philosophy[data-step="2"] .pp-welcome{transition-delay:.975s}
-#people-philosophy .pp-ai{position:absolute;left:0;top:49%;font-size:9px;letter-spacing:1px;color:#7fabca;transition:opacity .75s}
+#people-philosophy .pp-ai{position:absolute;left:0;top:49%;font-size:12px;letter-spacing:1px;color:#7fabca;transition:opacity .75s}
 #people-philosophy[data-step="2"] .pp-ai{opacity:.45}
 #people-philosophy .pp-controls{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:44px;border-top:1px solid #23415b;max-width:410px;margin:auto}
 #people-philosophy .pp-status{font-size:11px;color:#b4c8da;display:flex;align-items:center;gap:7px}
@@ -64,7 +62,7 @@ const CSS = `
 #people-philosophy .pp-button:focus-visible{outline:2px solid var(--pp-accent);outline-offset:3px}
 #people-philosophy .pp-footer{max-width:1040px;margin:30px auto 0;padding-top:19px;border-top:1px solid #23415b;display:flex;justify-content:space-between;gap:12px;font-size:10px;color:#8eabc2;letter-spacing:.2px}
 #people-philosophy .pp-footer strong{color:#c5daeb;font-weight:400}
-@media(min-width:900px){#people-philosophy h2{font-size:49px}#people-philosophy .pp-copy{font-size:16px;max-width:380px}}
+@media(min-width:900px){#people-philosophy h2{font-size:49px}#people-philosophy .pp-copy{font-size:22px;max-width:440px}}
 @media(max-width:620px){#people-philosophy .pp-layout{grid-template-columns:1fr;gap:18px}#people-philosophy h2{font-size:37px;max-width:370px}#people-philosophy .pp-copy{max-width:390px;margin-top:18px}#people-philosophy .pp-scene{max-width:340px}#people-philosophy .pp-footer{margin-top:18px;flex-wrap:wrap}#people-philosophy .pp-signature{margin-top:18px}}
 @media(prefers-reduced-motion:reduce){#people-philosophy *,#people-philosophy *:before{transition:none!important;animation:none!important}}
 `
@@ -84,72 +82,50 @@ function Person({ cls, label }: { cls: string; label: string }) {
 
 export default function PeoplePhilosophy() {
   const rootRef = useRef<HTMLElement>(null)
-  const timer = useRef<number | undefined>(undefined)
   const [step, setStep] = useState(0)
-  const [running, setRunning] = useState(false)
   const reduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-  const stepRef = useRef(0)
-  const go = useCallback((n: number) => {
-    stepRef.current = n
-    setStep(n)
-  }, [])
-
-  const stop = useCallback(() => {
-    window.clearTimeout(timer.current)
-    setRunning(false)
-  }, [])
-
-  // Same timings as the source: first move after 1s (or 1.8s when resuming
-  // from the middle), then 2.2s to the chat step, which holds 2.6s.
-  const advanceIn = useCallback(
-    (delay: number) => {
-      window.clearTimeout(timer.current)
-      timer.current = window.setTimeout(() => {
-        const next = stepRef.current + 1
-        go(next)
-        if (next < 2) advanceIn(1650)
-        else timer.current = window.setTimeout(() => setRunning(false), 1950)
-      }, delay)
-    },
-    [go],
-  )
-
-  const play = useCallback(() => {
-    if (reduced) {
-      go(2)
-      stop()
-      return
-    }
-    if (stepRef.current === 2) go(0)
-    setRunning(true)
-    advanceIn(stepRef.current === 0 ? 750 : 1350)
-  }, [advanceIn, go, reduced, stop])
-
+  // Revision brief 2, item 7: the diagram loops continuously (no Play /
+  // Replay). People drift in, lines draw, the chat appears, it holds, then it
+  // resets and runs again. Runs only while on screen and the tab is visible;
+  // reduced motion shows the final state.
   useEffect(() => {
     if (reduced) {
-      go(2)
+      setStep(2)
       return
     }
     const el = rootRef.current
     if (!el) return
+    const DURATIONS = [900, 1650, 3000] // time spent on steps 0, 1, 2
+    let timer: number | undefined
+    let current = 0
+    let onScreen = false
+    const tick = () => {
+      timer = window.setTimeout(() => {
+        current = (current + 1) % 3
+        setStep(current)
+        tick()
+      }, DURATIONS[current])
+    }
+    const sync = () => {
+      window.clearTimeout(timer)
+      if (onScreen && !document.hidden) tick()
+    }
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          play()
-          observer.disconnect()
-        }
+        onScreen = entries.some((e) => e.isIntersecting)
+        sync()
       },
       { threshold: 0.3 },
     )
     observer.observe(el)
+    document.addEventListener('visibilitychange', sync)
     return () => {
       observer.disconnect()
-      window.clearTimeout(timer.current)
+      document.removeEventListener('visibilitychange', sync)
+      window.clearTimeout(timer)
     }
-  }, [go, play, reduced])
-
-  const buttonLabel = running ? 'Pause Ⅱ' : step === 2 ? 'Replay ↻' : 'Play animation ↗'
+  }, [reduced])
 
   return (
     <section id="people-philosophy" ref={rootRef} data-step={step} aria-label="Our philosophy">
@@ -187,14 +163,6 @@ export default function PeoplePhilosophy() {
               ¡Bien! ¿Y tú?
             </div>
             <div className="pp-message pp-welcome">You’re doing great.</div>
-          </div>
-          <div className="pp-controls">
-            <span className="pp-status" aria-live="polite">
-              {LABELS[step]}
-            </span>
-            <button type="button" className="pp-button" onClick={() => (running ? stop() : play())}>
-              {buttonLabel}
-            </button>
           </div>
         </div>
       </div>

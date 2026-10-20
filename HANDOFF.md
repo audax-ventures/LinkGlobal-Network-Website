@@ -667,3 +667,10 @@ the picture source for ~25 picture items.
   Philosophy keeps "Our AI brings those people…". AI assessment + AI-guided
   practice no longer called free (Pricing, FAQ, Try Now, meta, chatbot); Pricing
   header line removed. Home journey compact = label + title + card only.
+- Batch 2: Philosophy diagram loops nonstop while on screen (no Play/Replay or
+  status line), bigger copy/labels. Café comparison rebuilt (item 8): flashcard
+  + silent "..." vs the flashcard flipping into "Un café, por favor." with the
+  word highlighted and a tick; square grid and card footers gone. The Loop
+  (item 21): Before/During/After are buttons that scroll to that phase; dot
+  pulses; section 220vh. Before/During/After cards (item 20, blocks.tsx) each
+  have a looping text-free visual; click replays.
