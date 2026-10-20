@@ -63,7 +63,7 @@ function NativeSpeakers() {
           </div>
         </Reveal>
         <Reveal delay={0.1} className="text-center md:text-left" from="right">
-          <h3 className="text-3xl font-extrabold tracking-tight text-navy-950 sm:text-4xl">A conversation, not a class.</h3>
+          <h3 className="!text-3xl font-extrabold !leading-tight tracking-tight text-navy-950 sm:!text-4xl">A conversation, not a class.</h3>
           <p className="mt-4 text-xl leading-relaxed text-navy-700/75">Your language, your subjects, your opinions. No lesson plan, no grammar drills, no fixed hours.</p>
         </Reveal>
       </div>
