@@ -41,6 +41,9 @@ export default function Logo({ variant = 'dark', markOnly = false, className = '
         <path d="M37.8 17.8L39.5 18.3L40.1 20.6L40 23.3L41.3 24.5L40.8 25.6L42.9 26.2L43.4 28.4L42.9 30.4L43.1 32.2L41 34.2L37.1 35L36.7 32.9L38.1 30.7L38.4 28.6L39.2 27.7L38.2 26.5L35.9 25.7L35.7 24.6L33.1 24.4L33.5 22.8L35.4 21.8L36.6 21.5L36.7 19.8Z" />
         <path d="M30.4 22.6L31.5 24.2L31.5 25.6L33 26.8L33.8 29.2L34.2 31.4L35.5 33.7L35.9 35.3L32.4 34.3L30.3 31.9L29.6 28.2Z" />
       </g>
+      {/* Reversed (dark backgrounds): a navy ring round the globe so its
+          white land doesn't run into the white bubble (brief 2, item 1). */}
+      {reversed && <ellipse cx="38" cy="26.4" rx="8.2" ry="8.6" fill="none" stroke="#0b2341" strokeWidth="0.9" />}
 
       {!markOnly && (
         <>

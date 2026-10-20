@@ -5,7 +5,7 @@ import { createGlobeBackground } from '../../lib/globeBackground'
 
 // Homepage intro. Unlike the old full-screen overlay, this is a real section
 // at the top of the page, directly above the hero:
-//  - First visit this session: the brand plays for ~3.2s, then the page
+//  - First visit this session: the brand plays for ~5.2s, then the page
 //    glides down to the hero (a slow eased scroll), so the intro drifts up
 //    and away with a parallax fade instead of cutting.
 //  - Visitors can scroll/swipe back up from the hero to see it again.
@@ -23,8 +23,27 @@ const SEEN_KEY = 'lg-intro-seen'
 const GREETINGS_START_MS = 600
 const FIRST_RUN_STEP_MS = 380 // quick run on first play
 const IDLE_STEP_MS = 1400 // gentle cycling when someone scrolls back up
-const AUTOPLAY_MS = 3200 // then glide to the hero
+const AUTOPLAY_MS = 5200 // then glide to the hero (longer per brief 2, item 1)
 const GLIDE_MS = 1600
+// Brief 2, item 1: more going on around the globe. A twinkling starfield,
+// two tilted orbits with travelling satellites, and greetings that pop up
+// round the globe's edge. Deterministic positions so SSR/remounts match.
+const STARS = Array.from({ length: 70 }, (_, i) => ({
+  left: (i * 37.7) % 100,
+  top: (i * 61.3) % 100,
+  size: 1 + ((i * 7) % 3),
+  delay: (i % 10) * 0.45,
+}))
+const POPS = [
+  { text: 'Hi!', left: '16%', top: '24%' },
+  { text: 'Ciao!', left: '78%', top: '20%' },
+  { text: 'Merhaba!', left: '84%', top: '62%' },
+  { text: '你好', left: '12%', top: '66%' },
+  { text: 'Hallo!', left: '30%', top: '86%' },
+  { text: 'Salut!', left: '66%', top: '84%' },
+]
+const INTRO_FX_CSS = `.lg-intro-fx .lg-star{position:absolute;border-radius:50%;background:#cfefff;animation:lg-twinkle 3.6s ease-in-out infinite}.lg-intro-fx .lg-orbit{position:absolute;left:50%;top:50%;border-radius:50%;border:1px dashed rgba(120,210,255,.28);transform:translate(-50%,-50%) rotateX(72deg) rotate(0deg);animation:lg-orbit 16s linear infinite}.lg-intro-fx .lg-orbit.lg-o2{border-style:solid;border-color:rgba(120,210,255,.16);animation-duration:24s;animation-direction:reverse}.lg-intro-fx .lg-sat{position:absolute;left:50%;top:-6px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#7fdcff;box-shadow:0 0 16px 4px rgba(62,198,255,.7)}.lg-intro-fx .lg-pop{position:absolute;padding:6px 12px;border-radius:14px 14px 14px 3px;background:rgba(255,255,255,.92);color:#0b2341;font-size:14px;font-weight:600;opacity:0;transform:translateY(8px) scale(.9);animation:lg-pop 7.2s ease-in-out infinite;box-shadow:0 8px 24px rgba(0,0,0,.25)}@keyframes lg-twinkle{0%,100%{opacity:.2}50%{opacity:.9}}@keyframes lg-orbit{to{transform:translate(-50%,-50%) rotateX(72deg) rotate(360deg)}}@keyframes lg-pop{0%,4%{opacity:0;transform:translateY(8px) scale(.9)}9%,22%{opacity:1;transform:translateY(0) scale(1)}28%,100%{opacity:0;transform:translateY(-6px) scale(.95)}}@media(max-width:640px){.lg-intro-fx .lg-pop{font-size:12px}}@media(prefers-reduced-motion:reduce){.lg-intro-fx *{animation:none!important}.lg-intro-fx .lg-pop{display:none}}`
+
 const RAMP_BG = 'linear-gradient(180deg, #02070f 0%, #0b1f3a 22%, #3a6698 50%, #b9d3ee 78%, #f8fbff 100%)'
 
 function readSeen() {
@@ -119,7 +138,7 @@ export default function IntroSection() {
   // Globe (Riley's supplied animation). It pauses itself when off-screen.
   useEffect(() => {
     if (!globeRef.current) return
-    return createGlobeBackground(globeRef.current, { brightness: 1, speed: 1.4, scale: 1.12, longitude: -40 })
+    return createGlobeBackground(globeRef.current, { brightness: 1, speed: 3.2, scale: 1.12, longitude: -40 })
   }, [])
 
   // Entry position, before first paint (so returning visitors never see a
@@ -227,6 +246,27 @@ export default function IntroSection() {
           transition={{ duration: 0.8, ease: 'easeOut' }}
           aria-hidden="true"
         />
+        <div className="lg-intro-fx pointer-events-none absolute inset-0" style={{ perspective: 900 }} aria-hidden="true">
+          <style>{INTRO_FX_CSS}</style>
+          {STARS.map((st, i) => (
+            <span
+              key={i}
+              className="lg-star"
+              style={{ left: `${st.left}%`, top: `${st.top}%`, width: st.size, height: st.size, animationDelay: `${st.delay}s` }}
+            />
+          ))}
+          <div className="lg-orbit" style={{ width: 'min(118vmin, 1100px)', height: 'min(118vmin, 1100px)' }}>
+            <span className="lg-sat" />
+          </div>
+          <div className="lg-orbit lg-o2" style={{ width: 'min(136vmin, 1260px)', height: 'min(136vmin, 1260px)' }}>
+            <span className="lg-sat" style={{ background: '#a78bfa', boxShadow: '0 0 16px 4px rgba(167,139,250,.7)' }} />
+          </div>
+          {POPS.map((p, i) => (
+            <span key={p.text} className="lg-pop" style={{ left: p.left, top: p.top, animationDelay: `${0.6 + i * 1.2}s` }}>
+              {p.text}
+            </span>
+          ))}
+        </div>
         <div
           className="pointer-events-none absolute inset-0"
           style={{ background: 'radial-gradient(ellipse 34% 30% at 50% 50%, rgba(2,7,15,0.62) 0%, rgba(2,7,15,0.3) 60%, rgba(2,7,15,0) 100%)' }}
@@ -234,12 +274,19 @@ export default function IntroSection() {
         />
 
         <div ref={contentRef} className="relative flex flex-col items-center will-change-transform">
+          {/* The mark spins in, then turns like a globe every few seconds. */}
           <motion.div
-            initial={autoplay && !reduced ? { opacity: 0, scale: 0.8 } : false}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            initial={autoplay && !reduced ? { opacity: 0, scale: 0.6, rotate: -200 } : false}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            style={{ perspective: 600 }}
           >
-            <Logo variant="reversed" markOnly className="h-24 w-24 sm:h-32 sm:w-32" />
+            <motion.div
+              animate={reduced ? undefined : { rotateY: [0, 0, 360] }}
+              transition={{ duration: 3.2, times: [0, 0.55, 1], repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+            >
+              <Logo variant="reversed" markOnly className="h-24 w-24 drop-shadow-[0_0_24px_rgba(62,198,255,0.45)] sm:h-32 sm:w-32" />
+            </motion.div>
           </motion.div>
 
           <div className="mt-6 text-4xl font-extrabold uppercase tracking-[0.12em] sm:text-7xl" aria-hidden="true">

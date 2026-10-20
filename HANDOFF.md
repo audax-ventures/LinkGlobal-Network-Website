@@ -688,3 +688,8 @@ the picture source for ~25 picture items.
   "From words to a moment": faster (useTour `seconds` option, 1.7s), bigger,
   4th step with the closing "Perfect. See you then." reply (34). About approach
   band: floating AI / people graphics either side (36).
+- Batch 5 (intro, item 1): AUTOPLAY_MS 5200 (was 3200), globe speed 3.2;
+  starfield, two tilted orbits with satellites, greeting pops round the globe
+  (INTRO_FX_CSS); intro mark spins in then turns on Y every ~3s. Logo
+  `reversed` now draws a navy ring round the globe so it separates from the
+  white bubble (nav/footer dark uses get it too).
