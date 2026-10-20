@@ -28,11 +28,11 @@ export default async function handler(req: any, res: any) {
         Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
-      // Sends from Resend's shared test address until linkglobalnetwork.ca
+      // Sends from Resend's shared test address until linkglobalnetwork.io
       // is verified as a sending domain in the Resend dashboard.
       body: JSON.stringify({
         from: 'LinkGlobal Network <onboarding@resend.dev>',
-        to: ['info@linkglobalnetwork.ca'],
+        to: ['info@linkglobalnetwork.io'],
         reply_to: email,
         subject: `[Contact Form] ${subject || 'General Inquiry'} — ${name}`,
         text: `From: ${name} <${email}>\nTopic: ${subject || 'General Inquiry'}\n\n${message}`,

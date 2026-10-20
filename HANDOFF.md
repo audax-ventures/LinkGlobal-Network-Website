@@ -12,7 +12,7 @@ English, no em dashes, no exclamation marks, brand "LinkGlobal",
 roles "certified educator" / "conversation partner".
 - `src/content/site.ts`: signup URLs (LEARNER/EDUCATOR_SIGNUP_URL, now
   /try-now), PARTNER_FIND/SHARE_URL (/contact), CONTACT_EMAIL
-  (info@linkglobalnetwork.ca; Riley rejected the doc's hello@linkglobal.com), SOCIAL + LEGAL links (null = hidden), and PENDING
+  (info@linkglobalnetwork.io; Riley rejected the doc's hello@linkglobal.com), SOCIAL + LEGAL links (null = hidden), and PENDING
   values the doc left blank: lessonPrice, aiFeedbackPrice, languages,
   replyDays, educatorSelection, proof numbers, testimonialNames. Null =
   hidden or neutral fallback ("Price to be announced", "LinkGlobal learner").
@@ -26,7 +26,7 @@ roles "certified educator" / "conversation partner".
   BeforeDuringAfter, TwoRoles, OutcomeList, Reveal), home/HomeSections.tsx,
   SampleCards (dashboard/SeeWhereItHappens.tsx, takes SampleData).
 - api/chat.ts facts rewritten to v7 (pay as you go, no prices quoted).
-  api/contact.ts delivers to info@linkglobalnetwork.ca (same as shown).
+  api/contact.ts delivers to info@linkglobalnetwork.io (same as shown).
 - vercel.json rewrite excludes /_vercel/* (analytics script was being
   served index.html because Web Analytics isn't enabled yet).
 - Nav: below md = logo + compact Start Your Journey + menu button (the 7
@@ -383,7 +383,7 @@ the two.**
 - Vercel: team `audax-ventures-inc`, project `link-global-network-website-v1`,
   live at https://link-global-network-website-v1.vercel.app
 - Local git identity for this repo: `user.name "LinkGlobal Network"`,
-  `user.email info@linkglobalnetwork.ca` (different from the main Audax
+  `user.email info@linkglobalnetwork.io` (different from the main Audax
   identity — already configured locally, don't change it)
 - Push auth: remote is `https://audax-ventures@github.com/...`, osxkeychain
   caches a classic PAT. If push ever fails on auth, the fix is a fresh
@@ -654,7 +654,7 @@ already fairly tight compositions).
 
 ## Revision brief 2 (client, Oct 15 2026; ~/Downloads/LinkGlobal Website Revision 2.pdf)
 Riley approved the "can do now" list. Blocked on client: email (brief says
-info@linkglobal.io; site keeps info@linkglobalnetwork.ca until confirmed), final
+info@linkglobal.io; site keeps info@linkglobalnetwork.io until confirmed), final
 free list, subscription prices/currency (two candidate sets: old site 39/89/159,
 copy v7 slots 79/199), 3 roadmap steps, Home map sign-off, item 35 wording, and
 the picture source for ~25 picture items.
@@ -710,3 +710,8 @@ the picture source for ~25 picture items.
   briefing shown 3x on For Educators; Before/During/After on For Learners twice
   (Loop + educator section, both kept by the client). "path" ~30 uses site-wide,
   "educator" ~26.
+- Contact email is now info@linkglobalnetwork.io (Riley, Oct 2026: live
+  mailbox). Updated CONTACT_EMAIL (footer, Contact page, Org schema), the
+  contact form recipient (api/contact.ts) and the chatbot facts. The form still
+  sends from onboarding@resend.dev until linkglobalnetwork.io is verified in
+  Resend; Resend's test sender only delivers to the Resend account's own email.
