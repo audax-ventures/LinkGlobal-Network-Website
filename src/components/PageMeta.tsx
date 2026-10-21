@@ -46,6 +46,10 @@ const META: Record<string, { title: string; description: string }> = {
     title: 'Terms of Service | LinkGlobal',
     description: 'The terms for using the LinkGlobal website and learning platform, including bookings, payments, and cancellations.',
   },
+  '/data-deletion': {
+    title: 'Delete Your Data | LinkGlobal',
+    description: 'How to ask LinkGlobal to delete your account and personal information, including data received through Facebook Login.',
+  },
   '/contact': {
     title: 'Contact LinkGlobal | Learn, Teach, or Speak With Learners',
     description:

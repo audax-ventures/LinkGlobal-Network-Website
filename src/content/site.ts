@@ -38,9 +38,10 @@ export const ADDRESS: { street: string | null; city: string | null; region: stri
 }
 
 // Legal pages (footer). Hidden until the pages exist.
-export const LEGAL: { privacy: string | null; terms: string | null; cookies: string | null } = {
+export const LEGAL: { privacy: string | null; terms: string | null; dataDeletion: string | null; cookies: string | null } = {
   privacy: '/privacy', // placeholder text, client to confirm
   terms: '/terms', // placeholder text, client to confirm
+  dataDeletion: '/data-deletion', // Meta requires it for Facebook Login
   cookies: null,
 }
 

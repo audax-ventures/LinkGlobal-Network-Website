@@ -7,7 +7,7 @@ import { CONTACT_EMAIL } from '../content/site'
 // and platform actually work; LinkGlobal must review and confirm it (ideally
 // with legal counsel) before it is relied on. Update UPDATED on every change.
 
-const UPDATED = 'October 20, 2026'
+const UPDATED = 'October 21, 2026'
 const mail = <a href={`mailto:${CONTACT_EMAIL}`} className="font-semibold text-brand-blue hover:underline">{CONTACT_EMAIL}</a>
 
 const SECTIONS: LegalSection[] = [
@@ -40,6 +40,11 @@ const SECTIONS: LegalSection[] = [
           <li>
             <strong>When you create an account and take the assessment:</strong> your name, email address, goals, current
             level, profession, interests, destination, and your answers to the assessment.
+          </li>
+          <li>
+            <strong>If you sign in with Facebook:</strong> the basic profile information Facebook shares with your
+            permission, such as your name, email address, and profile picture. We use it only to create and sign you in
+            to your account. We do not post to Facebook or access your friends list.
           </li>
           <li>
             <strong>When you learn with us:</strong> your bookings, lesson history, progress, and the speaking you do in
@@ -191,6 +196,13 @@ const SECTIONS: LegalSection[] = [
           You can ask to access the personal information we hold about you, to correct it, or to withdraw your consent to
           its use, subject to legal and contractual limits. Withdrawing consent may mean we can no longer provide some
           services. To make a request, email {mail}. We may need to confirm your identity before we respond.
+        </p>
+        <p>
+          You can also ask us to delete your account and personal information.{' '}
+          <Link to="/data-deletion" className="font-semibold text-brand-blue hover:underline">
+            Here is how to request deletion
+          </Link>
+          .
         </p>
         <p>
           If you are not satisfied with our response, you can contact the Office of the Privacy Commissioner of Canada,

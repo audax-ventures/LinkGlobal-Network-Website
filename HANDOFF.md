@@ -729,3 +729,8 @@ the picture source for ~25 picture items.
   Assumptions to confirm: platform sign-in cookies, payment processor, video
   calls via a third party, 18+ (or guardian consent), cancellation rule as in
   the site copy, 12-month liability cap, head-office province law.
+- Facebook Login (Riley adding to the platform, Oct 21 2026): Meta's required
+  URLs are https://www.linkglobalnetwork.io/privacy, /terms and /data-deletion
+  (new page, pages/DataDeletion.tsx: email info@ with subject "Delete my data",
+  30 days after verification, what's kept, how to remove the app in Facebook).
+  Privacy Policy now covers Facebook Login data. Placeholder, client to confirm.

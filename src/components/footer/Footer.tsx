@@ -53,6 +53,7 @@ export default function Footer() {
   const legal = [
     { label: 'Privacy Policy', href: LEGAL.privacy },
     { label: 'Terms of Service', href: LEGAL.terms },
+    { label: 'Delete your data', href: LEGAL.dataDeletion },
     { label: 'Cookie Settings', href: LEGAL.cookies },
   ].filter((l): l is { label: string; href: string } => !!l.href)
   const hasSocial = !!(SOCIAL.instagram || SOCIAL.linkedin)
