@@ -740,3 +740,8 @@ the picture source for ~25 picture items.
   events" on in the GA4 data stream settings. Privacy Policy Cookies section and
   "Automatically" bullet updated (GA sets _ga cookies; opt-out link). No consent
   banner yet: flagged to Riley (Quebec Law 25 / EU visitors).
+- Meta Pixel (27725227730486901, Riley Oct 21 2026): snippet in <head> after
+  gtag, <noscript> image at the top of <body>; charset/viewport kept first in
+  <head>. Pixel auto-fires PageView on SPA history changes. Privacy Policy now
+  covers it (Cookies section + sharing with Meta for advertising, ad
+  preferences link). Consent banner still not built: flagged.

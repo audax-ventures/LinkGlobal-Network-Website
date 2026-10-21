@@ -64,7 +64,7 @@ const SECTIONS: LegalSection[] = [
           </li>
           <li>
             <strong>Automatically:</strong> technical information such as your IP address, browser and device type, and
-            the pages you visit, collected through our hosting provider and our website analytics tools, including Google Analytics.
+            the pages you visit, collected through our hosting provider, our website analytics tools (including Google Analytics), and the Meta Pixel.
           </li>
         </ul>
       </>
@@ -124,6 +124,11 @@ const SECTIONS: LegalSection[] = [
             only to provide their services to us.
           </li>
           <li>
+            <strong>With Meta, for advertising:</strong> the Meta Pixel on our website shares information about your
+            visit with Meta Platforms, so we can measure our ads on Facebook and Instagram and show them to people who
+            may be interested. Meta’s use of this information is governed by its own privacy policy.
+          </li>
+          <li>
             <strong>For legal reasons:</strong> where required by law, or to protect the rights, safety, and property of
             our users or LinkGlobal.
           </li>
@@ -155,8 +160,20 @@ const SECTIONS: LegalSection[] = [
         <p>
           Our website uses Google Analytics to understand how visitors use it, such as which pages are visited and how
           people arrive. Google Analytics sets cookies and collects information like your IP address, device, and
-          browser, which Google processes on our behalf, including in the United States. We do not use advertising
-          cookies. You can block cookies in your browser settings, or opt out of Google Analytics with Google’s{' '}
+          browser, which Google processes on our behalf, including in the United States.
+        </p>
+        <p>
+          We also use the Meta Pixel, an advertising tool from Meta Platforms. It sets cookies and sends Meta information
+          about your visit, such as the pages you view, your IP address, and your browser, so we can measure how our
+          Facebook and Instagram ads perform and reach people who may be interested in LinkGlobal. You can control the ads
+          you see in your{' '}
+          <a href="https://www.facebook.com/adpreferences" target="_blank" rel="noreferrer" className="font-semibold text-brand-blue hover:underline">
+            Facebook ad preferences
+          </a>
+          .
+        </p>
+        <p>
+          You can block cookies in your browser settings, or opt out of Google Analytics with Google’s{' '}
           <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noreferrer" className="font-semibold text-brand-blue hover:underline">
             opt-out browser add-on
           </a>

@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Google tag (gtag.js), GA4 property G-JH23P418ZX (Riley, Oct 2026).
          GA4's enhanced measurement counts SPA route changes from browser
          history events, so no per-route code is needed. Sets cookies (_ga):
@@ -13,8 +15,24 @@
 
       gtag('config', 'G-JH23P418ZX');
     </script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Meta Pixel (ID 27725227730486901, Riley Oct 2026). The pixel fires
+         PageView on load and, by default, on SPA history changes too. Sets the
+         _fbp cookie: see the Cookies section of pages/Privacy.tsx. The
+         <noscript> fallback image is in <body> (images aren't valid in a
+         <noscript> inside <head>). -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '27725227730486901');
+      fbq('track', 'PageView');
+    </script>
     <title>AI Language Learning with Live Native Speakers | LinkGlobal</title>
     <meta
       name="description"
@@ -67,6 +85,9 @@
     <script defer src="/_vercel/insights/script.js"></script>
   </head>
   <body>
+    <noscript><img height="1" width="1" style="display:none" alt=""
+      src="https://www.facebook.com/tr?id=27725227730486901&ev=PageView&noscript=1"
+    /></noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
