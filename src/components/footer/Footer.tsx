@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import Logo from '../Logo'
 import { BRAND, CONTACT_EMAIL, LEGAL, SOCIAL } from '../../content/site'
+import { openCookieSettings } from '../CookieConsent'
 
 
 function SocialIcon({ path, href, label }: { path: string; href: string; label: string }) {
@@ -54,7 +55,6 @@ export default function Footer() {
     { label: 'Privacy Policy', href: LEGAL.privacy },
     { label: 'Terms of Service', href: LEGAL.terms },
     { label: 'Delete your data', href: LEGAL.dataDeletion },
-    { label: 'Cookie Settings', href: LEGAL.cookies },
   ].filter((l): l is { label: string; href: string } => !!l.href)
   const hasSocial = !!(SOCIAL.instagram || SOCIAL.linkedin)
 
@@ -106,7 +106,7 @@ export default function Footer() {
                 </div>
               </>
             )}
-            {legal.length > 0 && (
+            {(
               <>
                 <div className="mt-6">
                   <ColumnTitle>Legal</ColumnTitle>
@@ -119,6 +119,11 @@ export default function Footer() {
                       </Link>
                     </li>
                   ))}
+                  <li>
+                    <button type="button" onClick={openCookieSettings} className="text-sm text-white/60 transition-colors hover:text-white">
+                      Cookie settings
+                    </button>
+                  </li>
                 </ul>
               </>
             )}

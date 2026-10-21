@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import FloatingNav from './components/nav/FloatingNav'
 import ChatWidget from './components/chat/ChatWidget'
+import CookieConsent from './components/CookieConsent'
 import ScrollToTop from './components/ScrollToTop'
 import PageMeta from './components/PageMeta'
 import OrgSchema from './components/OrgSchema'
@@ -22,6 +23,7 @@ function App() {
     <BrowserRouter>
       <FloatingNav />
       <ChatWidget />
+      <CookieConsent />
       <ScrollToTop />
       <PageMeta />
       <OrgSchema />

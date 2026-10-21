@@ -3,35 +3,49 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Google tag (gtag.js), GA4 property G-JH23P418ZX (Riley, Oct 2026).
-         GA4's enhanced measurement counts SPA route changes from browser
-         history events, so no per-route code is needed. Sets cookies (_ga):
-         see the Cookies section of pages/Privacy.tsx. -->
+    <!-- Analytics and ads, behind cookie consent (Oct 2026). The choice is
+         stored in localStorage "lg-consent-v1" ("granted" | "denied") by
+         src/components/CookieConsent.tsx, which shows the banner and the
+         footer's "Cookie settings".
+         - Google Analytics 4 (G-JH23P418ZX) uses Consent Mode: it loads for
+           everyone but stays "denied" (cookieless, anonymous pings only) until
+           the visitor accepts. GA4 enhanced measurement counts SPA route
+           changes from browser history events.
+         - Meta Pixel (27725227730486901) is not loaded at all until the visitor
+           accepts (window.lgLoadPixel). Once loaded it fires PageView on SPA
+           history changes by itself. No <noscript> pixel: without JavaScript
+           there is no way to consent. -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JH23P418ZX"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      var lgConsent = null;
+      try { lgConsent = localStorage.getItem('lg-consent-v1'); } catch (e) {}
+      var lgState = lgConsent === 'granted' ? 'granted' : 'denied';
+      gtag('consent', 'default', {
+        ad_storage: lgState,
+        ad_user_data: lgState,
+        ad_personalization: lgState,
+        analytics_storage: lgState
+      });
+      gtag('set', 'ads_data_redaction', true);
       gtag('js', new Date());
-
       gtag('config', 'G-JH23P418ZX');
-    </script>
 
-    <!-- Meta Pixel (ID 27725227730486901, Riley Oct 2026). The pixel fires
-         PageView on load and, by default, on SPA history changes too. Sets the
-         _fbp cookie: see the Cookies section of pages/Privacy.tsx. The
-         <noscript> fallback image is in <body> (images aren't valid in a
-         <noscript> inside <head>). -->
-    <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '27725227730486901');
-      fbq('track', 'PageView');
+      window.lgLoadPixel = function () {
+        if (window.fbq) { fbq('consent', 'grant'); return; }
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '27725227730486901');
+        fbq('track', 'PageView');
+      };
+      if (lgConsent === 'granted') window.lgLoadPixel();
     </script>
     <title>AI Language Learning with Live Native Speakers | LinkGlobal</title>
     <meta
@@ -85,9 +99,6 @@
     <script defer src="/_vercel/insights/script.js"></script>
   </head>
   <body>
-    <noscript><img height="1" width="1" style="display:none" alt=""
-      src="https://www.facebook.com/tr?id=27725227730486901&ev=PageView&noscript=1"
-    /></noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

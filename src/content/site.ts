@@ -42,7 +42,7 @@ export const LEGAL: { privacy: string | null; terms: string | null; dataDeletion
   privacy: '/privacy', // placeholder text, client to confirm
   terms: '/terms', // placeholder text, client to confirm
   dataDeletion: '/data-deletion', // Meta requires it for Facebook Login
-  cookies: null,
+  cookies: null, // unused: "Cookie settings" is a footer button (CookieConsent)
 }
 
 export const PENDING = {

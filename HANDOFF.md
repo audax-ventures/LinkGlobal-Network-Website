@@ -745,3 +745,12 @@ the picture source for ~25 picture items.
   <head>. Pixel auto-fires PageView on SPA history changes. Privacy Policy now
   covers it (Cookies section + sharing with Meta for advertising, ad
   preferences link). Consent banner still not built: flagged.
+- Cookie consent (opt-in, Riley approved Oct 21 2026): index.html starts GA4 in
+  Consent Mode "denied" (cookieless pings, ads_data_redaction) and defines
+  window.lgLoadPixel; the Meta Pixel does not load until consent. Choice lives
+  in localStorage "lg-consent-v1"; returning "granted" visitors get both from
+  the first hit. components/CookieConsent.tsx = banner (hidden during the intro)
+  + openCookieSettings(); footer Legal list has a "Cookie settings" button.
+  Declining after accepting revokes the pixel and deletes _ga/_fbp cookies.
+  Bump the key version to re-ask everyone. Privacy Policy cookies section
+  rewritten to match.

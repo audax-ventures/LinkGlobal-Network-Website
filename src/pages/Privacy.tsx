@@ -64,7 +64,7 @@ const SECTIONS: LegalSection[] = [
           </li>
           <li>
             <strong>Automatically:</strong> technical information such as your IP address, browser and device type, and
-            the pages you visit, collected through our hosting provider, our website analytics tools (including Google Analytics), and the Meta Pixel.
+            the pages you visit, collected through our hosting provider and our website analytics tools, and, if you accept cookies, Google Analytics and the Meta Pixel.
           </li>
         </ul>
       </>
@@ -124,8 +124,8 @@ const SECTIONS: LegalSection[] = [
             only to provide their services to us.
           </li>
           <li>
-            <strong>With Meta, for advertising:</strong> the Meta Pixel on our website shares information about your
-            visit with Meta Platforms, so we can measure our ads on Facebook and Instagram and show them to people who
+            <strong>With Meta, for advertising:</strong> if you accept advertising cookies, the Meta Pixel on our website
+            shares information about your visit with Meta Platforms, so we can measure our ads on Facebook and Instagram and show them to people who
             may be interested. Meta’s use of this information is governed by its own privacy policy.
           </li>
           <li>
@@ -158,22 +158,28 @@ const SECTIONS: LegalSection[] = [
     body: (
       <>
         <p>
-          Our website uses Google Analytics to understand how visitors use it, such as which pages are visited and how
-          people arrive. Google Analytics sets cookies and collects information like your IP address, device, and
-          browser, which Google processes on our behalf, including in the United States.
+          We ask before using analytics or advertising cookies. When you first visit, you can accept or decline, and you
+          can change your choice at any time with the Cookie settings link at the bottom of every page.
         </p>
         <p>
-          We also use the Meta Pixel, an advertising tool from Meta Platforms. It sets cookies and sends Meta information
-          about your visit, such as the pages you view, your IP address, and your browser, so we can measure how our
-          Facebook and Instagram ads perform and reach people who may be interested in LinkGlobal. You can control the ads
-          you see in your{' '}
+          <strong>Google Analytics</strong> helps us understand how the website is used, such as which pages are visited
+          and how people arrive. If you accept, it sets cookies and collects information like your IP address, device,
+          and browser, which Google processes on our behalf, including in the United States. If you decline, Google
+          Analytics sets no cookies and receives only limited, anonymous signals without identifiers, which Google uses to
+          estimate overall visits.
+        </p>
+        <p>
+          <strong>The Meta Pixel</strong> is an advertising tool from Meta Platforms. It loads only if you accept. It then
+          sets cookies and sends Meta information about your visit, such as the pages you view, your IP address, and your
+          browser, so we can measure how our Facebook and Instagram ads perform and reach people who may be interested in
+          LinkGlobal. You can control the ads you see in your{' '}
           <a href="https://www.facebook.com/adpreferences" target="_blank" rel="noreferrer" className="font-semibold text-brand-blue hover:underline">
             Facebook ad preferences
           </a>
           .
         </p>
         <p>
-          You can block cookies in your browser settings, or opt out of Google Analytics with Google’s{' '}
+          You can also block cookies in your browser settings, or opt out of Google Analytics with Google’s{' '}
           <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noreferrer" className="font-semibold text-brand-blue hover:underline">
             opt-out browser add-on
           </a>
@@ -184,8 +190,9 @@ const SECTIONS: LegalSection[] = [
           visit only, that you have already seen the opening animation.
         </p>
         <p>
-          The learning platform uses essential cookies to keep you signed in. If we introduce other cookies, we will
-          update this policy and ask for your consent where the law requires it.
+          The learning platform uses essential cookies to keep you signed in. These are needed for the platform to work
+          and are not covered by the cookie choice. If we introduce other cookies, we will update this policy and ask for
+          your consent where the law requires it.
         </p>
       </>
     ),
