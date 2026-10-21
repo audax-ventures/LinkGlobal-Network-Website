@@ -734,3 +734,9 @@ the picture source for ~25 picture items.
   (new page, pages/DataDeletion.tsx: email info@ with subject "Delete my data",
   30 days after verification, what's kept, how to remove the app in Facebook).
   Privacy Policy now covers Facebook Login data. Placeholder, client to confirm.
+- Google Analytics 4 (G-JH23P418ZX, Riley Oct 21 2026): gtag snippet at the top
+  of <head> in index.html. SPA route changes are counted by GA4 enhanced
+  measurement (history events); keep "Page changes based on browser history
+  events" on in the GA4 data stream settings. Privacy Policy Cookies section and
+  "Automatically" bullet updated (GA sets _ga cookies; opt-out link). No consent
+  banner yet: flagged to Riley (Quebec Law 25 / EU visitors).

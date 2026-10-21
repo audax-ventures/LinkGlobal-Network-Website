@@ -64,7 +64,7 @@ const SECTIONS: LegalSection[] = [
           </li>
           <li>
             <strong>Automatically:</strong> technical information such as your IP address, browser and device type, and
-            the pages you visit, collected through our hosting provider and cookie-free website analytics.
+            the pages you visit, collected through our hosting provider and our website analytics tools, including Google Analytics.
           </li>
         </ul>
       </>
@@ -153,9 +153,18 @@ const SECTIONS: LegalSection[] = [
     body: (
       <>
         <p>
-          Our website does not use advertising or tracking cookies. Our website analytics are cookie-free. We use your
-          browser’s session storage to remember, for the current visit only, that you have already seen the opening
-          animation.
+          Our website uses Google Analytics to understand how visitors use it, such as which pages are visited and how
+          people arrive. Google Analytics sets cookies and collects information like your IP address, device, and
+          browser, which Google processes on our behalf, including in the United States. We do not use advertising
+          cookies. You can block cookies in your browser settings, or opt out of Google Analytics with Google’s{' '}
+          <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noreferrer" className="font-semibold text-brand-blue hover:underline">
+            opt-out browser add-on
+          </a>
+          .
+        </p>
+        <p>
+          We also use Vercel’s cookie-free analytics, and your browser’s session storage to remember, for the current
+          visit only, that you have already seen the opening animation.
         </p>
         <p>
           The learning platform uses essential cookies to keep you signed in. If we introduce other cookies, we will
