@@ -86,7 +86,7 @@ export default function ForYou() {
           { label: 'Find Your Conversation Partner', to: '#for-learners' },
           { label: 'Share Your Language', to: '#for-native-speakers' },
         ]}
-        image={{ src: '/photos/hero-learner.jpg', alt: 'A learner in conversation with a native speaker matched to their profession' }}
+        image={{ src: '/photos/cafe-conversation.jpg', alt: 'An older woman smiling in conversation over coffee' }}
       />
 
       {/* Brief 2, item 30: the native-speaker section moved up and merged with

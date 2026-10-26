@@ -114,7 +114,7 @@ export default function ForEducators() {
         }
         description="Before each lesson you receive a briefing: what the learner has mastered, what they avoid, what to focus on."
         actions={[{ label: 'Start Teaching With Us', to: EDUCATOR_SIGNUP_URL }]}
-        image={{ src: '/photos/educators-hero.jpg', alt: 'An educator reviewing a lesson plan before an online session' }}
+        image={{ src: '/photos/educator-thumbs-up.jpg', alt: 'An educator smiling and giving a thumbs up during an online lesson', position: '50% 30%' }}
       />
 
       <TeachingWithLinkGlobal />
@@ -134,7 +134,7 @@ export default function ForEducators() {
           <Reveal delay={0.1} from="right">
             <div className="rounded-[2rem] bg-white p-7 shadow-[0_30px_80px_rgba(0,0,0,0.35)] sm:p-9">
               <div className="flex items-center gap-4">
-                <Photo src="/photos/hero-learner.jpg" sizes="80px" alt="" className="h-20 w-20 rounded-full object-cover object-top ring-4 ring-brand-blue/20" loading="lazy" />
+                <Photo src="/photos/learner-earbuds.jpg" sizes="80px" alt="" style={{ objectPosition: '48% 38%' }} className="h-20 w-20 rounded-full object-cover ring-4 ring-brand-blue/20" loading="lazy" />
                 <div>
                   <p className="text-xl font-bold text-navy-950">Your learner</p>
                   <p className="text-base text-navy-700/65">B1 · Preparing for a job interview</p>

@@ -45,7 +45,7 @@ export default function About() {
           </>
         }
         description="Talented people go quiet in the meetings where their opinion matters most."
-        image={{ src: '/photos/about-founders.jpg', alt: 'Two colleagues in conversation over a laptop' }}
+        image={{ src: '/photos/thinking-at-whiteboard.jpg', alt: 'A man reading his notes in front of a whiteboard', position: '50% 30%' }}
       />
 
       <FromStudyToSpeaking />

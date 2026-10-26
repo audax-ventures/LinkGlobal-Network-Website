@@ -182,7 +182,7 @@ export default function Pricing() {
           </>
         }
         actions={[{ label: 'Start Your Journey', to: LEARNER_SIGNUP_URL }]}
-        image={{ src: '/photos/journey-2.jpg', alt: 'A learner in a live online lesson with headphones on' }}
+        image={{ src: '/photos/professional-video-call.jpg', alt: 'A learner waving at the start of a video lesson' }}
       />
 
       <Section className="pt-4 sm:pt-8">

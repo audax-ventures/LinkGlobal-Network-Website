@@ -26,7 +26,7 @@ export default function ForLearners() {
         }
         description="Most learners know more than they can use under pressure. LinkGlobal closes that gap."
         actions={[{ label: 'Start Your Journey', to: LEARNER_SIGNUP_URL }]}
-        image={{ src: '/photos/learners-hero.jpg', alt: 'A learner reviewing her LinkGlobal dashboard' }}
+        image={{ src: '/photos/learner-headphones.jpg', alt: 'A learner laughing during an online lesson' }}
       />
 
       <ReasonsToLearn />
@@ -57,35 +57,35 @@ export default function ForLearners() {
       <Section className="pb-10 sm:pb-12">
         <SectionHeading title="Inside the platform" />
         {/* Brief 2, item 23: each box has its own picture (Lingoda-style
-            tiles, "+" opens the line). Placeholder photos for now. */}
+            tiles, "+" opens the line). Stock photos supplied by Riley. */}
         <PhotoTiles
           tiles={[
             {
               title: 'Your learning path',
               line: 'A route drawn from your goals, revised as you progress.',
-              photo: '/photos/journey-3.jpg',
-              alt: 'A learner smiling as she studies with headphones on',
+              photo: '/photos/learner-planning.jpg',
+              alt: 'A learner planning her week with a notebook and laptop',
               chip: 'Next: explain your work clearly',
             },
             {
               title: 'Live sessions',
               line: 'Lessons with an educator who already knows your plan.',
-              photo: '/photos/journey-1.jpg',
-              alt: 'A learner in a live online lesson at her laptop',
+              photo: '/photos/learner-tablet.jpg',
+              alt: 'A learner in a live lesson on her tablet',
               chip: '● Live now',
             },
             {
               title: 'Conversation practice',
               line: 'Native speakers, on the subjects that matter to you.',
-              photo: '/photos/about-founders.jpg',
-              alt: 'Two people talking over a laptop',
-              chip: 'Matched: you both love design',
+              photo: '/photos/record-store-chat.jpg',
+              alt: 'Two people chatting in a record shop',
+              chip: 'Matched: you both love music',
             },
             {
               title: 'Progress overview',
               line: 'Specific, visible, and moving.',
-              photo: '/photos/institutions.jpg',
-              alt: 'An educator showing a learner’s progress on a tablet',
+              photo: '/photos/graduates.jpg',
+              alt: 'Three graduates celebrating with their diplomas',
               chip: 'Confidence +26%',
             },
           ]}

@@ -7,7 +7,8 @@ interface PageHeaderProps {
   eyebrow: string
   title: ReactNode
   description?: string
-  image: { src: string; alt: string }
+  /** position: CSS object-position, to keep faces in frame on cropped photos. */
+  image: { src: string; alt: string; position?: string }
   imagePosition?: 'left' | 'right'
   /** Tailwind aspect-ratio arbitrary value, e.g. "4/3" or "1000/540" — pass the
    * real dimensions for screenshots so object-cover doesn't crop UI content. */
@@ -100,7 +101,7 @@ export default function PageHeader({
             alt={image.alt}
             loading="eager"
             sizes="(min-width: 768px) 560px, 100vw"
-            style={{ aspectRatio: imageAspect }}
+            style={{ aspectRatio: imageAspect, objectPosition: image.position }}
             className="w-full rounded-3xl object-cover shadow-[0_25px_60px_rgba(19,41,82,0.2)]"
           />
         </motion.div>

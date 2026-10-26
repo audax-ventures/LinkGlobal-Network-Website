@@ -91,7 +91,7 @@ export default function Contact() {
         description={`Tell us what brought you here. Every message is read by a person${
           PENDING.replyDays ? `, and we reply within ${PENDING.replyDays} business days` : ''
         }.`}
-        image={{ src: '/photos/journey-5.jpg', alt: 'Two people connecting in conversation' }}
+        image={{ src: '/photos/learner-sofa.jpg', alt: 'A woman smiling as she types a message on her laptop', position: '50% 35%' }}
       />
 
       <section className="relative px-6 pb-16 sm:pb-20">

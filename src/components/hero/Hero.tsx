@@ -75,8 +75,7 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Photo-led, Lingoda-style. Placeholder photo until the client's
-            own set arrives: swap the src, keep the overlays. */}
+        {/* Photo-led, Lingoda-style (stock photo supplied by Riley). */}
         <motion.div
           variants={item}
           initial="hidden"
@@ -87,8 +86,8 @@ export default function Hero() {
             <Photo
               loading="eager"
               sizes="(min-width: 768px) 520px, 100vw"
-              src="/photos/journey-4.jpg"
-              alt="A learner waving hello on a video call with a native speaker"
+              src="/photos/learner-waving.jpg"
+              alt="A learner waving hello to a native speaker on a video call"
               className="aspect-[4/3] w-full object-cover sm:aspect-[5/4]"
             />
           </div>

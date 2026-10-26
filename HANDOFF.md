@@ -787,3 +787,17 @@ the picture source for ~25 picture items.
   between ThreePartsPhotos and OUTCOMES and is used by For Learners; deleting
   it fails `tsc -b` on Vercel. No local node_modules, so deploy status is the
   only build check: watch for "failure" and bisect if needed.
+- Photos (Oct 26 2026): every AI-generated photo replaced with stock photos
+  Riley supplied (public/photos, descriptive names). Removed the 12 old AI
+  photos. Map: Hero learner-waving; Home carousel friendly-desk /
+  educator-headset / friends-laughing; Home dashboard educator-waving +
+  learner-tablet; headers: For Learners learner-headphones, For Educators
+  educator-thumbs-up, For You cafe-conversation, About thinking-at-whiteboard,
+  Pricing professional-video-call, Contact learner-sofa (nav previews match);
+  For Educators learner avatar learner-earbuds; For Learners tiles
+  learner-planning / learner-tablet / record-store-chat / graduates; For Learners
+  "You're learning for a life" cards (item 18) now photos with the sample line
+  as a bubble: newcomer-canada / students-campus / handshake-cafe. Spare:
+  newcomer-family. PageHeader image takes optional `position`.
+  Riley sent a second batch (teacher at whiteboard, study group, handshake,
+  meeting...) that didn't arrive as files; ask him to save them to a folder.

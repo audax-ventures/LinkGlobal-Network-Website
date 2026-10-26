@@ -69,10 +69,10 @@ function SessionView() {
       </div>
       <div className="mt-5 grid grid-cols-2 gap-3">
         {/* Brief 2, item 15: real people instead of placeholder icons.
-            Placeholder photos until the client's set arrives. */}
+            Stock photos supplied by Riley. */}
         {[
-          { name: 'Your educator', photo: '/photos/educators.jpg', pos: '70% 35%' },
-          { name: 'You', photo: '/photos/learners.jpg', pos: '72% 30%' },
+          { name: 'Your educator', photo: '/photos/educator-waving.jpg', pos: '42% 35%' },
+          { name: 'You', photo: '/photos/learner-tablet.jpg', pos: '50% 35%' },
         ].map((p) => (
           <div key={p.name} className="relative aspect-[4/3] overflow-hidden rounded-xl bg-white/5">
             <Photo src={p.photo} alt="" sizes="240px" className="h-full w-full object-cover" style={{ objectPosition: p.pos }} />

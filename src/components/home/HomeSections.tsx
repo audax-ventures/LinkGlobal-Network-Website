@@ -170,30 +170,30 @@ export function Philosophy() {
 
 // Home's version of "three parts, one system": a Lingoda-style photo
 // carousel (brief 2), one line per slide.
-// Photos are placeholders until the client's own set arrives.
+// Licensed stock photos supplied by Riley (Oct 2026).
 const PARTS = [
   {
     kicker: 'AI personalizes',
     title: 'A plan that listens.',
     line: 'AI analyzes how you speak and shapes what comes next around you.',
-    photo: '/photos/learners.jpg',
-    alt: 'A learner reviewing his personalized LinkGlobal plan',
+    photo: '/photos/friendly-desk.jpg',
+    alt: 'A learner smiling at her laptop with her notebook open',
     chip: 'Next focus: everyday phrases',
   },
   {
     kicker: 'Educators teach',
     title: 'A teacher who’s ready.',
     line: 'Certified educators arrive briefed on your plan, ready to help you move forward.',
-    photo: '/photos/educators.jpg',
-    alt: 'An educator preparing for a live online lesson',
+    photo: '/photos/educator-headset.jpg',
+    alt: 'An educator in a headset teaching a lively online lesson',
     chip: '✓ Ready for your lesson',
   },
   {
     kicker: 'People connect',
     title: 'A reason to speak.',
     line: 'Meet native speakers connected to your work, your city, and what you love.',
-    photo: '/photos/journey-5.jpg',
-    alt: 'Two people chatting and laughing on a train',
+    photo: '/photos/friends-laughing.jpg',
+    alt: 'Two friends laughing together outside a front door',
     chip: '¡Sí! Vamos juntos.',
   },
 ]
