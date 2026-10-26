@@ -4,7 +4,7 @@ import NavyBand from '../components/NavyBand'
 import PageHeader from '../components/PageHeader'
 import CtaBand from '../components/CtaBand'
 import SmartLink from '../components/SmartLink'
-import { Reveal, Section, SectionHeading } from '../components/blocks'
+import { Reveal, Section, SectionHeading, PathVisual, ProgressVisual } from '../components/blocks'
 import { ensureGsapPlugins, gsap, ScrollTrigger } from '../lib/gsapSetup'
 import { CheckIcon } from '../components/icons/LineIcons'
 import { LEARNER_SIGNUP_URL, PENDING } from '../content/site'
@@ -187,19 +187,32 @@ export default function Pricing() {
 
       <Section className="pt-4 sm:pt-8">
         <SectionHeading title="Free to use" />
-        <ul className="mx-auto mt-10 grid max-w-4xl gap-3 sm:grid-cols-2">
-          {['Your personalized learning path', 'Progress overview'].map(
-            (t, i) => (
-              <Reveal key={t} delay={i * 0.06} from={i % 2 ? 'right' : 'left'}>
-                <li className="flex items-center gap-4 rounded-2xl bg-white p-5 text-lg font-semibold text-navy-950 shadow-[0_10px_30px_rgba(19,41,82,0.07)]">
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-white">
+        {/* Brief 2, item 41: each free item gets its own picture and the
+            cards fill the width. The final free list is still to be
+            confirmed by the client (the AI assessment is not free). */}
+        <ul className="mx-auto mt-10 grid max-w-5xl gap-6 md:grid-cols-2">
+          {[
+            { t: 'Your personalized learning path', line: 'See the whole route to your goal before you book anything.', Visual: PathVisual },
+            { t: 'Progress overview', line: 'Watch your speaking improve, session by session.', Visual: ProgressVisual },
+          ].map(({ t, line, Visual }, i) => (
+            <Reveal key={t} delay={i * 0.08} from={i % 2 ? 'right' : 'left'}>
+              <li className="h-full overflow-hidden rounded-3xl bg-white shadow-[0_15px_40px_rgba(19,41,82,0.08)]">
+                <div className="relative h-44 bg-gradient-to-br from-[#e6f6fd] to-[#f1edff] p-6" aria-hidden="true">
+                  <Visual />
+                  <span className="absolute right-4 top-4 rounded-full bg-emerald-500 px-3 py-1 text-sm font-bold text-white">Free</span>
+                </div>
+                <div className="flex items-start gap-4 p-7">
+                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-white">
                     <CheckIcon className="h-4 w-4" />
                   </span>
-                  {t}
-                </li>
-              </Reveal>
-            ),
-          )}
+                  <div>
+                    <h3 className="text-xl font-bold text-navy-950">{t}</h3>
+                    <p className="mt-1.5 text-lg text-navy-700/75">{line}</p>
+                  </div>
+                </div>
+              </li>
+            </Reveal>
+          ))}
         </ul>
       </Section>
 

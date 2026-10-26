@@ -765,3 +765,19 @@ the picture source for ~25 picture items.
 - Meta domain verification (Oct 2026): <meta name="facebook-domain-verification"
   content="ualheerjk0y8uubqniwpasfjowbcx1"> in the static <head> of index.html.
   Keep it there; removing it un-verifies the domain in Meta Business.
+- Group 1 of the remaining brief-2 work (Oct 26 2026):
+  * Images: vercel.json "images" (480/800/1200/1600, AVIF/WebP, /photos and
+    /gallery only) + components/Photo.tsx (srcset via /_vercel/image, falls back
+    to the original file in dev or on error). Used by PageHeader, Hero, nav
+    previews, carousel, tiles, dashboard, team/educator avatars. 200KB JPEG ->
+    11KB on phones.
+  * components/PhotoCarousel.tsx (Lingoda carousel: full-bleed photo, icon,
+    headline, line, chip, peeking slides, arrows/dots/swipe/keys): Home "three
+    parts" now uses it (was three stacked rows).
+  * components/PhotoTiles.tsx (photo tiles, chip, "+" read more): For Learners
+    "Inside the platform" (item 23). Placeholder photos.
+  * Home dashboard live session: educator/learner photos (item 15).
+  * Pricing "Free to use": two wide cards with PathVisual/ProgressVisual
+    (exported from blocks.tsx) and a line each (item 41). Free list still TBC.
+  * Deferred: Lingoda-style roadmap (picture + chip + short line) is the Home
+    journey; waits on items 10-12 (3-step approval + pictures).

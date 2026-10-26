@@ -155,7 +155,7 @@ function LessonVisual() {
   )
 }
 
-function PathVisual() {
+export function PathVisual() {
   return (
     <div className="relative mx-auto flex h-full w-48 items-center justify-between">
       <span className="absolute left-3 right-3 top-1/2 h-1 -translate-y-1/2 rounded-full bg-navy-900/10" />
@@ -173,6 +173,29 @@ function PathVisual() {
         >
           ✓
         </motion.span>
+      ))}
+    </div>
+  )
+}
+
+/** Bars that grow, for progress (Pricing "Free to use"). */
+export function ProgressVisual() {
+  const bars = [
+    { w: 0.55, c: '#1ba3e0' },
+    { w: 0.8, c: '#a78bfa' },
+    { w: 0.68, c: '#2dd4bf' },
+  ]
+  return (
+    <div className="mx-auto flex h-full w-48 flex-col justify-center gap-3">
+      {bars.map((b, i) => (
+        <span key={i} className="h-3 overflow-hidden rounded-full bg-navy-900/10">
+          <motion.span
+            className="block h-full origin-left rounded-full"
+            style={{ width: `${b.w * 100}%`, background: b.c }}
+            animate={{ scaleX: [0.2, 1, 1, 0.2] }}
+            transition={{ duration: 3.2, times: [0, 0.45, 0.85, 1], repeat: Infinity, delay: i * 0.2 }}
+          />
+        </span>
       ))}
     </div>
   )

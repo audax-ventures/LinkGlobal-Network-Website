@@ -5,6 +5,8 @@ import PeoplePhilosophy from './PeoplePhilosophy'
 import { PersonalizedPathsTour } from './TourSections'
 import { Reveal, Section, SectionHeading, side } from '../blocks'
 import { PENDING } from '../../content/site'
+import PhotoCarousel from '../PhotoCarousel'
+import { ChatIcon, GraduationCapIcon, SparkleIcon } from '../icons/LineIcons'
 
 // Homepage sections from Website Copy v7 (section 02), in reading order.
 
@@ -166,8 +168,8 @@ export function Philosophy() {
   )
 }
 
-// Home's version of "three parts, one system": photo-led rows (Lingoda
-// reference), one line each.
+// Home's version of "three parts, one system": a Lingoda-style photo
+// carousel (brief 2), one line per slide.
 // Photos are placeholders until the client's own set arrives.
 const PARTS = [
   {
@@ -197,52 +199,35 @@ const PARTS = [
 ]
 
 export function ThreePartsPhotos() {
+  const icon = 'h-5 w-5 text-white'
   return (
-    <Section>
-      <SectionHeading
-        eyebrow="Three parts. One connected experience."
-        title={
-          <>
-            A plan that gets you.
-            <br className="hidden sm:block" /> People who <span className="text-brand-blue">get you speaking.</span>
-          </>
-        }
-      />
-      <div className="mx-auto mt-14 flex max-w-5xl flex-col gap-14 sm:gap-20">
-        {PARTS.map((p, i) => (
-          <div key={p.title} className="grid items-center gap-8 md:grid-cols-2 md:gap-14">
-            <Reveal className={i % 2 ? 'md:order-2' : ''} from={side(i)}>
-              <div className="relative">
-                <img
-                  src={p.photo}
-                  alt={p.alt}
-                  loading="lazy"
-                  className="aspect-[4/3] w-full rounded-[1.75rem] object-cover shadow-[0_24px_60px_rgba(19,41,82,0.16)]"
-                />
-                <span
-                  className={`absolute -bottom-4 ${i % 2 ? '-left-3 sm:-left-6' : '-right-3 sm:-right-6'} rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-navy-950 shadow-[0_14px_40px_rgba(19,41,82,0.16)]`}
-                  aria-hidden="true"
-                >
-                  {p.chip}
-                </span>
-              </div>
-            </Reveal>
-            <Reveal delay={0.1} className="text-center md:text-left" from={side(i + 1)}>
-              <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">
-                0{i + 1} · {p.kicker}
-              </p>
-              <h3 className="mt-3 text-3xl font-extrabold tracking-tight text-navy-950 sm:text-4xl">{p.title}</h3>
-              <p className="mx-auto mt-4 max-w-sm text-lg text-navy-700/75 md:mx-0">{p.line}</p>
-            </Reveal>
-          </div>
-        ))}
+    <section className="relative py-16 sm:py-24">
+      <div className="px-6">
+        <SectionHeading
+          eyebrow="Three parts. One connected experience."
+          title={
+            <>
+              A plan that gets you.
+              <br className="hidden sm:block" /> People who <span className="text-brand-blue">get you speaking.</span>
+            </>
+          }
+        />
       </div>
-    </Section>
+      <div className="mt-12">
+        <PhotoCarousel
+          label="Three parts of LinkGlobal"
+          slides={PARTS.map((p, i) => ({
+            photo: p.photo,
+            alt: p.alt,
+            title: p.title,
+            line: p.line,
+            chip: p.chip,
+            icon: [<SparkleIcon className={icon} />, <GraduationCapIcon className={icon} />, <ChatIcon className={icon} />][i],
+          }))}
+        />
+      </div>
+    </section>
   )
-}
-
-export function BuiltForConversations() {
-  return <PersonalizedPathsTour />
 }
 
 export const OUTCOMES = ['An interview attended.', 'An idea raised in a meeting.', 'An acceptance letter.', 'A friendship in a second language.']

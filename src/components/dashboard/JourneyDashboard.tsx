@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 import { AnimatePresence, motion, useInView } from 'framer-motion'
 import { CheckIcon } from '../icons/LineIcons'
 import AvatarIllustration from '../AvatarIllustration'
+import Photo from '../Photo'
 
 // "Your journey has a dashboard": three tabs (Roadmap / Live Sessions /
 // Progress) that auto-advance while the section is on screen — a progress bar
@@ -67,13 +68,15 @@ function SessionView() {
         <SampleTag />
       </div>
       <div className="mt-5 grid grid-cols-2 gap-3">
+        {/* Brief 2, item 15: real people instead of placeholder icons.
+            Placeholder photos until the client's set arrives. */}
         {[
-          { name: 'Your educator', color: '#3ec6ff' },
-          { name: 'You', color: '#8fe0ff' },
+          { name: 'Your educator', photo: '/photos/educators.jpg', pos: '70% 35%' },
+          { name: 'You', photo: '/photos/learners.jpg', pos: '72% 30%' },
         ].map((p) => (
-          <div key={p.name} className="relative flex aspect-[4/3] items-center justify-center rounded-xl bg-white/5">
-            <AvatarIllustration color={p.color} className="h-14 w-14 rounded-full" />
-            <span className="absolute bottom-2 left-2 rounded-md bg-black/40 px-2 py-0.5 text-sm text-white">{p.name}</span>
+          <div key={p.name} className="relative aspect-[4/3] overflow-hidden rounded-xl bg-white/5">
+            <Photo src={p.photo} alt="" sizes="240px" className="h-full w-full object-cover" style={{ objectPosition: p.pos }} />
+            <span className="absolute bottom-2 left-2 rounded-md bg-black/50 px-2 py-0.5 text-sm text-white">{p.name}</span>
           </div>
         ))}
       </div>

@@ -4,6 +4,7 @@ import CtaBand from '../components/CtaBand'
 import { ReasonsToLearn } from '../components/tours/PageTours'
 import { BeforeDuringAfter, CardRow, Reveal, Section, SectionHeading, TwoRoles } from '../components/blocks'
 import { LEARNER_SIGNUP_URL } from '../content/site'
+import PhotoTiles from '../components/PhotoTiles'
 import LinkGlobalLoop from '../components/loop/LinkGlobalLoop'
 import { BuiltForConversations } from '../components/home/HomeSections'
 
@@ -55,13 +56,38 @@ export default function ForLearners() {
 
       <Section className="pb-10 sm:pb-12">
         <SectionHeading title="Inside the platform" />
-        <CardRow
-          cols={4}
-          items={[
-            { title: 'Your learning path', line: 'A route drawn from your goals, revised as you progress.' },
-            { title: 'Live sessions', line: 'Lessons with an educator who already knows your plan.' },
-            { title: 'Conversation practice', line: 'Native speakers, on the subjects that matter to you.' },
-            { title: 'Progress overview', line: 'Specific, visible, and moving.' },
+        {/* Brief 2, item 23: each box has its own picture (Lingoda-style
+            tiles, "+" opens the line). Placeholder photos for now. */}
+        <PhotoTiles
+          tiles={[
+            {
+              title: 'Your learning path',
+              line: 'A route drawn from your goals, revised as you progress.',
+              photo: '/photos/journey-3.jpg',
+              alt: 'A learner smiling as she studies with headphones on',
+              chip: 'Next: explain your work clearly',
+            },
+            {
+              title: 'Live sessions',
+              line: 'Lessons with an educator who already knows your plan.',
+              photo: '/photos/journey-1.jpg',
+              alt: 'A learner in a live online lesson at her laptop',
+              chip: '● Live now',
+            },
+            {
+              title: 'Conversation practice',
+              line: 'Native speakers, on the subjects that matter to you.',
+              photo: '/photos/about-founders.jpg',
+              alt: 'Two people talking over a laptop',
+              chip: 'Matched: you both love design',
+            },
+            {
+              title: 'Progress overview',
+              line: 'Specific, visible, and moving.',
+              photo: '/photos/institutions.jpg',
+              alt: 'An educator showing a learner’s progress on a tablet',
+              chip: 'Confidence +26%',
+            },
           ]}
         />
       </Section>
