@@ -758,3 +758,7 @@ the picture source for ~25 picture items.
   it stays fixed, and past the page top (Home: past the hero, via
   data-hero-top) it gets a frosted white backdrop + shadow so the dark logo and
   icons stay readable over navy sections.
+- Meta Pixel replaced (Oct 26 2026, Riley): new ID 1667210414994094 (old
+  27725227730486901 removed). Still loaded only after cookie consent via
+  window.lgLoadPixel; the snippet's <noscript> image is deliberately left out
+  (no way to consent without JavaScript).

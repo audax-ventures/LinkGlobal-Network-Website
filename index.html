@@ -11,7 +11,7 @@
            everyone but stays "denied" (cookieless, anonymous pings only) until
            the visitor accepts. GA4 enhanced measurement counts SPA route
            changes from browser history events.
-         - Meta Pixel (27725227730486901) is not loaded at all until the visitor
+         - Meta Pixel (1667210414994094) is not loaded at all until the visitor
            accepts (window.lgLoadPixel). Once loaded it fires PageView on SPA
            history changes by itself. No <noscript> pixel: without JavaScript
            there is no way to consent. -->
@@ -42,7 +42,7 @@
         t.src=v;s=b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '27725227730486901');
+        fbq('init', '1667210414994094');
         fbq('track', 'PageView');
       };
       if (lgConsent === 'granted') window.lgLoadPixel();
