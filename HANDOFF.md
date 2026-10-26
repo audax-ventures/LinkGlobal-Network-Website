@@ -754,3 +754,7 @@ the picture source for ~25 picture items.
   Declining after accepting revokes the pixel and deletes _ga/_fbp cookies.
   Bump the key version to re-ask everyone. Privacy Policy cookies section
   rewritten to match.
+- Nav (Oct 26 2026, Riley): FloatingNav no longer slides away on scroll-down;
+  it stays fixed, and past the page top (Home: past the hero, via
+  data-hero-top) it gets a frosted white backdrop + shadow so the dark logo and
+  icons stay readable over navy sections.

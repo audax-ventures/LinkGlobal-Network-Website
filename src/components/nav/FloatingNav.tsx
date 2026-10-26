@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
-import gsap from 'gsap'
 import Logo from '../Logo'
 import { NAV_ROUTES } from '../../routes'
 import SmartLink from '../SmartLink'
@@ -102,52 +101,19 @@ function NavCircle({ label, path, Icon, id }: { label: string; path: string; Ico
 }
 
 export default function FloatingNav() {
-  const navRef = useRef<HTMLDivElement>(null)
-  const progressRef = useRef({ value: 0 })
-  const lastScrollY = useRef(0)
-  const currentTarget = useRef(0)
-  const tweenRef = useRef<gsap.core.Tween | null>(null)
+  // The nav stays on screen while scrolling (Riley, Oct 2026; it used to
+  // slide away on scroll-down). Once the page moves past its top it gets a
+  // frosted white backdrop, so the dark logo and icons stay readable over the
+  // navy sections. On Home the "top" is the hero, which sits below the intro
+  // (IntroSection publishes its offset as data-hero-top).
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    lastScrollY.current = window.scrollY
-
-    const apply = () => {
-      const el = navRef.current
-      if (!el) return
-      const p = progressRef.current.value
-      el.style.transform = `translateY(${-90 * p}px)`
-      el.style.opacity = `${1 - p}`
-    }
-
-    const animateTo = (target: number) => {
-      if (currentTarget.current === target) return
-      currentTarget.current = target
-      tweenRef.current?.kill()
-      tweenRef.current = gsap.to(progressRef.current, {
-        value: target,
-        duration: 0.5,
-        ease: 'power2.inOut',
-        onUpdate: apply,
-      })
-    }
-
     const onScroll = () => {
-      const y = window.scrollY
-      const goingDown = y > lastScrollY.current
-      // On Home the hero sits below the intro section, which publishes the
-      // hero's offset — treat that as the page "top" so the nav shows there.
       const top = Number(document.documentElement.dataset.heroTop || 0)
-      if (y < top + 60) {
-        animateTo(0)
-      } else if (goingDown) {
-        animateTo(1)
-      } else {
-        animateTo(0)
-      }
-      lastScrollY.current = y
+      setScrolled(window.scrollY > top + 24)
     }
-
-    apply()
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -159,7 +125,11 @@ export default function FloatingNav() {
   useEffect(() => setMenuOpen(false), [pathname])
 
   return (
-    <div ref={navRef} className="lg-hide-on-intro fixed top-0 inset-x-0 z-40 px-5 sm:px-8 py-4">
+    <div
+      className={`lg-hide-on-intro fixed inset-x-0 top-0 z-40 px-5 py-4 transition-[background-color,box-shadow,backdrop-filter,padding] duration-300 sm:px-8 ${
+        scrolled ? 'bg-white/85 py-3 shadow-[0_6px_24px_rgba(19,41,82,0.08)] backdrop-blur-md' : 'bg-transparent'
+      }`}
+    >
       <div className="flex items-center justify-between gap-3">
         <Link to="/" aria-label="LinkGlobal home" className="shrink-0">
           <Logo variant="dark" className="h-8 w-auto sm:h-9" />
