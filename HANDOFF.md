@@ -762,3 +762,6 @@ the picture source for ~25 picture items.
   27725227730486901 removed). Still loaded only after cookie consent via
   window.lgLoadPixel; the snippet's <noscript> image is deliberately left out
   (no way to consent without JavaScript).
+- Meta domain verification (Oct 2026): <meta name="facebook-domain-verification"
+  content="ualheerjk0y8uubqniwpasfjowbcx1"> in the static <head> of index.html.
+  Keep it there; removing it un-verifies the domain in Meta Business.
