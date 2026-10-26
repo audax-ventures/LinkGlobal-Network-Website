@@ -9,6 +9,7 @@ import type { FeatureRow } from '../components/FeatureRows'
 import { CardRow, Reveal, Section, SectionHeading } from '../components/blocks'
 import { EDUCATOR_SIGNUP_URL, PENDING } from '../content/site'
 import { CalendarIcon, ClipboardIcon, RocketIcon } from '../components/icons/LineIcons'
+import Photo from '../components/Photo'
 
 // For Educators, per Website Copy v7 (section 04).
 
@@ -133,7 +134,7 @@ export default function ForEducators() {
           <Reveal delay={0.1} from="right">
             <div className="rounded-[2rem] bg-white p-7 shadow-[0_30px_80px_rgba(0,0,0,0.35)] sm:p-9">
               <div className="flex items-center gap-4">
-                <img src="/photos/hero-learner.jpg" alt="" className="h-20 w-20 rounded-full object-cover object-top ring-4 ring-brand-blue/20" loading="lazy" />
+                <Photo src="/photos/hero-learner.jpg" sizes="80px" alt="" className="h-20 w-20 rounded-full object-cover object-top ring-4 ring-brand-blue/20" loading="lazy" />
                 <div>
                   <p className="text-xl font-bold text-navy-950">Your learner</p>
                   <p className="text-base text-navy-700/65">B1 · Preparing for a job interview</p>

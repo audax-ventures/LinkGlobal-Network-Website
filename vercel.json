@@ -3,8 +3,43 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "redirects": [
-    { "source": "/learners", "destination": "/for-learners", "permanent": true },
-    { "source": "/educators", "destination": "/for-educators", "permanent": true }
+    {
+      "source": "/learners",
+      "destination": "/for-learners",
+      "permanent": true
+    },
+    {
+      "source": "/educators",
+      "destination": "/for-educators",
+      "permanent": true
+    }
   ],
-  "rewrites": [{ "source": "/((?!_vercel/).*)", "destination": "/index.html" }]
+  "rewrites": [
+    {
+      "source": "/((?!_vercel/).*)",
+      "destination": "/index.html"
+    }
+  ],
+  "images": {
+    "sizes": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "formats": [
+      "image/avif",
+      "image/webp"
+    ],
+    "qualities": [
+      75
+    ],
+    "minimumCacheTTL": 2678400,
+    "localPatterns": [
+      {
+        "pathname": "^/(photos|gallery)/.*$",
+        "search": ""
+      }
+    ]
+  }
 }

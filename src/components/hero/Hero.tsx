@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import HeroBackground from './HeroBackground'
 import SmartLink from '../SmartLink'
 import { LEARNER_SIGNUP_URL } from '../../content/site'
+import Photo from '../Photo'
 
 const container = {
   hidden: {},
@@ -83,7 +84,9 @@ export default function Hero() {
           className="relative mx-auto w-full max-w-lg md:mr-0"
         >
           <div className="relative overflow-hidden rounded-[2rem] shadow-[0_30px_80px_rgba(19,41,82,0.22)]">
-            <img
+            <Photo
+              loading="eager"
+              sizes="(min-width: 768px) 520px, 100vw"
               src="/photos/journey-4.jpg"
               alt="A learner waving hello on a video call with a native speaker"
               className="aspect-[4/3] w-full object-cover sm:aspect-[5/4]"
@@ -107,7 +110,8 @@ export default function Hero() {
           >
             <span lang="es">¡Muy bien! ¿Y tú?</span>
           </motion.div>
-          <img
+          <Photo
+            sizes="120px"
             src="/gallery/mobile-dashboard-mockup.png"
             alt="The LinkGlobal dashboard on mobile"
             className="absolute -bottom-8 -left-2 z-20 w-24 -rotate-6 drop-shadow-[0_20px_45px_rgba(10,20,45,0.32)] sm:-left-10 sm:w-28"

@@ -6,6 +6,7 @@ import { NAV_ROUTES } from '../../routes'
 import SmartLink from '../SmartLink'
 import { LEARNER_SIGNUP_URL } from '../../content/site'
 import {
+import Photo from '../Photo'
   HomeIcon,
   AboutIcon,
   ForYouIcon,
@@ -71,7 +72,7 @@ function NavCircle({ label, path, Icon, id }: { label: string; path: string; Ico
               className="overflow-hidden rounded-2xl bg-white shadow-[0_20px_45px_rgba(10,17,40,0.22)] ring-1 ring-navy-900/[0.06]"
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden">
-                <img src={meta.image} alt="" className="h-full w-full object-cover" />
+                <Photo src={meta.image} alt="" sizes="240px" className="h-full w-full object-cover" />
                 <div
                   className="absolute inset-0"
                   style={{ background: `linear-gradient(180deg, transparent 40%, ${meta.color}cc 100%)` }}

@@ -7,6 +7,7 @@ import { OutcomeList, Reveal, Section, SectionHeading } from '../components/bloc
 import { LEARNER_SIGNUP_URL } from '../content/site'
 import { motion } from 'framer-motion'
 import { SparkleIcon } from '../components/icons/LineIcons'
+import Photo from '../components/Photo'
 
 // About, per Website Copy v7 (section 06). Team photos aren't supplied yet,
 // so each person shows initials; swap in photos via `photo` when they arrive.
@@ -114,7 +115,7 @@ export default function About() {
             <Reveal key={p.name} delay={(i % 3) * 0.08}>
               <div className="h-full rounded-3xl bg-white p-7 shadow-[0_15px_40px_rgba(19,41,82,0.08)]">
                 {p.photo ? (
-                  <img src={p.photo} alt={`${p.name}, ${p.role} at LinkGlobal`} className="h-16 w-16 rounded-full object-cover" />
+                  <Photo src={p.photo} sizes="64px" alt={`${p.name}, ${p.role} at LinkGlobal`} className="h-16 w-16 rounded-full object-cover" />
                 ) : (
                   <span
                     className="flex h-16 w-16 items-center justify-center rounded-full text-lg font-extrabold text-white"

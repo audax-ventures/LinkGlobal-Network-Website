@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import SmartLink from './SmartLink'
+import Photo from './Photo'
 
 interface PageHeaderProps {
   eyebrow: string
@@ -94,9 +95,11 @@ export default function PageHeader({
           transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           className={imageOnLeft ? 'md:order-1' : ''}
         >
-          <img
+          <Photo
             src={image.src}
             alt={image.alt}
+            loading="eager"
+            sizes="(min-width: 768px) 560px, 100vw"
             style={{ aspectRatio: imageAspect }}
             className="w-full rounded-3xl object-cover shadow-[0_25px_60px_rgba(19,41,82,0.2)]"
           />
