@@ -781,3 +781,9 @@ the picture source for ~25 picture items.
     (exported from blocks.tsx) and a line each (item 41). Free list still TBC.
   * Deferred: Lingoda-style roadmap (picture + chip + short line) is the Home
     journey; waits on items 10-12 (3-step approval + pictures).
+- Link audit (Oct 26 2026): every internal link and #anchor on all 11 pages
+  resolves (44 checked); nothing points at a deleted section.
+- Lesson: when slicing HomeSections by markers, BuiltForConversations sits
+  between ThreePartsPhotos and OUTCOMES and is used by For Learners; deleting
+  it fails `tsc -b` on Vercel. No local node_modules, so deploy status is the
+  only build check: watch for "failure" and bisect if needed.
