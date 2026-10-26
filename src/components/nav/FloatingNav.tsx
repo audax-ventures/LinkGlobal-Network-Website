@@ -5,8 +5,8 @@ import Logo from '../Logo'
 import { NAV_ROUTES } from '../../routes'
 import SmartLink from '../SmartLink'
 import { LEARNER_SIGNUP_URL } from '../../content/site'
-import {
 import Photo from '../Photo'
+import {
   HomeIcon,
   AboutIcon,
   ForYouIcon,

@@ -19,5 +19,27 @@
       "source": "/((?!_vercel/).*)",
       "destination": "/index.html"
     }
-  ]
+  ],
+  "images": {
+    "sizes": [
+      480,
+      800,
+      1200,
+      1600
+    ],
+    "formats": [
+      "image/avif",
+      "image/webp"
+    ],
+    "qualities": [
+      75
+    ],
+    "minimumCacheTTL": 2678400,
+    "localPatterns": [
+      {
+        "pathname": "^/(photos|gallery)/.*$",
+        "search": ""
+      }
+    ]
+  }
 }
