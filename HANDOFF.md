@@ -873,3 +873,5 @@ the picture source for ~25 picture items.
 - Oct 27 2026: Riley asked to revert the Home "Less rehearsing" section to
   the flashcard comparison (item 8 version). HomeSections.tsx restored from
   before f9abf89. cafe-laughing.jpg is now unused (kept as a spare).
+
+- Intro: added the Persian greeting "درود" to the cycling greetings (after سلام). First run now takes ~4.0s, still inside the 5.2s autoplay.

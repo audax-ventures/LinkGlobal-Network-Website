@@ -16,7 +16,7 @@ import { createGlobeBackground } from '../../lib/globeBackground'
 //
 // ?intro=1 forces the auto-play; ?debugPhase=done skips straight to the hero.
 
-const GREETINGS = ['Hello', 'Hola', 'Bonjour', 'こんにちは', 'Olá', 'مرحبا', 'سلام', 'Namaste']
+const GREETINGS = ['Hello', 'Hola', 'Bonjour', 'こんにちは', 'Olá', 'مرحبا', 'سلام', 'درود', 'Namaste']
 const WORD = 'LinkGlobal'
 const SEEN_KEY = 'lg-intro-seen'
 
