@@ -291,7 +291,9 @@ export function TeachingWithLinkGlobal() {
 
 /* ---------------- For You: conversation connections ---------------- */
 
-const CONNECTIONS_CSS = `#lg-connections .co-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:19px}#lg-connections .co-option{padding:15px 12px;border-radius:12px;background:white;border:1px solid var(--lg-line);color:var(--lg-ink);text-align:left;transition:background .225s,border-color .225s}#lg-connections .co-option strong{font-size:18px;display:block;margin-bottom:5px}#lg-connections .co-option small{font-size:15px;line-height:1.5;color:var(--lg-muted);display:block}#lg-connections .co-option[aria-pressed="true"]{background:#eaf7ff;border-color:var(--lg-blue)}#lg-connections .co-stage{background:white;border-radius:20px;padding:25px 26px 21px;box-shadow:0 12px 35px #254e7608}#lg-connections .co-example{font-size:14px;color:var(--lg-muted);letter-spacing:1.2px;text-align:center;margin:0 0 20px}#lg-connections .co-match{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;gap:6px;position:relative}#lg-connections .co-person{text-align:center;position:relative;z-index:2}#lg-connections .co-avatar{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;margin:0 auto 12px;background:#e6f5ff;color:#0c80b4;font-weight:600;font-size:16px;box-shadow:0 0 0 5px white}#lg-connections .co-person:last-child .co-avatar{background:#e3f4ed;color:#178469}#lg-connections .co-person strong{display:block;font-size:17px;font-weight:600;line-height:1.4}#lg-connections .co-person small{display:block;font-size:15px;color:var(--lg-muted);margin-top:5px;line-height:1.45;min-height:28px}#lg-connections .co-bridge{align-self:start;margin-top:37px;height:2px;background:#bddeee;position:relative}#lg-connections .co-bridge:before{content:'';position:absolute;inset:0;background:var(--lg-blue);transform:scaleX(1);transform-origin:left}#lg-connections .co-topic{position:absolute;top:0;left:50%;transform:translate(-50%,-50%);background:#eff8fd;color:#0b7bad;border:5px solid white;padding:9px 16px;border-radius:30px;font-size:19px;font-weight:700;white-space:nowrap;z-index:1;display:flex;align-items:center;gap:8px;box-shadow:0 8px 22px #1ba3e026}#lg-connections .co-topic i{font-style:normal;font-size:22px}#lg-connections .co-spark{position:absolute;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;background:var(--lg-blue);box-shadow:0 0 10px #1ba3e0;animation:co-travel 2.4s linear infinite;animation-delay:var(--delay,0s);opacity:0}#lg-connections .co-spark.co-back{background:#18a77e;box-shadow:0 0 10px #18a77e;animation-name:co-travel-back}@keyframes co-travel{0%{left:0;opacity:0}10%{opacity:1}90%{opacity:1}100%{left:100%;opacity:0}}@keyframes co-travel-back{0%{left:100%;opacity:0}10%{opacity:1}90%{opacity:1}100%{left:0;opacity:0}}@media(prefers-reduced-motion:reduce){#lg-connections .co-spark{display:none}}#lg-connections .co-dialogue{display:flex;flex-direction:column;gap:9px;max-width:560px;margin:24px auto 0;min-height:130px;justify-content:center}#lg-connections .co-bubble{padding:14px 18px;background:#edf4f8;color:var(--lg-ink);border-radius:13px 13px 13px 3px;font-size:18px;line-height:1.4;max-width:88%;align-self:flex-start}#lg-connections .co-bubble.co-answer{background:var(--lg-blue);color:white;border-radius:13px 13px 3px 13px;align-self:flex-end}#lg-connections .co-stage.lg-enter .co-bridge:before{animation:co-connect .675s ease both}@keyframes co-connect{from{transform:scaleX(0)}to{transform:scaleX(1)}}#lg-connections .co-footer{text-align:center;border-top:1px solid var(--lg-line);padding-top:18px;margin-top:8px}#lg-connections .co-footer strong{font-size:19px;font-weight:600;display:block;line-height:1.4}#lg-connections .co-footer p{font-size:15px;color:var(--lg-muted);margin:7px 0 0}@media(max-width:540px){#lg-connections .co-options{grid-template-columns:1fr;gap:8px}#lg-connections .co-option{padding:13px 15px}#lg-connections .co-stage{padding:23px 16px}#lg-connections .co-match{grid-template-columns:1fr 58px 1fr}#lg-connections .co-person strong{font-size:14px}#lg-connections .co-person small{font-size:14px}#lg-connections .co-avatar{width:58px;height:58px}#lg-connections .co-topic{font-size:14px;padding:6px 9px}#lg-connections .co-topic i{font-size:16px}#lg-connections .co-bubble{font-size:16px}#lg-connections .co-person small{min-height:36px}}`
+const CONNECTIONS_CSS = `#lg-connections .co-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:19px}#lg-connections .co-option{padding:15px 12px;border-radius:12px;background:white;border:1px solid var(--lg-line);color:var(--lg-ink);text-align:left;transition:background .225s,border-color .225s}#lg-connections .co-option strong{font-size:18px;display:block;margin-bottom:5px}#lg-connections .co-option small{font-size:15px;line-height:1.5;color:var(--lg-muted);display:block}#lg-connections .co-option[aria-pressed="true"]{background:#eaf7ff;border-color:var(--lg-blue)}#lg-connections .co-stage{background:white;border-radius:20px;padding:25px 26px 21px;box-shadow:0 12px 35px #254e7608}#lg-connections .co-example{font-size:14px;color:var(--lg-muted);letter-spacing:1.2px;text-align:center;margin:0 0 20px}#lg-connections .co-match{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;gap:6px;position:relative}#lg-connections .co-person{text-align:center;position:relative;z-index:2}#lg-connections .co-avatar{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;margin:0 auto 12px;background:#e6f5ff;color:#0c80b4;font-weight:600;font-size:16px;box-shadow:0 0 0 5px white}#lg-connections .co-person:last-child .co-avatar{background:#e3f4ed;color:#178469}#lg-connections .co-person strong{display:block;font-size:17px;font-weight:600;line-height:1.4}#lg-connections .co-person small{display:block;font-size:15px;color:var(--lg-muted);margin-top:5px;line-height:1.45;min-height:28px}#lg-connections .co-bridge{align-self:start;margin-top:37px;height:2px;background:#bddeee;position:relative}#lg-connections .co-bridge:before{content:'';position:absolute;inset:0;background:var(--lg-blue);transform:scaleX(1);transform-origin:left}#lg-connections .co-topic{position:absolute;top:0;left:50%;transform:translate(-50%,-50%);background:#eff8fd;color:#0b7bad;border:5px solid white;padding:9px 16px;border-radius:30px;font-size:19px;font-weight:700;white-space:nowrap;z-index:1;display:flex;align-items:center;gap:8px;box-shadow:0 8px 22px #1ba3e026}#lg-connections .co-topic i{font-style:normal;font-size:22px}#lg-connections .co-spark{position:absolute;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;background:var(--lg-blue);box-shadow:0 0 10px #1ba3e0;animation:co-travel 2.4s linear infinite;animation-delay:var(--delay,0s);opacity:0}#lg-connections .co-spark.co-back{background:#18a77e;box-shadow:0 0 10px #18a77e;animation-name:co-travel-back}@keyframes co-travel{0%{left:0;opacity:0}10%{opacity:1}90%{opacity:1}100%{left:100%;opacity:0}}@keyframes co-travel-back{0%{left:100%;opacity:0}10%{opacity:1}90%{opacity:1}100%{left:0;opacity:0}}@media(prefers-reduced-motion:reduce){#lg-connections .co-spark{display:none}}#lg-connections .co-dialogue{display:flex;flex-direction:column;gap:9px;max-width:560px;margin:24px auto 0;min-height:130px;justify-content:center}#lg-connections .co-bubble{padding:14px 18px;background:#edf4f8;color:var(--lg-ink);border-radius:13px 13px 13px 3px;font-size:18px;line-height:1.4;max-width:88%;align-self:flex-start}#lg-connections .co-bubble.co-answer{background:var(--lg-blue);color:white;border-radius:13px 13px 3px 13px;align-self:flex-end}#lg-connections .co-stage.lg-enter .co-bridge:before{animation:co-connect .675s ease both}@keyframes co-connect{from{transform:scaleX(0)}to{transform:scaleX(1)}}#lg-connections .co-footer{text-align:center;border-top:1px solid var(--lg-line);padding-top:18px;margin-top:8px}#lg-connections .co-footer strong{font-size:19px;font-weight:600;display:block;line-height:1.4}#lg-connections .co-footer p{font-size:15px;color:var(--lg-muted);margin:7px 0 0}@media(max-width:540px){#lg-connections .co-options{grid-template-columns:1fr;gap:8px}#lg-connections .co-option{padding:13px 15px}#lg-connections .co-stage{padding:23px 16px}#lg-connections .co-match{grid-template-columns:1fr 58px 1fr}#lg-connections .co-person strong{font-size:14px}#lg-connections .co-person small{font-size:14px}#lg-connections .co-avatar{width:58px;height:58px}#lg-connections .co-topic{font-size:14px;padding:6px 9px}#lg-connections .co-topic i{font-size:16px}#lg-connections .co-bubble{font-size:16px}#lg-connections .co-person small{min-height:36px}}#lg-connections .co-photo{width:150px;height:150px;border-radius:26px;overflow:hidden;margin:0 auto 14px;box-shadow:0 0 0 5px white,0 14px 30px #1a477322}#lg-connections .co-photo img{width:100%;height:100%;object-fit:cover;display:block}@media(max-width:540px){#lg-connections .co-photo{width:88px;height:88px;border-radius:18px}}`
+// Brief 2, items 31-33: each side of the connection is a photo (best fits
+// from Riley's stock set), with the sparks and topic chip between them.
 const EXAMPLES = [
   {
     name: 'Your profession',
@@ -299,6 +301,8 @@ const EXAMPLES = [
     topic: 'Design',
     icon: '🎨',
     you: 'You work in design.',
+    youPhoto: ['/photos/designer-studio.jpg', 'A designer in headphones at a studio desk with sticky notes on the wall', '20% 40%'],
+    themPhoto: ['/photos/designer-tablet.jpg', 'A designer sketching on a tablet at a workshop table', '62% 40%'],
     them: 'They work in design, too.',
     question: 'What are you working on lately?',
     answer: 'A new brand. I’m still exploring the colours.',
@@ -309,6 +313,8 @@ const EXAMPLES = [
     topic: 'New city',
     icon: '✈️',
     you: 'You’re moving somewhere new.',
+    youPhoto: ['/photos/newcomers-arriving.jpg', 'A traveller with a backpack, ready to set off', '72% 35%'],
+    themPhoto: ['/photos/local-in-park.jpg', 'A local smiling with her laptop in a city park', '45% 30%'],
     them: 'They’ve lived where you’re going.',
     question: 'What are you looking forward to most?',
     answer: 'Finding a neighbourhood that feels like home.',
@@ -319,6 +325,8 @@ const EXAMPLES = [
     topic: 'Music',
     icon: '🎵',
     you: 'You love live music.',
+    youPhoto: ['/photos/record-store-chat.jpg', 'A music lover in headphones in a record shop', '45% 35%'],
+    themPhoto: ['/photos/headphones-waving.jpg', 'A music fan in big headphones waving hello on a video call', '50% 35%'],
     them: 'They always have a gig to recommend.',
     question: 'What’s the best concert you’ve been to?',
     answer: 'A tiny show last summer. I still think about it.',
@@ -360,7 +368,9 @@ export function ConversationConnections({ id, intro }: { id?: string; intro?: Re
           <div className="co-example">AN EXAMPLE OF A CONNECTION</div>
           <div className="co-match">
             <div className="co-person">
-              <div className="co-avatar">You</div>
+              <div className="co-photo">
+                <Photo src={e.youPhoto[0]} alt={e.youPhoto[1]} sizes="150px" style={{ objectPosition: e.youPhoto[2] }} />
+              </div>
               <strong>A little common ground</strong>
               <small>{e.you}</small>
             </div>
@@ -376,7 +386,9 @@ export function ConversationConnections({ id, intro }: { id?: string; intro?: Re
               </span>
             </div>
             <div className="co-person">
-              <div className="co-avatar">Hello</div>
+              <div className="co-photo">
+                <Photo src={e.themPhoto[0]} alt={e.themPhoto[1]} sizes="150px" style={{ objectPosition: e.themPhoto[2] }} />
+              </div>
               <strong>A conversation partner</strong>
               <small>{e.them}</small>
             </div>

@@ -835,3 +835,9 @@ the picture source for ~25 picture items.
     ProgressVisual; "Free" chip kept. Final free list still to confirm.
   * item 42 (Pricing booking): text + photo split (booking-phone-coffee).
   * Items 31-33 (shared-interest scenes) still need specific photos.
+- Items 31-33 (For You shared-interest examples, Oct 27 2026): the "You" /
+  "Hello" circles are now photos (.co-photo, 150px rounded squares) from the
+  stock set, best fits not exact scenes: design designer-studio /
+  designer-tablet; destination newcomers-arriving / local-in-park; music
+  record-store-chat / headphones-waving. Swap if the client supplies the exact
+  scenes in the brief (Paris, guitar, etc.).
