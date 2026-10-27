@@ -36,11 +36,11 @@ export function WhereLearnersGetStuck() {
         <Reveal delay={0.1} from="right">
           <div className="relative aspect-square overflow-hidden rounded-[1.75rem] shadow-[0_24px_60px_rgba(19,41,82,0.16)]">
             <Photo
-              src="/photos/record-store-chat.jpg"
-              alt="Two friends deep in conversation in a record shop, one smiling and gesturing as she talks"
+              src="/photos/cafe-laughing.jpg"
+              alt="A woman laughing with a friend over coffee at an outdoor café"
               sizes="(min-width: 768px) 520px, 90vw"
               className="absolute inset-0 h-full w-full object-cover"
-              style={{ objectPosition: '50% 35%' }}
+              style={{ objectPosition: '45% 50%' }}
             />
           </div>
         </Reveal>

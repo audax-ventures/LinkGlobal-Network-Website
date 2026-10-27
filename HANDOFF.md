@@ -805,5 +805,9 @@ the picture source for ~25 picture items.
   flashcard comparison (WhereLearnersGetStuck) is now a split card: eyebrow
   "Real people. Real conversations.", "Turn what you learn into confident
   conversation.", one line, "Start speaking" button (LEARNER_SIGNUP_URL), and
-  photo record-store-chat (also used on For Learners tiles). Flashcard helpers
-  removed.
+  photo cafe-laughing (from the second batch). Flashcard helpers removed.
+- Riley's full stock set (70 photos, both batches) is in
+  ~/Downloads/WhatsApp Unknown 2026-10-26 at 4.39.44 PM. Unused picks for
+  pending items: teacher waving at grammar whiteboard (educators), study group
+  with tablet in library / students high-fiving on stairs (student tabs),
+  handshake close-up and flipchart meeting (outcomes), cafe trio.
