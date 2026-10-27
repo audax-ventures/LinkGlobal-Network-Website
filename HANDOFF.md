@@ -811,3 +811,16 @@ the picture source for ~25 picture items.
   pending items: teacher waving at grammar whiteboard (educators), study group
   with tablet in library / students high-fiving on stairs (student tabs),
   handshake close-up and flipchart meeting (outcomes), cafe trio.
+- Second batch placed (Oct 27 2026), per brief 2 picture items:
+  * item 14 (For Learners "What are you getting ready for?"): photo on each tab
+    (newcomers-arriving / students-high-five / professional-boardroom) and in
+    the open panel above the title (newcomer-family / study-group /
+    presentation-flipchart). PATHS has photo/panel fields.
+  * item 22 (For Learners "Who you will be speaking with"): TwoRoles cards lead
+    with educator-whiteboard and cafe-trio (text snippets removed).
+  * item 25 (For Educators "Meet a world of learners"): LEARNER_CHIPS give each
+    chip a round face photo (newcomers-arriving / student-orange /
+    professional-smiling); "Your expertise" stays in the centre.
+  * item 37 (About outcomes): OutcomeList `photos` prop renders photo cards:
+    interview / meeting-idea / acceptance-letter / cafe-friendship /
+    handshake-deal.

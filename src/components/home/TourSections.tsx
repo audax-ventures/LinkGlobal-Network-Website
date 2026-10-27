@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import Photo from '../Photo'
 
 // Personalized-paths tour ported from Riley's supplied design
 // (~/Desktop/personalized-paths.html), plus the shared tour engine used by
@@ -115,10 +116,14 @@ export function useTour(opts: { last: number; reducedInitial?: number; seconds?:
 
 /* ---------------- Personalized paths ---------------- */
 
-const PATHS_CSS = `#lg-paths .pa-audiences{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:20px}#lg-paths .pa-choice{background:var(--lg-panel);border:1px solid var(--lg-line);border-radius:13px;padding:16px 14px;text-align:left;color:var(--lg-ink);transition:background .225s,border-color .225s,transform .225s;min-width:0}#lg-paths .pa-choice strong{font-size:14px;line-height:1.3;display:block;margin-bottom:7px}#lg-paths .pa-choice span{font-size:14px;line-height:1.55;display:block;color:var(--lg-muted)}#lg-paths .pa-choice[aria-pressed="true"]{border-color:var(--lg-blue);background:#eaf7ff;transform:translateY(-3px)}#lg-paths .pa-detail{border-radius:20px;background:var(--lg-panel);padding:25px;display:grid;grid-template-columns:1fr 1fr;gap:27px;align-items:center;box-shadow:0 12px 35px #254e7608}#lg-paths .pa-label{font-size:14px;letter-spacing:1.4px;color:var(--lg-blue);margin-bottom:10px}#lg-paths .pa-title{font-size:24px;line-height:1.14;letter-spacing:-.7px;margin:0 0 18px}#lg-paths .pa-route{list-style:none;margin:0;padding:0;position:relative;display:grid;gap:17px}#lg-paths .pa-route:before{content:'';width:1px;background:var(--lg-line);position:absolute;top:15px;bottom:15px;left:12px}#lg-paths .pa-step{position:relative;display:flex;gap:10px;align-items:flex-start;color:var(--lg-muted);transition:color .3s}#lg-paths .pa-step i{font-size:14px;font-style:normal;display:grid;place-items:center;background:#eff5f9;width:25px;height:25px;border-radius:50%;color:var(--lg-muted);flex-shrink:0;transition:background .3s,color .3s,box-shadow .3s}#lg-paths .pa-step strong{font-size:14px;display:block;line-height:1.3;margin-bottom:3px}#lg-paths .pa-step span{font-size:14px;line-height:1.45;display:block}#lg-paths .pa-step.pa-active{color:var(--lg-ink)}#lg-paths .pa-step.pa-active i{background:var(--lg-blue);color:white;box-shadow:0 0 0 4px #159edb12}#lg-paths .pa-moment{background:#09273e;color:#edf8ff;padding:25px 20px;border-radius:16px;min-height:250px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}#lg-paths .pa-moment:before{content:'';position:absolute;width:180px;height:180px;right:-95px;top:-90px;border:1px solid #265b74;border-radius:50%;box-shadow:0 0 0 23px #265b741c,0 0 0 47px #265b7414}#lg-paths .pa-moment-top{font-size:14px;letter-spacing:1.6px;color:#77c8e9;position:relative}#lg-paths .pa-question{font-size:14px;line-height:1.5;color:#adcadd;margin:23px 0 10px}#lg-paths .pa-say{font-size:21px;line-height:1.3;letter-spacing:-.4px;color:white;font-weight:500;margin:0;min-height:83px;position:relative}#lg-paths .pa-moment-footer{font-size:14px;color:#8bd9f4;margin-top:20px}#lg-paths .pa-quality{border-top:1px solid var(--lg-line);padding-top:16px;margin:8px 0 0;text-align:center;font-size:14px;color:var(--lg-muted)}@media(max-width:540px){#lg-paths .pa-audiences{grid-template-columns:1fr;gap:8px}#lg-paths .pa-choice{padding:13px 15px}#lg-paths .pa-choice strong{font-size:14px;margin-bottom:4px}#lg-paths .pa-choice span{font-size:14px}#lg-paths .pa-choice[aria-pressed="true"]{transform:none}#lg-paths .pa-detail{grid-template-columns:1fr;padding:21px;gap:24px}#lg-paths .pa-moment{min-height:215px}#lg-paths .pa-title{font-size:25px}}`
+const PATHS_CSS = `#lg-paths .pa-choice img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:9px;margin-bottom:12px}#lg-paths .pa-photo{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:14px;margin-bottom:18px}#lg-paths .pa-audiences{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:20px}#lg-paths .pa-choice{background:var(--lg-panel);border:1px solid var(--lg-line);border-radius:13px;padding:16px 14px;text-align:left;color:var(--lg-ink);transition:background .225s,border-color .225s,transform .225s;min-width:0}#lg-paths .pa-choice strong{font-size:14px;line-height:1.3;display:block;margin-bottom:7px}#lg-paths .pa-choice span{font-size:14px;line-height:1.55;display:block;color:var(--lg-muted)}#lg-paths .pa-choice[aria-pressed="true"]{border-color:var(--lg-blue);background:#eaf7ff;transform:translateY(-3px)}#lg-paths .pa-detail{border-radius:20px;background:var(--lg-panel);padding:25px;display:grid;grid-template-columns:1fr 1fr;gap:27px;align-items:center;box-shadow:0 12px 35px #254e7608}#lg-paths .pa-label{font-size:14px;letter-spacing:1.4px;color:var(--lg-blue);margin-bottom:10px}#lg-paths .pa-title{font-size:24px;line-height:1.14;letter-spacing:-.7px;margin:0 0 18px}#lg-paths .pa-route{list-style:none;margin:0;padding:0;position:relative;display:grid;gap:17px}#lg-paths .pa-route:before{content:'';width:1px;background:var(--lg-line);position:absolute;top:15px;bottom:15px;left:12px}#lg-paths .pa-step{position:relative;display:flex;gap:10px;align-items:flex-start;color:var(--lg-muted);transition:color .3s}#lg-paths .pa-step i{font-size:14px;font-style:normal;display:grid;place-items:center;background:#eff5f9;width:25px;height:25px;border-radius:50%;color:var(--lg-muted);flex-shrink:0;transition:background .3s,color .3s,box-shadow .3s}#lg-paths .pa-step strong{font-size:14px;display:block;line-height:1.3;margin-bottom:3px}#lg-paths .pa-step span{font-size:14px;line-height:1.45;display:block}#lg-paths .pa-step.pa-active{color:var(--lg-ink)}#lg-paths .pa-step.pa-active i{background:var(--lg-blue);color:white;box-shadow:0 0 0 4px #159edb12}#lg-paths .pa-moment{background:#09273e;color:#edf8ff;padding:25px 20px;border-radius:16px;min-height:250px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}#lg-paths .pa-moment:before{content:'';position:absolute;width:180px;height:180px;right:-95px;top:-90px;border:1px solid #265b74;border-radius:50%;box-shadow:0 0 0 23px #265b741c,0 0 0 47px #265b7414}#lg-paths .pa-moment-top{font-size:14px;letter-spacing:1.6px;color:#77c8e9;position:relative}#lg-paths .pa-question{font-size:14px;line-height:1.5;color:#adcadd;margin:23px 0 10px}#lg-paths .pa-say{font-size:21px;line-height:1.3;letter-spacing:-.4px;color:white;font-weight:500;margin:0;min-height:83px;position:relative}#lg-paths .pa-moment-footer{font-size:14px;color:#8bd9f4;margin-top:20px}#lg-paths .pa-quality{border-top:1px solid var(--lg-line);padding-top:16px;margin:8px 0 0;text-align:center;font-size:14px;color:var(--lg-muted)}@media(max-width:540px){#lg-paths .pa-choice img{aspect-ratio:5/2}#lg-paths .pa-audiences{grid-template-columns:1fr;gap:8px}#lg-paths .pa-choice{padding:13px 15px}#lg-paths .pa-choice strong{font-size:14px;margin-bottom:4px}#lg-paths .pa-choice span{font-size:14px}#lg-paths .pa-choice[aria-pressed="true"]{transform:none}#lg-paths .pa-detail{grid-template-columns:1fr;padding:21px;gap:24px}#lg-paths .pa-moment{min-height:215px}#lg-paths .pa-title{font-size:25px}}`
 const PATHS = [
   {
     name: 'Newcomers',
+    photo: '/photos/newcomers-arriving.jpg',
+    photoAlt: 'Two newcomers smiling outside a front door, one checking her phone',
+    panel: '/photos/newcomer-family.jpg',
+    panelAlt: 'A parent hugging their child in a sunny park',
     blurb: 'Appointments, interviews, and everyday life.',
     title: 'Your first school meeting.',
     details: ['Questions about your child’s day.', 'Ask clearly. Understand the reply.', 'Talk about school and family life.'],
@@ -127,6 +132,10 @@ const PATHS = [
   },
   {
     name: 'International students',
+    photo: '/photos/students-high-five.jpg',
+    photoAlt: 'Students sitting on campus stairs, two of them high-fiving',
+    panel: '/photos/study-group.jpg',
+    panelAlt: 'Four students in a library talking over a tablet',
     blurb: 'Admissions, seminars, IELTS and TOEFL.',
     title: 'Your voice in the seminar.',
     details: ['The language of sharing an opinion.', 'Explain your point and build on it.', 'Exchange ideas with another speaker.'],
@@ -135,6 +144,10 @@ const PATHS = [
   },
   {
     name: 'Professionals',
+    photo: '/photos/professional-boardroom.jpg',
+    photoAlt: 'A professional speaking up at a boardroom table',
+    panel: '/photos/presentation-flipchart.jpg',
+    panelAlt: 'A presenter at a flipchart with colleagues listening around the table',
     blurb: 'Meetings, presentations, and client calls.',
     title: 'Your next client presentation.',
     details: ['The phrases your work calls for.', 'Make your point. Handle questions.', 'Discuss your work at a natural pace.'],
@@ -185,6 +198,7 @@ export function PersonalizedPathsTour() {
                 t.go(0, true)
               }}
             >
+              <Photo src={p.photo} alt={p.photoAlt} sizes="(min-width: 640px) 300px, 90vw" />
               <strong>{p.name}</strong>
               <span>{p.blurb}</span>
             </button>
@@ -192,6 +206,7 @@ export function PersonalizedPathsTour() {
         </div>
         <div className="pa-detail">
           <div>
+            <Photo key={path.panel} className="pa-photo" src={path.panel} alt={path.panelAlt} sizes="(min-width: 640px) 440px, 90vw" />
             <div className="pa-label">ONE MOMENT. YOUR PATH TO IT.</div>
             <h3 className="pa-title">{path.title}</h3>
             <ol className="pa-route">

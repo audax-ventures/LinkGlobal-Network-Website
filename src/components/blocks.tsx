@@ -3,7 +3,7 @@ import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { CheckIcon } from './icons/LineIcons'
-import AvatarIllustration from './AvatarIllustration'
+import Photo from './Photo'
 
 // Shared content blocks for the Website Copy v7 pages. Copy is passed in by
 // each page so the same layout can carry page-specific wording.
@@ -232,7 +232,8 @@ export function BeforeDuringAfter({ items }: { items: { label: string; line: str
   )
 }
 
-/** Certified educators vs Conversation partners, with the For You button. */
+/** Certified educators vs Conversation partners, with the For You button.
+ *  Each card leads with a stock photo (revision brief 2, item 22). */
 export function TwoRoles({ educator, partner }: { educator: string; partner: string }) {
   const card = (title: string, line: string, visual: ReactNode, i: number) => (
     <Reveal delay={i * 0.1} from={side(i)}>
@@ -243,35 +244,16 @@ export function TwoRoles({ educator, partner }: { educator: string; partner: str
       </div>
     </Reveal>
   )
+  const photo = (src: string, alt: string) => (
+    <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
+      <Photo src={src} alt={alt} sizes="(min-width: 768px) 460px, 90vw" className="absolute inset-0 h-full w-full object-cover" />
+    </div>
+  )
   return (
     <>
       <div className="mx-auto mt-12 grid max-w-5xl gap-5 md:grid-cols-2">
-        {card(
-          'Certified educators',
-          educator,
-          <div className="rounded-2xl bg-navy-900/[0.03] p-4 text-sm">
-            <p className="text-navy-700/60">
-              I <span className="rounded bg-rose-500/10 px-1 text-rose-600 line-through">have went</span>{' '}
-              <span className="rounded bg-emerald-500/10 px-1 font-semibold text-emerald-700">went</span> to the meeting.
-            </p>
-            <p className="mt-2 text-sm font-semibold text-brand-blue">Correction · technique · direct feedback</p>
-          </div>,
-          0,
-        )}
-        {card(
-          'Conversation partners',
-          partner,
-          <div className="space-y-2 rounded-2xl bg-navy-900/[0.03] p-4 text-sm">
-            <div className="flex items-end gap-2">
-              <AvatarIllustration color="#2dd4bf" className="h-7 w-7 shrink-0 rounded-full" />
-              <p className="rounded-2xl rounded-bl-sm bg-white px-3 py-2 text-navy-800 shadow-sm">So what got you into design?</p>
-            </div>
-            <div className="flex items-end justify-end gap-2">
-              <p className="rounded-2xl rounded-br-sm bg-brand-blue px-3 py-2 text-white">Honestly, it started with posters.</p>
-            </div>
-          </div>,
-          1,
-        )}
+        {card('Certified educators', educator, photo('/photos/educator-whiteboard.jpg', 'An educator waving hello on a video lesson, a grammar whiteboard behind her'), 0)}
+        {card('Conversation partners', partner, photo('/photos/cafe-trio.jpg', 'Three friends talking over coffee at an outdoor café table'), 1)}
       </div>
       <Reveal className="mt-10 text-center">
         <Link
@@ -285,8 +267,30 @@ export function TwoRoles({ educator, partner }: { educator: string; partner: str
   )
 }
 
-/** "What learners become able to do" outcome list (Home, About). */
-export function OutcomeList({ items, dark = false }: { items: string[]; dark?: boolean }) {
+/** "What learners become able to do" outcome list (About). With `photos`
+ *  (same order as items), each outcome becomes a photo card (brief 2, item 37). */
+export function OutcomeList({ items, photos, dark = false }: { items: string[]; photos?: { src: string; alt: string }[]; dark?: boolean }) {
+  if (photos) {
+    return (
+      <ul className="mx-auto mt-12 flex max-w-6xl flex-wrap justify-center gap-5">
+        {items.map((t, i) => (
+          <Reveal key={t} delay={(i % 3) * 0.08} from={side(i)} className="w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.84rem)]">
+            <li className="h-full overflow-hidden rounded-3xl bg-white shadow-[0_15px_40px_rgba(19,41,82,0.08)]">
+              <div className="relative aspect-[4/3]">
+                <Photo src={photos[i].src} alt={photos[i].alt} sizes="(min-width: 1024px) 370px, (min-width: 640px) 45vw, 90vw" className="absolute inset-0 h-full w-full object-cover" />
+              </div>
+              <p className="flex items-center gap-3 p-5 text-lg font-semibold text-navy-950">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-white">
+                  <CheckIcon className="h-4 w-4" />
+                </span>
+                {t}
+              </p>
+            </li>
+          </Reveal>
+        ))}
+      </ul>
+    )
+  }
   return (
     <ul className="mx-auto mt-12 grid max-w-4xl gap-4 sm:grid-cols-2">
       {items.map((t, i) => (

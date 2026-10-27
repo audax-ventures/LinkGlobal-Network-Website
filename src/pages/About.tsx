@@ -105,6 +105,13 @@ export default function About() {
             'A friendship in a second language.',
             'A business built across a border.',
           ]}
+          photos={[
+            { src: '/photos/interview.jpg', alt: 'A smiling candidate in a job interview across the desk' },
+            { src: '/photos/meeting-idea.jpg', alt: 'Two colleagues talking through an idea at a meeting table' },
+            { src: '/photos/acceptance-letter.jpg', alt: 'Three friends reading a letter together, delighted' },
+            { src: '/photos/cafe-friendship.jpg', alt: 'Two friends chatting at a café table' },
+            { src: '/photos/handshake-deal.jpg', alt: 'Two business people shaking hands across a meeting room' },
+          ]}
         />
       </Section>
 
