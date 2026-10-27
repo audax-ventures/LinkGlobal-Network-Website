@@ -50,7 +50,7 @@ export const PENDING = {
   lessonPrice: null as string | null,
   /** ISO currency for the prices above, e.g. 'CAD'. Needed for Google's
    *  Product data on Pricing (only emitted once prices + currency are set). */
-  currency: null as string | null,
+  currency: 'CAD' as string | null,
   /** Personal AI Feedback price, e.g. '$15'. */
   aiFeedbackPrice: null as string | null,
   /** Languages currently offered, e.g. ['English', 'French']. */

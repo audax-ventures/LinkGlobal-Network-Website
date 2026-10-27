@@ -14,7 +14,7 @@ import { LEARNER_SIGNUP_URL, PENDING } from '../content/site'
 // brief 2, item 42) the monthly subscription plans and prices from the
 // previous version of the website. Lesson prices come from content/site.ts;
 // until set they read "Price to be announced". Other card slots stay off
-// until `enabled: true`. No currency is stated until the client confirms it.
+// until `enabled: true`. Prices are in Canadian dollars (PENDING.currency).
 
 interface PlanSlot {
   name: string
@@ -191,6 +191,7 @@ export default function Pricing() {
   const offers = [
     { name: 'Lesson with a certified educator', price: toAmount(PENDING.lessonPrice) },
     { name: 'Personal AI Feedback', price: toAmount(PENDING.aiFeedbackPrice) },
+    ...livePlans.map((p) => ({ name: `${p.name} monthly plan`, price: toAmount(p.price) })),
   ].filter((o): o is { name: string; price: string } => !!o.price)
   const productJsonLd =
     PENDING.currency && offers.length
@@ -271,7 +272,7 @@ export default function Pricing() {
             eyebrow="Lessons · Pay as you go"
             title="Book lessons individually with a certified educator."
             price={PENDING.lessonPrice}
-            unit="per lesson"
+            unit={`${PENDING.currency ?? ''} per lesson`.trim()}
             features={['Live one-to-one session', 'Educator briefed from your path', 'Your path updated afterwards']}
             cta="Start Your Journey"
             delay={0}
@@ -300,7 +301,7 @@ export default function Pricing() {
                   title={p.name}
                   line={p.line}
                   price={p.price}
-                  unit="per month"
+                  unit={`${PENDING.currency ?? ''} per month`.trim()}
                   features={p.features}
                   cta="Start Your Journey"
                   delay={i * 0.08}

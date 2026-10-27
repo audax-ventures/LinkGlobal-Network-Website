@@ -861,3 +861,8 @@ the picture source for ~25 picture items.
   "interview" part, prices for lessons / AI Feedback, languages, legal review,
   socials/address/reply days/educator selection/proof numbers/testimonial
   names/team photos. Email stays info@linkglobalnetwork.io (Riley).
+- Currency confirmed CAD (Riley, Oct 27 2026): PENDING.currency = 'CAD'.
+  Pricing units read "CAD per month" / "CAD per lesson"; Product JSON-LD now
+  emits the three monthly plans (priceCurrency CAD) and will add lesson / AI
+  Feedback once priced; chatbot states prices are CAD. (Older notes saying
+  "currency unknown, never state one" are superseded.)
