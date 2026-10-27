@@ -824,3 +824,14 @@ the picture source for ~25 picture items.
   * item 37 (About outcomes): OutcomeList `photos` prop renders photo cards:
     interview / meeting-idea / acceptance-letter / cafe-friendship /
     handshake-deal.
+- More second-batch photos (Oct 27 2026):
+  * items 10-11 (Home journey): stages 1-2 show a photo instead of their card
+    (Stage.photo; new-city-balcony / learner-notebook) and lost their paragraph
+    and takeaway line. Other stages unchanged.
+  * item 40 (Try Now header): onboarding.png (AI assessment screen) replaced by
+    learner-headset-call. Header words still to change once the client says.
+  * item 41 (Pricing "Free to use"): cards lead with photos
+    (learner-tablet-headset / learner-excited) instead of PathVisual /
+    ProgressVisual; "Free" chip kept. Final free list still to confirm.
+  * item 42 (Pricing booking): text + photo split (booking-phone-coffee).
+  * Items 31-33 (shared-interest scenes) still need specific photos.

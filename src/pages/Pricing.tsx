@@ -4,7 +4,8 @@ import NavyBand from '../components/NavyBand'
 import PageHeader from '../components/PageHeader'
 import CtaBand from '../components/CtaBand'
 import SmartLink from '../components/SmartLink'
-import { Reveal, Section, SectionHeading, PathVisual, ProgressVisual } from '../components/blocks'
+import { Reveal, Section, SectionHeading } from '../components/blocks'
+import Photo from '../components/Photo'
 import { ensureGsapPlugins, gsap, ScrollTrigger } from '../lib/gsapSetup'
 import { CheckIcon } from '../components/icons/LineIcons'
 import { LEARNER_SIGNUP_URL, PENDING } from '../content/site'
@@ -192,13 +193,23 @@ export default function Pricing() {
             confirmed by the client (the AI assessment is not free). */}
         <ul className="mx-auto mt-10 grid max-w-5xl gap-6 md:grid-cols-2">
           {[
-            { t: 'Your personalized learning path', line: 'See the whole route to your goal before you book anything.', Visual: PathVisual },
-            { t: 'Progress overview', line: 'Watch your speaking improve, session by session.', Visual: ProgressVisual },
-          ].map(({ t, line, Visual }, i) => (
+            {
+              t: 'Your personalized learning path',
+              line: 'See the whole route to your goal before you book anything.',
+              photo: '/photos/learner-tablet-headset.jpg',
+              alt: 'A learner in a headset studying from a tablet with her books open',
+            },
+            {
+              t: 'Progress overview',
+              line: 'Watch your speaking improve, session by session.',
+              photo: '/photos/learner-excited.jpg',
+              alt: 'A learner celebrating at his laptop, surrounded by books',
+            },
+          ].map(({ t, line, photo, alt }, i) => (
             <Reveal key={t} delay={i * 0.08} from={i % 2 ? 'right' : 'left'}>
               <li className="h-full overflow-hidden rounded-3xl bg-white shadow-[0_15px_40px_rgba(19,41,82,0.08)]">
-                <div className="relative h-44 bg-gradient-to-br from-[#e6f6fd] to-[#f1edff] p-6" aria-hidden="true">
-                  <Visual />
+                <div className="relative h-56">
+                  <Photo src={photo} alt={alt} sizes="(min-width: 768px) 500px, 90vw" className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition: '50% 30%' }} />
                   <span className="absolute right-4 top-4 rounded-full bg-emerald-500 px-3 py-1 text-sm font-bold text-white">Free</span>
                 </div>
                 <div className="flex items-start gap-4 p-7">
@@ -254,12 +265,30 @@ export default function Pricing() {
         )}
       </NavyBand>
 
+      {/* Brief 2, item 42: copy beside a picture. */}
       <Section>
-        <SectionHeading
-          eyebrow="Booking and cancellations"
-          title="Lessons are booked and paid for individually."
-          line="A lesson you cancel after booking is not refunded. If your educator cancels, the full value returns to your balance for another lesson."
-        />
+        <div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-2 lg:gap-14">
+          <Reveal from="left">
+            <p className="text-sm font-bold uppercase tracking-[0.25em] text-brand-blue">Booking and cancellations</p>
+            <h2 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight text-navy-950 sm:text-4xl">
+              Lessons are booked and paid for individually.
+            </h2>
+            <p className="mt-5 max-w-md text-lg leading-relaxed text-navy-700/75">
+              A lesson you cancel after booking is not refunded. If your educator cancels, the full value returns to your balance for
+              another lesson.
+            </p>
+          </Reveal>
+          <Reveal delay={0.1} from="right">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] shadow-[0_24px_60px_rgba(19,41,82,0.16)]">
+              <Photo
+                src="/photos/booking-phone-coffee.jpg"
+                alt="A learner on the phone with a coffee, her laptop open on a café table"
+                sizes="(min-width: 768px) 560px, 90vw"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            </div>
+          </Reveal>
+        </div>
       </Section>
 
       <Section className="pt-0 sm:pt-4">

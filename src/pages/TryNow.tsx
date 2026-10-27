@@ -69,8 +69,7 @@ export default function TryNow() {
           </>
         }
         description="Tell us your goal. Your plan follows from your answers."
-        image={{ src: '/gallery/onboarding.png', alt: 'The LinkGlobal onboarding flow' }}
-        imageAspect="1000/540"
+        image={{ src: '/photos/learner-headset-call.jpg', alt: 'A learner in a headset smiling as he talks on his laptop', position: '50% 30%' }}
       />
 
       <NavyBand className="pb-24 pt-8 sm:pt-12" fadeOut={false}>
