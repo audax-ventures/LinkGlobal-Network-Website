@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { SparkleIcon, UserIcon } from '../icons/LineIcons'
 
 // "The philosophy" block — ported from Riley's supplied design
 // (~/Desktop/philosophy-section.html): text column + an animated scene where
@@ -43,7 +44,7 @@ const CSS = `
 #people-philosophy .pp-shirt{position:absolute;left:7px;top:36px;width:43px;height:34px;border-radius:50% 50% 0 0;background:var(--shirt)}
 #people-philosophy .pp-two .pp-hair{height:23px;width:30px;left:12px;top:6px}
 #people-philosophy .pp-three .pp-hair{height:40px;width:34px;left:10px}
-#people-philosophy .pp-you{position:absolute;left:48%;top:54%;transform:translate(-50%,-50%);width:78px;height:78px;border-radius:50%;background:#0c314e;border:1px solid #49c9f599;box-shadow:0 0 0 9px #39bde90a,0 0 40px #25aeec18;display:grid;place-content:center;text-align:center;z-index:3}
+#people-philosophy .pp-you{position:absolute;left:48%;top:54%;transform:translate(-50%,-50%);width:78px;height:78px;border-radius:50%;background:#0c314e;border:1px solid #49c9f599;box-shadow:0 0 0 9px #39bde90a,0 0 40px #25aeec18;display:grid;place-content:center;text-align:center;z-index:3;color:#e9f8ff}
 #people-philosophy .pp-you strong{font-size:19px;font-weight:600}
 #people-philosophy .pp-you small{font-size:14px;color:#9dcce0;margin-top:4px;letter-spacing:1px}
 #people-philosophy .pp-message{position:absolute;font-size:14px;line-height:1.4;white-space:nowrap;padding:9px 13px;background:#f2f8fc;color:#15314b;border-radius:12px 12px 12px 2px;box-shadow:0 8px 24px #0002;opacity:0;transform:translateY(10px) scale(.94);transition:opacity .375s,transform .525s;z-index:5}
@@ -53,7 +54,7 @@ const CSS = `
 #people-philosophy[data-step="2"] .pp-message{opacity:1;transform:translateY(0) scale(1)}
 #people-philosophy[data-step="2"] .pp-response{transition-delay:.488s}
 #people-philosophy[data-step="2"] .pp-welcome{transition-delay:.975s}
-#people-philosophy .pp-ai{position:absolute;left:0;top:49%;font-size:14px;letter-spacing:1px;color:#7fabca;transition:opacity .75s}
+#people-philosophy .pp-ai{position:absolute;left:2%;top:47%;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#0c314e;border:1px solid #49c9f566;color:var(--pp-accent);transition:opacity .75s}
 #people-philosophy[data-step="2"] .pp-ai{opacity:.45}
 #people-philosophy .pp-controls{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:44px;border-top:1px solid #23415b;max-width:410px;margin:auto}
 #people-philosophy .pp-status{font-size:14px;color:#b4c8da;display:flex;align-items:center;gap:7px}
@@ -67,7 +68,10 @@ const CSS = `
 @media(prefers-reduced-motion:reduce){#people-philosophy *,#people-philosophy *:before{transition:none!important;animation:none!important}}
 `
 
-function Person({ cls, label }: { cls: string; label: string }) {
+// Brief 2, item 7: pictures carry no text, so the diagram's labels ("AI
+// connects", "At the center", the three person captions) became icons or
+// were removed. Only the chat bubbles, which act as message chips, remain.
+function Person({ cls }: { cls: string }) {
   return (
     <div className={`pp-person ${cls}`}>
       <div className="pp-portrait" aria-hidden="true">
@@ -75,7 +79,6 @@ function Person({ cls, label }: { cls: string; label: string }) {
         <span className="pp-face" />
         <span className="pp-shirt" />
       </div>
-      <span className="pp-person-label">{label}</span>
     </div>
   )
 }
@@ -148,14 +151,15 @@ export default function PeoplePhilosophy() {
               <path d="M48 57 Q76 62 81 36" />
               <path d="M48 57 Q44 79 66 86" />
             </svg>
-            <div className="pp-ai">AI CONNECTS</div>
-            <div className="pp-you">
-              <strong>You</strong>
-              <small>AT THE CENTER</small>
+            <div className="pp-ai" aria-hidden="true">
+              <SparkleIcon className="h-7 w-7" />
             </div>
-            <Person cls="pp-one" label="A new perspective" />
-            <Person cls="pp-two" label="A shared interest" />
-            <Person cls="pp-three" label="A familiar face" />
+            <div className="pp-you" aria-hidden="true">
+              <UserIcon className="h-9 w-9" />
+            </div>
+            <Person cls="pp-one" />
+            <Person cls="pp-two" />
+            <Person cls="pp-three" />
             <div className="pp-message pp-hello" lang="es">
               ¡Hola! ¿Cómo estás?
             </div>

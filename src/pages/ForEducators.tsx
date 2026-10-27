@@ -36,6 +36,7 @@ function CardHeader({ icon: Icon, label, from, to }: { icon: typeof ClipboardIco
 const DASHBOARD: FeatureRow[] = [
   {
     title: 'Session briefing',
+    accent: '#7c5cd6',
     line: 'The learner’s progress and focus areas, ready before you meet.',
     visual: (
       <div>
@@ -57,6 +58,7 @@ const DASHBOARD: FeatureRow[] = [
   },
   {
     title: 'Your schedule',
+    accent: '#0f9e8a',
     line: 'Sessions arranged around your availability.',
     visual: (
       <div>
@@ -74,6 +76,7 @@ const DASHBOARD: FeatureRow[] = [
   },
   {
     title: 'Learner progress',
+    accent: '#db2777',
     line: 'How each learner has developed across sessions.',
     visual: (
       <div className="text-lg">

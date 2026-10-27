@@ -28,102 +28,23 @@ interface Stage {
   photo?: { src: string; alt: string; position?: string }
 }
 
+// Brief 2, item 12: three steps only (the client's suggestion: your goal,
+// your lessons and conversations, your progress), each a photo.
 const STAGES: Stage[] = [
   {
-    category: '01 · YOUR PROFILE',
+    category: '01 · YOUR GOAL',
     title: (<>Start with the life<br />you’re learning for.</>),
     photo: { src: '/photos/new-city-balcony.jpg', alt: 'A young woman on a balcony above a new city, checking her phone', position: '30% 50%' },
   },
   {
-    category: '02 · YOUR LEARNING PATH',
-    title: (<>See where you’re going.<br />Know what comes next.</>),
-    photo: { src: '/photos/learner-notebook.jpg', alt: 'A learner in headphones writing her plan in a notebook beside her laptop' },
+    category: '02 · LESSONS AND CONVERSATIONS',
+    title: (<>Learn it in a lesson.<br />Use it in a conversation.</>),
+    photo: { src: '/photos/lesson-wave.jpg', alt: 'A learner waving hello to her educator at the start of a video lesson', position: '30% 40%' },
   },
   {
-    category: '03 · CONTINUOUS ADAPTATION',
-    title: (<>You keep growing.<br />Your plan keeps up.</>),
-    description:
-      'The AI follows how you actually speak and adjusts what comes next. As you become more comfortable, your practice moves with you.',
-    takeaway: 'The next challenge fits the speaker you’re becoming.',
-    cardTop: 'A PLAN THAT LISTENS',
-    replayLabel: 'Replay plan adaptation animation',
-    card: (
-      <>
-        <div className="hj-insight hj-pop">After your speaking practice<b>Your introduction is flowing.</b></div>
-        <div className="hj-adjustment hj-pop" style={v({ '--delay': '262ms' })}>
-          <small>NEXT STEP, UPDATED</small>
-          <span className="hj-old">Rehearse your introduction</span>
-          <strong className="hj-pop" style={v({ '--delay': '638ms' })}>↳ Try an unexpected follow-up.</strong>
-        </div>
-        <p className="hj-note">Example adjustment based on a learner’s speaking.</p>
-      </>
-    ),
-  },
-  {
-    category: '04 · CERTIFIED EDUCATORS',
-    title: (<>A teacher who knows<br />where to begin.</>),
-    description:
-      'Your educator arrives briefed on your path. Live, structured lessons give you the feedback, technique, and human guidance to work on what matters now.',
-    takeaway: 'Shared context. Focused teaching.',
-    cardTop: 'READY FOR YOUR LESSON',
-    replayLabel: 'Replay educator animation',
-    cardClass: 'hj-lesson',
-    card: (
-      <>
-        <div className="hj-people">
-          <div className="hj-person hj-pop"><div className="hj-avatar">E</div>Your educator</div>
-          <div className="hj-wave" aria-hidden="true">
-            <i style={v({ '--height': '10px' })} />
-            <i style={v({ '--height': '23px', '--delay': '75ms' })} />
-            <i style={v({ '--height': '31px', '--delay': '150ms' })} />
-            <i style={v({ '--height': '17px', '--delay': '225ms' })} />
-            <i style={v({ '--height': '26px', '--delay': '300ms' })} />
-          </div>
-          <div className="hj-person hj-pop" style={v({ '--delay': '150ms' })}><div className="hj-avatar">You</div>Your voice</div>
-        </div>
-        <div className="hj-brief hj-pop" style={v({ '--delay': '488ms' })}>
-          <small>WORKING ON FOLLOW-UP QUESTIONS</small>“Try leading with the action you took. Then explain why.”
-        </div>
-        <p className="hj-note">An example of guidance in a live lesson.</p>
-      </>
-    ),
-  },
-  {
-    category: '05 · REAL CONVERSATIONS',
-    title: (<>Find common ground.<br />Let the words follow.</>),
-    description:
-      'Meet native speakers connected to your work, interests, or destination. Talk about real things at a natural pace, without a lesson plan.',
-    takeaway: 'You have more to share than a practice sentence.',
-    cardTop: 'SOMETHING IN COMMON',
-    replayLabel: 'Replay conversation animation',
-    card: (
-      <>
-        <div className="hj-match">Example connection · A nurse in Toronto</div>
-        <div className="hj-chat">
-          <div className="hj-bubble hj-pop">What’s a typical shift like for you?</div>
-          <div className="hj-bubble hj-answer hj-pop" style={v({ '--delay': '488ms' })}>Busy, but the people make it worth it.</div>
-          <div className="hj-bubble hj-pop" style={v({ '--delay': '1012ms' })}>I know exactly what you mean.</div>
-        </div>
-      </>
-    ),
-  },
-  {
-    category: '06 · VISIBLE PROGRESS',
+    category: '03 · YOUR PROGRESS',
     title: (<>One day, the words<br />are simply there.</>),
-    description:
-      'You answer the question. Share your experience. Keep the conversation going. Progress becomes something you can do in the moments that matter.',
-    takeaway: 'The goal you started with becomes a milestone you can reach.',
-    cardTop: 'AN EXAMPLE MILESTONE',
-    replayLabel: 'Replay progress animation',
-    cardClass: 'hj-win',
-    card: (
-      <>
-        <div className="hj-win-symbol" aria-hidden="true">✓</div>
-        <div className="hj-then hj-pop">“I need my notes.”</div>
-        <div className="hj-win-title hj-pop" style={v({ '--delay': '172ms' })}>Answer interview questions<br />in your own words.</div>
-        <div className="hj-stamp">Without reaching for a script.</div>
-      </>
-    ),
+    photo: { src: '/photos/progress-win.jpg', alt: 'A smiling learner holding up his notes, pleased with how far he has come', position: '40% 30%' },
   },
 ]
 

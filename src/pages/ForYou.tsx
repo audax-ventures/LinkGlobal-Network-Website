@@ -78,10 +78,10 @@ export default function ForYou() {
         eyebrow="Conversation Partners"
         title={
           <>
-            Every language you speak is worth something <span className="text-gradient-brand">to someone.</span>
+            The language you already speak helps <span className="text-gradient-brand">someone else grow.</span>
           </>
         }
-        description="You do not have to be a teacher to help someone speak. You just have to speak."
+        description="You do not need to be a teacher. Just talk."
         actions={[
           { label: 'Find Your Conversation Partner', to: '#for-learners' },
           { label: 'Share Your Language', to: '#for-native-speakers' },

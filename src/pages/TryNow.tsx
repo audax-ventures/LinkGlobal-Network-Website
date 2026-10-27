@@ -35,7 +35,7 @@ const PATHS: Path[] = [
       { title: 'See your learning path', line: 'The whole route, before you book anything.' },
       { title: 'Book your first lesson', line: 'With a certified educator, briefed from your path.' },
     ],
-    perk: 'No subscription',
+    perk: 'No subscription needed',
     cta: 'Start Your Journey',
     color: '#1ba3e0',
     tint: 'linear-gradient(135deg, rgba(27,163,224,0.14), rgba(62,198,255,0.05))',
@@ -65,10 +65,9 @@ export default function TryNow() {
         eyebrow="Start Your Journey"
         title={
           <>
-            Your path begins with a conversation <span className="text-gradient-brand">about you.</span>
+            Your goal comes first. <span className="text-gradient-brand">Your path follows.</span>
           </>
         }
-        description="Tell us your goal. Your plan follows from your answers."
         image={{ src: '/photos/learner-headset-call.jpg', alt: 'A learner in a headset smiling as he talks on his laptop', position: '50% 30%' }}
       />
 

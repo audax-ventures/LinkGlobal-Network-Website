@@ -11,6 +11,9 @@ export interface FeatureRow {
   title: string
   line: string
   visual: ReactNode
+  /** Brand colour for this row (brief 2, item 28: more colour): tints the
+   *  row number and adds a soft glow behind the card. */
+  accent?: string
 }
 
 export default function FeatureRows({ heading, eyebrow, rows }: { heading: string; eyebrow?: string; rows: FeatureRow[] }) {
@@ -31,7 +34,7 @@ export default function FeatureRows({ heading, eyebrow, rows }: { heading: strin
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className={i % 2 === 1 ? 'md:order-2' : ''}
             >
-              <p className="text-sm font-semibold tracking-[0.2em] text-brand-blue">
+              <p className="text-sm font-semibold tracking-[0.2em] text-brand-blue" style={r.accent ? { color: r.accent } : undefined}>
                 0{i + 1}
                 {r.eyebrow ? ` · ${r.eyebrow.toUpperCase()}` : ''}
               </p>
@@ -39,13 +42,20 @@ export default function FeatureRows({ heading, eyebrow, rows }: { heading: strin
               <p className="mt-4 text-xl leading-relaxed text-navy-700/75">{r.line}</p>
             </motion.div>
             {/* Plain wrapper owns placement; motion.div only animates. */}
-            <div className={`flex ${i % 2 === 1 ? 'md:order-1 md:justify-start' : 'md:justify-end'}`}>
+            <div className={`relative flex ${i % 2 === 1 ? 'md:order-1 md:justify-start' : 'md:justify-end'}`}>
+              {r.accent && (
+                <span
+                  className={`pointer-events-none absolute top-1/2 h-72 w-72 -translate-y-1/2 rounded-full opacity-30 blur-3xl ${i % 2 === 1 ? 'left-0' : 'right-0'}`}
+                  style={{ background: r.accent }}
+                  aria-hidden="true"
+                />
+              )}
               <motion.div
                 initial={{ opacity: 0, x: i % 2 === 1 ? -90 : 90, rotate: i % 2 === 1 ? -3 : 3 }}
                 whileInView={{ opacity: 1, x: 0, rotate: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="w-full max-w-md overflow-hidden rounded-3xl bg-white p-7 shadow-[0_24px_60px_rgba(19,41,82,0.16)] sm:p-8"
+                className="relative w-full max-w-md overflow-hidden rounded-3xl bg-white p-7 shadow-[0_24px_60px_rgba(19,41,82,0.16)] sm:p-8"
               >
                 {r.visual}
               </motion.div>

@@ -841,3 +841,23 @@ the picture source for ~25 picture items.
   designer-tablet; destination newcomers-arriving / local-in-park; music
   record-store-chat / headphones-waving. Swap if the client supplies the exact
   scenes in the brief (Paris, guitar, etc.).
+- Revision 2 follow-ups (Oct 27 2026; Riley: follow the Revision 2 document
+  where it answers an open question):
+  * item 42: monthly plans from the previous site restored on Pricing
+    (PLAN_SLOTS Starter $39 / Growth $89 most popular / Intensive $159, old
+    features, "per month", no currency) under "Prefer a monthly plan?" in the
+    NavyBand. FAQ, Try Now perk and chatbot facts updated. $79/$199 dropped.
+  * item 12: Home journey cut to 3 photo steps: 01 Your goal
+    (new-city-balcony), 02 Lessons and conversations (lesson-wave), 03 Your
+    progress (progress-win). learner-notebook removed.
+  * item 35: For You header = Option A.
+  * item 7: Philosophy diagram labels removed; AI = sparkle icon, You = user
+    icon; chat bubbles kept as chips.
+  * item 28: FeatureRow `accent` (row number colour + soft glow); For
+    Educators dashboard violet / teal / pink.
+  * item 40: Try Now header "Your goal comes first. Your path follows.", line
+    under it removed.
+  Still with the client: final free list, currency, which Home section is the
+  "interview" part, prices for lessons / AI Feedback, languages, legal review,
+  socials/address/reply days/educator selection/proof numbers/testimonial
+  names/team photos. Email stays info@linkglobalnetwork.io (Riley).

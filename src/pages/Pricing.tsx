@@ -10,10 +10,11 @@ import { ensureGsapPlugins, gsap, ScrollTrigger } from '../lib/gsapSetup'
 import { CheckIcon } from '../components/icons/LineIcons'
 import { LEARNER_SIGNUP_URL, PENDING } from '../content/site'
 
-// Pricing, per Website Copy v7 (section 07): pay as you go at launch, no
-// subscription. Prices come from content/site.ts; until set they read
-// "Price to be announced". Subscription plans are built as card slots
-// (PLAN_SLOTS) and switched on later by setting `enabled: true`.
+// Pricing, per Website Copy v7 (section 07): pay as you go, plus (revision
+// brief 2, item 42) the monthly subscription plans and prices from the
+// previous version of the website. Lesson prices come from content/site.ts;
+// until set they read "Price to be announced". Other card slots stay off
+// until `enabled: true`. No currency is stated until the client confirms it.
 
 interface PlanSlot {
   name: string
@@ -21,20 +22,47 @@ interface PlanSlot {
   price: string | null
   features: string[]
   enabled: boolean
+  /** One-line description under the plan name. */
+  line?: string
+  /** Shows a "Most popular" badge. */
+  popular?: boolean
 }
 
 // Card slots from the copy doc's "Pricing build slots". To confirm before
 // any go live: public-facing names, what each includes, and prices.
 const PLAN_SLOTS: PlanSlot[] = [
-  { name: 'Basic Subscription', type: 'Monthly', price: '$79.00', features: [], enabled: false },
-  { name: 'Premium Subscription', type: 'Monthly', price: '$199.00', features: [], enabled: false },
+  {
+    name: 'Starter',
+    type: 'Monthly',
+    price: '$39',
+    line: 'For your first real conversations.',
+    features: ['Full AI roadmap', '2 live native-speaker sessions / month', 'Progress tracked after every conversation'],
+    enabled: true,
+  },
+  {
+    name: 'Growth',
+    type: 'Monthly',
+    price: '$89',
+    line: 'For steady, visible momentum.',
+    features: ['Everything in Starter', '4 live native-speaker sessions / month', 'Business or exam-prep track (IELTS and TOEFL)'],
+    enabled: true,
+    popular: true,
+  },
+  {
+    name: 'Intensive',
+    type: 'Monthly',
+    price: '$159',
+    line: 'For a deadline you intend to hit.',
+    features: ['Everything in Growth', '8 live sessions / month and priority scheduling', 'Weekly roadmap check-ins'],
+    enabled: true,
+  },
   { name: 'P2P Tutoring', type: 'Per session', price: null, features: [], enabled: false },
   { name: 'AI-Based Feedback', type: 'Add-on', price: null, features: [], enabled: false },
   { name: 'Exam Courses', type: 'Course', price: null, features: [], enabled: false },
 ]
 
 const FAQ: { q: string; a: string }[] = [
-  { q: 'Do I have to subscribe?', a: 'No. You pay for the lessons you book, and nothing more.' },
+  { q: 'Do I have to subscribe?', a: 'No. You can pay for each lesson you book, or choose a monthly plan.' },
   { q: 'What is free?', a: 'Your personalized learning path and your progress overview.' },
   { q: 'Is there a demo lesson?', a: 'No. Your level and path are created before you book, so you can see the direction first.' },
   {
@@ -93,6 +121,8 @@ function PaidCard({
   features,
   cta,
   delay,
+  line,
+  popular = false,
 }: {
   eyebrow: string
   title: string
@@ -101,12 +131,20 @@ function PaidCard({
   features: string[]
   cta: string
   delay: number
+  line?: string
+  popular?: boolean
 }) {
   return (
     <Reveal delay={delay}>
-      <div className="flex h-full flex-col rounded-3xl bg-white p-8 shadow-[0_30px_80px_rgba(0,0,0,0.35)]">
+      <div
+        className={`relative flex h-full flex-col rounded-3xl bg-white p-8 shadow-[0_30px_80px_rgba(0,0,0,0.35)] ${popular ? 'ring-4 ring-brand-cyan' : ''}`}
+      >
+        {popular && (
+          <span className="absolute right-6 top-6 rounded-full bg-brand-blue px-3 py-1 text-sm font-bold text-white">Most popular</span>
+        )}
         <p className="text-sm font-bold uppercase tracking-[0.25em] text-brand-blue">{eyebrow}</p>
         <h3 className="mt-3 text-2xl font-extrabold tracking-tight text-navy-950">{title}</h3>
+        {line && <p className="mt-1.5 text-navy-700/70">{line}</p>}
         <p className="mt-5 flex items-baseline gap-2">
           {price ? (
             <>
@@ -249,19 +287,28 @@ export default function Pricing() {
         </div>
 
         {livePlans.length > 0 && (
-          <div className="mx-auto mt-10 grid max-w-6xl gap-6 md:grid-cols-3">
-            {livePlans.map((p, i) => (
-              <PaidCard
-                key={p.name}
-                eyebrow={p.type}
-                title={p.name}
-                price={p.price}
-                features={p.features}
-                cta="Start Your Journey"
-                delay={i * 0.08}
-              />
-            ))}
-          </div>
+          <>
+            <div className="mx-auto mt-16 max-w-2xl text-center">
+              <p className="text-sm font-bold uppercase tracking-[0.25em] text-brand-cyan">Subscription</p>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">Prefer a monthly plan?</h2>
+            </div>
+            <div className="mx-auto mt-10 grid max-w-6xl gap-6 md:grid-cols-3">
+              {livePlans.map((p, i) => (
+                <PaidCard
+                  key={p.name}
+                  eyebrow={p.type}
+                  title={p.name}
+                  line={p.line}
+                  price={p.price}
+                  unit="per month"
+                  features={p.features}
+                  cta="Start Your Journey"
+                  delay={i * 0.08}
+                  popular={p.popular}
+                />
+              ))}
+            </div>
+          </>
         )}
       </NavyBand>
 
