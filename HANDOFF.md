@@ -801,3 +801,9 @@ the picture source for ~25 picture items.
   newcomer-family. PageHeader image takes optional `position`.
   Riley sent a second batch (teacher at whiteboard, study group, handshake,
   meeting...) that didn't arrive as files; ask him to save them to a folder.
+- Home "Less rehearsing" section (Oct 27 2026): per Riley's mock-up, the
+  flashcard comparison (WhereLearnersGetStuck) is now a split card: eyebrow
+  "Real people. Real conversations.", "Turn what you learn into confident
+  conversation.", one line, "Start speaking" button (LEARNER_SIGNUP_URL), and
+  photo record-store-chat (also used on For Learners tiles). Flashcard helpers
+  removed.

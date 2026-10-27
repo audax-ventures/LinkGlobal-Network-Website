@@ -1,161 +1,50 @@
-import { useEffect, useRef, useState } from 'react'
-import { motion, useInView } from 'framer-motion'
 import NavyBand from '../NavyBand'
 import PeoplePhilosophy from './PeoplePhilosophy'
 import { PersonalizedPathsTour } from './TourSections'
-import { Reveal, Section, SectionHeading, side } from '../blocks'
-import { PENDING } from '../../content/site'
+import { Reveal, Section, SectionHeading } from '../blocks'
+import { LEARNER_SIGNUP_URL, PENDING } from '../../content/site'
 import PhotoCarousel from '../PhotoCarousel'
+import Photo from '../Photo'
+import SmartLink from '../SmartLink'
 import { ChatIcon, GraduationCapIcon, SparkleIcon } from '../icons/LineIcons'
 
 // Homepage sections from Website Copy v7 (section 02), in reading order.
 
-// "From studying to speaking" comparison, simplified per revision brief 2
-// (item 8, the client's suggestion): the left card is one big flashcard next
-// to a silent "..." bubble; on the right the same flashcard flips into the
-// spoken reply, with the word highlighted and a tick. Loops while on screen.
-function Flashcard({ className = '' }: { className?: string }) {
-  return (
-    <div className={`rounded-2xl border border-navy-900/10 bg-white px-6 py-5 text-center shadow-[5px_7px_0_#e3eef5] ${className}`}>
-      <strong lang="es" className="block text-3xl font-extrabold tracking-tight text-navy-950">
-        un café
-      </strong>
-      <span className="mt-1 block text-base text-navy-700/60">a coffee</span>
-    </div>
-  )
-}
-
-function SilentBubble() {
-  return (
-    <div className="flex items-center gap-1.5 rounded-2xl rounded-bl-[4px] bg-[#edf3f7] px-5 py-4" aria-label="No reply">
-      {[0, 1, 2].map((i) => (
-        <motion.span
-          key={i}
-          className="h-2.5 w-2.5 rounded-full bg-navy-700/30"
-          animate={{ opacity: [0.25, 0.8, 0.25] }}
-          transition={{ duration: 1.4, repeat: Infinity, delay: i * 0.2 }}
-        />
-      ))}
-    </div>
-  )
-}
-
-function SpokenReply() {
-  const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { amount: 0.5 })
-  const [phase, setPhase] = useState(0) // 0 flashcard, 1 flipping, 2 spoken + tick
-  useEffect(() => {
-    if (!inView) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setPhase(2)
-      return
-    }
-    const steps = [1100, 450, 2800] // time on phases 0, 1, 2
-    let t: number
-    const run = (p: number) => {
-      setPhase(p)
-      t = window.setTimeout(() => run((p + 1) % 3), steps[p])
-    }
-    run(0)
-    return () => window.clearTimeout(t)
-  }, [inView])
-
-  return (
-    <div ref={ref} className="flex flex-col gap-4" style={{ perspective: 900 }}>
-      <div className="max-w-[88%] self-start rounded-2xl rounded-bl-[4px] bg-[#edf3f7] px-4 py-3 text-lg leading-snug text-navy-950">
-        <span lang="es">¡Hola! ¿Qué te pongo?</span>
-        <small className="mt-0.5 block text-sm text-navy-700/60">Hi! What can I get you?</small>
-      </div>
-      <div className="relative min-h-[112px] self-end">
-        <motion.div
-          animate={{ rotateY: phase === 0 ? 0 : 90, opacity: phase === 2 ? 0 : 1 }}
-          transition={{ duration: 0.45, ease: 'easeIn' }}
-          className="absolute right-0 top-0"
-          style={{ transformOrigin: 'center', display: phase === 2 ? 'none' : 'block' }}
-          aria-hidden="true"
-        >
-          <Flashcard />
-        </motion.div>
-        <motion.div
-          initial={false}
-          animate={{ rotateY: phase === 2 ? 0 : -90, opacity: phase === 2 ? 1 : 0 }}
-          transition={{ duration: 0.45, ease: 'easeOut' }}
-          className="rounded-2xl rounded-br-[4px] bg-brand-blue px-4 py-3 text-lg leading-snug text-white"
-        >
-          <span lang="es">
-            Un <mark className="rounded-md bg-white px-1.5 font-bold text-brand-blue">café</mark>, por favor.
-          </span>
-          <small className="mt-0.5 block text-sm text-white/80">A coffee, please.</small>
-        </motion.div>
-      </div>
-      <motion.p
-        animate={{ opacity: phase === 2 ? 1 : 0, y: phase === 2 ? 0 : 6 }}
-        transition={{ duration: 0.3, delay: phase === 2 ? 0.25 : 0 }}
-        className="flex items-center justify-end gap-2 text-base font-semibold text-emerald-700"
-      >
-        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-500 text-white" aria-hidden="true">
-          ✓
-        </span>
-        You said it.
-      </motion.p>
-    </div>
-  )
-}
-
-function StudyPanelTop({ label, meta, speaking = false }: { label: string; meta: string; speaking?: boolean }) {
-  return (
-    <div className="mb-3 flex items-center justify-between gap-2">
-      <span className={`text-sm font-bold uppercase tracking-[0.15em] ${speaking ? 'text-brand-blue' : 'text-navy-700/60'}`}>{label}</span>
-      <span className="text-sm text-navy-700/60">{meta}</span>
-    </div>
-  )
-}
-
+// "Less rehearsing. More living." Split layout per Riley's mock-up (Oct 2026):
+// copy and a call to action on the left, a stock photo of a real conversation
+// on the right. Replaced the flashcard comparison (item 8).
 export function WhereLearnersGetStuck() {
   return (
     <Section>
-      <SectionHeading
-        eyebrow="Less rehearsing. More living."
-        title={
-          <>
-            One conversation can unlock
-            <br className="hidden sm:block" /> what a month of study <span className="text-brand-blue">couldn’t.</span>
-          </>
-        }
-        line="You’ve learned the words. Now feel what happens when you use them with someone."
-      />
-
-      <div className="mx-auto mt-12 grid max-w-4xl gap-5 md:grid-cols-2">
+      <div className="mx-auto grid max-w-6xl items-center gap-10 rounded-[2rem] bg-[#f6f9fc] p-7 sm:p-12 md:grid-cols-2 lg:gap-14 lg:p-16">
         <Reveal from="left">
-          <article className="flex h-full flex-col rounded-3xl bg-white p-7 shadow-[0_12px_34px_rgba(11,53,84,0.06)]">
-            <StudyPanelTop label="A month of study" meta="30 days" />
-            <h3 className="text-2xl font-bold tracking-tight text-navy-950 sm:text-3xl">“I know this word.”</h3>
-            <div className="mt-8 flex flex-1 items-center justify-center gap-4">
-              <Flashcard className="-rotate-2" />
-              <SilentBubble />
-            </div>
-          </article>
-        </Reveal>
-
-        <Reveal delay={0.1} from="right">
-          <article
-            className="flex h-full flex-col rounded-3xl bg-white p-7 shadow-[inset_0_0_0_2px_#1ba3e0,0_12px_34px_rgba(27,163,224,0.1)]"
-            aria-label="Conversation preview"
+          <p className="text-sm font-bold uppercase tracking-[0.25em] text-brand-blue">Real people. Real conversations.</p>
+          <h2 className="mt-5 text-4xl font-extrabold leading-[1.05] tracking-tight text-navy-950 sm:text-5xl">
+            Turn what you learn into <span className="text-brand-blue">confident conversation.</span>
+          </h2>
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-navy-700/75 sm:text-xl">
+            Practise with native speakers and build the confidence to use your language in everyday life.
+          </p>
+          <SmartLink
+            to={LEARNER_SIGNUP_URL}
+            className="mt-8 inline-flex items-center gap-3 rounded-full px-8 py-4 text-lg font-semibold text-white shadow-[0_10px_28px_rgba(30,120,190,0.3)] transition-transform hover:scale-105"
+            style={{ background: 'linear-gradient(90deg, #1ba3e0, #3ec6ff)' }}
           >
-            <StudyPanelTop label="One real conversation" meta="1 moment" speaking />
-            <h3 className="text-2xl font-bold tracking-tight text-navy-950 sm:text-3xl">“I can actually say it.”</h3>
-            <div className="mt-8">
-              <SpokenReply />
-            </div>
-          </article>
+            Start speaking <span aria-hidden="true">→</span>
+          </SmartLink>
+        </Reveal>
+        <Reveal delay={0.1} from="right">
+          <div className="relative aspect-square overflow-hidden rounded-[1.75rem] shadow-[0_24px_60px_rgba(19,41,82,0.16)]">
+            <Photo
+              src="/photos/record-store-chat.jpg"
+              alt="Two friends deep in conversation in a record shop, one smiling and gesturing as she talks"
+              sizes="(min-width: 768px) 520px, 90vw"
+              className="absolute inset-0 h-full w-full object-cover"
+              style={{ objectPosition: '50% 35%' }}
+            />
+          </div>
         </Reveal>
       </div>
-
-      <Reveal className="mt-10 text-center">
-        <p className="text-lg text-navy-700/75 sm:text-xl">
-          Study builds your knowledge. <strong className="font-bold text-navy-950">Conversation puts it to work.</strong>
-        </p>
-      </Reveal>
     </Section>
   )
 }
