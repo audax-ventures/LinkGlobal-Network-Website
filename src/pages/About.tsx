@@ -9,19 +9,20 @@ import { motion } from 'framer-motion'
 import { SparkleIcon } from '../components/icons/LineIcons'
 import Photo from '../components/Photo'
 
-// About, per Website Copy v7 (section 06). Team photos aren't supplied yet,
-// so each person shows initials; swap in photos via `photo` when they arrive.
+// About, per Website Copy v7 (section 06). Team photos supplied by Riley
+// (Oct 2026), cropped square to the face; anyone without `photo` shows initials.
 
 const TEAM: { name: string; role: string; line: string; photo?: string }[] = [
-  { name: 'Huseyn Maharramov', role: 'President Director', line: 'Leads LinkGlobal with one aim: that language never decides who gets heard.' },
+  { name: 'Huseyn Maharramov', role: 'President Director', photo: '/photos/team-huseyn.jpg', line: 'Leads LinkGlobal with one aim: that language never decides who gets heard.' },
   {
     name: 'Ehsan Jafari Dastgerdi',
     role: 'Chief Academic Officer & Head of R&D',
+    photo: '/photos/team-ehsan.jpg',
     line: 'Puts years of classroom experience into a path someone can follow in weeks.',
   },
-  { name: 'Mahmud Rahimov', role: 'Project Advisor', line: 'Turns what learners struggle with into what the platform does next.' },
-  { name: 'Davood Zivar', role: 'Project Manager', line: 'Makes sure what we promise a learner actually arrives.' },
-  { name: 'Banu Akhundlu', role: 'Manager', line: 'Writes so that nobody ever feels behind.' },
+  { name: 'Mahmud Rahimov', role: 'Project Advisor', photo: '/photos/team-mahmud.jpg', line: 'Turns what learners struggle with into what the platform does next.' },
+  { name: 'Davood Zivar', role: 'Project Manager', photo: '/photos/team-davood.jpg', line: 'Makes sure what we promise a learner actually arrives.' },
+  { name: 'Banu Akhundlu', role: 'Manager', photo: '/photos/team-banu.jpg', line: 'Writes so that nobody ever feels behind.' },
 ]
 
 const COLORS = ['#1ba3e0', '#f5a623', '#2dd4bf', '#a78bfa', '#f472b6', '#4ade80']
@@ -122,7 +123,7 @@ export default function About() {
             <Reveal key={p.name} delay={(i % 3) * 0.08}>
               <div className="h-full rounded-3xl bg-white p-7 shadow-[0_15px_40px_rgba(19,41,82,0.08)]">
                 {p.photo ? (
-                  <Photo src={p.photo} sizes="64px" alt={`${p.name}, ${p.role} at LinkGlobal`} className="h-16 w-16 rounded-full object-cover" />
+                  <Photo src={p.photo} sizes="96px" alt={`${p.name}, ${p.role} at LinkGlobal`} className="h-24 w-24 rounded-full object-cover shadow-[0_8px_20px_rgba(19,41,82,0.15)]" />
                 ) : (
                   <span
                     className="flex h-16 w-16 items-center justify-center rounded-full text-lg font-extrabold text-white"

@@ -866,3 +866,7 @@ the picture source for ~25 picture items.
   emits the three monthly plans (priceCurrency CAD) and will add lesson / AI
   Feedback once priced; chatbot states prices are CAD. (Older notes saying
   "currency unknown, never state one" are superseded.)
+- Team photos (Oct 27 2026, from Riley): About team cards now show round
+  96px photos (public/photos/team-huseyn / ehsan / mahmud / davood / banu,
+  square face crops at 480px). Samad's photo also came but his card was
+  deleted (item 38), so it isn't used.
