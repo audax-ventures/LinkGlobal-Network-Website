@@ -870,3 +870,6 @@ the picture source for ~25 picture items.
   96px photos (public/photos/team-huseyn / ehsan / mahmud / davood / banu,
   square face crops at 480px). Samad's photo also came but his card was
   deleted (item 38), so it isn't used.
+- Oct 27 2026: Riley asked to revert the Home "Less rehearsing" section to
+  the flashcard comparison (item 8 version). HomeSections.tsx restored from
+  before f9abf89. cafe-laughing.jpg is now unused (kept as a spare).
