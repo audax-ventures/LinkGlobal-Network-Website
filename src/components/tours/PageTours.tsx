@@ -313,7 +313,7 @@ const EXAMPLES = [
     topic: 'New city',
     icon: '✈️',
     you: 'You’re moving somewhere new.',
-    youPhoto: ['/photos/newcomers-arriving.jpg', 'A traveller with a backpack, ready to set off', '72% 35%'],
+    youPhoto: ['/photos/newcomers-arriving.jpg', 'A traveller with a backpack, ready to set off', '92% 35%'],
     themPhoto: ['/photos/local-in-park.jpg', 'A local smiling with her laptop in a city park', '45% 30%'],
     them: 'They’ve lived where you’re going.',
     question: 'What are you looking forward to most?',
