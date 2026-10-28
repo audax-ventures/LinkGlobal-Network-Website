@@ -123,6 +123,7 @@ function PaidCard({
   delay,
   line,
   popular = false,
+  priceNote,
 }: {
   eyebrow: string
   title: string
@@ -133,6 +134,7 @@ function PaidCard({
   delay: number
   line?: string
   popular?: boolean
+  priceNote?: string
 }) {
   return (
     <Reveal delay={delay}>
@@ -154,7 +156,7 @@ function PaidCard({
               {unit && <span className="text-navy-700/60">{unit}</span>}
             </>
           ) : (
-            <span className="text-xl font-bold text-navy-700/60">Price to be announced</span>
+            <span className="text-xl font-bold text-navy-700/60">{priceNote ?? 'Price to be announced'}</span>
           )}
         </p>
         <ul className="mt-6 flex-1 space-y-3">
@@ -273,7 +275,8 @@ export default function Pricing() {
             title="Book lessons individually with a certified educator."
             price={PENDING.lessonPrice}
             unit={`${PENDING.currency ?? ''} per lesson`.trim()}
-            features={['Live one-to-one session', 'Educator briefed from your path', 'Your path updated afterwards']}
+            priceNote="Set by your educator"
+            features={['30 or 60 minute sessions, each educator sets their own rate', 'Live one-to-one session', 'Educator briefed from your path', 'Your path updated afterwards']}
             cta="Start Your Journey"
             delay={0}
           />

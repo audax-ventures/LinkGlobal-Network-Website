@@ -89,7 +89,7 @@ export default function Contact() {
           </>
         }
         description={`Tell us what brought you here. Every message is read by a person${
-          PENDING.replyDays ? `, and we reply within ${PENDING.replyDays} business days` : ''
+          PENDING.replyDays ? `, and we reply within ${PENDING.replyDays === 1 ? 'one business day' : `${PENDING.replyDays} business days`}` : ''
         }.`}
         image={{ src: '/photos/learner-sofa.jpg', alt: 'A woman smiling as she types a message on her laptop', position: '50% 35%' }}
       />

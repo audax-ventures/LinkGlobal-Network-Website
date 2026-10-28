@@ -875,3 +875,12 @@ the picture source for ~25 picture items.
   before f9abf89. cafe-laughing.jpg is now unused (kept as a spare).
 
 - Intro: added the Persian greeting "درود" to the cycling greetings (after سلام). First run now takes ~4.0s, still inside the 5.2s autoplay.
+- Oct 28 2026, client info from Riley: PENDING.languages = the 32 platform
+  languages (Pricing FAQ + chatbot); replyDays = 1 (Contact says "one business
+  day"); educatorSelection = generic "reviewed and qualified by LinkGlobal"
+  line, shown under the For Educators dashboard. Pay-as-you-go lessons are
+  priced by each educator (30 / 60 min rates), so lessonPrice stays null and
+  the lesson card shows "Set by your educator" (PaidCard `priceNote`).
+  Socials coming from Riley later; testimonial names and proof numbers not
+  yet (don't ask the client). Still asked of the client: final free list,
+  AI Feedback price, confirm monthly plans.

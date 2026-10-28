@@ -46,7 +46,8 @@ export const LEGAL: { privacy: string | null; terms: string | null; dataDeletion
 }
 
 export const PENDING = {
-  /** Pay-as-you-go lesson price, e.g. '$45'. */
+  /** Pay-as-you-go lesson price, e.g. '$45'. Stays null: each educator sets
+   *  their own rate for 30 and 60 minute sessions (Riley, Oct 28 2026). */
   lessonPrice: null as string | null,
   /** ISO currency for the prices above, e.g. 'CAD'. Needed for Google's
    *  Product data on Pricing (only emitted once prices + currency are set). */
@@ -54,11 +55,13 @@ export const PENDING = {
   /** Personal AI Feedback price, e.g. '$15'. */
   aiFeedbackPrice: null as string | null,
   /** Languages currently offered, e.g. ['English', 'French']. */
-  languages: null as string[] | null,
+  languages: [
+    'English', 'German', 'French', 'Spanish', 'Italian', 'Portuguese', 'Dutch', 'Hindi', 'Mandarin Chinese', 'Arabic', 'Russian', 'Indonesian', 'Turkish', 'Persian', 'Bengali', 'Japanese', 'Korean', 'Vietnamese', 'Urdu', 'Polish', 'Ukrainian', 'Azerbaijani', 'Romanian', 'Hungarian', 'Czech', 'Greek', 'Georgian', 'Uzbek', 'Slovak', 'Thai', 'Swahili', 'Hebrew',
+  ] as string[] | null,
   /** Contact reply time in business days, e.g. 2. */
-  replyDays: null as number | null,
+  replyDays: 1 as number | null,
   /** One sentence on the educator selection process (For Educators). */
-  educatorSelection: null as string | null,
+  educatorSelection: 'Every educator is reviewed and qualified by LinkGlobal before they teach their first lesson.' as string | null,
   /** Proof band on Home. The band only shows once all three are set. */
   proof: { conversations: null as string | null, educators: null as string | null, countries: null as string | null },
   /** Testimonial attributions, in the order the quotes appear on Home. */

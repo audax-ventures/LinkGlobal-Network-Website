@@ -158,6 +158,12 @@ export default function ForEducators() {
 
       <FeatureRows heading="Your dashboard" rows={DASHBOARD} />
 
+      {PENDING.educatorSelection && (
+        <Reveal className="mx-auto mt-4 max-w-2xl px-6 text-center">
+          <p className="text-xl font-semibold text-navy-950">{PENDING.educatorSelection}</p>
+        </Reveal>
+      )}
+
       <div className="pt-12" />
       <CtaBand primary={{ label: 'Start Teaching With Us', to: EDUCATOR_SIGNUP_URL }} />
     </PageShell>
