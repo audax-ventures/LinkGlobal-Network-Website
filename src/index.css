@@ -60,36 +60,3 @@ html[data-intro='on'] .lg-hide-on-intro {
   opacity: 0 !important;
   pointer-events: none;
 }
-
-/* Intuitina chatbot (src/components/chat/intuitina.ts): its own launcher
-   stays hidden so only the mascot shows. While the chat window is open the
-   widget shows and the mascot steps aside.
-   visibility (not display) so the widget keeps loading and sizing itself. */
-html:not([data-lg-chat-open]) [data-lg-intuitina] {
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-/* Intuitina's closed-state launcher iframe sits invisibly over the mascot,
-   so a click on the mascot lands on Intuitina's own icon and opens the chat. */
-html:not([data-lg-chat-open]) iframe[data-lg-launcher-frame] {
-  visibility: visible !important;
-  opacity: 0 !important;
-  pointer-events: auto !important;
-  position: fixed !important;
-  left: var(--lg-frame-left) !important;
-  top: var(--lg-frame-top) !important;
-  right: auto !important;
-  bottom: auto !important;
-  margin: 0 !important;
-  transform: none !important;
-  z-index: 51 !important;
-}
-html[data-intro='on'] iframe[data-lg-launcher-frame] {
-  pointer-events: none !important;
-}
-html[data-lg-chat-open] .lg-chat-launcher {
-  display: none;
-}
-html[data-lg-chat-hover] .lg-chat-launcher {
-  transform: scale(1.05);
-}

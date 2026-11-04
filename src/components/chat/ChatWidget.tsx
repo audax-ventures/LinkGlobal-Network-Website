@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { openIntuitina } from './intuitina'
 
 // The assistant's display name — change it here and it updates everywhere in
 // the widget (the server-side persona in api/chat.ts is separate).
@@ -248,15 +247,10 @@ export default function ChatWidget() {
 
       <button
         type="button"
-        onClick={() => {
-          // Intuitina is the chatbot. The panel above is only a fallback for
-          // when its widget hasn't loaded (blocked, or still loading).
-          if (!open && openIntuitina()) return
-          setOpen((o) => !o)
-        }}
+        onClick={() => setOpen((o) => !o)}
         aria-label={open ? `Close chat with ${ASSISTANT_NAME}` : `Chat with ${ASSISTANT_NAME}`}
         aria-expanded={open}
-        className="lg-hide-on-intro lg-chat-launcher fixed bottom-5 right-4 z-50 flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-white shadow-[0_10px_30px_rgba(10,17,40,0.25)] ring-1 ring-navy-900/[0.08] transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue sm:right-6"
+        className="lg-hide-on-intro fixed bottom-5 right-4 z-50 flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-white shadow-[0_10px_30px_rgba(10,17,40,0.25)] ring-1 ring-navy-900/[0.08] transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue sm:right-6"
       >
         <img src={MASCOT_SRC} alt="" className="h-full w-full scale-[1.15]" draggable={false} />
       </button>
