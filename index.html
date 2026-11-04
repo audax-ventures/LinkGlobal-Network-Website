@@ -104,5 +104,22 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- Intuitina chatbot (Nov 2026). The site is a single-page app, so this
+         one script covers every page. Loads after the page has finished
+         loading so it doesn't slow down the first paint. -->
+    <script>
+      window.addEventListener('load', function () {
+        if (!document.getElementById('custom-chatbot-iframe')) {
+          var script = document.createElement('script');
+          script.src = 'https://chat.intuitina.com/widget.js';
+          script.async = true;
+          script.setAttribute('cid', 'MjYxMDI2NTM0');
+          script.setAttribute('pod', '4');
+          /* Send user details to the bot so its not requested again */
+          /* script.setAttribute('data-userdetails','name:Users name,email:Users email,company:Users company'); */
+          document.body.appendChild(script);
+        }
+      });
+    </script>
   </body>
 </html>

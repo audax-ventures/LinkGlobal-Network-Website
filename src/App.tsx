@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import FloatingNav from './components/nav/FloatingNav'
-import ChatWidget from './components/chat/ChatWidget'
 import CookieConsent from './components/CookieConsent'
 import ScrollToTop from './components/ScrollToTop'
 import PageMeta from './components/PageMeta'
@@ -22,7 +21,9 @@ function App() {
   return (
     <BrowserRouter>
       <FloatingNav />
-      <ChatWidget />
+      {/* The chatbot is Intuitina, loaded by the script at the end of
+          index.html, using its own launcher icon. The old mascot launcher
+          (components/chat/ChatWidget.tsx) is off for now. */}
       <CookieConsent />
       <ScrollToTop />
       <PageMeta />
