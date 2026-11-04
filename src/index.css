@@ -60,3 +60,15 @@ html[data-intro='on'] .lg-hide-on-intro {
   opacity: 0 !important;
   pointer-events: none;
 }
+
+/* Intuitina chatbot (src/components/chat/intuitina.ts): its own launcher
+   stays hidden so only the mascot shows. After the mascot is clicked, the
+   widget shows and the mascot steps aside until the chat is closed.
+   visibility (not display) so the widget keeps loading and sizing itself. */
+html:not([data-lg-chat-open]) [data-lg-intuitina] {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+html[data-lg-chat-open] .lg-chat-launcher {
+  display: none;
+}
