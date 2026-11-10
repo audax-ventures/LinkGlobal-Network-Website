@@ -22,7 +22,7 @@ const TEAM: { name: string; role: string; line: string; photo?: string }[] = [
     line: 'What seems impossible comes within reach through self-belief, clear thinking, precise planning, and innovation.',
   },
   { name: 'Mahmud Rahimov', role: 'Admin', photo: '/photos/team-mahmud.jpg', line: 'From Nothing To Something To Everything.' },
-  { name: 'Davood Zivar', role: 'Project Manager', photo: '/photos/team-davood.jpg', line: 'Test it, break it, make it better.' },
+  { name: 'Davud Zivar', role: 'Project Manager', photo: '/photos/team-davood.jpg', line: 'Test it, break it, make it better.' },
   { name: 'Banu Akhundlu', role: 'Manager', photo: '/photos/team-banu.jpg', line: 'Grateful for how far you’ve come, excited for how far you can go.' },
   { name: 'Mahal Abayeva', role: 'Marketing Manager', photo: '/photos/team-mahal.jpg', line: 'Build Empires.' },
 ]
@@ -137,12 +137,13 @@ export default function About() {
                 )}
                 <h3 className="mt-5 text-lg font-bold text-navy-950">{p.name}</h3>
                 <p className="text-sm font-semibold text-brand-blue">{p.role}</p>
-                <blockquote className="relative mt-5 rounded-2xl rounded-tl-sm bg-brand-blue/[0.08] px-4 py-3 font-medium italic leading-relaxed text-navy-800">
+                <blockquote className="relative mt-6 rounded-[1.75rem] border-2 border-brand-blue/30 bg-[#e8f6fd] px-5 py-4 font-medium italic leading-relaxed text-navy-800 shadow-[0_6px_16px_rgba(27,163,224,0.12)]">
+                  {/* Balloon tail pointing up at the person */}
                   <span
-                    className="absolute -top-2 left-0 h-0 w-0 border-b-[10px] border-r-[12px] border-b-brand-blue/[0.08] border-r-transparent"
+                    className="absolute -top-[11px] left-8 h-5 w-5 rotate-45 rounded-tl-[4px] border-l-2 border-t-2 border-brand-blue/30 bg-[#e8f6fd]"
                     aria-hidden="true"
                   />
-                  “{p.line}”
+                  <span className="relative">“{p.line}”</span>
                 </blockquote>
               </div>
             </Reveal>
