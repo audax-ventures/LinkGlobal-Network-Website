@@ -12,17 +12,19 @@ import Photo from '../components/Photo'
 // About, per Website Copy v7 (section 06). Team photos supplied by Riley
 // (Oct 2026), cropped square to the face; anyone without `photo` shows initials.
 
+// Mottos are the team's own words (client, Nov 2026), shown as speech bubbles.
 const TEAM: { name: string; role: string; line: string; photo?: string }[] = [
-  { name: 'Huseyn Maharramov', role: 'President Director', photo: '/photos/team-huseyn.jpg', line: 'Leads LinkGlobal with one aim: that language never decides who gets heard.' },
+  { name: 'Huseyn Maharramov', role: 'President Director', photo: '/photos/team-huseyn.jpg', line: 'Connecting the World in One App.' },
   {
     name: 'Ehsan Jafari Dastgerdi',
     role: 'Chief Academic Officer & Head of R&D',
     photo: '/photos/team-ehsan.jpg',
-    line: 'Puts years of classroom experience into a path someone can follow in weeks.',
+    line: 'What seems impossible comes within reach through self-belief, clear thinking, precise planning, and innovation.',
   },
-  { name: 'Mahmud Rahimov', role: 'Project Advisor', photo: '/photos/team-mahmud.jpg', line: 'Turns what learners struggle with into what the platform does next.' },
-  { name: 'Davood Zivar', role: 'Project Manager', photo: '/photos/team-davood.jpg', line: 'Makes sure what we promise a learner actually arrives.' },
-  { name: 'Banu Akhundlu', role: 'Manager', photo: '/photos/team-banu.jpg', line: 'Writes so that nobody ever feels behind.' },
+  { name: 'Mahmud Rahimov', role: 'Admin', photo: '/photos/team-mahmud.jpg', line: 'From Nothing To Something To Everything.' },
+  { name: 'Davood Zivar', role: 'Project Manager', photo: '/photos/team-davood.jpg', line: 'Test it, break it, make it better.' },
+  { name: 'Banu Akhundlu', role: 'Manager', photo: '/photos/team-banu.jpg', line: 'Grateful for how far you’ve come, excited for how far you can go.' },
+  { name: 'Mahal Abayeva', role: 'Marketing Manager', photo: '/photos/team-mahal.jpg', line: 'Build Empires.' },
 ]
 
 const COLORS = ['#1ba3e0', '#f5a623', '#2dd4bf', '#a78bfa', '#f472b6', '#4ade80']
@@ -135,7 +137,13 @@ export default function About() {
                 )}
                 <h3 className="mt-5 text-lg font-bold text-navy-950">{p.name}</h3>
                 <p className="text-sm font-semibold text-brand-blue">{p.role}</p>
-                <p className="mt-3 leading-relaxed text-navy-700/75">{p.line}</p>
+                <blockquote className="relative mt-5 rounded-2xl rounded-tl-sm bg-brand-blue/[0.08] px-4 py-3 font-medium italic leading-relaxed text-navy-800">
+                  <span
+                    className="absolute -top-2 left-0 h-0 w-0 border-b-[10px] border-r-[12px] border-b-brand-blue/[0.08] border-r-transparent"
+                    aria-hidden="true"
+                  />
+                  “{p.line}”
+                </blockquote>
               </div>
             </Reveal>
           ))}

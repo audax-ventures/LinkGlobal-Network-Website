@@ -884,3 +884,10 @@ the picture source for ~25 picture items.
   Socials coming from Riley later; testimonial names and proof numbers not
   yet (don't ask the client). Still asked of the client: final free list,
   AI Feedback price, confirm monthly plans.
+- Nov 10 2026, client: About team cards now show each person's motto in a
+  speech bubble (tinted blue, tail top-left) instead of the old description.
+  Mahmud's role is now "Admin". New member Mahal Abayeva, Marketing Manager
+  (public/photos/team-mahal.jpg, face crop from the client photo). Client
+  spelt "Davud"; site still says "Davood Zivar" until confirmed. The client
+  mentioned a Brandbook, but it wasn't in the message, so none of its
+  formatting is applied yet.
