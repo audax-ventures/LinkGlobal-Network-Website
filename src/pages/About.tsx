@@ -3,7 +3,7 @@ import NavyBand from '../components/NavyBand'
 import PageHeader from '../components/PageHeader'
 import CtaBand from '../components/CtaBand'
 import { FromStudyToSpeaking } from '../components/tours/PageTours'
-import { OutcomeList, Reveal, Section, SectionHeading } from '../components/blocks'
+import { OutcomeList, Reveal, Section, SectionHeading, VideoFeature } from '../components/blocks'
 import { LEARNER_SIGNUP_URL } from '../content/site'
 import { motion } from 'framer-motion'
 import { SparkleIcon } from '../components/icons/LineIcons'
@@ -97,6 +97,14 @@ export default function About() {
           </Reveal>
         </div>
       </NavyBand>
+
+      <VideoFeature
+        eyebrow="Our mission"
+        title="For individuals, and the organizations they belong to."
+        src="/videos/linkglobal-mission.mp4"
+        poster="/videos/linkglobal-mission.jpg"
+        label="LinkGlobal's mission: language learning for individuals, universities, educational institutions and businesses"
+      />
 
       <Section>
         <SectionHeading eyebrow="What we measure" title="The outcomes we consider meaningful." />

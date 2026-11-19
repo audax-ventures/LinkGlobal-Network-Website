@@ -310,3 +310,38 @@ export function OutcomeList({ items, photos, dark = false }: { items: string[]; 
     </ul>
   )
 }
+
+/** Client video with a heading. Streams only once played (preload="none"),
+ *  so the ~50MB files in public/videos don't slow the page down. */
+export function VideoFeature({
+  eyebrow,
+  title,
+  src,
+  poster,
+  label,
+  className = '',
+}: {
+  eyebrow: string
+  title: ReactNode
+  src: string
+  poster: string
+  label: string
+  className?: string
+}) {
+  return (
+    <Section className={className}>
+      <SectionHeading eyebrow={eyebrow} title={title} />
+      <Reveal className="mx-auto mt-10 max-w-5xl">
+        <video
+          className="aspect-video w-full rounded-[2rem] bg-navy-950 object-cover shadow-[0_30px_80px_rgba(19,41,82,0.25)]"
+          src={src}
+          poster={poster}
+          controls
+          playsInline
+          preload="none"
+          aria-label={label}
+        />
+      </Reveal>
+    </Section>
+  )
+}

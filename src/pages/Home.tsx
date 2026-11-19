@@ -6,6 +6,7 @@ import JourneyDashboard from '../components/dashboard/JourneyDashboard'
 import CtaBand from '../components/CtaBand'
 import { LearnerOutcomes, Philosophy, ThreePartsPhotos, WhereLearnersGetStuck } from '../components/home/HomeSections'
 import { LEARNER_SIGNUP_URL } from '../content/site'
+import { VideoFeature } from '../components/blocks'
 
 // Home, trimmed per the client's Oct 2026 design notes (less text, more
 // imagery, Lingoda as reference). The fuller v7 sections now live on For
@@ -22,6 +23,13 @@ export default function Home() {
     <PageShell footerFade={false}>
       <IntroSection />
       <Hero />
+      <VideoFeature
+        eyebrow="See it in action"
+        title="One minute inside LinkGlobal."
+        src="/videos/linkglobal-tour.mp4"
+        poster="/videos/linkglobal-tour.jpg"
+        label="A one-minute tour of the LinkGlobal platform: creating an account, practising with AI, feedback and a live lesson"
+      />
       <Philosophy />
       <WhereLearnersGetStuck />
       <ThreePartsPhotos />
