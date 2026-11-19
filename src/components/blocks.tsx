@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
@@ -311,8 +311,10 @@ export function OutcomeList({ items, photos, dark = false }: { items: string[]; 
   )
 }
 
-/** Client video with a heading. Streams only once played (preload="none"),
- *  so the ~50MB files in public/videos don't slow the page down. */
+/** Client video with a heading. Plays by itself, muted (browsers only allow
+ *  autoplay without sound), once it scrolls into view, and pauses when it
+ *  leaves, so the ~50MB files in public/videos only download if someone gets
+ *  there. Controls stay so visitors can turn the sound on. */
 export function VideoFeature({
   eyebrow,
   title,
@@ -328,15 +330,35 @@ export function VideoFeature({
   label: string
   className?: string
 }) {
+  const ref = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    const v = ref.current
+    if (!v) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) v.play().catch(() => {})
+        else v.pause()
+      },
+      { threshold: 0.4 },
+    )
+    io.observe(v)
+    return () => io.disconnect()
+  }, [])
+
   return (
     <Section className={className}>
       <SectionHeading eyebrow={eyebrow} title={title} />
       <Reveal className="mx-auto mt-10 max-w-5xl">
         <video
+          ref={ref}
           className="aspect-video w-full rounded-[2rem] bg-navy-950 object-cover shadow-[0_30px_80px_rgba(19,41,82,0.25)]"
           src={src}
           poster={poster}
           controls
+          muted
+          loop
           playsInline
           preload="none"
           aria-label={label}

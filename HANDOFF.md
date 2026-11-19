@@ -898,3 +898,6 @@ the picture source for ~25 picture items.
   720p H.264 with macOS avconvert (originals were 124/143MB, over GitHub's
   100MB limit); posters are frames from each. `VideoFeature` in blocks.tsx,
   preload="none" so nothing downloads until play.
+- Videos autoplay (Riley, Nov 19 2026): VideoFeature plays muted + looped
+  when 40% in view (IntersectionObserver), pauses when it leaves; controls
+  kept for sound. Skipped under prefers-reduced-motion.
