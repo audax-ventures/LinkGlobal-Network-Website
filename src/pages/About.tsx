@@ -51,6 +51,14 @@ export default function About() {
         image={{ src: '/photos/thinking-at-whiteboard.jpg', alt: 'A man reading his notes in front of a whiteboard', position: '50% 30%' }}
       />
 
+      <VideoFeature
+        eyebrow="Our mission"
+        title="For individuals, and the organizations they belong to."
+        src="/videos/linkglobal-mission.mp4"
+        poster="/videos/linkglobal-mission.jpg"
+        label="LinkGlobal's mission: language learning for individuals, universities, educational institutions and businesses"
+      />
+
       <FromStudyToSpeaking />
 
       {/* Brief 2, item 36: graphics either side of the headline (AI on one
@@ -97,14 +105,6 @@ export default function About() {
           </Reveal>
         </div>
       </NavyBand>
-
-      <VideoFeature
-        eyebrow="Our mission"
-        title="For individuals, and the organizations they belong to."
-        src="/videos/linkglobal-mission.mp4"
-        poster="/videos/linkglobal-mission.jpg"
-        label="LinkGlobal's mission: language learning for individuals, universities, educational institutions and businesses"
-      />
 
       <Section>
         <SectionHeading eyebrow="What we measure" title="The outcomes we consider meaningful." />

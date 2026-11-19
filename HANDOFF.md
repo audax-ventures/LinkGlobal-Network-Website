@@ -894,7 +894,7 @@ the picture source for ~25 picture items.
 - Nov 19 2026, client videos (Riley): public/videos/linkglobal-tour.mp4 (from
   "LinkGlobal 03 Fainal.mp4", product walkthrough) on Home right after the
   Hero; linkglobal-mission.mp4 (from "LinkGlobal B2B MAIN.mp4", mission +
-  organizations) on About after the "Our approach" band. Both re-encoded to
+  organizations) on About right under the page header (moved up Nov 19). Both re-encoded to
   720p H.264 with macOS avconvert (originals were 124/143MB, over GitHub's
   100MB limit); posters are frames from each. `VideoFeature` in blocks.tsx,
   preload="none" so nothing downloads until play.
