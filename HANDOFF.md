@@ -901,3 +901,7 @@ the picture source for ~25 picture items.
 - Videos autoplay (Riley, Nov 19 2026): VideoFeature plays muted + looped
   when 40% in view (IntersectionObserver), pauses when it leaves; controls
   kept for sound. Skipped under prefers-reduced-motion.
+- Nov 23 2026 (Riley): LEARNER_SIGNUP_URL = https://learner.linkglobalnetwork.io/
+  so every "Start Your Journey" button (nav, hero, CTA strips, Pricing cards,
+  page headers) goes to the learner platform; Try Now's learner card button
+  now links there too (Path.href). EDUCATOR_SIGNUP_URL is still /try-now.

@@ -4,6 +4,8 @@ import PageShell from '../components/PageShell'
 import NavyBand from '../components/NavyBand'
 import PageHeader from '../components/PageHeader'
 import { CheckIcon, TargetIcon, ChatIcon } from '../components/icons/LineIcons'
+import SmartLink from '../components/SmartLink'
+import { LEARNER_SIGNUP_URL } from '../content/site'
 
 interface Step {
   title: string
@@ -17,6 +19,7 @@ interface Path {
   steps: Step[]
   perk: string
   cta: string
+  href?: string
   color: string
   tint: string
   icon: ReactNode
@@ -37,6 +40,7 @@ const PATHS: Path[] = [
     ],
     perk: 'No subscription needed',
     cta: 'Start Your Journey',
+    href: LEARNER_SIGNUP_URL,
     color: '#1ba3e0',
     tint: 'linear-gradient(135deg, rgba(27,163,224,0.14), rgba(62,198,255,0.05))',
     icon: <TargetIcon className="h-full w-full" />,
@@ -135,13 +139,23 @@ export default function TryNow() {
                 </span>
 
                 <div className="flex-1" />
-                <button
-                  type="button"
-                  className="mt-8 rounded-full px-8 py-3.5 text-sm font-semibold text-white shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-transform hover:scale-105"
-                  style={{ background: p.color }}
-                >
-                  {p.cta}
-                </button>
+                {p.href ? (
+                  <SmartLink
+                    to={p.href}
+                    className="mt-8 rounded-full px-8 py-3.5 text-center text-sm font-semibold text-white shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-transform hover:scale-105"
+                    style={{ background: p.color }}
+                  >
+                    {p.cta}
+                  </SmartLink>
+                ) : (
+                  <button
+                    type="button"
+                    className="mt-8 rounded-full px-8 py-3.5 text-sm font-semibold text-white shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-transform hover:scale-105"
+                    style={{ background: p.color }}
+                  >
+                    {p.cta}
+                  </button>
+                )}
               </div>
             </motion.div>
           ))}

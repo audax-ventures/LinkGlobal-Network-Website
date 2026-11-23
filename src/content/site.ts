@@ -7,7 +7,7 @@ export const BRAND = 'LinkGlobal'
 
 // "Start Your Journey" / "Start Teaching With Us" destinations. Point these
 // at the real platform signup when it's ready (full https:// URLs work).
-export const LEARNER_SIGNUP_URL = '/try-now'
+export const LEARNER_SIGNUP_URL = 'https://learner.linkglobalnetwork.io/'
 export const EDUCATOR_SIGNUP_URL = '/try-now'
 
 export const CONTACT_EMAIL = 'info@linkglobalnetwork.io'
