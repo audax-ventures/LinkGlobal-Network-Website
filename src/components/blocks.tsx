@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { CheckIcon } from './icons/LineIcons'
 import Photo from './Photo'
+import FlipPhoto from './FlipPhoto'
 
 // Shared content blocks for the Website Copy v7 pages. Copy is passed in by
 // each page so the same layout can carry page-specific wording.
@@ -269,7 +270,7 @@ export function TwoRoles({ educator, partner }: { educator: string; partner: str
 
 /** "What learners become able to do" outcome list (About). With `photos`
  *  (same order as items), each outcome becomes a photo card (brief 2, item 37). */
-export function OutcomeList({ items, photos, dark = false }: { items: string[]; photos?: { src: string; alt: string }[]; dark?: boolean }) {
+export function OutcomeList({ items, photos, dark = false }: { items: string[]; photos?: { src: string; alt: string; position?: string; sentence?: string }[]; dark?: boolean }) {
   if (photos) {
     return (
       <ul className="mx-auto mt-12 flex max-w-6xl flex-wrap justify-center gap-5">
@@ -277,7 +278,20 @@ export function OutcomeList({ items, photos, dark = false }: { items: string[]; 
           <Reveal key={t} delay={(i % 3) * 0.08} from={side(i)} className="w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.84rem)]">
             <li className="h-full overflow-hidden rounded-3xl bg-white shadow-[0_15px_40px_rgba(19,41,82,0.08)]">
               <div className="relative aspect-[4/3]">
-                <Photo src={photos[i].src} alt={photos[i].alt} sizes="(min-width: 1024px) 370px, (min-width: 640px) 45vw, 90vw" className="absolute inset-0 h-full w-full object-cover" />
+                {photos[i].sentence ? (
+                  <span className="absolute inset-0">
+                    <FlipPhoto
+                      src={photos[i].src}
+                      alt={photos[i].alt}
+                      sentence={photos[i].sentence!}
+                      position={photos[i].position}
+                      rounded="rounded-none"
+                      sizes="(min-width: 1024px) 370px, (min-width: 640px) 45vw, 90vw"
+                    />
+                  </span>
+                ) : (
+                  <Photo src={photos[i].src} alt={photos[i].alt} sizes="(min-width: 1024px) 370px, (min-width: 640px) 45vw, 90vw" className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition: photos[i].position }} />
+                )}
               </div>
               <p className="flex items-center gap-3 p-5 text-lg font-semibold text-navy-950">
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-white">
@@ -322,6 +336,7 @@ export function VideoFeature({
   poster,
   label,
   className = '',
+  dark = false,
 }: {
   eyebrow: string
   title: ReactNode
@@ -329,6 +344,7 @@ export function VideoFeature({
   poster: string
   label: string
   className?: string
+  dark?: boolean
 }) {
   const ref = useRef<HTMLVideoElement>(null)
 
@@ -349,7 +365,7 @@ export function VideoFeature({
 
   return (
     <Section className={className}>
-      <SectionHeading eyebrow={eyebrow} title={title} />
+      <SectionHeading dark={dark} eyebrow={eyebrow} title={title} />
       <Reveal className="mx-auto mt-10 max-w-5xl">
         <video
           ref={ref}

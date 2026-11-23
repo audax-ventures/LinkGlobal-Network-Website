@@ -4,7 +4,7 @@ import type { LegalSection } from '../components/LegalPage'
 import { CONTACT_EMAIL } from '../content/site'
 
 // Terms of Service. PLACEHOLDER drafted by Audax (Oct 2026) from the site's
-// own copy (pay-as-you-go lessons, the cancellation rule, AI feedback add-on);
+// own copy (pay-as-you-go lessons, the cancellation rule, AI feedback included);
 // LinkGlobal must review and confirm it, ideally with legal counsel, before it
 // is relied on. Update UPDATED on every change.
 
@@ -47,7 +47,7 @@ const SECTIONS: LegalSection[] = [
       <>
         <p>
           LinkGlobal combines a personalized learning path planned by AI, live lessons with certified educators,
-          conversation practice with native speakers, and optional personal AI feedback.
+          conversation practice with native speakers, and personal AI feedback.
         </p>
         <p>
           We may add, change, or remove features over time. We aim to keep LinkGlobal available, but we do not guarantee
@@ -79,12 +79,12 @@ const SECTIONS: LegalSection[] = [
     body: (
       <ul>
         <li>Lessons are booked and paid for individually, at the price shown when you book, plus any applicable taxes.</li>
-        <li>Personal AI feedback is an optional paid add-on, at the price shown when you choose it.</li>
+        <li>AI practice and personal AI feedback are included in the lesson price.</li>
         <li>A lesson you cancel after booking is not refunded.</li>
         <li>If your educator cancels, the full value of the lesson returns to your balance for another lesson.</li>
         <li>
-          If we offer subscriptions or packages, the price, billing period, and cancellation terms will be shown before
-          you buy and form part of these terms.
+          There is no subscription. If we offer packages in future, the price and cancellation terms will be shown
+          before you buy and form part of these terms.
         </li>
         <li>Nothing in these terms limits any refund rights you have under the consumer protection laws that apply to you.</li>
       </ul>

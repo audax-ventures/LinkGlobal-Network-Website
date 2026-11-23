@@ -23,13 +23,6 @@ export default function Home() {
     <PageShell footerFade={false}>
       <IntroSection />
       <Hero />
-      <VideoFeature
-        eyebrow="See it in action"
-        title="One minute inside LinkGlobal."
-        src="/videos/linkglobal-tour.mp4"
-        poster="/videos/linkglobal-tour.jpg"
-        label="A one-minute tour of the LinkGlobal platform: creating an account, practising with AI, feedback and a live lesson"
-      />
       <Philosophy />
       <WhereLearnersGetStuck />
       <ThreePartsPhotos />
@@ -39,6 +32,16 @@ export default function Home() {
       <JourneyDashboard />
       <div style={{ background: FADE_TO_DARK }}>
         <LearnerOutcomes />
+        {/* Final changes (Nov 2026): the platform video sits between the
+            reviews and the closing Start strip. */}
+        <VideoFeature
+          dark
+          eyebrow="See it in action"
+          title="One minute inside LinkGlobal."
+          src="/videos/linkglobal-tour.mp4"
+          poster="/videos/linkglobal-tour.jpg"
+          label="A one-minute tour of the LinkGlobal platform: creating an account, practising with AI, feedback and a live lesson"
+        />
         <CtaBand primary={{ label: 'Start Your Journey', to: LEARNER_SIGNUP_URL }} />
       </div>
     </PageShell>

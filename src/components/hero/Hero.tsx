@@ -86,8 +86,9 @@ export default function Hero() {
             <Photo
               loading="eager"
               sizes="(min-width: 768px) 520px, 100vw"
-              src="/photos/learner-waving.jpg"
-              alt="A learner waving hello to a native speaker on a video call"
+              src="/photos/learner-headset-notes.jpg"
+              alt="A learner in headphones taking notes during an online lesson"
+              style={{ objectPosition: '55% 40%' }}
               className="aspect-[4/3] w-full object-cover sm:aspect-[5/4]"
             />
           </div>

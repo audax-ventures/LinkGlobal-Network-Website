@@ -14,7 +14,7 @@ const v = (vars: Record<string, string>) => vars as CSSProperties
 
 /* ---------------- For Learners: reasons to learn ---------------- */
 
-const REASONS_CSS = `#lg-reasons .re-photo{position:relative;display:block;margin-top:18px;aspect-ratio:4/3;border-radius:14px;overflow:hidden}#lg-reasons .re-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s}#lg-reasons .re-card[aria-pressed="true"] .re-photo img{transform:scale(1.04)}#lg-reasons .re-bubble{position:absolute;left:12px;bottom:12px;max-width:85%;background:#fff;color:var(--lg-ink);font-weight:600;font-size:15px;line-height:1.35;padding:9px 13px;border-radius:14px 14px 14px 3px;box-shadow:0 8px 22px #0003}#lg-reasons .re-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}#lg-reasons .re-card{border:1px solid var(--lg-line);background:var(--lg-panel);border-radius:18px;padding:21px 17px;color:var(--lg-ink);text-align:left;min-width:0;transition:transform .338s,border-color .338s,box-shadow .338s;display:flex;flex-direction:column;width:100%}#lg-reasons .re-card[aria-pressed="true"]{transform:translateY(-5px);border-color:var(--lg-blue);box-shadow:0 12px 30px #159edb0c}#lg-reasons .re-kicker{font-size:14px;letter-spacing:1.2px;color:var(--lg-blue);margin-bottom:12px;display:block}#lg-reasons .re-title{font-size:17px;font-weight:700;line-height:1.2;letter-spacing:-.4px;display:block}#lg-reasons .re-copy{font-size:14px;line-height:1.65;color:var(--lg-muted);margin:11px 0 0;display:block;min-height:73px}#lg-reasons .re-scene{display:flex;flex-direction:column;justify-content:center;min-height:150px;border-radius:11px;background:#eff6fa;margin:17px 0;position:relative;padding:15px 11px;gap:8px}#lg-reasons .re-paper{display:block;background:white;border:1px solid #ddeaf2;border-radius:8px;padding:13px 10px;transform:rotate(-4deg);box-shadow:4px 5px 0 #dcecf7;align-self:center;width:100%;font-size:14px;line-height:1.4}#lg-reasons .re-paper small{display:block;color:var(--lg-muted);font-size:14px;letter-spacing:.8px;margin-bottom:8px}#lg-reasons .re-paper strong{display:block;font-size:14px;font-weight:600;letter-spacing:-.3px}#lg-reasons .re-note{display:block;border-left:2px solid var(--lg-blue);padding:8px 10px;background:white;border-radius:0 6px 6px 0;font-size:14px;line-height:1.4}#lg-reasons .re-screen{background:#0e304a;color:white;border-radius:8px;padding:14px 12px;font-size:14px;line-height:1.3;text-align:center}#lg-reasons .re-screen small{display:block;color:#86cce7;font-size:14px;letter-spacing:.7px;margin-bottom:9px}#lg-reasons .re-dots{display:flex;gap:6px;justify-content:center;margin-top:6px}#lg-reasons .re-dots i{width:19px;height:19px;border-radius:50%;background:#add8ec}#lg-reasons .re-dots i:nth-child(2){background:#73bce0}#lg-reasons .re-dots i:nth-child(3){background:#459dcb}#lg-reasons .re-payoff{font-size:14px;font-weight:600;line-height:1.5;display:block;border-top:1px solid var(--lg-line);padding-top:13px;margin-top:auto}#lg-reasons .re-payoff span{display:block;font-size:14px;color:var(--lg-muted);font-weight:400;margin-top:5px}@media(max-width:560px){#lg-reasons .re-grid{grid-template-columns:1fr}#lg-reasons .re-card{padding:22px}#lg-reasons .re-card[aria-pressed="true"]{transform:none}#lg-reasons .re-copy{min-height:0;font-size:14px}#lg-reasons .re-title{font-size:22px}#lg-reasons .re-scene{min-height:130px}#lg-reasons .re-paper{max-width:260px}}`
+const REASONS_CSS = `#lg-reasons .re-photo{position:relative;display:block;margin-top:18px;aspect-ratio:4/3;border-radius:14px;perspective:1200px}.re-flip{position:absolute;inset:0;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1);transform-style:preserve-3d}.re-flipped .re-flip{transform:rotateY(180deg)}.re-face{position:absolute;inset:0;display:block;border-radius:14px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden}.re-back{transform:rotateY(180deg);display:flex;align-items:center;justify-content:center;padding:22px;text-align:center;font-size:19px;font-weight:700;line-height:1.35;color:#fff;background:linear-gradient(135deg,#1ba3e0,#3b82f6,#7c5cd6)}.re-turn{position:absolute;right:12px;bottom:12px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#ffffffe6;color:#1ba3e0;font-size:19px;font-weight:700;box-shadow:0 6px 16px #0003}#lg-reasons .re-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s}#lg-reasons .re-card[aria-pressed="true"] .re-photo img{transform:scale(1.04)}#lg-reasons .re-bubble{position:absolute;left:12px;bottom:12px;max-width:85%;background:#fff;color:var(--lg-ink);font-weight:600;font-size:15px;line-height:1.35;padding:9px 13px;border-radius:14px 14px 14px 3px;box-shadow:0 8px 22px #0003}#lg-reasons .re-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}#lg-reasons .re-card{border:1px solid var(--lg-line);background:var(--lg-panel);border-radius:18px;padding:21px 17px;color:var(--lg-ink);text-align:left;min-width:0;transition:transform .338s,border-color .338s,box-shadow .338s;display:flex;flex-direction:column;width:100%}#lg-reasons .re-card[aria-pressed="true"]{transform:translateY(-5px);border-color:var(--lg-blue);box-shadow:0 12px 30px #159edb0c}#lg-reasons .re-kicker{font-size:14px;letter-spacing:1.2px;color:var(--lg-blue);margin-bottom:12px;display:block}#lg-reasons .re-title{font-size:17px;font-weight:700;line-height:1.2;letter-spacing:-.4px;display:block}#lg-reasons .re-copy{font-size:14px;line-height:1.65;color:var(--lg-muted);margin:11px 0 0;display:block;min-height:73px}#lg-reasons .re-scene{display:flex;flex-direction:column;justify-content:center;min-height:150px;border-radius:11px;background:#eff6fa;margin:17px 0;position:relative;padding:15px 11px;gap:8px}#lg-reasons .re-paper{display:block;background:white;border:1px solid #ddeaf2;border-radius:8px;padding:13px 10px;transform:rotate(-4deg);box-shadow:4px 5px 0 #dcecf7;align-self:center;width:100%;font-size:14px;line-height:1.4}#lg-reasons .re-paper small{display:block;color:var(--lg-muted);font-size:14px;letter-spacing:.8px;margin-bottom:8px}#lg-reasons .re-paper strong{display:block;font-size:14px;font-weight:600;letter-spacing:-.3px}#lg-reasons .re-note{display:block;border-left:2px solid var(--lg-blue);padding:8px 10px;background:white;border-radius:0 6px 6px 0;font-size:14px;line-height:1.4}#lg-reasons .re-screen{background:#0e304a;color:white;border-radius:8px;padding:14px 12px;font-size:14px;line-height:1.3;text-align:center}#lg-reasons .re-screen small{display:block;color:#86cce7;font-size:14px;letter-spacing:.7px;margin-bottom:9px}#lg-reasons .re-dots{display:flex;gap:6px;justify-content:center;margin-top:6px}#lg-reasons .re-dots i{width:19px;height:19px;border-radius:50%;background:#add8ec}#lg-reasons .re-dots i:nth-child(2){background:#73bce0}#lg-reasons .re-dots i:nth-child(3){background:#459dcb}#lg-reasons .re-payoff{font-size:14px;font-weight:600;line-height:1.5;display:block;border-top:1px solid var(--lg-line);padding-top:13px;margin-top:auto}#lg-reasons .re-payoff span{display:block;font-size:14px;color:var(--lg-muted);font-weight:400;margin-top:5px}@media(max-width:560px){#lg-reasons .re-grid{grid-template-columns:1fr}#lg-reasons .re-card{padding:22px}#lg-reasons .re-card[aria-pressed="true"]{transform:none}#lg-reasons .re-copy{min-height:0;font-size:14px}#lg-reasons .re-title{font-size:22px}#lg-reasons .re-scene{min-height:130px}#lg-reasons .re-paper{max-width:260px}}`
 const REASON_CAPTIONS = [
   'For the everyday moments in a new home.',
   'For the ideas you’re ready to share.',
@@ -22,6 +22,7 @@ const REASON_CAPTIONS = [
 ]
 
 export function ReasonsToLearn() {
+  const [flipped, setFlipped] = useState<boolean[]>([false, false, false])
   const t = useTour({ last: 2 })
   const scene = (i: number, children: ReactNode) => (
     <span key={i === t.index ? `on-${t.nonce}` : 'off'} className={`re-scene${i === t.index && t.animate ? ' lg-enter' : ''}`}>
@@ -45,6 +46,7 @@ export function ReasonsToLearn() {
       ),
       payoff: '“I’d like to ask a question.”',
       sub: 'Find your voice in everyday life.',
+      back: 'Speak up at the doctor, the bank and the school, from your first weeks.',
       photo: '/photos/newcomer-canada.jpg',
       alt: 'A newcomer holding a Canadian flag behind her at sunset',
       pos: '50% 40%',
@@ -66,6 +68,7 @@ export function ReasonsToLearn() {
       ),
       payoff: '“Here’s how I see it.”',
       sub: 'Bring your ideas into the room.',
+      back: 'Get ready for seminars, interviews and your IELTS or TOEFL score.',
       photo: '/photos/students-campus.jpg',
       alt: 'Three international students laughing over their notes on campus',
       pos: '45% 40%',
@@ -91,6 +94,7 @@ export function ReasonsToLearn() {
       ),
       payoff: '“Let me walk you through it.”',
       sub: 'Sound like yourself at work.',
+      back: 'Lead the meeting and answer the client in your own words.',
       photo: '/photos/handshake-cafe.jpg',
       alt: 'A professional smiling as he shakes hands across a meeting table',
       pos: '35% 35%',
@@ -111,15 +115,34 @@ export function ReasonsToLearn() {
         </header>
         <div className="re-grid">
           {cards.map((c, i) => (
-            <button key={c.title} className="re-card" type="button" aria-pressed={i === t.index} onClick={() => t.go(i)}>
+            <button
+              key={c.title}
+              className="re-card"
+              type="button"
+              aria-pressed={i === t.index}
+              onClick={() => {
+                t.go(i)
+                setFlipped((f) => f.map((x, j) => (j === i ? !x : x)))
+              }}
+            >
               <span className="re-kicker">{c.kicker}</span>
               <strong className="re-title">{c.title}</strong>
               <span className="re-copy">{c.copy}</span>
               {/* Brief 2, item 18: a picture of each group instead of the
                   mock-up, with the sample line as a bubble on it. */}
-              <span className="re-photo">
-                <Photo src={c.photo} alt={c.alt} sizes="(min-width: 768px) 340px, 90vw" style={{ objectPosition: c.pos }} />
-                <span className="re-bubble">{c.payoff}</span>
+              {/* Final changes (Nov 2026): the photo turns over like a
+                  flashcard on click to show one sentence about the group. */}
+              <span className={`re-photo${flipped[i] ? ' re-flipped' : ''}`}>
+                <span className="re-flip">
+                  <span className="re-face">
+                    <Photo src={c.photo} alt={c.alt} sizes="(min-width: 768px) 340px, 90vw" style={{ objectPosition: c.pos }} />
+                    <span className="re-bubble">{c.payoff}</span>
+                    <span className="re-turn" aria-hidden="true">↻</span>
+                  </span>
+                  <span className="re-face re-back" aria-hidden={!flipped[i]}>
+                    {c.back}
+                  </span>
+                </span>
               </span>
               <span className="re-payoff">
                 <span>{c.sub}</span>

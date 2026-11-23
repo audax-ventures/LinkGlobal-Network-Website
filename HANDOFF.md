@@ -905,3 +905,28 @@ the picture source for ~25 picture items.
   so every "Start Your Journey" button (nav, hero, CTA strips, Pricing cards,
   page headers) goes to the learner platform; Try Now's learner card button
   now links there too (Path.href). EDUCATOR_SIGNUP_URL is still /try-now.
+
+## Final changes (client, Nov 23 2026; ~/Downloads/LinkGlobal Website Unfinished Changes Audax.pdf)
+- Photos (section 1): About cover -> team-meeting-flipchart, Educators cover ->
+  educator-video-lesson (also their nav previews). Home hero (the man lying on
+  the sofa) -> learner-headset-notes. Home nav preview -> friends-laptop
+  (was /gallery/dashboard.png). Journey step 1 -> cafe-laughing.
+  thinking-at-whiteboard / educator-thumbs-up / learner-waving now unused.
+- Image quality: optimizer quality 75 -> 85 (vercel.json qualities + Photo.tsx).
+  interview / meeting-idea re-copied full frame. Sources are the WhatsApp copies
+  (max 1600px); the client says they sent higher-quality originals, which we
+  don't have. Ask Riley for them.
+- FlipPhoto.tsx: photo turns over on click to show one sentence. Used on the
+  Home journey photos, About outcome photos (OutcomeList photos[].sentence);
+  For Learners group cards flip via .re-flip CSS in PageTours (card is already
+  a button).
+- Home journey: 4 steps (new 03 "AI + real talk", learner-practising-phone;
+  progress is 04). Footer replaced by journey/FinishLine.tsx (ribbon snaps,
+  checkered flag, confetti, "Goal reached", "Follow these steps, and you'll
+  reach your goal.").
+- Home video moved between the reviews and the closing Start strip
+  (VideoFeature `dark`).
+- Pricing: no subscription (plans enabled: false), AI Feedback card removed,
+  single pay-as-you-go card with AI practice + feedback included. FAQ, meta,
+  Terms, Privacy, chatbot updated. Commission is internal, not shown.
+- Mascot: waiting on client details. Do not change.

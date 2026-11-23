@@ -78,7 +78,7 @@ const SECTIONS: LegalSection[] = [
         <li>To reply to your messages and support requests.</li>
         <li>To build and update your learning path, and to measure your progress.</li>
         <li>To brief your educator before each lesson and to match you with conversation partners.</li>
-        <li>To provide paid features you choose, such as personal AI feedback, and to process payments.</li>
+        <li>To provide the lessons and features you use, such as personal AI feedback, and to process payments.</li>
         <li>To keep the platform secure, prevent abuse, and limit automated misuse.</li>
         <li>To understand how the website is used and to improve it.</li>
         <li>To meet our legal and accounting obligations.</li>

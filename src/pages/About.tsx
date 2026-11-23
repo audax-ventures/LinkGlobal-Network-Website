@@ -48,7 +48,7 @@ export default function About() {
           </>
         }
         description="Talented people go quiet in the meetings where their opinion matters most."
-        image={{ src: '/photos/thinking-at-whiteboard.jpg', alt: 'A man reading his notes in front of a whiteboard', position: '50% 30%' }}
+        image={{ src: '/photos/team-meeting-flipchart.jpg', alt: 'A diverse team smiling during a meeting beside a flipchart', position: '55% 35%' }}
       />
 
       <VideoFeature
@@ -117,11 +117,11 @@ export default function About() {
             'A business built across a border.',
           ]}
           photos={[
-            { src: '/photos/interview.jpg', alt: 'A smiling candidate in a job interview across the desk' },
-            { src: '/photos/meeting-idea.jpg', alt: 'Two colleagues talking through an idea at a meeting table' },
-            { src: '/photos/acceptance-letter.jpg', alt: 'Three friends reading a letter together, delighted' },
-            { src: '/photos/cafe-friendship.jpg', alt: 'Two friends chatting at a café table' },
-            { src: '/photos/handshake-deal.jpg', alt: 'Two business people shaking hands across a meeting room' },
+            { src: '/photos/interview.jpg', alt: 'A smiling candidate in a job interview across the desk', position: '62% 40%', sentence: 'Walk into the interview ready to answer in your own words.' },
+            { src: '/photos/meeting-idea.jpg', alt: 'Two colleagues talking through an idea at a meeting table', position: '55% 45%', sentence: 'Raise your idea in the meeting, and have it heard.' },
+            { src: '/photos/acceptance-letter.jpg', alt: 'Three friends reading a letter together, delighted', position: '45% 40%', sentence: 'Open the letter that says yes to your next chapter.' },
+            { src: '/photos/cafe-friendship.jpg', alt: 'Two friends chatting at a café table', position: '50% 30%', sentence: 'Make a close friend in a language that once felt foreign.' },
+            { src: '/photos/handshake-deal.jpg', alt: 'Two business people shaking hands across a meeting room', position: '50% 45%', sentence: 'Shake hands on a deal with a partner across the border.' },
           ]}
         />
       </Section>

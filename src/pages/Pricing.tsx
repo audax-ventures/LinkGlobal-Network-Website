@@ -10,9 +10,11 @@ import { ensureGsapPlugins, gsap, ScrollTrigger } from '../lib/gsapSetup'
 import { CheckIcon } from '../components/icons/LineIcons'
 import { LEARNER_SIGNUP_URL, PENDING } from '../content/site'
 
-// Pricing, per Website Copy v7 (section 07): pay as you go, plus (revision
-// brief 2, item 42) the monthly subscription plans and prices from the
-// previous version of the website. Lesson prices come from content/site.ts;
+// Pricing, per Website Copy v7 (section 07) and the client's final changes
+// (Nov 2026): pay as you go only, no subscription. Each educator sets their
+// own lesson fee; AI practice and personal AI feedback are included in the
+// lesson price, never described as free. The Revision 2 monthly plans are
+// switched off below (enabled: false). Lesson prices come from content/site.ts;
 // until set they read "Price to be announced". Other card slots stay off
 // until `enabled: true`. Prices are in Canadian dollars (PENDING.currency).
 
@@ -37,7 +39,7 @@ const PLAN_SLOTS: PlanSlot[] = [
     price: '$39',
     line: 'For your first real conversations.',
     features: ['Full AI roadmap', '2 live native-speaker sessions / month', 'Progress tracked after every conversation'],
-    enabled: true,
+    enabled: false,
   },
   {
     name: 'Growth',
@@ -45,7 +47,7 @@ const PLAN_SLOTS: PlanSlot[] = [
     price: '$89',
     line: 'For steady, visible momentum.',
     features: ['Everything in Starter', '4 live native-speaker sessions / month', 'Business or exam-prep track (IELTS and TOEFL)'],
-    enabled: true,
+    enabled: false,
     popular: true,
   },
   {
@@ -54,7 +56,7 @@ const PLAN_SLOTS: PlanSlot[] = [
     price: '$159',
     line: 'For a deadline you intend to hit.',
     features: ['Everything in Growth', '8 live sessions / month and priority scheduling', 'Weekly roadmap check-ins'],
-    enabled: true,
+    enabled: false,
   },
   { name: 'P2P Tutoring', type: 'Per session', price: null, features: [], enabled: false },
   { name: 'AI-Based Feedback', type: 'Add-on', price: null, features: [], enabled: false },
@@ -62,7 +64,7 @@ const PLAN_SLOTS: PlanSlot[] = [
 ]
 
 const FAQ: { q: string; a: string }[] = [
-  { q: 'Do I have to subscribe?', a: 'No. You can pay for each lesson you book, or choose a monthly plan.' },
+  { q: 'Do I have to subscribe?', a: 'No. There is no subscription. You pay for each lesson you book, at the rate your educator sets.' },
   { q: 'What is free?', a: 'Your personalized learning path and your progress overview.' },
   { q: 'Is there a demo lesson?', a: 'No. Your level and path are created before you book, so you can see the direction first.' },
   {
@@ -192,7 +194,6 @@ export default function Pricing() {
   }
   const offers = [
     { name: 'Lesson with a certified educator', price: toAmount(PENDING.lessonPrice) },
-    { name: 'Personal AI Feedback', price: toAmount(PENDING.aiFeedbackPrice) },
     ...livePlans.map((p) => ({ name: `${p.name} monthly plan`, price: toAmount(p.price) })),
   ].filter((o): o is { name: string; price: string } => !!o.price)
   const productJsonLd =
@@ -270,24 +271,23 @@ export default function Pricing() {
 
       <NavyBand className="py-10 sm:py-16">
         <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
-          <PaidCard
-            eyebrow="Lessons · Pay as you go"
-            title="Book lessons individually with a certified educator."
-            price={PENDING.lessonPrice}
-            unit={`${PENDING.currency ?? ''} per lesson`.trim()}
-            priceNote="Set by your educator"
-            features={['30 or 60 minute sessions, each educator sets their own rate', 'Live one-to-one session', 'Educator briefed from your path', 'Your path updated afterwards']}
-            cta="Start Your Journey"
-            delay={0}
-          />
-          <PaidCard
-            eyebrow="Personal AI feedback"
-            title="Detailed analysis of how you speak."
-            price={PENDING.aiFeedbackPrice}
-            features={['Feedback on fluency, hesitation, and accuracy', 'Specific areas to focus on next', 'Delivered into your learning path']}
-            cta="Add Personal AI Feedback"
-            delay={0.1}
-          />
+          <div className="md:col-span-2 md:mx-auto md:w-full md:max-w-xl">
+            <PaidCard
+              eyebrow="Lessons · Pay as you go"
+              title="Book lessons individually with a native-speaking educator."
+              price={PENDING.lessonPrice}
+              unit={`${PENDING.currency ?? ''} per lesson`.trim()}
+              priceNote="Set by your educator"
+              features={[
+                'Choose your educator by style and budget',
+                '30 or 60 minute sessions, each educator sets their own rate',
+                'AI practice and personal AI feedback included',
+                'Live one-to-one session, your path updated afterwards',
+              ]}
+              cta="Start Your Journey"
+              delay={0}
+            />
+          </div>
         </div>
 
         {livePlans.length > 0 && (

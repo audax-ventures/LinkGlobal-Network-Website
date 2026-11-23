@@ -34,11 +34,11 @@ const ICONS: Record<string, typeof HomeIcon> = {
 // keeps every preview automatically accurate (no asset pipeline to keep in
 // sync) and reuses images already shipped in the bundle.
 const ROUTE_META: Record<string, { color: string; image: string; blurb: string }> = {
-  home: { color: '#1ba3e0', image: '/gallery/dashboard.png', blurb: 'Learn the language. Own the conversation.' },
+  home: { color: '#1ba3e0', image: '/photos/friends-laptop.jpg', blurb: 'Learn the language. Own the conversation.' },
   learners: { color: '#a78bfa', image: '/photos/learner-headphones.jpg', blurb: 'Made for language learners.' },
-  educators: { color: '#f472b6', image: '/photos/educator-thumbs-up.jpg', blurb: 'For educators who want to teach, not prepare.' },
+  educators: { color: '#f472b6', image: '/photos/educator-video-lesson.jpg', blurb: 'For educators who want to teach, not prepare.' },
   'for-you': { color: '#2dd4bf', image: '/photos/cafe-conversation.jpg', blurb: 'For native speakers who want to share their language.' },
-  about: { color: '#f5a623', image: '/photos/thinking-at-whiteboard.jpg', blurb: 'The story behind LinkGlobal.' },
+  about: { color: '#f5a623', image: '/photos/team-meeting-flipchart.jpg', blurb: 'The story behind LinkGlobal.' },
   pricing: { color: '#1ba3e0', image: '/photos/professional-video-call.jpg', blurb: 'Simple, flexible pricing.' },
   contact: { color: '#f5a623', image: '/photos/learner-sofa.jpg', blurb: 'Questions? We are here to help.' },
 }

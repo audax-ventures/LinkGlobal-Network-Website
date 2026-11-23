@@ -117,7 +117,7 @@ export default function ForEducators() {
         }
         description="Before each lesson you receive a briefing: what the learner has mastered, what they avoid, what to focus on."
         actions={[{ label: 'Start Teaching With Us', to: EDUCATOR_SIGNUP_URL }]}
-        image={{ src: '/photos/educator-thumbs-up.jpg', alt: 'An educator smiling and giving a thumbs up during an online lesson', position: '50% 30%' }}
+        image={{ src: '/photos/educator-video-lesson.jpg', alt: 'An educator teaching a learner over a video call', position: '40% 40%' }}
       />
 
       <TeachingWithLinkGlobal />

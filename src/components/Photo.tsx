@@ -9,7 +9,7 @@ import type { ImgHTMLAttributes } from 'react'
 const WIDTHS = [480, 800, 1200, 1600]
 const OPTIMIZABLE = /^\/(photos|gallery)\//
 
-export const optimized = (src: string, w: number) => `/_vercel/image?url=${encodeURIComponent(src)}&w=${w}&q=75`
+export const optimized = (src: string, w: number) => `/_vercel/image?url=${encodeURIComponent(src)}&w=${w}&q=85`
 
 interface PhotoProps extends ImgHTMLAttributes<HTMLImageElement> {
   src: string
