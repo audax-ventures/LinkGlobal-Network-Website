@@ -35,7 +35,6 @@ export default function Home() {
         {/* Final changes (Nov 2026): the platform video sits between the
             reviews and the closing Start strip. */}
         <VideoFeature
-          dark
           eyebrow="See it in action"
           title="One minute inside LinkGlobal."
           src="/videos/linkglobal-tour.mp4"

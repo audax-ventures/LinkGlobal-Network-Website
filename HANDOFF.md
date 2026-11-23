@@ -925,7 +925,7 @@ the picture source for ~25 picture items.
   checkered flag, confetti, "Goal reached", "Follow these steps, and you'll
   reach your goal.").
 - Home video moved between the reviews and the closing Start strip
-  (VideoFeature `dark`).
+  (navy heading: it sits on the light-blue part of the fade).
 - Pricing: no subscription (plans enabled: false), AI Feedback card removed,
   single pay-as-you-go card with AI practice + feedback included. FAQ, meta,
   Terms, Privacy, chatbot updated. Commission is internal, not shown.
