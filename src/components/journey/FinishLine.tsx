@@ -14,7 +14,7 @@ const PIECES = Array.from({ length: 16 }, (_, i) => {
 
 export default function FinishLine() {
   const reduced = useReducedMotion()
-  const swing = { type: 'spring' as const, stiffness: 120, damping: 9, delay: 0.25 }
+  const snap = { duration: 1.1, delay: 0.25, ease: 'easeIn' as const, times: [0, 0.35, 1] }
 
   return (
     <motion.div
@@ -33,13 +33,13 @@ export default function FinishLine() {
         {/* Ribbon halves, joined in the middle, then snapped apart */}
         <motion.span
           className="absolute left-1 top-5 h-3 w-1/2 origin-left rounded-r-sm bg-gradient-to-r from-[#1ba3e0] to-[#3ec6ff] shadow-sm"
-          variants={{ idle: { rotate: 0 }, done: { rotate: 78 } }}
-          transition={swing}
+          variants={{ idle: { rotate: 0, opacity: 1 }, done: { rotate: [0, 28, 62], y: [0, 4, 26], opacity: [1, 1, 0] } }}
+          transition={snap}
         />
         <motion.span
           className="absolute right-1 top-5 h-3 w-1/2 origin-right rounded-l-sm bg-gradient-to-l from-[#1ba3e0] to-[#3ec6ff] shadow-sm"
-          variants={{ idle: { rotate: 0 }, done: { rotate: -78 } }}
-          transition={swing}
+          variants={{ idle: { rotate: 0, opacity: 1 }, done: { rotate: [0, -28, -62], y: [0, 4, 26], opacity: [1, 1, 0] } }}
+          transition={snap}
         />
         {/* Confetti */}
         {PIECES.map((p, i) => (

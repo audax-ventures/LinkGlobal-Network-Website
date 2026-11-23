@@ -45,13 +45,21 @@ const ROUTE_META: Record<string, { color: string; image: string; blurb: string }
 
 const MotionLink = motion(Link)
 
-function NavCircle({ label, path, Icon, id }: { label: string; path: string; Icon: typeof HomeIcon; id: string }) {
+/** Lighten (amount > 0) or darken (amount < 0) a #rrggbb colour. */
+function shade(hex: string, amount: number) {
+  const n = parseInt(hex.slice(1), 16)
+  const ch = (v: number) => Math.round(amount < 0 ? v * (1 + amount) : v + (255 - v) * amount)
+  const [r, g, b] = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map(ch)
+  return `#${((1 << 24) | (r << 16) | (g << 8) | b).toString(16).slice(1)}`
+}
+
+function NavCircle({ label, path, Icon, id, index }: { label: string; path: string; Icon: typeof HomeIcon; id: string; index: number }) {
   const [hovered, setHovered] = useState(false)
   const meta = ROUTE_META[id]
 
   return (
     <div
-      className="relative flex items-center justify-center"
+      className="relative flex items-center justify-center [perspective:400px]"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -84,18 +92,31 @@ function NavCircle({ label, path, Icon, id }: { label: string; path: string; Ico
           </div>
         )}
       </AnimatePresence>
+      {/* Final changes (Nov 2026): 3D, animated page symbols. Each is a glossy
+          sphere in the page's colour (light from the top left, inner shade
+          at the bottom), floating gently on a stagger; on hover it lifts,
+          tilts towards the pointer side and the icon gives a little wiggle. */}
       <MotionLink
         to={path}
         aria-label={label}
-        whileHover={{ y: -2, scale: 1.06 }}
-        transition={{ type: 'spring', stiffness: 400, damping: 22 }}
-        className="flex h-11 w-11 items-center justify-center rounded-full shadow-[0_2px_10px_rgba(10,17,40,0.12)] ring-1 ring-navy-900/[0.06] transition-colors"
+        animate={{ y: [0, -2.5, 0] }}
+        transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut', delay: index * 0.35 }}
+        whileHover={{ y: -4, scale: 1.12, rotateX: 14, rotateY: -14 }}
+        whileTap={{ scale: 0.94 }}
+        className="relative flex h-11 w-11 items-center justify-center rounded-full text-white [transform-style:preserve-3d]"
         style={{
-          background: hovered ? meta.color : `${meta.color}1a`,
-          color: hovered ? '#ffffff' : meta.color,
+          background: `radial-gradient(circle at 30% 25%, rgba(255,255,255,0.75) 0%, ${meta.color} 42%, ${shade(meta.color, -0.32)} 100%)`,
+          boxShadow: `0 ${hovered ? 12 : 6}px ${hovered ? 22 : 14}px ${meta.color}${hovered ? '80' : '55'}, inset 0 -3px 6px rgba(0,0,0,0.18), inset 0 2px 3px rgba(255,255,255,0.55)`,
+          transition: 'box-shadow .3s',
         }}
       >
-        <Icon className="h-[18px] w-[18px]" />
+        <motion.span
+          className="flex drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]"
+          animate={hovered ? { rotate: [0, -14, 12, -6, 0], scale: [1, 1.15, 1] } : { rotate: 0, scale: 1 }}
+          transition={{ duration: 0.6 }}
+        >
+          <Icon className="h-[18px] w-[18px]" />
+        </motion.span>
       </MotionLink>
     </div>
   )
@@ -136,8 +157,8 @@ export default function FloatingNav() {
           <Logo variant="dark" className="h-8 w-auto sm:h-9" />
         </Link>
         <div className="hidden items-center gap-2.5 md:flex">
-          {NAV_ROUTES.map((route) => (
-            <NavCircle key={route.id} id={route.id} label={route.label} path={route.path} Icon={ICONS[route.id]} />
+          {NAV_ROUTES.map((route, i) => (
+            <NavCircle key={route.id} id={route.id} label={route.label} path={route.path} Icon={ICONS[route.id]} index={i} />
           ))}
           <SmartLink
             to={LEARNER_SIGNUP_URL}
@@ -195,7 +216,13 @@ export default function FloatingNav() {
                     current ? 'bg-navy-900/[0.04] text-navy-950' : 'text-navy-800'
                   }`}
                 >
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full" style={{ background: `${color}1a`, color }}>
+                  <span
+                    className="flex h-9 w-9 items-center justify-center rounded-full text-white"
+                    style={{
+                      background: `radial-gradient(circle at 30% 25%, rgba(255,255,255,0.75) 0%, ${color} 42%, ${shade(color, -0.32)} 100%)`,
+                      boxShadow: `0 4px 10px ${color}55, inset 0 -2px 4px rgba(0,0,0,0.18), inset 0 2px 3px rgba(255,255,255,0.55)`,
+                    }}
+                  >
                     <Icon className="h-[17px] w-[17px]" />
                   </span>
                   {route.label}

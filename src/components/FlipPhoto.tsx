@@ -33,7 +33,7 @@ export default function FlipPhoto({
           flipped ? '[transform:rotateY(180deg)]' : ''
         }`}
       >
-        <span className={`absolute inset-0 overflow-hidden ${rounded} [backface-visibility:hidden] group-focus-visible:ring-4 group-focus-visible:ring-brand-cyan`}>
+        <span className={`absolute inset-0 overflow-hidden ${rounded} shadow-[0_16px_40px_rgba(26,71,115,0.12)] [backface-visibility:hidden] group-focus-visible:ring-4 group-focus-visible:ring-brand-cyan`}>
           <Photo
             src={src}
             alt=""

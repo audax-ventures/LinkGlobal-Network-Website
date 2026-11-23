@@ -930,3 +930,6 @@ the picture source for ~25 picture items.
   single pay-as-you-go card with AI practice + feedback included. FAQ, meta,
   Terms, Privacy, chatbot updated. Commission is internal, not shown.
 - Mascot: waiting on client details. Do not change.
+- Nav (final changes, section 2): page symbols are glossy 3D spheres in each
+  page's colour (radial gradient + inset shading, `shade()` helper), gentle
+  staggered float, hover lift + tilt + icon wiggle. Mobile menu icons match.
