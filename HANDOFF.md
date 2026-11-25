@@ -941,3 +941,4 @@ the picture source for ~25 picture items.
 - Sends through Web3Forms to the inbox the key belongs to, with subject "[Educator Application] First Last" and reply-to set to the applicant.
 - **Needs `WEB3FORMS_KEY` in src/content/site.ts.** Sign up at web3forms.com with info@linkglobalnetwork.io, then paste the access key (it is public by design). Until then the form shows "Applications are not connected yet. Please email your details to info@linkglobalnetwork.io." The same key also switches the Contact form to Web3Forms.
 - Privacy Policy educator line now lists phone number and preferred payment method.
+- Nov 25, 2026: `WEB3FORMS_KEY` added (account under info@linkglobalnetwork.io). Both the educator application and the Contact form now send through Web3Forms.
