@@ -10,6 +10,7 @@ import ForYou from './pages/ForYou'
 import ForLearners from './pages/ForLearners'
 import ForEducators from './pages/ForEducators'
 import TryNow from './pages/TryNow'
+import BecomeEducator from './pages/BecomeEducator'
 import Pricing from './pages/Pricing'
 import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
@@ -39,6 +40,7 @@ function App() {
         <Route path="/learners" element={<Navigate to="/for-learners" replace />} />
         <Route path="/educators" element={<Navigate to="/for-educators" replace />} />
         <Route path="/try-now" element={<TryNow />} />
+        <Route path="/become-an-educator" element={<BecomeEducator />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy" element={<Privacy />} />

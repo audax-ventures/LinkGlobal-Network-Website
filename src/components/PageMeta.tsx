@@ -55,6 +55,10 @@ const META: Record<string, { title: string; description: string }> = {
     description:
       'Questions about learning a language, teaching with LinkGlobal, or becoming a conversation partner? Every message is read by a person.',
   },
+  '/become-an-educator': {
+    title: 'Apply to Teach | LinkGlobal',
+    description: 'Apply to teach your language on LinkGlobal. Tell us about yourself and our team will review your application.',
+  },
   '/try-now': {
     title: 'Start Your Journey | LinkGlobal',
     description: 'Tell us your goal. Your plan follows from your answers.',

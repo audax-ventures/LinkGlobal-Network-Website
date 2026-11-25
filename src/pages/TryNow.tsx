@@ -5,7 +5,7 @@ import NavyBand from '../components/NavyBand'
 import PageHeader from '../components/PageHeader'
 import { CheckIcon, TargetIcon, ChatIcon } from '../components/icons/LineIcons'
 import SmartLink from '../components/SmartLink'
-import { LEARNER_SIGNUP_URL } from '../content/site'
+import { EDUCATOR_SIGNUP_URL, LEARNER_SIGNUP_URL } from '../content/site'
 
 interface Step {
   title: string
@@ -56,6 +56,7 @@ const PATHS: Path[] = [
     ],
     perk: 'You set your own availability',
     cta: 'Start Teaching With Us',
+    href: EDUCATOR_SIGNUP_URL,
     color: '#f5a623',
     tint: 'linear-gradient(135deg, rgba(245,166,35,0.16), rgba(245,166,35,0.04))',
     icon: <ChatIcon className="h-full w-full" />,

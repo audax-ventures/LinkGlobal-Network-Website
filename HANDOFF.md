@@ -933,3 +933,11 @@ the picture source for ~25 picture items.
 - Nav (final changes, section 2): page symbols are glossy 3D spheres in each
   page's colour (radial gradient + inset shading, `shade()` helper), gentle
   staggered float, hover lift + tilt + icon wiggle. Mobile menu icons match.
+
+## Educator application form (Nov 25, 2026)
+
+- New page `/become-an-educator` (src/pages/BecomeEducator.tsx). Every "Start Teaching With Us" button goes here (`EDUCATOR_SIGNUP_URL` in site.ts; the Try Now educator card now links too).
+- Fields: first and last name, email, phone, languages (chips from `PENDING.languages` plus an "Other" box), payment method (Interac e-Transfer, Wire transfer, PayPal, Other). Honeypot field for spam. Asks for the payment METHOD only, never account or banking details.
+- Sends through Web3Forms to the inbox the key belongs to, with subject "[Educator Application] First Last" and reply-to set to the applicant.
+- **Needs `WEB3FORMS_KEY` in src/content/site.ts.** Sign up at web3forms.com with info@linkglobalnetwork.io, then paste the access key (it is public by design). Until then the form shows "Applications are not connected yet. Please email your details to info@linkglobalnetwork.io." The same key also switches the Contact form to Web3Forms.
+- Privacy Policy educator line now lists phone number and preferred payment method.

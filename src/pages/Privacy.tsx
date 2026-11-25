@@ -57,7 +57,8 @@ const SECTIONS: LegalSection[] = [
           </li>
           <li>
             <strong>If you teach or share your language with us:</strong> the information in your application, such as
-            your qualifications, languages, experience, and availability.
+            your name, email address, phone number, languages, preferred payment method, qualifications, experience, and
+            availability.
           </li>
           <li>
             <strong>When you use the chat assistant:</strong> the messages you type into it.
