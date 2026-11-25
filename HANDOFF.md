@@ -10,8 +10,8 @@ doc is the source of truth for wording; don't invent headings (where the
 doc has only a label, the label is the heading). House style: Canadian
 English, no em dashes, no exclamation marks, brand "LinkGlobal",
 roles "certified educator" / "conversation partner".
-- `src/content/site.ts`: signup URLs (LEARNER/EDUCATOR_SIGNUP_URL, now
-  /try-now), PARTNER_FIND/SHARE_URL (/contact), CONTACT_EMAIL
+- `src/content/site.ts`: signup URLs (LEARNER_SIGNUP_URL = learner
+  platform, EDUCATOR_SIGNUP_URL = /become-an-educator; see the educator form section), PARTNER_FIND/SHARE_URL (/contact), CONTACT_EMAIL
   (info@linkglobalnetwork.io; Riley rejected the doc's hello@linkglobal.com), SOCIAL + LEGAL links (null = hidden), and PENDING
   values the doc left blank: lessonPrice, aiFeedbackPrice, languages,
   replyDays, educatorSelection, proof numbers, testimonialNames. Null =
@@ -904,7 +904,7 @@ the picture source for ~25 picture items.
 - Nov 23 2026 (Riley): LEARNER_SIGNUP_URL = https://learner.linkglobalnetwork.io/
   so every "Start Your Journey" button (nav, hero, CTA strips, Pricing cards,
   page headers) goes to the learner platform; Try Now's learner card button
-  now links there too (Path.href). EDUCATOR_SIGNUP_URL is still /try-now.
+  now links there too (Path.href). EDUCATOR_SIGNUP_URL is now /become-an-educator (Nov 25 2026).
 
 ## Final changes (client, Nov 23 2026; ~/Downloads/LinkGlobal Website Unfinished Changes Audax.pdf)
 - Photos (section 1): About cover -> team-meeting-flipchart, Educators cover ->
@@ -934,12 +934,43 @@ the picture source for ~25 picture items.
   page's colour (radial gradient + inset shading, `shade()` helper), gentle
   staggered float, hover lift + tilt + icon wiggle. Mobile menu icons match.
 
-## Educator application form (Nov 25, 2026)
+## Educator application form (Nov 25, 2026) — live and tested
 
-- New page `/become-an-educator` (src/pages/BecomeEducator.tsx). Every "Start Teaching With Us" button goes here (`EDUCATOR_SIGNUP_URL` in site.ts; the Try Now educator card now links too).
-- Fields: first and last name, email, phone, languages (chips from `PENDING.languages` plus an "Other" box), payment method (Interac e-Transfer, Wire transfer, PayPal, Other). Honeypot field for spam. Asks for the payment METHOD only, never account or banking details.
-- Sends through Web3Forms to the inbox the key belongs to, with subject "[Educator Application] First Last" and reply-to set to the applicant.
-- **Needs `WEB3FORMS_KEY` in src/content/site.ts.** Sign up at web3forms.com with info@linkglobalnetwork.io, then paste the access key (it is public by design). Until then the form shows "Applications are not connected yet. Please email your details to info@linkglobalnetwork.io." The same key also switches the Contact form to Web3Forms.
-- Privacy Policy educator line now lists phone number and preferred payment method.
-- Nov 25, 2026: `WEB3FORMS_KEY` added (account under info@linkglobalnetwork.io). Both the educator application and the Contact form now send through Web3Forms.
-- Nov 25, 2026: CVs (option 3, free). No upload field: Web3Forms attachments need the paid Pro plan (about US$149/yr). The form shows "Have your CV ready" above Submit, and the thank-you screen asks applicants to email their CV to info@ with their full name in the subject (mailto with subject "Educator application CV"). To add real uploads later: upgrade Web3Forms to Pro (no new key) and add a file input, or use Vercel Blob.
+**Summary for the client:** prospective educators (speakers) now apply on the
+website. Every "Start Teaching With Us" button opens a short application at
+www.linkglobalnetwork.io/become-an-educator. Each application is emailed to
+info@linkglobalnetwork.io for the admin to review before signing the educator
+up to the platform. Applicants are then asked to email their CV separately.
+
+What the form collects:
+- First and last name, email, phone number (all required).
+- Languages they speak fluently: tap-to-select chips for the 32 site languages
+  (`PENDING.languages`) plus an "Another language" box. At least one required.
+- Preferred payment method: Interac e-Transfer, Wire transfer, PayPal, or Other
+  (with a box to name it). The method only: the form tells applicants not to
+  include account or banking details, which are collected at onboarding.
+
+What the admin receives: an email titled "[Educator Application] First Last"
+with each answer on its own line. Reply-to is the applicant, so hitting Reply
+answers them directly.
+
+CVs: no upload field (Web3Forms attachments need the paid Pro plan, about
+US$149/yr; Riley chose the free route). A note above Submit says "Have your CV
+ready", and the thank-you screen asks applicants to email their CV to info@
+with their full name in the subject (mailto link, subject "Educator application
+CV"). To add real uploads later: upgrade Web3Forms to Pro (same key) and add a
+file input, or store files in Vercel Blob.
+
+Technical notes:
+- Page: src/pages/BecomeEducator.tsx; route in App.tsx; meta title "Apply to
+  Teach | LinkGlobal" in PageMeta.tsx. `EDUCATOR_SIGNUP_URL` in site.ts drives
+  both buttons on For Educators and the Try Now educator card.
+- Delivery: Web3Forms. `WEB3FORMS_KEY` in site.ts (public by design; account
+  under info@linkglobalnetwork.io). The same key now also sends the Contact
+  form ("[Contact Form] Topic: Name"), which previously depended on a Resend
+  key that may never have been set. api/contact.ts is only the fallback if the
+  key is removed.
+- Spam: hidden "company" honeypot field, same as Contact.
+- Privacy Policy educator line lists phone number and preferred payment method.
+- Tested Nov 25 2026: one test submission from each form; Riley confirmed both
+  emails arrived in info@.
