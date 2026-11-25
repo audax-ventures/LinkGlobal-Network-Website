@@ -130,6 +130,19 @@ export default function BecomeEducator() {
               <p className="mt-3 text-navy-700/80">
                 Your application is with our team. We will review it and contact you by email{within}.
               </p>
+              <div className="mx-auto mt-6 max-w-md rounded-2xl border-2 border-brand-blue/30 bg-[#e8f6fd] p-5 text-left">
+                <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">One more step</p>
+                <p className="mt-2 text-navy-800">
+                  Please email your CV to{' '}
+                  <a
+                    href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Educator application CV')}`}
+                    className="font-semibold text-brand-blue underline underline-offset-2"
+                  >
+                    {CONTACT_EMAIL}
+                  </a>{' '}
+                  with your full name in the subject line, so we can match it to your application.
+                </p>
+              </div>
             </motion.div>
           ) : (
             <motion.form
@@ -238,6 +251,11 @@ export default function BecomeEducator() {
                   Please do not include any account or banking details. We will collect those securely if you are selected.
                 </p>
               </fieldset>
+
+              <p className="mt-7 rounded-xl bg-[#e8f6fd] px-4 py-3 text-sm text-navy-800">
+                <span className="font-semibold">Have your CV ready.</span> After you submit, we will ask you to email it to{' '}
+                {CONTACT_EMAIL}.
+              </p>
 
               {status === 'error' && (
                 <p className="mt-5 text-sm text-red-600" role="alert">
