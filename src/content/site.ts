@@ -9,6 +9,8 @@ export const BRAND = 'LinkGlobal'
 // at the real platform signup when it's ready (full https:// URLs work).
 export const LEARNER_SIGNUP_URL = 'https://learner.linkglobalnetwork.io/'
 export const EDUCATOR_SIGNUP_URL = '/become-an-educator'
+// Existing educators (speakers) sign in to their own platform here.
+export const SPEAKER_SIGNIN_URL = 'https://speaker.linkglobalnetwork.io/login'
 
 export const CONTACT_EMAIL = 'info@linkglobalnetwork.io'
 

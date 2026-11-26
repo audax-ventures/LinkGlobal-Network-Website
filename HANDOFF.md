@@ -946,9 +946,16 @@ What the form collects:
 - First and last name, email, phone number (all required).
 - Languages they speak fluently: tap-to-select chips for the 32 site languages
   (`PENDING.languages`) plus an "Another language" box. At least one required.
-- Preferred payment method: Interac e-Transfer, Wire transfer, PayPal, or Other
-  (with a box to name it). The method only: the form tells applicants not to
-  include account or banking details, which are collected at onboarding.
+- Country of birth (dropdown, src/content/countries.ts).
+- Languages they speak: chosen from a dropdown (32 site languages from
+  `PENDING.languages`, plus "Other (not listed)" for a typed name), as many as
+  they like, each with a level: Native, Advanced, Intermediate or Beginner.
+  At least one required. Email shows "English (Native), French (Advanced)".
+- Optional "Tell us about yourself" message box.
+- Required checkbox "I confirm I am over 18".
+- Payment question REMOVED (client, Nov 26 2026). No reply-time promise
+  anywhere on the page: header says "Our team reviews every application",
+  thank-you says "Your application is with our team." (plus the CV step).
 
 What the admin receives: an email titled "[Educator Application] First Last"
 with each answer on its own line. Reply-to is the applicant, so hitting Reply
@@ -971,6 +978,10 @@ Technical notes:
   key that may never have been set. api/contact.ts is only the fallback if the
   key is removed.
 - Spam: hidden "company" honeypot field, same as Contact.
-- Privacy Policy educator line lists phone number and preferred payment method.
+- For Educators page: under the closing "Start Teaching With Us" strip, a line
+  "Already teaching with us? Sign in here" links to `SPEAKER_SIGNIN_URL`
+  (https://speaker.linkglobalnetwork.io/login, the speaker platform sign-in),
+  not the application form.
+- Privacy Policy educator line lists what the form collects (updated Nov 26 2026).
 - Tested Nov 25 2026: one test submission from each form; Riley confirmed both
   emails arrived in info@.

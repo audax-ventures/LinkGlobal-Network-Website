@@ -7,7 +7,7 @@ import SmartLink from '../components/SmartLink'
 import FeatureRows, { CardLabel } from '../components/FeatureRows'
 import type { FeatureRow } from '../components/FeatureRows'
 import { CardRow, Reveal, Section, SectionHeading } from '../components/blocks'
-import { EDUCATOR_SIGNUP_URL, PENDING } from '../content/site'
+import { EDUCATOR_SIGNUP_URL, PENDING, SPEAKER_SIGNIN_URL } from '../content/site'
 import { CalendarIcon, ClipboardIcon, RocketIcon } from '../components/icons/LineIcons'
 import Photo from '../components/Photo'
 
@@ -166,6 +166,13 @@ export default function ForEducators() {
 
       <div className="pt-12" />
       <CtaBand primary={{ label: 'Start Teaching With Us', to: EDUCATOR_SIGNUP_URL }} />
+      {/* Client, Nov 26 2026: existing educators go straight to sign-in. */}
+      <p className="-mt-4 px-6 pb-12 text-center text-base text-navy-700/80 sm:-mt-6">
+        Already teaching with us?{' '}
+        <a href={SPEAKER_SIGNIN_URL} className="font-semibold text-brand-blue underline underline-offset-2 hover:text-navy-950">
+          Sign in here
+        </a>
+      </p>
     </PageShell>
   )
 }
