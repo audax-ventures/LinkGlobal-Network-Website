@@ -12,7 +12,9 @@ import { COUNTRIES } from '../content/countries'
 // admin can review each one before signing the educator up to the platform.
 // Client revision (Nov 26 2026): country of birth, languages from a dropdown
 // with a level for each, over-18 confirmation, optional "about you" message;
-// payment question removed; no reply-time promise.
+// payment question removed; no reply-time promise. Nov 27 2026: optional CV
+// or motivation letter upload (Web3Forms Pro), replacing the "email us your
+// CV" step.
 
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
@@ -26,6 +28,9 @@ interface LangRow {
 const LANGUAGES = PENDING.languages ?? []
 const LEVELS = ['Native', 'Advanced', 'Intermediate', 'Beginner']
 const OTHER = '__other__'
+// Web3Forms Pro (paid, Nov 27 2026): one attachment per submission, up to 5 MB.
+const MAX_FILE_MB = 5
+const FILE_TYPES = '.pdf,.doc,.docx,.odt,.rtf,.txt'
 
 const field =
   'mt-1.5 w-full rounded-xl border border-navy-900/15 bg-white px-4 py-2.5 text-navy-950 outline-none transition-colors focus:border-brand-blue'
@@ -35,6 +40,7 @@ export default function BecomeEducator() {
   const [status, setStatus] = useState<Status>('idle')
   const [errorMessage, setErrorMessage] = useState('')
   const [rows, setRows] = useState<LangRow[]>([])
+  const [fileName, setFileName] = useState('')
   const nextId = useRef(1)
 
   const chosen = new Set(rows.filter((r) => !r.custom).map((r) => r.name))
@@ -71,6 +77,13 @@ export default function BecomeEducator() {
     const phone = get('phone')
     const country = get('country')
     const about = get('about')
+    const file = data.get('attachment')
+    const hasFile = file instanceof File && file.size > 0
+    if (hasFile && file.size > MAX_FILE_MB * 1024 * 1024) {
+      setStatus('error')
+      setErrorMessage(`Your file is larger than ${MAX_FILE_MB} MB. Please upload a smaller file.`)
+      return
+    }
 
     const langs = rows.map((r) => ({ ...r, name: r.name.trim() })).filter((r) => r.name)
     if (langs.length === 0) {
@@ -94,29 +107,37 @@ export default function BecomeEducator() {
     setErrorMessage('')
 
     try {
+      // Multipart, so the CV can travel as an email attachment. No
+      // Content-Type header: the browser sets the multipart boundary.
+      const body = new FormData()
+      const fields: [string, string][] = [
+        ['access_key', WEB3FORMS_KEY],
+        ['subject', `[Educator Application] ${firstName} ${lastName}`],
+        ['from_name', 'LinkGlobal website'],
+        ['replyto', email],
+        ['First name', firstName],
+        ['Last name', lastName],
+        ['Email', email],
+        ['Phone', phone],
+        ['Country of birth', country],
+        ['Languages', langs.map((r) => `${r.name} (${r.level})`).join(', ')],
+        ['Confirmed over 18', 'Yes'],
+        ['CV or motivation letter', hasFile ? 'Attached' : '(not provided)'],
+        ['About them', about || '(not provided)'],
+      ]
+      fields.forEach(([k, v]) => body.append(k, v))
+      if (hasFile) body.append('attachment', file)
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_KEY,
-          subject: `[Educator Application] ${firstName} ${lastName}`,
-          from_name: 'LinkGlobal website',
-          replyto: email,
-          'First name': firstName,
-          'Last name': lastName,
-          Email: email,
-          Phone: phone,
-          'Country of birth': country,
-          Languages: langs.map((r) => `${r.name} (${r.level})`).join(', '),
-          'Confirmed over 18': 'Yes',
-          'About them': about || '(not provided)',
-        }),
+        headers: { Accept: 'application/json' },
+        body,
       })
       const json = await res.json().catch(() => null)
       if (!res.ok || !json?.success) throw new Error('Something went wrong. Please try again.')
       setStatus('success')
       form.reset()
       setRows([])
+      setFileName('')
     } catch (err) {
       setStatus('error')
       setErrorMessage(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
@@ -146,19 +167,6 @@ export default function BecomeEducator() {
             >
               <h2 className="text-2xl font-bold text-navy-950">Thank you for applying.</h2>
               <p className="mt-3 text-navy-700/80">Your application is with our team.</p>
-              <div className="mx-auto mt-6 max-w-md rounded-2xl border-2 border-brand-blue/30 bg-[#e8f6fd] p-5 text-left">
-                <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-blue">One more step</p>
-                <p className="mt-2 text-navy-800">
-                  Please email your CV to{' '}
-                  <a
-                    href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Educator application CV')}`}
-                    className="font-semibold text-brand-blue underline underline-offset-2"
-                  >
-                    {CONTACT_EMAIL}
-                  </a>{' '}
-                  with your full name in the subject line, so we can match it to your application.
-                </p>
-              </div>
             </motion.div>
           ) : (
             <motion.form
@@ -285,7 +293,33 @@ export default function BecomeEducator() {
                 </select>
               </fieldset>
 
-              <label className="mt-7 block">
+              <label className="mt-7 flex cursor-pointer items-start gap-3">
+                <input type="checkbox" name="over18" required className="mt-1 h-4 w-4 shrink-0 accent-[#1ba3e0]" />
+                <span className="text-sm font-semibold text-navy-800">I confirm I am over 18</span>
+              </label>
+
+              <div className="mt-6">
+                <span className={labelText}>
+                  CV or motivation letter <span className="font-normal text-navy-700/60">(optional)</span>
+                </span>
+                <label className="mt-1.5 flex cursor-pointer flex-wrap items-center gap-3 rounded-xl border-2 border-dashed border-navy-900/15 bg-[#f5fbfe] px-4 py-4 transition-colors hover:border-brand-blue/60">
+                  <span className="rounded-full bg-brand-blue px-4 py-2 text-sm font-semibold text-white shadow-[0_4px_12px_rgba(27,163,224,0.3)]">
+                    Choose file
+                  </span>
+                  <span className={`min-w-0 flex-1 truncate text-sm ${fileName ? 'font-semibold text-navy-950' : 'text-navy-700/60'}`}>
+                    {fileName || `PDF or Word document, up to ${MAX_FILE_MB} MB`}
+                  </span>
+                  <input
+                    type="file"
+                    name="attachment"
+                    accept={FILE_TYPES}
+                    onChange={(e) => setFileName(e.target.files?.[0]?.name ?? '')}
+                    className="sr-only"
+                  />
+                </label>
+              </div>
+
+              <label className="mt-6 block">
                 <span className={labelText}>
                   Tell us about yourself <span className="font-normal text-navy-700/60">(optional)</span>
                 </span>
@@ -296,16 +330,6 @@ export default function BecomeEducator() {
                   className={`${field} resize-y`}
                 />
               </label>
-
-              <label className="mt-6 flex cursor-pointer items-start gap-3">
-                <input type="checkbox" name="over18" required className="mt-1 h-4 w-4 shrink-0 accent-[#1ba3e0]" />
-                <span className="text-sm font-semibold text-navy-800">I confirm I am over 18</span>
-              </label>
-
-              <p className="mt-6 rounded-xl bg-[#e8f6fd] px-4 py-3 text-sm text-navy-800">
-                <span className="font-semibold">Have your CV ready.</span> After you submit, we will ask you to email it to{' '}
-                {CONTACT_EMAIL}.
-              </p>
 
               {status === 'error' && (
                 <p className="mt-5 text-sm text-red-600" role="alert">

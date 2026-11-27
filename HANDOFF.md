@@ -961,12 +961,14 @@ What the admin receives: an email titled "[Educator Application] First Last"
 with each answer on its own line. Reply-to is the applicant, so hitting Reply
 answers them directly.
 
-CVs: no upload field (Web3Forms attachments need the paid Pro plan, about
-US$149/yr; Riley chose the free route). A note above Submit says "Have your CV
-ready", and the thank-you screen asks applicants to email their CV to info@
-with their full name in the subject (mailto link, subject "Educator application
-CV"). To add real uploads later: upgrade Web3Forms to Pro (same key) and add a
-file input, or store files in Vercel Blob.
+CVs (Nov 27 2026): Riley upgraded Web3Forms to the paid Pro plan (same key).
+The form has an optional "CV or motivation letter" upload (one file, PDF or
+Word, up to 5 MB, checked in the browser). It arrives as an attachment on the
+application email. The submission is sent as multipart FormData (no
+Content-Type header) with the file under `attachment`. The earlier "email us
+your CV" note and thank-you step are removed.
+End of form, in the client's order: over-18 checkbox (required), CV upload
+(optional), "Tell us about yourself" (optional).
 
 Technical notes:
 - Page: src/pages/BecomeEducator.tsx; route in App.tsx; meta title "Apply to

@@ -58,7 +58,7 @@ const SECTIONS: LegalSection[] = [
           <li>
             <strong>If you teach or share your language with us:</strong> the information in your application, such as
             your name, email address, phone number, country of birth, the languages you speak and your level in each,
-            confirmation that you are over 18, and anything you choose to tell us about yourself, such as your qualifications
+            confirmation that you are over 18, any CV or motivation letter you upload, and anything you choose to tell us about yourself, such as your qualifications
             and experience.
           </li>
           <li>
